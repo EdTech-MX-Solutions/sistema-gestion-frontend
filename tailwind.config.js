@@ -1,3 +1,6 @@
+const colors = require('tailwindcss/colors')
+
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -11,6 +14,7 @@ module.exports = {
       current: 'currentColor',
       'secondary': '#E2EAE6',
       'white': '#FFFFFF',
+      ...colors,
     },
     extend: {
       backgroundImage: {
