@@ -7,7 +7,6 @@ function PersonalData() {
   return (
     <>
       <CardView title={title} description={description}>
-        <h1>This is example of personal information</h1>
         <PersonalCard />
       </CardView>
     </>

@@ -8,7 +8,6 @@ function ParentsData() {
   return (
     <>
       <CardView title={title} description={description}>
-        <h1>This is example of parents information</h1>
         <PersonalCard />
       </CardView>
     </>
