@@ -7,7 +7,7 @@ interface CardProps {
 const CardView = ({ title, description, children }: CardProps) => {
   return (
     <>
-      <div className="m-10 p-10">
+      <div className="md:m-10 md:p-10">
         <div className="text-4xl font-semibold">
           <h1>{title}</h1>
         </div>
