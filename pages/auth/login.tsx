@@ -11,9 +11,9 @@ export default function SignIn({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
-      <div className="container h-full p-10 dark:bg-black">
-        <div className="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
-          <div className="w-full">
+      <div className="h-screen w-screen bg-green-100 justify-center dark:bg-black">
+        <div className="flex h-full pt-20 flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
+          <div className="w-full m-20">
             <div className="block rounded-lg bg-white shadow-lg dark:bg-black">
               <div className="g-0 lg:flex lg:flex-wrap">
                 <div className="px-4 md:px-0 lg:w-6/12">
@@ -33,7 +33,7 @@ export default function SignIn({
                     <div>
                       <div>
                         <span className="text-3xl font-bold text-neutral-800 dark:text-neutral-200">
-                          Inicio se Sesión
+                          Inicio de Sesión
                         </span>
                       </div>
                       <div>

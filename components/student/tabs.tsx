@@ -51,8 +51,8 @@ function DisabledLink({ text }: { text: string }) {
 
 function StudentTabs() {
   const tab1 = "Datos Personales";
-  const tab2 = "Datos Académicos";
   const tab3 = "Datos de Contacto";
+  const tab2 = "Datos Académicos";
   const tab4 = "Datos de Salud";
   return (
     <>
