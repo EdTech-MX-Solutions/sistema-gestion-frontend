@@ -3,7 +3,7 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
-function getGreetings() {
+function GetGreetings() {
     const { data: session, status } = useSession();
     const router = useRouter();
     const chatsRef = useRef();
@@ -41,7 +41,7 @@ function getGreetings() {
 
 export default function Index() {
     const { data: session } = useSession()
-    const greeting = getGreetings();
+    const greeting = GetGreetings();
     const name = session?.user?.name;
     return (
         <>
