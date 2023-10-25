@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function App(
     { Component, pageProps:{session, ...pageProps}, ...appProps }) {
-    if ([`/auth/login`].includes(appProps.router.pathname))
+    if ([`/auth/login`].includes(appProps.router.pathname) || [`/auth/loginEmail`].includes(appProps.router.pathname))
       return <Component {...pageProps} />;
     return (
         <>

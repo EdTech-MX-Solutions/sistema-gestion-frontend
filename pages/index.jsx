@@ -53,7 +53,7 @@ export default function Index() {
                 </div>
                 <div className="text-2xl font-semibold">
                     <h1>
-                        {greeting}, {name}
+                        {greeting}, {name}, {session}
                     </h1>
                 </div>
 

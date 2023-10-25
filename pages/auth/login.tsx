@@ -46,13 +46,20 @@ export default function SignIn({
                       {Object.values(providers).map((provider) => (
                         <div key={provider.name}>
                           <button
-                            className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                            onClick={() => {signIn(provider.id)}}
+                            className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+                            onClick={() => {
+                              signIn(provider.id);
+                            }}
                           >
                             Continuar con {provider.name}
                           </button>
                         </div>
                       ))}
+                      <a href="/auth/loginEmail">
+                        <button className="mt-5 flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                          Continuar con correo electrónico
+                        </button>
+                      </a>
                     </div>
                   </div>
                 </div>

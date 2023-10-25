@@ -10,6 +10,14 @@ export const authOptions = {
   ],
   pages: {
     signIn: '/auth/login',
+  },
+  callbacks: {
+    jwt: ({token, account })=> {
+      if (account?.access_token) {
+        token.access_token = account.access_token;
+      }
+      return token;
+    },
   }
 }
 export default NextAuth(authOptions)
