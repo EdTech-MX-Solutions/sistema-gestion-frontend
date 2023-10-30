@@ -4,15 +4,15 @@ import ParentsCardComponent from "./ParentsCardComponent";
 
 function ParentsDataComponent({ alumno }: { alumno: InterfaceAlumno }) {
   const parent1 = {
-    name: "Carlota Hernandez",
-    email: "carlotas@gmail.com",
+    name: "Ana Hernandez",
+    email: "Ana@gmail.com",
     phone: "5520798192",
-    relationship: "Padre",
+    relationship: "Madre",
     bloodType: "O- (Compatible)",
   };
   const parent2 = {
-    name: "Maximiliano Urbina",
-    email: "max@gmail.com",
+    name: "Rodrigo Rubio Haro",
+    email: "chavo0022009@gmail.com",
     phone: "5520798192",
     relationship: "Padre",
     bloodType: "O- (Compatible)",

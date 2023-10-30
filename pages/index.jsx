@@ -2,8 +2,12 @@ import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
+import { useCookies } from 'react-cookie';
+
 
 function GetGreetings() {
+    const [cookies, setCookie] = useCookies(['token']);
+
     const { data: session, status } = useSession();
     const router = useRouter();
     const chatsRef = useRef();
@@ -13,18 +17,41 @@ function GetGreetings() {
         if (status === "unauthenticated") {
             router.push("/auth/login");
         } else if (session && status === "authenticated") {
-            const handleFetchChatTitles = async () => {
-                try {
-                    const chatTitles = await fetchChatTitles();
-                    if (chatTitles.length !== chatsRef.length) {
-                        setChats(chatTitles);
-                    }
-                } catch (error) {
-                    console.error("Error fetching chat titles:", error);
-                }
-            };
+            if (cookies.token != null) {
+                console.log("ya existe un token:", cookies.token);
+                return;
+            }
+            const accessToken = session.accessToken;
+            if (accessToken != null) {
+                console.log(session.accessToken);
 
-            handleFetchChatTitles();
+                const base_rute = "https://sige-octavio-paz.azurewebsites.net";
+                const version = "v1";
+                const route = "auth/login/google";
+                fetch(`${base_rute}/${version}/${route}?accessToken=${accessToken}`, {
+                    method: "GET",
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json(); // Convierte la respuesta a JSON
+                        } else {
+                            throw new Error("Error en la solicitud");
+                        }
+                    })
+                    .then(data => {
+                        console.log("Datos de respuesta:", data);
+                        if (cookies.token == null)
+                            setCookie('token', data.token);
+                        else {
+                            console.log("ya existe un token:", cookies.token);
+                        }
+
+                        console.log("cookie token:", cookies.token);
+                    })
+                    .catch(error => {
+                        console.error("Error de solicitud:", error);
+                    });
+            }
         }
     }, [session, status, router, chatsRef]);
 
@@ -53,7 +80,7 @@ export default function Index() {
                 </div>
                 <div className="text-2xl font-semibold">
                     <h1>
-                        {greeting}, {name}, {session}
+                        {greeting}, {name}
                     </h1>
                 </div>
 

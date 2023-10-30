@@ -5,10 +5,14 @@ import type {
 import { getProviders, signIn } from "next-auth/react";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function SignIn({
   providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const router = useRouter()
+      console.log(router.query);
   return (
     <>
       <div className="h-screen w-screen bg-green-100 justify-center dark:bg-black">
@@ -55,11 +59,12 @@ export default function SignIn({
                           </button>
                         </div>
                       ))}
-                      <a href="/auth/loginEmail">
-                        <button className="mt-5 flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
-                          Continuar con correo electrónico
-                        </button>
-                      </a>
+                      <Link
+                        href="/auth/loginEmail"
+                        className="mt-5 flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+                      >
+                        Continuar con correo electrónico
+                      </Link>
                     </div>
                   </div>
                 </div>
