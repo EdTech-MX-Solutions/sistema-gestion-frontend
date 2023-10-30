@@ -17,9 +17,12 @@ function GetGreetings() {
         if (status === "unauthenticated") {
             router.push("/auth/login");
         } else if (session && status === "authenticated") {
+            console.log("Usuario autenticado")
             if (cookies.token != null) {
                 console.log("ya existe un token:", cookies.token);
                 return;
+            } else {
+                console.log("No existe un token:");
             }
             const accessToken = session.accessToken;
             if (accessToken != null) {
