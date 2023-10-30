@@ -15,7 +15,7 @@ function PersonalData({ alumno }: { alumno: InterfaceAlumno }) {
           </div>
           <div className="p-1">
             <p>
-              Nacionalidad: <b> {alumno.nacionalidad}</b>{" "}
+              Pais de Origen: <b> {alumno.pais_origen}</b>{" "}
             </p>
           </div>
           <div className="p-1">
@@ -31,12 +31,12 @@ function PersonalData({ alumno }: { alumno: InterfaceAlumno }) {
           </div>
           <div className="p-1">
             <p>
-              Grupo:<b> {alumno.sexo}</b>{" "}
+              Años en Preescolar:<b> {alumno.aniosPreescolar}</b>{" "}
             </p>
           </div>
           <div className="p-1">
             <p>
-              Grado:<b> {alumno.sexo}</b>{" "}
+              Fecha de Nacimiento:<b> {alumno.fecha_nacimiento}</b> ( {alumno.edad} años) {" "}
             </p>
           </div>
         </div>

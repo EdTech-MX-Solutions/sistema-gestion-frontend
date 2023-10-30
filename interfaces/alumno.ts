@@ -4,11 +4,13 @@ interface InterfaceAlumno {
     nombre: string;
     apellido_paterno: string;
     apellido_materno: string;
+    aniosPreescolar: number;
     fecha_nacimiento: string;
+    edad: number;
+    pais_origen: string;
     sexo: string;
     estatus: string;
     entidad_nacimiento: string,
-    nacionalidad: string,
 }
 
 export default InterfaceAlumno;
