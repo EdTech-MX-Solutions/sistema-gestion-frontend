@@ -192,7 +192,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
             <ul className="mb-6 ml-4  flex flex-col gap-1.5">
               <li>
-                <Link href={"/academics/schedule"}>
+                <Link href={"/student/academics/schedule"}>
                   <div
                     //   to="/calendar"
                     className={`group relative flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
@@ -218,13 +218,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li
                 className={`group relative flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
               >
-                <Link href={"/academics/notes"}>Calificaciones</Link>
+                <Link href={"/student/academics/notes"}>Calificaciones</Link>
                 {/* </NavLink> */}
               </li>
               <li
                 className={`group relative flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
               >
-                <Link href={"/academics/history"}>Historial Academico</Link>
+                <Link href={"/student/academics/academicRecord"}>Historial Academico</Link>
                 {/* </NavLink> */}
               </li>
             </ul>
@@ -253,13 +253,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li
                 className={`group relative flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
               >
-                Mensajes o Avisos
+                 <Link href={"/student/othersOptions/messages"}> Mensajes o Avisos </Link> 
                 {/* </NavLink> */}
               </li>
               <li
                 className={`group relative flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
               >
-                Reportes o Sugerencias
+                <Link href={"/student/othersOptions/suggestions"}> Reportes o Sugerencias </Link> 
               </li>
             </ul>
           </div>
