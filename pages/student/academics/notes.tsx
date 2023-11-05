@@ -6,21 +6,53 @@ interface DefaultLayoutProps {
 
 function notes(){
 
-    /*
-    private String materia;
-    private String claveMateria;
-    private Float primerTrimestre;
-    private Float segundoTrimestre;
-    private Float tercerTrimestre;
-    private Float calificacionFinal;
-    */
-
-    //const calificacionesAlumno = [calificaciones];
-
-    const calificaciones = {
-        materias : "Español",
-        calificion : 10  
+    const calificacionM1 = {
+        materia : "Español",
+        trimestre1 : 10,
+        trimestre2 : 10,  
+        trimestre3 : 10,
+        final : 10,
+        alumnoBoleta : ""  
     }
+
+    const calificacionM2 = {
+        materia : "Matematicas",
+        trimestre1 : 10,
+        trimestre2 : 10,  
+        trimestre3 : 10,
+        final : 10,
+        alumnoBoleta : ""  
+    }
+
+    const calificacionM3 = {
+        materia : "Español",
+        trimestre1 : 10,
+        trimestre2 : 10,  
+        trimestre3 : 10,
+        final : 10,
+        alumnoBoleta : ""  
+    }
+
+    const calificacionM4 = {
+        materia : "Español",
+        trimestre1 : 10,
+        trimestre2 : 10,  
+        trimestre3 : 10,
+        final : 10,
+        alumnoBoleta : ""  
+    }
+
+    const calificacionM5 = {
+        materia : "Español",
+        trimestre1 : 10,
+        trimestre2 : 10,  
+        trimestre3 : 10,
+        final : 10,
+        alumnoBoleta : ""  
+    }
+
+    const calificacionesAlumno = [calificacionM1, calificacionM2, calificacionM3, calificacionM4, calificacionM5];
+
 
     return (
         <>
