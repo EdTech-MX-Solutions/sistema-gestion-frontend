@@ -10,11 +10,13 @@ function medicData() {
     nombre: "Ricardo",
     apellido_paterno: "Urbina",
     apellido_materno: "Hernández",
+    aniosPreescolar: 3,
+    edad: 12,
     fecha_nacimiento: "01/01/2002",
     sexo: "Hombre",
     estatus: "Activo",
     entidad_nacimiento: "Ciudad de México",
-    nacionalidad: "Mexicana",
+    pais_origen: "México",
   };
   const title = "Datos Médicos del Alumno";
   const description = `Datos registrados del alumno, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
