@@ -8,6 +8,7 @@ interface DefaultLayoutProps {
 }
 
 const StudentData = ({ children }: DefaultLayoutProps) => {
+  
   // create alumno from interface
   const alumno: InterfaceAlumno = {
     no_boleta: "2019630523",
@@ -15,11 +16,13 @@ const StudentData = ({ children }: DefaultLayoutProps) => {
     nombre: "Ricardo",
     apellido_paterno: "Urbina",
     apellido_materno: "Hernández",
+    aniosPreescolar: 3,
+    edad: 12,
     fecha_nacimiento: "01/01/2002",
     sexo: "Hombre",
     estatus: "Activo",
     entidad_nacimiento: "Ciudad de México",
-    nacionalidad: "Mexicana",
+    pais_origen: "Mexicana",
   };
   const alumno2: InterfaceAlumno = {
     no_boleta: "2019630523",
@@ -27,11 +30,13 @@ const StudentData = ({ children }: DefaultLayoutProps) => {
     nombre: "Juan",
     apellido_paterno: "Perez",
     apellido_materno: "Hernández",
+    aniosPreescolar: 3,
+    edad: 12,
     fecha_nacimiento: "01/01/2002",
     sexo: "Hombre",
     estatus: "Activo",
     entidad_nacimiento: "Ciudad de México",
-    nacionalidad: "Mexicana",
+    pais_origen: "México",
   };
 
   const title = "Datos del Alumno";
