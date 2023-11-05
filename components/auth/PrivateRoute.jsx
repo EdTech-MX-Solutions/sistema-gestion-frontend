@@ -6,11 +6,12 @@ import { useCookies } from 'react-cookie';
 import { jwtDecode } from "jwt-decode";
 
 
-const PrivateRoute = ({ children }) => {
-    const allowedRoles = ["DIRECTIVO", "TUTOR"];
+const PrivateRoute = ({ children, allowedRoles }) => {
+    if (allowedRoles == null)
+        allowedRoles = ["DIRECTIVO", "TUTOR"];
     const { data: session, status } = useSession();
     const [cookies, setCookie] = useCookies(['token', 'user']);
-    
+
     const router = useRouter();
 
     useEffect(() => {
@@ -33,7 +34,7 @@ const PrivateRoute = ({ children }) => {
                     console.log("current roles:", user_roles);
                     console.log("allowed roles:", allowedRoles);
                     // router.push("/auth/login");
-                } else{
+                } else {
                     console.log("No tienes permisos para acceder a esta página");
                     console.log("current roles:", user_roles);
                     console.log("allowed roles:", allowedRoles);

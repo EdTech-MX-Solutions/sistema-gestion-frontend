@@ -1,5 +1,5 @@
 import CardView from "@/components/CardView";
-import TutorLayout from "@/components/Layouts/TutorLayout";
+// import TutorLayout from "@/components/Layouts/TutorLayout";
 import MedicCard from "@/components/Medic.Card";
 import StudentCard from "@/components/Student.Card";
 import InterfaceAlumno from "@/interfaces/alumno";
@@ -23,13 +23,11 @@ function medicData() {
     const description = `Datos registrados del alumno, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
     return (
         <>
-            <TutorLayout>
-                <CardView title={title} description={description}>
-                    <StudentCard alumno={alumno}>
-                        <MedicCard />
-                    </StudentCard>
-                </CardView>
-            </TutorLayout>
+            <CardView title={title} description={description}>
+                <StudentCard alumno={alumno}>
+                    <MedicCard />
+                </StudentCard>
+            </CardView>
         </>
     );
 }

@@ -1,5 +1,4 @@
 import CardView from "@/components/CardView";
-import TutorLayout from "@/components/Layouts/TutorLayout";
 import StudentCard from "@/components/Student.Card";
 import PersonalData from "@/components/student/data/PersonalData";
 import InterfaceAlumno from "@/interfaces/alumno";
@@ -76,13 +75,11 @@ function Personal() {
 
     return (
         <>
-            <TutorLayout>
-                <CardView title={title} description={description}>
-                    <StudentCard alumno={alumno}>
-                        <PersonalData alumno={alumno} />
-                    </StudentCard>
-                </CardView>
-            </TutorLayout>
+            <CardView title={title} description={description}>
+                <StudentCard alumno={alumno}>
+                    <PersonalData alumno={alumno} />
+                </StudentCard>
+            </CardView>
         </>
     );
 }

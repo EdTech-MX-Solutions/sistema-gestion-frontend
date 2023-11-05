@@ -2,7 +2,7 @@ import CardView from "@/components/CardView";
 import StudentCard from "@/components/Student.Card";
 import ParentsDataComponent from "@/components/student/data/ParentsData";
 import InterfaceAlumno from "@/interfaces/alumno";
-import PrivateRoute from "../../../components/auth/PrivateRoute";
+import PrivateRoute from "../../../../components/auth/PrivateRoute";
 
 function ParentsData() {
     const tutor = "Rodrigo Rubio";
@@ -24,13 +24,13 @@ function ParentsData() {
     };
     return (
         <>
-            <PrivateRoute>
+            {/* <PrivateRoute> */}
                 <CardView title={title} description={description}>
                     <StudentCard alumno={alumno}>
                         <ParentsDataComponent alumno={alumno} />
                     </StudentCard>
                 </CardView>
-            </PrivateRoute>
+            {/* </PrivateRoute> */}
         </>
     );
 }

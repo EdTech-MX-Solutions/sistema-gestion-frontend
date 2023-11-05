@@ -1,5 +1,5 @@
 import CardView from "@/components/CardView";
-import TutorLayout from "@/components/Layouts/TutorLayout";
+// import TutorLayout from "@/components/Layouts/TutorLayout";
 import StudentCard from "@/components/Student.Card";
 import InterfaceAlumno from "@/interfaces/alumno";
 import { ReactNode, useState } from "react";
@@ -43,10 +43,10 @@ const StudentData = ({ children }: DefaultLayoutProps) => {
     const description = `Datos registrados del alumno, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
     return (
         <>
-            <TutorLayout>
+            {/* <TutorLayout> */}
                 <CardView title={title} description={description}>
                 </CardView>
-            </TutorLayout>
+            {/* </TutorLayout> */}
         </>
     );
 };

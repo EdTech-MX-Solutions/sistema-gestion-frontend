@@ -1,4 +1,5 @@
-import PrivateRoute from "../auth/PrivateRoute";
+import React from "react";
+import PrivateRoute from "../components/auth/PrivateRoute";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -7,7 +8,7 @@ interface LayoutProps {
 const TutorLayout = ({ children }: LayoutProps) => {
     return (
         <>
-            <PrivateRoute>
+            <PrivateRoute allowedRoles={["SUPERUSER", "PROFESOR"]}>
                 {children}
             </PrivateRoute>
         </>
