@@ -15,11 +15,13 @@ function Personal() {
     nombre: "Ricardo",
     apellido_paterno: "Urbina",
     apellido_materno: "Hernández",
+    aniosPreescolar: 3,
+    edad: 12,
     fecha_nacimiento: "01/01/2002",
     sexo: "Hombre",
     estatus: "Activo",
     entidad_nacimiento: "Ciudad de México",
-    nacionalidad: "Mexicana",
+    pais_origen: "Mexicana",
   };
   return (
     <>
