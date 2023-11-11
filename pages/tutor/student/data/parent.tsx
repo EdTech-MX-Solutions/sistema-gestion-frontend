@@ -2,7 +2,6 @@ import CardView from "@/components/CardView";
 import StudentCard from "@/components/Student.Card";
 import ParentsDataComponent from "@/components/student/data/ParentsData";
 import InterfaceAlumno from "@/interfaces/alumno";
-import PrivateRoute from "../../../../components/auth/PrivateRoute";
 
 function ParentsData() {
     const tutor = "Rodrigo Rubio";
