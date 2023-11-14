@@ -1,15 +1,18 @@
 import { ReactNode, useState } from "react";
+import PrincipalTitle from "@/components/student/Principal.Title";
+
 
 interface DefaultLayoutProps {
   children: ReactNode;
 }
 
 function messages() {
+
+  const title = "Mensajes y avisos"
+
   return (
     <>
-      <div className="container mx-auto justify-center py-5">
-        <h1 className="text-4xl font-bold text-center bg-white p-3 rounded-full"> Mensajes y avisos </h1>
-      </div>
+      <PrincipalTitle title = {title}></PrincipalTitle>
 
         <div className="grid grid-cols-2 gap-4 p-5">
 

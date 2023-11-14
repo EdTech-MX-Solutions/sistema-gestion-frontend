@@ -1,17 +1,18 @@
 import { ReactNode } from "react";
+import PrincipalTitle from "@/components/professor/Principal.Title";
+
 
 interface DefaultLayoutProps {
   children: ReactNode;
 }
 
 function studentReport() {
+
+  const title = "Reporte";
+
   return (
     <>
-      <div className="container mx-auto justify-center py-5">
-        <h1 className="text-4xl font-bold text-center bg-white p-3 rounded-full">
-          Reporte
-        </h1>
-      </div>
+      <PrincipalTitle title = {title}></PrincipalTitle>
 
       <div className="justify-center bg-white p-5 rounded-lg">
         <div className="p-5">

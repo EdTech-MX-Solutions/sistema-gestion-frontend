@@ -1,15 +1,18 @@
 import { ReactNode, useState } from "react";
+import PrincipalTitle from "@/components/student/Principal.Title";
+
 
 interface DefaultLayoutProps {
   children: ReactNode;
 }
 
 function suggestions(){
+
+  const title = "Quejas o sugerencias"
+
     return (
         <>
-            <div className="container mx-auto justify-center py-5">
-                <h1 className="text-4xl font-bold text-center bg-white p-3 rounded-full"> Quejas o sugerencia </h1>
-            </div>
+            <PrincipalTitle title = {title}></PrincipalTitle>
 
             <div className="p-5 m-5 text-center bg-blue-200 font-bold rounded-lg">
                 <p> En este espacio podrás escribir de manera anónima cualquier asunto relacionado con una conducta inapropiada o incorrecta del profesor </p>

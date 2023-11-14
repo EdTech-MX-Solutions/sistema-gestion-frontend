@@ -1,15 +1,18 @@
 import { ReactNode, useState } from "react";
+import PrincipalTitle from "@/components/student/Principal.Title";
+import TableGrades from "@/components/student/academics/Table.Grades";
 
 interface DefaultLayoutProps {
   children: ReactNode;
 }
 
 function academicRecord(){
+
+    const title = "Historial academico"
+
     return(
         <>
-            <div className="container mx-auto justify-center py-5">
-                <h1 className="text-4xl font-bold text-center bg-white p-3 rounded-full"> Historial Académico </h1>
-            </div>
+            <PrincipalTitle title = {title}></PrincipalTitle>
 
             <div className="bg-white grid grid-cols-2 gap-4">
                 <div className="col-span-1">
@@ -27,59 +30,8 @@ function academicRecord(){
                             </select>
                         </div>
 
-                        <div className="p-4 row-span-3">
-                            <table className="table-fixed w-full md:text-sm text-[.70rem] text-center font-semibold">
-                                <thead className="text-white uppercase bg-green-700">
-                                    <tr className="">
-                                        <th className="p-3 lg:p-3">Materia</th>
-                                        <th>1er Trimestre</th>
-                                        <th>2do Trimestre</th>
-                                        <th>3er Trimestre</th>
-                                        <th>Final</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td className="p-5">Español</td>
-                                        <td>8</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td className="p-5">Matemáticas</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td className="p-5">Exploración de la Naturaleza y la Sociedad</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td className="p-5">Formación Cívica y Ètica</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td className="p-5">Educación Artística</td>
-                                        <td>8</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div className="row-span-3">
+                            <TableGrades></TableGrades>
                         </div>
                     </div>
                 </div>

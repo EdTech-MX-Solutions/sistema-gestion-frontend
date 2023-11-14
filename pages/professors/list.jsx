@@ -1,17 +1,14 @@
 import { ReactNode } from "react";
+import PrincipalTitle from "@/components/professor/Principal.Title";
 
-/*
-interface DefaultLayoutProps {
-  children: ReactNode;
-}
-*/
 
 function list() {
+
+  const title = "Lista de alumnos [Grupo_Asignado]";
+
   return (
     <>
-      <div className="container mx-auto justify-center py-5">
-        <h1 className="text-4xl font-bold text-center bg-white p-3 rounded-full"> Lista de alumnos [Grupo_Asignado] </h1>
-      </div>
+      <PrincipalTitle title = {title}></PrincipalTitle>
 
       <div className="flex mx-auto justify-center bg-white p-5 rounded-lg">
         <table className="table-fixed w-full text-sm text-center font-semibold">
