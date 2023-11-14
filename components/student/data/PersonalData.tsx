@@ -1,6 +1,3 @@
-import CardView from "@/components/CardView";
-import PersonalCard from "@/components/Personal.Card";
-import StudentCard from "@/components/Student.Card";
 import InterfaceAlumno from "@/interfaces/alumno";
 
 function PersonalData({ alumno }: { alumno: InterfaceAlumno }) {

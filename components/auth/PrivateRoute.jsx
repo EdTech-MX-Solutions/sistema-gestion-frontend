@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { useCookies } from 'react-cookie';
 import { jwtDecode } from "jwt-decode";
+import SIGEAPICollection from "@/api/apiHandler";
 
 
 const PrivateRoute = ({ children, allowedRoles }) => {
@@ -20,7 +21,33 @@ const PrivateRoute = ({ children, allowedRoles }) => {
             router.push("/auth/login");
         } else if (session && status === "authenticated") {
             console.log("Usuario autenticado")
-            if (cookies.token != null) {
+            if (cookies === undefined || cookies.token === undefined || cookies.token == "undefined") {
+                console.log("No existe un token, generando nuevo token");
+                const accessToken = session.accessToken;
+                if (accessToken != null) {
+                    console.log(session.accessToken);
+                    const api = new SIGEAPICollection();
+
+                    api.authCollection.executeGetGoogleAutentication(accessToken)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Respuesta no exitosa: ' + response.status);
+                            }
+                            return response.json(); // Analiza el cuerpo de la respuesta como JSON
+                        })
+                        .then(data => {
+                            console.log("Datos de respuesta:", data);
+                            console.log("token:", data.token);
+                            setCookie('token', data.token);
+                            const decodedToken = jwtDecode(data.token);
+                            console.log("decodedToken:", decodedToken);
+                            console.log("cookie token:", cookies.token);
+                        })
+                        .catch(error => {
+                            console.error("Error de solicitud:", error);
+                        });
+                }
+            } else {
                 console.log("ya existe un token:", cookies.token);
                 console.log("token antes de decode: " + cookies.token)
                 const decodedToken = jwtDecode(cookies.token);
@@ -50,43 +77,6 @@ const PrivateRoute = ({ children, allowedRoles }) => {
                 }
 
                 return;
-            } else {
-                console.log("No existe un token, generando nuevo token");
-                const accessToken = session.accessToken;
-                if (accessToken != null) {
-                    console.log(session.accessToken);
-
-                    const base_rute = "https://sige-octavio-paz.azurewebsites.net";
-                    const version = "v1";
-                    const route = "auth/login/google";
-                    fetch(`${base_rute}/${version}/${route}?accessToken=${accessToken}`, {
-                        method: "GET",
-                    })
-                        .then(response => {
-                            if (response.ok) {
-                                return response.json(); // Convierte la respuesta a JSON
-                            } else {
-                                signOut()
-                                throw new Error("Error en la solicitud");
-                            }
-                        })
-                        .then(data => {
-                            console.log("Datos de respuesta:", data);
-                            if (cookies.token == null) {
-                                setCookie('token', data.token);
-                                const decodedToken = jwtDecode(data.token);
-                                console.log("decodedToken:", decodedToken);
-                            }
-                            else {
-                                console.log("ya existe un token:", cookies.token);
-                            }
-
-                            console.log("cookie token:", cookies.token);
-                        })
-                        .catch(error => {
-                            console.error("Error de solicitud:", error);
-                        });
-                }
             }
         }
 
