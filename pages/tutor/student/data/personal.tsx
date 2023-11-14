@@ -1,11 +1,11 @@
 import CardView from "@/components/CardView";
-// import TutorLayout from "@/components/Layouts/TutorLayout";
+import PersonalCard from "@/components/Personal.Card";
 import StudentCard from "@/components/Student.Card";
 import InterfaceAlumno from "@/interfaces/alumno";
 import { ReactNode, useState } from "react";
 
 interface DefaultLayoutProps {
-  children: ReactNode;
+    children: ReactNode;
 }
 
 const StudentData = ({ children }: DefaultLayoutProps) => {
@@ -39,14 +39,15 @@ const StudentData = ({ children }: DefaultLayoutProps) => {
         pais_origen: "México",
     };
 
-    const title = "Datos del Alumno";
+    const title = "Datos Personales del Alumno";
     const description = `Datos registrados del alumno, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
     return (
         <>
-            {/* <TutorLayout> */}
-                <CardView title={title} description={description}>
-                </CardView>
-            {/* </TutorLayout> */}
+            <CardView title={title} description={description}>
+                <StudentCard alumno={alumno}>
+                    <PersonalCard />
+                </StudentCard>
+            </CardView>
         </>
     );
 };

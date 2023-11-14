@@ -6,7 +6,7 @@ function PersonalCard() {
       <Card>
         <div className="flex flex-col space-y-2 p-3">
           <h3 className="font-black text-gray-800 md:text-3xl text-xl">
-            Rodrigo Rodolfo Rubio Haro
+            Nombre Completo: Rodrigo Rodolfo Rubio Haro
           </h3>
           <p className="md:text-lg text-gray-500 text-base">
             CURP: RUHR920101HDFRBR00 Fecha de Nacimiento: 01/01/1992 (29 años)

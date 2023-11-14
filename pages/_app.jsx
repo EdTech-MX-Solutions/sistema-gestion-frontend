@@ -17,9 +17,13 @@ export const AppContext = ({ Layout, pageProps, session, Component }) => {
         <CookiesProvider>
             <main className="bg-secondary">
                 <SessionProvider session={session}>
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
+                    {
+                        Layout ? <Layout {...pageProps}>
+                            <Component {...pageProps} />
+                        </Layout>
+                            : <Component {...pageProps} />
+                    }
+
                 </SessionProvider>
             </main>
         </CookiesProvider>
@@ -28,16 +32,19 @@ export const AppContext = ({ Layout, pageProps, session, Component }) => {
 
 export default function App(
     { Component, pageProps: { session, ...pageProps }, ...appProps }) {
-        const pathname = appProps.router.pathname;
+    const pathname = appProps.router.pathname;
 
     if ([`/auth/login`].includes(pathname) || [`/auth/loginEmail`].includes(pathname))
         return <Component {...pageProps} />;
-    if (pathname.startsWith("/tutor/"))
+    if (pathname.startsWith("/tutor"))
         return (AppContext({ Layout: TutorLayout, pageProps, session, Component }))
-    if (pathname.startsWith("/directive/"))
+    if (pathname.startsWith("/directive"))
         return (AppContext({ Layout: DirectivoLayout, pageProps, session, Component }))
-    if (pathname.startsWith("/professor/"))
+    if (pathname.startsWith("/professor"))
         return (AppContext({ Layout: ProfesorLayout, pageProps, session, Component }))
+    // check if is "/" route    
+    if (pathname === "/")
+        return (AppContext({ Layout: null, pageProps, session, Component }))
     else
         return (
             <>
