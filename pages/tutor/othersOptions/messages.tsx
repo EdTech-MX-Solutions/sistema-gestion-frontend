@@ -1,15 +1,18 @@
 import { ReactNode, useState } from "react";
+import PrincipalTitle from "@/components/student/Principal.Title";
+
 
 interface DefaultLayoutProps {
   children: ReactNode;
 }
 
 function messages() {
+
+  const title = "Mensajes y avisos"
+
   return (
     <>
-      <div className="container mx-auto justify-center py-5">
-        <h1 className="text-4xl font-bold text-center bg-white p-3 rounded-full"> Mensajes y avisos </h1>
-      </div>
+      <PrincipalTitle title = {title}></PrincipalTitle>
 
         <div className="grid grid-cols-2 gap-4 p-5">
 
@@ -17,7 +20,7 @@ function messages() {
 
             <div className="grid grid-rows-10 gap-2">
 
-              <div className="p-4">
+              <div className="p-4 grid grid-rows-2">
                 <h4> Buzón de entrada </h4>
                 <label htmlFor="opc" className="block mb-2 text-sm font-medium text-gray-900"> Selecione la opcion que desea visualizar:  </label>
                 <select name="opc" id="opc" className="w-full p-5 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
@@ -27,7 +30,7 @@ function messages() {
                 </select>
               </div>
 
-              <div className="p-4 row-span-9 bg-gray-200 border overflow-y-auto">
+              <div className="p-4 row-span-9 bg-gray-200 border overflow-y-auto grid grid-rows-8">
                 <div className="max-w-sm p-6 bg-white m-5 border border-gray-200 rounded-lg shadow">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-center">Mensaje 2</h5>
                   <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Mensaje por mala conducta</p>
@@ -68,12 +71,12 @@ function messages() {
 
           <div className="col-span-1">
 
-            <div className="grid grid-rows-4 gap-2">
+            <div className="grid grid-rows-1 gap-2">
 
               <div className="p-4">
                 <div className="w-full p-4 text-center bg-white border border-gray-200 rounded-lg shadow">
                     <h5 className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">No. de reporte: 1</h5>
-
+da
                     <h6 className="mb-5 text-base text-gray-500 sm:text-lg"> Motivo: Mala conducta</h6>
 
                     <p className="mb-5 text-base text-gray-900 sm:text-lg"> Detalles del mensaje </p>

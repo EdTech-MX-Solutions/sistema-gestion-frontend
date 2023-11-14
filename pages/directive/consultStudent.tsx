@@ -7,7 +7,7 @@ interface DefaultLayoutProps {
 function consultStudent(){
     return(
         <>
-        
+          
         </>
     );
 }
