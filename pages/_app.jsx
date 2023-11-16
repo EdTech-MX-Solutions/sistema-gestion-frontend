@@ -36,7 +36,7 @@ export default function App(
 
     if ([`/auth/login`].includes(pathname) || [`/auth/loginEmail`].includes(pathname))
         return <Component {...pageProps} />;
-    if (pathname.startsWith("/tutor"))
+    if (pathname.startsWith("/student"))
         return (AppContext({ Layout: TutorLayout, pageProps, session, Component }))
     if (pathname.startsWith("/directive"))
         return (AppContext({ Layout: DirectivoLayout, pageProps, session, Component }))

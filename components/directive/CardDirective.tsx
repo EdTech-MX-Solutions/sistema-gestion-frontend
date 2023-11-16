@@ -1,48 +1,8 @@
-import { ReactNode } from "react";
+import React from 'react'
 
-interface DefaultLayoutProps {
-  children: ReactNode;
-}
-
-function consultGroup() {
+export const CardDirective = () => {
   return (
     <>
-      <div className="container mx-auto justify-center py-5">
-        <h1 className="text-4xl font-bold text-center bg-white p-5 rounded-full">
-          Consultar Grupos
-        </h1>
-      </div>
-
-      <div className="grid grid-rows-4 gap-4 bg-green-200">
-        <div className="p-5 grid grid-cols-3 gap-4 row-span-1">
-          <div>
-            <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900"> Clave Grupo: </label>
-            <input type="text" name="" id="" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5" />
-          </div>
-
-          <div>
-            <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900"> Grado: </label>
-              <select name="" id="" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5">
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3</option>
-                <option value="">4</option>
-                <option value="">5</option>
-                <option value="">6</option>
-              </select>
-          </div>
-
-          <div>
-            <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900"> Grupo: </label>
-              <select name="" id="" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5">
-                  <option value="">A</option>
-                  <option value="">B</option>
-                  <option value="">C</option>
-                  <option value="">D</option>
-                </select>
-          </div>
-        </div>
-
         <div className="p-5 bg-white row-span-3">
           <div className="mx-10 right-0 mt-2 w-60">
             <div className="bg-white rounded overflow-hidden shadow-lg">
@@ -62,9 +22,9 @@ function consultGroup() {
                   ></path>
                 </svg>
                 <p className="pt-2 text-lg font-semibold text-gray-50">
-                  1A
+                  Nombre Directivo
                 </p>
-                <p className="text-sm text-gray-100">Clave de grupo</p>
+                <p className="text-sm text-gray-100">Email@</p>
               </div>
               <div className="border-b">
                 {/* <Link href="/account/campaigns"> */}
@@ -84,9 +44,9 @@ function consultGroup() {
                   </div>
                   <div className="pl-3">
                     <p className="text-sm font-medium text-gray-800 leading-none">
-                      Profesor Titular
+                      Datos de Contacto
                     </p>
-                    <p className="text-xs text-gray-500">Nombre profesor</p>
+                    <p className="text-xs text-gray-500">551214919165</p>
                   </div>
                 </div>
                 {/* </Link> */}
@@ -107,9 +67,9 @@ function consultGroup() {
                   </div>
                   <div className="pl-3">
                     <p className="text-sm font-medium text-gray-800 leading-none">
-                      Salon
+                      Permisos
                     </p>
-                    <p className="text-xs text-gray-500">S-1</p>
+                    <p className="text-xs text-gray-500">Permisos seleccionados</p>
                   </div>
                 </div>
               </div>
@@ -124,10 +84,6 @@ function consultGroup() {
             </div>
           </div>
         </div>
-      </div>
     </>
-  );
+  )
 }
-
-export default consultGroup;
-

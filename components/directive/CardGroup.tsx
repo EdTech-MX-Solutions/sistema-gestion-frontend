@@ -1,31 +1,8 @@
-import { ReactNode } from "react";
+import React from 'react'
 
-interface DefaultLayoutProps {
-  children: ReactNode;
-}
-
-function consultDirective() {
+export const CardGroup = () => {
   return (
     <>
-      <div className="container mx-auto justify-center py-5">
-        <h1 className="text-4xl font-bold text-center bg-white p-5 rounded-full">
-          Consultar Directivos
-        </h1>
-      </div>
-
-      <div className="grid grid-rows-4 gap-4 bg-green-200">
-        <div className="p-5 grid grid-cols-2 gap-4 row-span-1">
-          <div>
-            <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900"> No. Empleado: </label>
-            <input type="text" name="" id="" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5" />
-          </div>
-
-          <div>
-            <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900"> Nombre: </label>
-            <input type="text" name="" id="" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5" />
-          </div>
-        </div>
-
         <div className="p-5 bg-white row-span-3">
           <div className="mx-10 right-0 mt-2 w-60">
             <div className="bg-white rounded overflow-hidden shadow-lg">
@@ -45,9 +22,9 @@ function consultDirective() {
                   ></path>
                 </svg>
                 <p className="pt-2 text-lg font-semibold text-gray-50">
-                  Nombre Directivo
+                  1A
                 </p>
-                <p className="text-sm text-gray-100">Email@</p>
+                <p className="text-sm text-gray-100">Clave de grupo</p>
               </div>
               <div className="border-b">
                 {/* <Link href="/account/campaigns"> */}
@@ -67,9 +44,9 @@ function consultDirective() {
                   </div>
                   <div className="pl-3">
                     <p className="text-sm font-medium text-gray-800 leading-none">
-                      Datos de Contacto
+                      Profesor Titular
                     </p>
-                    <p className="text-xs text-gray-500">551214919165</p>
+                    <p className="text-xs text-gray-500">Nombre profesor</p>
                   </div>
                 </div>
                 {/* </Link> */}
@@ -90,9 +67,9 @@ function consultDirective() {
                   </div>
                   <div className="pl-3">
                     <p className="text-sm font-medium text-gray-800 leading-none">
-                      Permisos
+                      Salon
                     </p>
-                    <p className="text-xs text-gray-500">Permisos seleccionados</p>
+                    <p className="text-xs text-gray-500">S-1</p>
                   </div>
                 </div>
               </div>
@@ -107,10 +84,6 @@ function consultDirective() {
             </div>
           </div>
         </div>
-      </div>
     </>
-  );
+  )
 }
-
-export default consultDirective;
-
