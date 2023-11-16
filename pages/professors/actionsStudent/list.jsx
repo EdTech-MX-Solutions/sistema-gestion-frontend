@@ -10,7 +10,7 @@ function list() {
     <>
       <PrincipalTitle title = {title}></PrincipalTitle>
 
-      <div className="flex mx-auto justify-center bg-white p-5 rounded-lg">
+      <div className="justify-center bg-white p-5 rounded-lg">
         <table className="table-fixed w-full text-sm text-center font-semibold">
           <thead className="text-white uppercase bg-green-700">
             <tr className="">
@@ -103,7 +103,6 @@ function list() {
               </div>
               </td>
             </tr>
-
           </tbody>
         </table>
       </div>
