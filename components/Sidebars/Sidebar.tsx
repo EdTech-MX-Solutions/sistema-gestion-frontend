@@ -13,7 +13,12 @@ interface SidebarProps {
     role: string;
 }
 
-const Sidebar = ({ children, sidebarOpen, setSidebarOpen, role }: SidebarProps) => {
+const Sidebar = ({
+    children,
+    sidebarOpen,
+    setSidebarOpen,
+    role,
+}: SidebarProps) => {
     const router = useRouter();
 
     const system_name = "EdTech-MX SIGE";
@@ -119,7 +124,7 @@ const Sidebar = ({ children, sidebarOpen, setSidebarOpen, role }: SidebarProps) 
                                 </svg>
                                 Cerrar Sesión
                             </li>
-                            <Link href={role +"/system.info." + role}>
+                            <Link href={"/" + role + "/system.info." + role}>
                                 <li
                                     className={`group relative pb-3 flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:cursor-pointer hover:font-bold dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
                                 >
