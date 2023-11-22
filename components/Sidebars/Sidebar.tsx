@@ -3,14 +3,17 @@ import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../public/logo.png";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 interface SidebarProps {
     children: React.ReactNode;
     sidebarOpen: boolean;
     setSidebarOpen: (arg: boolean) => void;
+    role: string;
 }
 
-const Sidebar = ({ children, sidebarOpen, setSidebarOpen }: SidebarProps) => {
+const Sidebar = ({ children, sidebarOpen, setSidebarOpen, role }: SidebarProps) => {
     const router = useRouter();
 
     const system_name = "EdTech-MX SIGE";
@@ -51,7 +54,7 @@ const Sidebar = ({ children, sidebarOpen, setSidebarOpen }: SidebarProps) => {
     return (
         <aside
             ref={sidebar}
-            className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden duration-300 ease-linear dark:bg-boxdark  bg-white lg:static lg:translate-x-0 ${
+            className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col duration-300 ease-linear dark:bg-boxdark  bg-white lg:static lg:translate-x-0 ${
                 sidebarOpen ? "translate-x-0" : "-translate-x-full"
             }`}
         >
@@ -85,8 +88,8 @@ const Sidebar = ({ children, sidebarOpen, setSidebarOpen }: SidebarProps) => {
             </div>
             {/* <!-- SIDEBAR HEADER --> */}
 
-            <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear h-screen">
-                <nav className="mt-5 py-4 lg:mt-9 lg:pl-2 lg:pr-4 h-screen">
+            <div className="no-scrollbar flex flex-col overflow-visible duration-300 ease-linear h-screen">
+                <nav className="mt-5 py-4 lg:mt-9 lg:pl-2 lg:pr-4 min-h-screen">
                     <div>
                         <Image src={Logo} alt="Logo" width={200} />
                     </div>
@@ -94,37 +97,56 @@ const Sidebar = ({ children, sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         {/* <!-- Menu Groups --> */}
                         {children}
                     </div>
+                    <div>
+                        <ul className="self-end">
+                            <li
+                                onClick={() => signOut()}
+                                className={`group relative pb-3 flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:cursor-pointer hover:font-bold dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
+                            >
+                                <svg
+                                    className="ml-1.5 inline-block mr-1.5 mb-0.5 text-bodydark2 text-black"
+                                    display={"default"}
+                                    width="20"
+                                    height="20"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    id="signout"
+                                >
+                                    <path
+                                        fill="#000000"
+                                        d="M4,12a1,1,0,0,0,1,1h7.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H5A1,1,0,0,0,4,12ZM17,2H7A3,3,0,0,0,4,5V8A1,1,0,0,0,6,8V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Z"
+                                    ></path>
+                                </svg>
+                                Cerrar Sesión
+                            </li>
+                            <Link href={role +"/system.info." + role}>
+                                <li
+                                    className={`group relative pb-3 flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:cursor-pointer hover:font-bold dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
+                                >
+                                    {/* info svg icon whitout fill */}
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="24px"
+                                        viewBox="0 0 24 24"
+                                        width="24px"
+                                        fill="#000000"
+                                    >
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                                    </svg>
+                                    Sobre el Sistema
+                                </li>
+                            </Link>
+                            <li
+                                className={`group mt-1 text-center relative items-center rounded-sm py-1 text-xs text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
+                            >
+                                <p>{version_name}</p>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
 
                 {/* <!-- Sidebar Footer --> */}
-                <div className="lg:pl-2 lg:pr-4">
-                    <ul className="self-end">
-                        <li
-                            className={`group relative pb-3 flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
-                        >
-                            <svg
-                                className="ml-1.5 inline-block mr-1.5 mb-0.5 text-bodydark2 text-black"
-                                display={"default"}
-                                width="20"
-                                height="20"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                id="signout"
-                            >
-                                <path
-                                    fill="#000000"
-                                    d="M4,12a1,1,0,0,0,1,1h7.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H5A1,1,0,0,0,4,12ZM17,2H7A3,3,0,0,0,4,5V8A1,1,0,0,0,6,8V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Z"
-                                ></path>
-                            </svg>
-                            Cerrar Sesión
-                        </li>
-                        <li
-                            className={`group m-1 text-center relative items-center rounded-sm py-1 text-xs text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
-                        >
-                            <p>{version_name}</p>
-                        </li>
-                    </ul>
-                </div>
                 {/* <!-- Sidebar Footer --> */}
             </div>
         </aside>

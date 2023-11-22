@@ -1,21 +1,12 @@
 import React from "react";
 import SidebarLinkGroup from "../../SidebarLinkGroup";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import { sidebarItem } from "./SidebarItem";
 
 const SidebarContProfesor = () => {
     const router = useRouter();
     const pathname = router.pathname;
 
-    const sidebarItem = (label: string, path: string) => (
-        <Link href={path}>
-            <div
-                className={`group relative flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
-            >
-                {label}
-            </div>
-        </Link>
-    );
 
     return (
         <>

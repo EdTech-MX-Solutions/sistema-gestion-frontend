@@ -2,22 +2,13 @@ import React from "react";
 import SidebarLinkGroup from "../../SidebarLinkGroup";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { sidebarItem } from "./SidebarItem";
 
 
 const SidebarContTutor = () => {
     const router = useRouter();
     const pathname = router.pathname;
-    const base_rute = "/tutor/";
-
-    const sidebarItem = (label: string, path: string) => (
-        <Link href={base_rute + path}>
-            <div
-                className={`group relative flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
-            >
-                {label}
-            </div>
-        </Link>
-    );
+    const base_rute = "/student/";
 
     return (
         <>
@@ -54,9 +45,9 @@ const SidebarContTutor = () => {
                             return <React.Fragment></React.Fragment>;
                         }}
                     </SidebarLinkGroup>
-                    {sidebarItem("Datos Personales", "/student/data/personal")}
-                    {sidebarItem("Datos Medicos", "/student/data/medic")}
-                    {sidebarItem("Datos Tutor", "/student/data/parent")}
+                    {sidebarItem("Datos Personales", "/data/")}
+                    {sidebarItem("Datos Medicos", "/data/medic")}
+                    {sidebarItem("Datos Tutor", "/data/parent")}
                 </ul>
             </div>
             {/* <!-- Others Group --> */}
@@ -81,9 +72,9 @@ const SidebarContTutor = () => {
                 </h3>
 
                 <ul className="mb-6 ml-4  flex flex-col gap-1.5">
-                    {sidebarItem("Horario Escolar", "/academics/schedule")}
                     {sidebarItem("Calificaciones", "/academics/notes")}
-                    {sidebarItem("Historial Academico", "/academics/history")}
+                    {sidebarItem("Historial Academico", "/academics/academicRecord")}
+                    {sidebarItem("Horario", "/academics/schedule")}
                 </ul>
             </div>
             <div>
@@ -107,8 +98,8 @@ const SidebarContTutor = () => {
                 </h3>
 
                 <ul className="mb-6 ml-4  flex flex-col gap-1.5">
-                    {sidebarItem("Mensajes o Avisos", "/messages")}
-                    {sidebarItem("Reportes o Sugerencias", "/reports")}
+                    {sidebarItem("Mensajes o Avisos", "/othersOptions/messages")}
+                    {sidebarItem("Reportes o Sugerencias", "/othersOptions/suggestions")}
                 </ul>
             </div>
         </>
