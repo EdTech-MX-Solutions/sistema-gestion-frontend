@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { useCookies } from "react-cookie";
 
 interface SidebarProps {
     children: React.ReactNode;
@@ -19,6 +20,7 @@ const Sidebar = ({
     setSidebarOpen,
     role,
 }: SidebarProps) => {
+    const [cookies, setCookie, removeCookie] = useCookies(["token", "user"]);
     const router = useRouter();
 
     const system_name = "EdTech-MX SIGE";
@@ -105,7 +107,11 @@ const Sidebar = ({
                     <div>
                         <ul className="self-end">
                             <li
-                                onClick={() => signOut()}
+                                onClick={() => {
+                                    removeCookie("token",{path:'/'});
+                                    setCookie("user", "", { path: "/" });
+                                    signOut();
+                                }}
                                 className={`group relative pb-3 flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:cursor-pointer hover:font-bold dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
                             >
                                 <svg

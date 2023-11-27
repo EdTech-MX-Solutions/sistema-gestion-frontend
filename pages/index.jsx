@@ -31,8 +31,8 @@ export default function Index() {
             token = cookies.token
             const decodedToken = jwtDecode(token);
             user_roles = decodedToken.roles;
+            user_roles.includes("DIRECTIVO") ? router.push('/directive/') : (user_roles.includes("TUTOR") ? router.push('/student/') : router.push('/professors/'))
         }
-        user_roles.includes("DIRECTIVO") ? router.push('/directive/') : (user_roles.includes("TUTOR") ? router.push('/student/') : router.push('/professors/'))
     })
 
 
