@@ -9,7 +9,7 @@ import SIGEAPICollection from "@/api/apiHandler";
 
 const PrivateRoute = ({ children, allowedRoles }) => {
     if (allowedRoles == null)
-        allowedRoles = ["DIRECTIVO", "TUTOR"];
+        allowedRoles = ["DIRECTIVO"];
     const { data: session, status } = useSession();
     const [cookies, setCookie] = useCookies(['token', 'user']);
 
