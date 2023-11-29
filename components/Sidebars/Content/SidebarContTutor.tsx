@@ -14,6 +14,11 @@ const SidebarContTutor = () => {
         <>
             {/* <!-- Menu Group --> */}
             <div>
+                <h3 className="mb-4 ml-8 font-bold text-sm text-bodydark2">
+                    Módulo Tutor
+                </h3>
+            </div>
+            <div>
                 <h3 className="mb-4 ml-2 font-bold text-sm text-bodydark2">
                     <label>
                         <svg
