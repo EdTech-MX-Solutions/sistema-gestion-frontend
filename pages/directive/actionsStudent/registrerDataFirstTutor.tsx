@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, SetStateAction, useState } from "react";
 
 interface DefaultLayoutProps {
     children: ReactNode;
@@ -11,11 +11,11 @@ function registrerDataFirstTutor() {
     const [tipoIdentificacion, setTipoIdentificacion] = useState("");
     const [claveElector, setclaveElector] = useState("");
 
-    const handleTipoIdentificacion = (event) =>{
+    const handleTipoIdentificacion = (event: { target: { value: SetStateAction<string>; }; }) =>{
         setTipoIdentificacion(event.target.value);
     }
 
-    const handleClaveElector = (event) =>{
+    const handleClaveElector = (event: { target: { value: SetStateAction<string>; }; }) =>{
         setclaveElector(event.target.value);
     }
 
