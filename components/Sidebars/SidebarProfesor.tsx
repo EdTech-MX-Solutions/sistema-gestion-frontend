@@ -13,7 +13,7 @@ const SidebarProfesor = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
     return (
         <>
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} >
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} role="professors">
             <SidebarContProfesor/>
         </Sidebar>
         </>

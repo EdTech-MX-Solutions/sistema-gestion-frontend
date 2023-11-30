@@ -2,26 +2,22 @@ import React from "react";
 import SidebarLinkGroup from "../../SidebarLinkGroup";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { sidebarItem } from "./SidebarItem";
 
 
 const SidebarContTutor = () => {
     const router = useRouter();
     const pathname = router.pathname;
-    const base_rute = "/tutor/";
-
-    const sidebarItem = (label: string, path: string) => (
-        <Link href={base_rute + path}>
-            <div
-                className={`group relative flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
-            >
-                {label}
-            </div>
-        </Link>
-    );
+    const base_rute = "/student";
 
     return (
         <>
             {/* <!-- Menu Group --> */}
+            <div>
+                <h3 className="mb-4 ml-8 font-bold text-sm text-bodydark2">
+                    Módulo Tutor
+                </h3>
+            </div>
             <div>
                 <h3 className="mb-4 ml-2 font-bold text-sm text-bodydark2">
                     <label>
@@ -54,9 +50,9 @@ const SidebarContTutor = () => {
                             return <React.Fragment></React.Fragment>;
                         }}
                     </SidebarLinkGroup>
-                    {sidebarItem("Datos Personales", "/student/data/personal")}
-                    {sidebarItem("Datos Medicos", "/student/data/medic")}
-                    {sidebarItem("Datos Tutor", "/student/data/parent")}
+                    {sidebarItem("Datos Personales", base_rute + "/data/")}
+                    {sidebarItem("Datos Medicos", base_rute + "/data/medic")}
+                    {sidebarItem("Datos Tutor", base_rute + "/data/parent")}
                 </ul>
             </div>
             {/* <!-- Others Group --> */}
@@ -77,13 +73,13 @@ const SidebarContTutor = () => {
                             d="M21.49,10.19l-1-.55h0l-9-5-.11,0a1.06,1.06,0,0,0-.19-.06l-.19,0-.18,0a1.17,1.17,0,0,0-.2.06l-.11,0-9,5a1,1,0,0,0,0,1.74L4,12.76V17.5a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V12.76l2-1.12V14.5a1,1,0,0,0,2,0V11.06A1,1,0,0,0,21.49,10.19ZM16,17.5a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V13.87l4.51,2.5.15.06.09,0a1,1,0,0,0,.25,0h0a1,1,0,0,0,.25,0l.09,0a.47.47,0,0,0,.15-.06L16,13.87Zm-5-3.14L4.06,10.5,11,6.64l6.94,3.86Z"
                         ></path>
                     </svg>
-                    DATOS ACADEMICOS
+                    DATOS ACADÉMICOS
                 </h3>
 
                 <ul className="mb-6 ml-4  flex flex-col gap-1.5">
-                    {sidebarItem("Horario Escolar", "/academics/schedule")}
-                    {sidebarItem("Calificaciones", "/academics/notes")}
-                    {sidebarItem("Historial Academico", "/academics/history")}
+                    {sidebarItem("Calificaciones", base_rute + "/academics/notes")}
+                    {sidebarItem("Historial Academico", base_rute + "/academics/academicRecord")}
+                    {sidebarItem("Horario", base_rute + "/academics/schedule")}
                 </ul>
             </div>
             <div>
@@ -107,8 +103,8 @@ const SidebarContTutor = () => {
                 </h3>
 
                 <ul className="mb-6 ml-4  flex flex-col gap-1.5">
-                    {sidebarItem("Mensajes o Avisos", "/messages")}
-                    {sidebarItem("Reportes o Sugerencias", "/reports")}
+                    {sidebarItem("Mensajes o Avisos", base_rute + "/othersOptions/messages")}
+                    {sidebarItem("Reportes o Sugerencias", base_rute + "/othersOptions/suggestions")}
                 </ul>
             </div>
         </>

@@ -1,25 +1,21 @@
 import React from "react";
 import SidebarLinkGroup from "../../SidebarLinkGroup";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import { sidebarItem } from "./SidebarItem";
 
 const SidebarContProfesor = () => {
     const router = useRouter();
     const pathname = router.pathname;
-
-    const sidebarItem = (label: string, path: string) => (
-        <Link href={path}>
-            <div
-                className={`group relative flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
-            >
-                {label}
-            </div>
-        </Link>
-    );
+    const base_route = "/professors/";
 
     return (
         <>
             {/* <!-- Menu Group --> */}
+            <div>
+                <h3 className="mb-4 ml-8 font-bold text-sm text-bodydark2">
+                    Módulo Profesor
+                </h3>
+            </div>
             <div>
                 <h3 className="mb-4 ml-2 font-bold text-sm text-bodydark2">
                     <label>
@@ -37,7 +33,7 @@ const SidebarContProfesor = () => {
                                 d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z"
                             ></path>
                         </svg>
-                        ALUMNO
+                        TUS ALUMNOS
                     </label>
                 </h3>
 
@@ -52,9 +48,9 @@ const SidebarContProfesor = () => {
                             return <React.Fragment></React.Fragment>;
                         }}
                     </SidebarLinkGroup>
-                    {sidebarItem("Datos Personales", "/student/data/personal")}
-                    {sidebarItem("Datos Medicos", "/student/data/medic")}
-                    {sidebarItem("Datos Tutor", "/student/data/parent")}
+                    {sidebarItem("Grupo Asignado", base_route + "actionsStudent/list")}
+                    {sidebarItem("Horario Grupo (próximamente)", "#")}
+                    {sidebarItem("Reportes", base_route + "actionsStudent/studentReport")}
                 </ul>
             </div>
             {/* <!-- Others Group --> */}
@@ -75,13 +71,12 @@ const SidebarContProfesor = () => {
                             d="M21.49,10.19l-1-.55h0l-9-5-.11,0a1.06,1.06,0,0,0-.19-.06l-.19,0-.18,0a1.17,1.17,0,0,0-.2.06l-.11,0-9,5a1,1,0,0,0,0,1.74L4,12.76V17.5a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V12.76l2-1.12V14.5a1,1,0,0,0,2,0V11.06A1,1,0,0,0,21.49,10.19ZM16,17.5a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V13.87l4.51,2.5.15.06.09,0a1,1,0,0,0,.25,0h0a1,1,0,0,0,.25,0l.09,0a.47.47,0,0,0,.15-.06L16,13.87Zm-5-3.14L4.06,10.5,11,6.64l6.94,3.86Z"
                         ></path>
                     </svg>
-                    DATOS ACADEMICOS
+                    CALIFICACIONES
                 </h3>
 
                 <ul className="mb-6 ml-4  flex flex-col gap-1.5">
-                    {sidebarItem("Horario Escolar", "/academics/schedule")}
-                    {sidebarItem("Calificaciones", "/academics/notes")}
-                    {sidebarItem("Historial Academico", "/academics/history")}
+                    {sidebarItem("Calificaciones", base_route +"grades/grades")}
+                    {sidebarItem("Historial Academico", base_route +"grades/modifyGrades")}
                 </ul>
             </div>
             <div>
@@ -105,8 +100,8 @@ const SidebarContProfesor = () => {
                 </h3>
 
                 <ul className="mb-6 ml-4  flex flex-col gap-1.5">
-                    {sidebarItem("Mensajes o Avisos", "/messages")}
-                    {sidebarItem("Reportes o Sugerencias", "/reports")}
+                    {sidebarItem("Mensajes o Avisos", "#")}
+                    {sidebarItem("Perfil Profesor", "#")}
                 </ul>
             </div>
         </>

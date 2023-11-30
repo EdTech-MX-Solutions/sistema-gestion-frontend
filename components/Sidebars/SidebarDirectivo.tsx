@@ -13,7 +13,7 @@ const SidebarDirectivo = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
     return (
         <>
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} >
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} role="directive">
             <SidebarContDirectivo/>
         </Sidebar>
         </>
