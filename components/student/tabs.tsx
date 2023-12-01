@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React from "react";
 
 interface NavLinkProps {
@@ -11,7 +12,7 @@ function NavLink({ href, icon, text, active }: NavLinkProps) {
   const commonClasses =
     "inline-flex items-center justify-center p-1 md:p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group";
   const activeClasses = active
-    ? "text-green-600 border-blue-600 dark:text-green-500 dark:border-green-500"
+    ? "text-green-600 border-green-700 dark:text-green-500 dark:border-green-500"
     : "text-gray-500 dark:text-gray-400";
 
   return (
@@ -50,16 +51,28 @@ function DisabledLink({ text }: { text: string }) {
 }
 
 function StudentTabs() {
+  const router = useRouter();
+  const pathname = router.pathname;
+  const rute_base = "/student/"
   const tab1 = "Datos Personales";
-  const tab3 = "Datos de Contacto";
-  const tab2 = "Datos Académicos";
-  const tab4 = "Datos de Salud";
+  const tab1_route = rute_base + "data/";
+  const tab1_active = pathname === rute_base + "data" || pathname === rute_base + "data/personal";
+
+  const tab2 = "Datos de Salud";
+  const tab2_route = rute_base + "data/medic";
+  const tab2_active = pathname === rute_base + "data/medic";
+
+  const tab3 = "Datos del Tutor";
+  const tab3_route = rute_base + "data/parent";
+  const tab3_active = pathname === rute_base + "data/parent";
+
+  const tab4 = "Datos Académicos";
   return (
     <>
       <div className="border-b border-gray-200 dark:border-gray-700">
         <ul className="flex flex-wrap -mb-px text-xs md:text-sm font-medium text-center text-gray-500 dark:text-gray-400">
           <NavLink
-            href="#"
+            href={tab1_route}
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,10 +83,10 @@ function StudentTabs() {
               </svg>
             }
             text={tab1}
-            active={true}
+            active={tab1_active}
           />
           <NavLink
-            href="#"
+            href={tab2_route}
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -84,9 +97,10 @@ function StudentTabs() {
               </svg>
             }
             text={tab2}
+            active={tab2_active}
           />
           <NavLink
-            href="#"
+            href={tab3_route}
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -97,8 +111,9 @@ function StudentTabs() {
               </svg>
             }
             text={tab3}
+            active={tab3_active}
           />
-          <NavLink
+          {/* <NavLink
             href="#"
             icon={
               <svg
@@ -110,7 +125,7 @@ function StudentTabs() {
               </svg>
             }
             text={tab4}
-          />
+          /> */}
         </ul>
       </div>
     </>

@@ -1,6 +1,4 @@
-import { ReactNode } from "react";
-import PrincipalTitle from "@/components/directive/Principal.Title";
-import FormTutor from "@/components/directive/FormTutor";
+import { ReactNode, useState } from "react";
 
 interface DefaultLayoutProps {
   children: ReactNode;
@@ -8,28 +6,17 @@ interface DefaultLayoutProps {
 
 function registrerDataFirstTutor() {
 
-  const InitialTutor = {
-    "nombre" : "",
-    "apellidoPaterno" : "",
-    "apellidoMaterno" : "",
-    "email" : "alguien@.com",
-    "CURP" : "",
-    "leerYEscribir" : true,
-    "gradoMaximoDeEstudios" : "",
-    "ocupacion" : "",
-    "fechaNacimiento" : "01/12/2000",
-    "edad" : 0,
-    "sexo" : "",
-    "paisOrigen" : "",
-    "estadoOrigen" : "",
-    "estadoCivil" : "",
-    "redesSociales" : [""],
-    "tipoIdentificacion" : "",
-    "noIdentificacion" : "",
-    "esPrincipal" : true,
-    "parentesto" : "",
-    "numeros" : []
-  }
+
+    const [tipoIdentificacion, setTipoIdentificacion] = useState("");
+    const [claveElector, setclaveElector] = useState("");
+
+    const handleTipoIdentificacion = (event) =>{
+        setTipoIdentificacion(event.target.value);
+    }
+
+    const handleClaveElector = (event) =>{
+        setclaveElector(event.target.value);
+    }
 
   return (
     <>

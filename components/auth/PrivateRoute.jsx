@@ -9,7 +9,7 @@ import SIGEAPICollection from "@/api/apiHandler";
 
 const PrivateRoute = ({ children, allowedRoles }) => {
     if (allowedRoles == null)
-        allowedRoles = ["DIRECTIVO", "TUTOR"];
+        allowedRoles = ["DIRECTIVO"];
     const { data: session, status } = useSession();
     const [cookies, setCookie] = useCookies(['token', 'user']);
 
@@ -27,7 +27,7 @@ const PrivateRoute = ({ children, allowedRoles }) => {
                 if (accessToken != null) {
                     console.log(session.accessToken);
                     const api = new SIGEAPICollection();
-
+                    console.log("accessToken:", accessToken);
                     api.authCollection.executeGetGoogleAutentication(accessToken)
                         .then(response => {
                             if (!response.ok) {
@@ -45,6 +45,7 @@ const PrivateRoute = ({ children, allowedRoles }) => {
                         })
                         .catch(error => {
                             console.error("Error de solicitud:", error);
+                            signOut();
                         });
                 }
             } else {
