@@ -7,7 +7,6 @@ interface DefaultLayoutProps {
 function studentData(){
     return(
         <> 
-
           <div> Datos personales Alumno </div>
 
           <div> Datos médicos alumno </div>
