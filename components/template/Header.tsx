@@ -1,5 +1,5 @@
 // import { Link } from 'react-router-dom';
-import Logo from "../images/logo/logo-icon.svg";
+import Link from "next/link";
 // import DarkModeSwitcher from './DarkModeSwitcher';
 // import DropdownMessage from './DropdownMessage';
 // import DropdownNotification from './DropdownNotification';
@@ -20,7 +20,7 @@ const Header = (props: {
               e.stopPropagation();
               props.setSidebarOpen(!props.sidebarOpen);
             }}
-            className="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
+            className="z-50 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
           >
             <span className="relative block h-5.5 w-5.5 cursor-pointer">
               <span className="du-block absolute right-0 h-full w-full">
@@ -56,9 +56,9 @@ const Header = (props: {
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
 
-          {/* <Link className="block flex-shrink-0 lg:hidden" to="/">
-            <img src={Logo} alt="Logo" />
-          </Link> */}
+          <Link className="block flex-shrink-0 lg:hidden" href="/">
+            <img src="/logo.png" className="w-20" alt="Logo" />
+          </Link>
         </div>
 
         <div className="hidden sm:block">

@@ -14,8 +14,7 @@ const TableGrades = ({}: TableGradesProps) => {
           htmlFor="periodo"
           className="block mb-2 text-sm font-medium text-gray-900"
         >
-          {" "}
-          Seleciona una materia:{" "}
+          Seleciona una materia:
         </label>
         <select
           name="periodo"

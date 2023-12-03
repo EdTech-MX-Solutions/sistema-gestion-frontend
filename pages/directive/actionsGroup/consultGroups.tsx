@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import InputSearch from "@/components/InputSearch";
+import InputSearch from "@/components/template/InputSearch";
 import TableGroups from "@/components/directive/TableGroups";
 import PrincipalTitle from "@/components/directive/Principal.Title";
 

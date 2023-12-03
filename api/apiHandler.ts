@@ -3,7 +3,7 @@ import { AuthAPICollection } from "./collections/AuthAPICollection";
 import { DirectivosAPICollection } from "./collections/DirectivosAPICollection";
 import { ProfesoresAPICollection } from "./collections/ProfesoresAPICollection";
 import { TutoresAPICollection } from "./collections/TutoresAPICollection";
-import { SharedAPICollection } from "./collections/sharedAPICollection";
+import { SharedAPICollection } from "./collections/SharedAPICollection";
 
 
 

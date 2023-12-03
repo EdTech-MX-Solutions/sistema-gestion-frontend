@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import InputSearch from "@/components/InputSearch";
+import InputSearch from "@/components/template/InputSearch";
 import TableDirectives from "@/components/directive/TableDirectives";
 
 interface DefaultLayoutProps {

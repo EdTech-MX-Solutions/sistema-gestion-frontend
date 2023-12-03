@@ -6,9 +6,10 @@ function ParentsCardComponent({ parentInst }: { parentInst: InterfaceParent }) {
         return null;
     }
     let number = "";
-    if (!parentInst.numeros) {
-        // Manejar el caso cuando parentInst.numeros es nulo o indefinido
-        // let number = parentInst.numeros[0].numero || "";
+    try {
+        number = "cel:" + parentInst.numeros[0].numero || "";
+    } catch (error) {
+        console.log(error);
     }
     const parent = {
         name: `${parentInst.nombres || ""} ${

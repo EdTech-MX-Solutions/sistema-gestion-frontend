@@ -14,11 +14,9 @@ function consultGroup() {
   return (
     <>
       <PrincipalTitle title={title}></PrincipalTitle>
-
       <div className="grid grid-rows-12 gap-6 bg-white rounded-lg">
         <CardConsultGroup></CardConsultGroup>
-        <TableStudentsGroup titleBtn1 = {"Ver Datos del Alumno"} titleBtn2 = {""} titleTable = {"Listado de Alumnos disponibles para el grupo seleccionado"}></TableStudentsGroup>
-
+        <TableStudentsGroup titleBtn1 = {"Ver Datos del Alumno"} titleBtn2 = {"Ver Datos Del Alumno"} titleTable = {"Listado de Alumnos disponibles para el grupo seleccionado"}></TableStudentsGroup>
         <div className = "grid grid-cols-2 row-span-1 gap-4 items-center text-center">
           <ButtonComponent
             title = {"Modificar Grupo"}

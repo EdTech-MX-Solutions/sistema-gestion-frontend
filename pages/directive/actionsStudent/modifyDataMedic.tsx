@@ -7,26 +7,27 @@ interface DefaultLayoutProps {
 }
 
 function registrerDataMedicStudent() {
-  const InitialDataMedic = {
-    "tipoSanguineo": "",
-    "peso": 0,
-    "talla": 0,
-    "zapatoOrtopedico": true,
+
+  const dataMedic = {
+    "tipoSanguineo": "AB+",
+    "peso": 70,
+    "talla": 175,
+    "zapatoOrtopedico": false,
     "lentes": true,
-    "seguroMedico": "",
-    "recomendacionesEspeciales": "",
-    "nombreMedicoFamiliar": "",
-    "telefonoMedicoFamiliar": "",
-    "enfermadesFrecuentes": "",
-    "enfermadesUltimoAnio": "",
-    "alergias": "", 
+    "seguroMedico": "SeguroXYZ",
+    "recomendacionesEspeciales": "Evitar esfuerzos excesivos",
+    "nombreMedicoFamiliar": "Dr. Rodríguez",
+    "telefonoMedicoFamiliar": "555-1234",
+    "enfermadesFrecuentes": "Resfriado, Gripe, Asma",
+    "enfermadesUltimoAnio": "Gripe, Bronquitis",
+    "alergias": "Polen, Ácaros", 
     "respuestasPreguntasMedicas" : [
       {
         "pregunta" : {
           "id" : 1,
           "pregunta" : "Sobrepeso u Obesidad"
         },
-        "respuestaCorta": "",
+        "respuestaCorta": "No",
         "respuestaEspecifica": ""
       },
       {
@@ -34,7 +35,7 @@ function registrerDataMedicStudent() {
           "id" : 2,
           "pregunta" : "Anemia"
         },
-        "respuestaCorta": "",
+        "respuestaCorta": "No",
         "respuestaEspecifica": ""
       },
       {
@@ -42,7 +43,7 @@ function registrerDataMedicStudent() {
           "id" : 3,
           "pregunta" : "Bronquitis"
         },
-        "respuestaCorta": "",
+        "respuestaCorta": "No",
         "respuestaEspecifica": ""
       },
       {
@@ -50,7 +51,7 @@ function registrerDataMedicStudent() {
           "id" : 4,
           "pregunta" : "Hemorragias"
         },
-        "respuestaCorta": "",
+        "respuestaCorta": "No",
         "respuestaEspecifica": ""
       },
       {
@@ -58,7 +59,7 @@ function registrerDataMedicStudent() {
           "id" : 5,
           "pregunta" : "Fiebre Reumatica"
         },
-        "respuestaCorta": "",
+        "respuestaCorta": "No",
         "respuestaEspecifica": ""
       },
       {
@@ -66,7 +67,7 @@ function registrerDataMedicStudent() {
           "id" : 6,
           "pregunta" : "Problemas en el habla"
         },
-        "respuestaCorta": "",
+        "respuestaCorta": "No",
         "respuestaEspecifica": ""
       }
     ],
@@ -77,32 +78,32 @@ function registrerDataMedicStudent() {
           "id": 1,
           "pregunta": "¿Tiene algún familiar diabetico?"
         },
-        "respuestaCorta": "",
-        "respuestaEspecifica": ""
+        "respuestaCorta": "Sí",
+        "respuestaEspecifica": "Padre"
       },
       {
         "pregunta": {
           "id": 2,
           "pregunta": "¿Tiene algún familiar enfermo del corazón?"
         },
-        "respuestaCorta": "",
-        "respuestaEspecifica": ""
+        "respuestaCorta": "Sí",
+        "respuestaEspecifica": "Padre"
       },
       {
         "pregunta": {
           "id": 3,
           "pregunta": "¿Tiene algún familiar hipertenso?"
         },
-        "respuestaCorta": "",
-        "respuestaEspecifica": ""
+        "respuestaCorta": "Sí",
+        "respuestaEspecifica": "Padre"
       },
       {
         "pregunta": {
           "id": 4,
           "pregunta": "¿Tiene algún familiar enfermo de cancer?"
         },
-        "respuestaCorta": "",
-        "respuestaEspecifica": ""
+        "respuestaCorta": "Sí",
+        "respuestaEspecifica": "Padre"
       },
     ],
 
@@ -110,19 +111,18 @@ function registrerDataMedicStudent() {
       {
         "pregunta": {
           "id": 1,
-          "nombreCondicion": ""
+          "nombreCondicion": "Asma"
         },
-        "respuestaCorta": "",
-        "respuestaEspecifica": ""
+        "respuestaCorta": "Sí",
+        "respuestaEspecifica": "Controlado con medicación"
       },
     ]
   };
 
-
   return (
     <>
       <PrincipalTitle title={"Registro Datos Médicos Alumno"}></PrincipalTitle>
-      <FormMedic dataMedic = {InitialDataMedic}></FormMedic>
+      <FormMedic dataMedic={dataMedic}></FormMedic>
     </>
   );
 }

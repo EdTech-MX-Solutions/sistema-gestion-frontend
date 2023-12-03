@@ -14,9 +14,7 @@ const listData = () => {
     return (
         <>
             <PrincipalTitle title={title}></PrincipalTitle>
-            <TableGrades>
-                
-            </TableGrades>
+            <TableGrades></TableGrades>
         </>
     );
 };
