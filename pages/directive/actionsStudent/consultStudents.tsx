@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import PrincipalTitle from "@/components/directive/Principal.Title";
-import InputSearch from "@/components/InputSearch";
+import InputSearch from "@/components/template/InputSearch";
 import TableStudets from "@/components/directive/TableStudets";
 
 interface DefaultLayoutProps {

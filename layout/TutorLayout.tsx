@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PrivateRoute from "../components/auth/PrivateRoute";
 import Sidebar from "../components/Sidebars/Content/SidebarContTutor";
-import Header from "../components/Header";
+import Header from "../components/template/Header";
 import SidebarTutor from "@/components/Sidebars/SidebarTutor";
 import { AlumnoProvider } from "@/components/context/AlumnoProvider";
 

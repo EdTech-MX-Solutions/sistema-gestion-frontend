@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -17,7 +18,7 @@ function NavLink({ href, icon, text, active }: NavLinkProps) {
 
   return (
     <li className="mr-2">
-      <a
+      <Link
         href={href}
         className={`${commonClasses} ${activeClasses}`}
         aria-current={active ? "page" : undefined}
@@ -35,7 +36,7 @@ function NavLink({ href, icon, text, active }: NavLinkProps) {
           </i>
         )}
         {text}
-      </a>
+      </Link>
     </li>
   );
 }
