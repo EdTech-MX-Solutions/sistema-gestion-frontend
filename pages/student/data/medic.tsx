@@ -1,7 +1,7 @@
 import CardView from "@/components/CardView";
 import MedicCard from "@/components/Medic.Card";
-import StudentCard from "@/components/Student.Card";
 import { useAlumno } from "@/components/context/AlumnoProvider";
+import StudentDataCard from "@/components/student/StudentData.Card";
 
 function medicData() {
     const { alumno } = useAlumno();
@@ -11,9 +11,9 @@ function medicData() {
     return (
         <>
             <CardView title={title} description={description}>
-                <StudentCard alumno={alumno}>
+                <StudentDataCard alumno={alumno}>
                     <MedicCard />
-                </StudentCard>
+                </StudentDataCard>
             </CardView>
         </>
     );

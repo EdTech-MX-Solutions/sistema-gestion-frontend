@@ -1,6 +1,6 @@
 import SIGEAPICollection from "@/api/apiHandler";
 import CardView from "@/components/CardView";
-import StudentCard from "@/components/Student.Card";
+import StudentCard from "@/components/student/Student.Card";
 import ParentsDataComponent from "@/components/student/data/ParentsData";
 import InterfaceAlumno from "@/interfaces/alumno";
 import InterfaceParent from "@/interfaces/parent";
@@ -11,7 +11,7 @@ import { useAlumno } from "@/components/context/AlumnoProvider";
 
 function ParentsData() {
     const { alumno } = useAlumno();
-    const [cookies, setCookie] = useCookies(["token"]);
+    const [cookies, setCookie] = useCookies(["token", "user"]);
     const [dataGetted, setDataGetted] = useState(false);
     const loadingMessage = "cargando...";
     const [parentList, setParents] = useState<InterfaceParent[]>([
@@ -38,8 +38,15 @@ function ParentsData() {
             numeros: undefined,
         },
     ]);
+    var tutor = "";
 
-    const tutor = "Rodrigo Rubio";
+    try {
+        tutor = cookies.user || "";
+        console.log("tutor:", tutor);
+    } catch (error) {
+        console.log("error:", error);
+    }
+
     const title = "Datos Personales del Tutor";
     const description = `Datos registrados del tutor ${tutor}, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
 
@@ -59,7 +66,7 @@ function ParentsData() {
             })
             .then((data) => {
                 console.log("Datos de respuesta:", data);
-                var list:InterfaceParent[] = [];
+                var list: InterfaceParent[] = [];
                 data.forEach((dataParent: any) => {
                     list.push({
                         id_tutor: dataParent.idTutor,
@@ -97,15 +104,11 @@ function ParentsData() {
 
     return (
         <>
-            {/* <PrivateRoute> */}
             <CardView title={title} description={description}>
                 <StudentCard alumno={alumno}>
-                    <ParentsDataComponent
-                        parents={parentList}
-                    />
+                    <ParentsDataComponent parents={parentList} />
                 </StudentCard>
             </CardView>
-            {/* </PrivateRoute> */}
         </>
     );
 }
