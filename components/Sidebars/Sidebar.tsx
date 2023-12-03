@@ -20,7 +20,7 @@ const Sidebar = ({
     setSidebarOpen,
     role,
 }: SidebarProps) => {
-    const [cookies, setCookie, removeCookie] = useCookies(["token", "user"]);
+    const [cookies, setCookie, removeCookie] = useCookies(["token", "user", "childs", "boleta"]);
     const router = useRouter();
 
     const system_name = "EdTech-MX SIGE";
@@ -108,8 +108,10 @@ const Sidebar = ({
                         <ul className="self-end">
                             <li
                                 onClick={() => {
-                                    removeCookie("token",{path:'/'});
+                                    removeCookie("token", { path: "/" });
                                     setCookie("user", "", { path: "/" });
+                                    setCookie("childs", "", { path: "/" });
+                                    setCookie("boleta", "", { path: "/" });
                                     signOut();
                                 }}
                                 className={`group relative pb-3 flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:cursor-pointer hover:font-bold dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}

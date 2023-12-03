@@ -19,7 +19,7 @@ const AlumnoContext = createContext<AlumnoContextType | undefined>(undefined);
 export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
-    const [cookies, setCookie] = useCookies(["token"]);
+    const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
     // const [alumno, setAlumno] = useState<InterfaceAlumno | null>(null);
     const [alumno, setAlumno] = useState<InterfaceAlumno>({
         no_boleta: "cargando...",
@@ -61,6 +61,8 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
                     edad: data[0].edad,
                     aniosPreescolar: data[0].aniosPreescolar,
                 };
+                setCookie("childs", data.length);
+                setCookie("boleta", data[0].noBoleta);
                 setAlumno(newAlumno);
             } else {
                 console.error(
@@ -78,8 +80,8 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
 
     useEffect(() => {
         fetchAlumno();
-    }, []); 
-	
+    }, []);
+
     return (
         <AlumnoContext.Provider value={{ alumno, updateAlumno }}>
             {children}
