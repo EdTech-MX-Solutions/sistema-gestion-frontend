@@ -5,8 +5,9 @@ import Loader from "./interface/Loader";
 import Button from "./interface/button";
 
 function MedicCard() {
-    const [loadingData, setLoadingData] = useState(true);
+    const [loadingData, setLoadingData] = useState(false);
     const [haveData, setHaveData] = useState(false);
+    const [error, setError] = useState(false);
 
     const describeText =
         "Los datos médicos de un alumno nos proporcionan información crítica para garantizar un entorno escolar seguro y propicio para su desarrollo.";
@@ -117,9 +118,23 @@ function MedicCard() {
                             title="No se ha encontrado un registro de Datos Médicos"
                             value="Sin registro médico"
                         >
-                            <Button className="flex mt-10 mx-auto">
-                                Registrar Datos Médicos
-                            </Button>
+                            {!error && (
+                                <div
+                                    onClick={() => {
+                                        setError(true);
+                                    }}
+                                >
+                                    <Button className="flex mt-10 mx-auto disabled bg-gray-500 hover:bg-gray-500 focus:ring-1 focus:ring-red-300">
+                                        Registrar Datos Médicos
+                                    </Button>
+                                </div>
+                            )}
+                            {error && (
+                                <div className="text-red-800">
+                                    Error: Registro no permitido. Contacta con
+                                    la dirección del plantel.
+                                </div>
+                            )}
                         </DataMedicCard>
                     </div>
                     <div>
@@ -153,31 +168,6 @@ function MedicCard() {
             </>
         );
     }
-}
-
-interface InterfaceMedicDataCard {
-    title: string;
-    value: string;
-    color?: string;
-}
-
-function DataMedicCardRegister({
-    title,
-    value,
-    color,
-}: InterfaceMedicDataCard) {
-    const className = `text-4xl font-bold pb-2 ${color}`;
-    return (
-        <>
-            <div className="flex-grow border border-gray-300 rounded text-center py-8">
-                <h2 className={className}>{value}</h2>
-                <h4 className="inline text-gray-500 text-sm">{title}</h4>
-                <Button className="flex mt-10 mx-auto">
-                    Registrar Datos Médicos
-                </Button>
-            </div>
-        </>
-    );
 }
 
 export default MedicCard;
