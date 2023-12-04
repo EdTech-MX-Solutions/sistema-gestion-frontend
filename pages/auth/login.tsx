@@ -20,7 +20,7 @@ export default function SignIn({
           <div className="w-full m-20">
             <div className="block rounded-lg bg-white shadow-lg dark:bg-black">
               <div className="g-0 lg:flex lg:flex-wrap">
-                <div className="px-4 md:px-0 lg:w-6/12">
+                <div className="px-4 md:px-0 w-full lg:w-6/12">
                   <div className="md:mx-6 md:p-12">
                     <div className="text-center">
                       <img
@@ -32,8 +32,8 @@ export default function SignIn({
                   </div>
                 </div>
 
-                <div className="flex items-center rounded-b-lg lg:rounded-r-lg lg:rounded-bl-none">
-                  <div className="px-4 py-6 text-white md:mx-12 md:p-12 text-center">
+                <div className="w-full lg:w-6/12 flex items-center rounded-b-lg lg:rounded-r-lg lg:rounded-bl-none">
+                  <div className="mx-auto px-4 py-6 text-white lg:mx-12 md:p-12 text-center">
                     <div>
                       <div>
                         <span className="text-3xl font-bold text-neutral-800 dark:text-neutral-200">

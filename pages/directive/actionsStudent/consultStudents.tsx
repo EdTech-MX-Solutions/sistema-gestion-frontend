@@ -1,43 +1,100 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import PrincipalTitle from "@/components/directive/Principal.Title";
 import InputSearch from "@/components/template/InputSearch";
 import TableStudets from "@/components/directive/TableStudets";
+import CardView from "@/components/CardView";
+import SIGEAPICollection from "@/api/apiHandler";
+import { useCookies } from "react-cookie";
+import InterfaceAlumno from "@/interfaces/alumno";
 
 interface DefaultLayoutProps {
-  children: ReactNode;
+    children: ReactNode;
 }
 
 function consultStudents() {
-  const students = [
-    {
-      no_boleta: "2019630523",
-      curp: "RUHR920101HDFRBR00",
-      nombre: "Ricardo",
-      apellido_paterno: "Urbina",
-      apellido_materno: "Hernández",
-      aniosPreescolar: 3,
-      edad: 12,
-      fecha_nacimiento: "01/01/2002",
-      sexo: "Hombre",
-      estatus: "Activo",
-      entidad_nacimiento: "Ciudad de México",
-      pais_origen: "México",
-      grado: "1",
-      grupo: "A",
-    },
-  ];
+    const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
+    const [alumnos, setAlumnos] = useState<InterfaceAlumno[]>([]);
+    const [hayAlumnos, setHayAlumnos] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
+    
+    const fetchAlumnos = async () => {
+        const api = new SIGEAPICollection();
+        const token = cookies.token;
 
-  return (
-    <>
-      <PrincipalTitle title={"Consultar Alumnos"}></PrincipalTitle>
-        <InputSearch
-          comment={
-            "Recuerda que puedes buscar a un alumno por nombre, apellidos o boleta"
-          }
-        ></InputSearch>
-        <TableStudets students={students}></TableStudets>
-    </>
-  );
+        try {
+            const response = await api.sharedCollection.executeGetAlumnos(
+                token
+            );
+            if (response.ok) {
+                console.log("Generando Lista de Alumnos");
+                const data = await response.json();
+                console.log(data);
+                if (!data || data.length == 0) {
+                    setHayAlumnos(false);
+                    setLoading(false);
+                    return;
+                } else {
+                    setHayAlumnos(true);
+                }
+                let newAlumnos: InterfaceAlumno[] = [];
+                console.log("Entrando al for");
+
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i];
+                    const sexo =
+                        element.sexo === "M" ? "Masculino" : "Femenino";
+                    const newAlumno: InterfaceAlumno = {
+                        no_boleta: element.noBoleta,
+                        curp: element.curp,
+                        nombre: element.nombres,
+                        apellido_paterno: element.apellidoPaterno,
+                        apellido_materno: element.apellidoMaterno,
+                        aniosPreescolar: element.aniosPreescolar,
+                        fecha_nacimiento: element.fechaNacimiento,
+                        edad: element.edad,
+                        pais_origen: element.paisOrigen,
+                        sexo: sexo,
+                        estatus: element.estatus,
+                        entidad_nacimiento: element.entidad,
+                        grado: element.grado || "Sin asignar",
+                        grupo: element.grupo || "",
+                        actualizarDatosMedicos: element.actualizarDatosMedicos,
+                    };
+                    newAlumnos.push(newAlumno);
+                }
+                console.log("Alumnos obtenidos ");
+                setAlumnos(newAlumnos);
+                setHayAlumnos(true);
+                setLoading(false);
+                console.log("Alumnos Actuales: ", newAlumnos);
+                console.log("Alumnos: ", alumnos);
+            } else {
+                console.error(
+                    `Error en la solicitud. Código de estado: ${response.status}`
+                );
+            }
+        } catch (error) {
+            console.error("Error de solicitud:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchAlumnos();
+    }, []);
+
+    return (
+        <>
+            <CardView title={"title"} customtitle={true} description={""}>
+                <PrincipalTitle title={"Consultar Alumnos"}></PrincipalTitle>
+                <InputSearch
+                    comment={
+                        "Recuerda que puedes buscar a un alumno por nombre, apellidos o boleta"
+                    }
+                ></InputSearch>
+                <TableStudets students={alumnos}></TableStudets>
+            </CardView>
+        </>
+    );
 }
 
 export default consultStudents;
