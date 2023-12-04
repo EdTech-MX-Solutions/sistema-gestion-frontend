@@ -44,7 +44,6 @@ function list() {
   return (
     <>
       <PrincipalTitle title = {title}></PrincipalTitle>
-
       <TableList lista = {listadoAlumnos} ></TableList>
     </>
   );
