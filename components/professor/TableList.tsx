@@ -70,7 +70,9 @@ const TableList = ({lista}: TableListprops) => {
           </tbody>
         </table>
       </div>
-      <ButtonComponent title = {"Cerrar asistencia"} color = {"green"}></ButtonComponent>
+      <div className="text-center">
+        <ButtonComponent title = {"Cerrar asistencia"} color = {"green"}></ButtonComponent>
+      </div>
       </form>
     </>
   );

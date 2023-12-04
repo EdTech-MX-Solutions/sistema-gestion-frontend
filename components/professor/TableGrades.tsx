@@ -2,10 +2,20 @@ import React from "react";
 import ButtonComponent from "../ButtonComponent";
 
 interface TableGradesProps {
-
+  calificaciones : Array<{
+    grado : string
+    grupo : string
+    materia : string
+    claveMateria : string
+    primerTrimestre : number
+    segundoTrimestre : number
+    tercerTrimestre : number
+    calificacionFinal : number
+  }>
 }
 
-const TableGrades = ({}: TableGradesProps) => {
+const TableGrades = ({calificaciones}: TableGradesProps) => {
+
   return (
     <>
       <form>
@@ -30,8 +40,8 @@ const TableGrades = ({}: TableGradesProps) => {
         <table className="table-fixed w-full text-sm text-center font-semibold">
           <thead className="text-white uppercase bg-green-700">
             <tr className="">
-              <th className="p-3">No. Lista</th>
-              <th colSpan={2}>Apellido Paterno Apellido Materno Nombres(s)</th>
+              <th className="p-3"> No. Lista </th>
+              <th colSpan={2}> Apellido Paterno Apellido Materno Nombres(s) </th>
               <th> Calificación 1er Trimestre </th>
               <th> Calificación 2do Trimestre </th>
               <th> Calificación 3er Trimestre </th>
@@ -82,8 +92,10 @@ const TableGrades = ({}: TableGradesProps) => {
           </tbody>
         </table>
       </div>
-
-      <ButtonComponent title = {"Guardar"} color = {"green"}></ButtonComponent>
+      <div className="text-center">
+        <ButtonComponent title = {"Guardar"} color = {"green"}></ButtonComponent>
+      </div>
+      
       </form>
     </>
   );
