@@ -6,5 +6,4 @@ export class DirectivosAPICollection {
     constructor() {
         this.apiCaller = new APICaller();
     }
-
 }
