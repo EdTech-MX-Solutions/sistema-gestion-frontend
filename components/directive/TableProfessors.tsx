@@ -2,14 +2,7 @@ import React from "react";
 import ButtonComponentBiColor from "../ButtonComponentBiColor";
 
 interface TableProfessorsProps {
-  professors: Array<{
-    idProfessor: string;
-    nombre: String;
-    apellidoPaterno: String;
-    apellidoMaterno: String;
-    email: String;
-    telefono: String;
-  }>;
+  professors : InterfaceProfessor[];
 }
 
 export const TableProfessors = ({ professors }: TableProfessorsProps) => {
@@ -23,22 +16,18 @@ export const TableProfessors = ({ professors }: TableProfessorsProps) => {
               <tr className="">
                 <th className="p-3">No. Empleado</th>
                 <th colSpan={2}>
-                  Apellido Paterno Apellido Materno Nombres (s)
+                  Nombres(s) Apellido Paterno Apellido Materno
                 </th>
-                <th> Grupo asignado </th>
                 <th> Email </th>
-                <th> Telefono </th>
                 <th> Acciones </th>
               </tr>
             </thead>
             <tbody>
               {professors.map((professor) => (
-                <tr key = {professor.idProfessor}>
-                  <td className="p-5"> {professor.idProfessor} </td>
+                <tr key = {professor.idProfesor}>
+                  <td className="p-5"> {professor.idProfesor} </td>
                   <td colSpan={2}> {`${professor.nombre}  ${professor.apellidoPaterno}  ${professor.apellidoMaterno}`}</td>
-                  <td> *1A* </td>
                   <td> {professor.email} </td>
-                  <td> {professor.telefono} </td>
                   <td>
                     <ButtonComponentBiColor
                       title={"Consultar"}

@@ -33,7 +33,7 @@ export const FormStudent = ({}: FormStudentProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  CURP:
+                  CURP<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -78,13 +78,14 @@ export const FormStudent = ({}: FormStudentProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Apellido Paterno:
+                  Apellido Paterno<span>*</span>:
                 </label>
                 <input
                   type="text"
                   name=""
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                  required
                 />
               </div>
 
@@ -108,7 +109,7 @@ export const FormStudent = ({}: FormStudentProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Nombre(s):
+                  Nombre(s)<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -123,12 +124,13 @@ export const FormStudent = ({}: FormStudentProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Fecha de nacimiento
+                  Fecha de nacimiento<span>*</span>:
                 </label>
                 <input
                   type="date"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 ps-10 p-2.5"
                   placeholder="Select date"
+                  required
                 />
               </div>
 
@@ -152,13 +154,14 @@ export const FormStudent = ({}: FormStudentProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Años preescolar:
+                  Años preescolar<span>*</span>:
                 </label>
                 <input
                   type="text"
                   name=""
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                  required
                 />
               </div>
 
@@ -172,6 +175,23 @@ export const FormStudent = ({}: FormStudentProps) => {
                 <select
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                >
+                  <option value="h"> Masculino </option>
+                  <option value="m"> Femenino </option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  htmlFor=""
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Estado de Origen<span>*</span>:
+                </label>
+                <select
+                  id=""
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                  required
                 >
                   <option value="h"> Masculino </option>
                   <option value="m"> Femenino </option>

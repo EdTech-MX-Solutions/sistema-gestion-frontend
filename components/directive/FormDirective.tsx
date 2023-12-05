@@ -16,7 +16,7 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
   return (
     <>
       <div className="grid grid-rows-1 grid-flow-col gap-4">
-        <div className="p-7 bg-green-200 rounded-lg">
+        <div className="p-7 rounded-lg">
           <h4 className="font-bold pb-5"> Datos personales </h4>
           <form>
             <div className="grid grid-cols-3 gap-4 items-center">
@@ -25,7 +25,7 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Apellido Paterno:
+                  Apellido Paterno<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -33,6 +33,7 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   value = {directive.apellidoPaterno}
+                  required
                 />
               </div>
 
@@ -41,7 +42,7 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Apellido Materno:
+                  Apellido Materno:<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -49,6 +50,7 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   value = {directive.apellidoMaterno}
+                  required
                 />
               </div>
 
@@ -57,7 +59,7 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Nombres:
+                  Nombres:<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -65,6 +67,7 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   value = {directive.nombre}
+                  required
                 />
               </div>
 
@@ -73,13 +76,14 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Cédula Profesional:
+                  Cédula Profesional<span>*</span>:
                 </label>
                 <input
                   type="text"
                   name=""
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                  required
                 />
               </div>
 
@@ -125,7 +129,7 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Telefono de contacto
+                  Telefono de contacto<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -133,6 +137,7 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   value = {directive.telefono}
+                  required
                 />
               </div>
             </div>

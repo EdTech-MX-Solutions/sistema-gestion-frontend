@@ -15,6 +15,7 @@ function modifyProfessor() {
     "nombre" : "AbrahamP" ,
     "apellidoPaterno" : "RomeroP",
     "apellidoMaterno" : "AngelesP",
+    "cedulaProfesional" : "",
     "email" : "professorCorreo@gmail.com",
     "telefono" : "5511223344"
   }

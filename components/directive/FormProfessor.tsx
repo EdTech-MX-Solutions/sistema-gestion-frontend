@@ -2,12 +2,13 @@ import React from "react";
 
 interface FormProfessorProps {
   professor: {
-    idProfessor: string;
-    nombre: string;
-    apellidoPaterno: string;
-    apellidoMaterno: string;
-    email: string;
-    telefono: string;
+    idProfessor: string
+    nombre: string
+    apellidoPaterno: string
+    apellidoMaterno: string
+    cedulaProfesional : string
+    email: string
+    telefono: string
   };
 }
 
@@ -16,6 +17,7 @@ export const FormProfessor = ({professor}: FormProfessorProps) => {
     <>
       <form>
         <div className="bg-white rounded-lg">
+        <h4 className="font-bold p-5"> Datos personales </h4>
           <div className="p-5 grid grid-cols-3 gap-4 items-center">
             <div>
               <label
@@ -38,7 +40,7 @@ export const FormProfessor = ({professor}: FormProfessorProps) => {
                 htmlFor=""
                 className="text-xl block mb-2 text-sm font-medium text-gray-900"
               >
-                Nombre(s):
+                Nombre(s)<span>*</span>:
               </label>
               <input
                 type="text"
@@ -54,7 +56,7 @@ export const FormProfessor = ({professor}: FormProfessorProps) => {
                 htmlFor=""
                 className="text-xl block mb-2 text-sm font-medium text-gray-900"
               >
-                Apellido Paterno:
+                Apellido Paterno<span>*</span>:
               </label>
               <input
                 type="text"
@@ -70,7 +72,7 @@ export const FormProfessor = ({professor}: FormProfessorProps) => {
                 htmlFor=""
                 className="text-xl block mb-2 text-sm font-medium text-gray-900"
               >
-                Apellido Materno:
+                Apellido Materno<span>*</span>:
               </label>
               <input
                 type="text"
@@ -78,9 +80,28 @@ export const FormProfessor = ({professor}: FormProfessorProps) => {
                 id=""
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                 value = {professor.apellidoMaterno}
+                required
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor=""
+                className="text-xl block mb-2 text-sm font-medium text-gray-900"
+              >
+                Cedula profesional:
+              </label>
+              <input
+                type="text"
+                name=""
+                id=""
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                value = {professor.cedulaProfesional}
               />
             </div>
           </div>
+
+          
 
           <div className="px-5 pb-5">
           <h4 className="font-bold pb-5 pt-10"> Datos de contacto </h4>
@@ -106,7 +127,7 @@ export const FormProfessor = ({professor}: FormProfessorProps) => {
                   htmlFor=""
                   className="text-xl block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Telefono de contacto:
+                  Telefono de contacto<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -114,6 +135,7 @@ export const FormProfessor = ({professor}: FormProfessorProps) => {
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   value={professor.telefono}
+                  required
                 />
               </div>
             </div>

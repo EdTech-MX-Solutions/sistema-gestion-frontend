@@ -60,7 +60,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Nombres(s):
+                  Nombres(s)<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -68,6 +68,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   value={tutor.nombre}
+                  required
                 />
               </div>
 
@@ -76,7 +77,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Apellido Paterno:
+                  Apellido Paterno<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -84,6 +85,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   value={tutor.apellidoPaterno}
+                  required
                 />
               </div>
 
@@ -124,7 +126,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  CURP:
+                  CURP<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -132,6 +134,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   value={tutor.CURP}
+                  required
                 />
               </div>
 
@@ -140,12 +143,13 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  ¿Sabe leer y escribir?
+                  ¿Sabe leer y escribir?<span>*</span>
                 </label>
                 <select
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   value = {tutor.leerYEscribir ? "s" : "n"}
+                  required
                 >
                   <option value="s"> Sí </option>
                   <option value="n"> No </option>
@@ -195,13 +199,14 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Fecha de Nacimiento:
+                  Fecha de Nacimiento<span>*</span>:
                 </label>
                 <input
                   type="date"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 ps-10 p-2.5"
                   placeholder="Select date"
                   value={tutor.fechaNacimiento}
+                  required
                 />
               </div>
 
@@ -228,7 +233,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Pais de Origen:
+                  Pais de Origen<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -236,6 +241,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   value={tutor.paisOrigen}
+                  required
                 />
               </div>
 
@@ -244,11 +250,12 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Estado de Origen:
+                  Estado de Origen<span>*</span>:
                 </label>
                 <select
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                  required
                 >
                   <option value="M"> CDMX </option>
                   <option value="F"> Estado de Mexico </option>
@@ -389,7 +396,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Tipo de Identificación:
+                  Tipo de Identificación<span>*</span>:
                 </label>
                 <select
                   id=""
@@ -419,6 +426,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                     value={claveElector}
                     onChange={handleClaveElector}
+                    required
                   />
                 </div>
               )}
@@ -429,13 +437,14 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
 
-                  Numero de Teléfono Celular:
+                  Numero de Teléfono Celular<span>*</span>:
                 </label>
                 <input
                   type="text"
                   name=""
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                  required
                 />
               </div>
 
@@ -474,12 +483,13 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Parentesco con el alumno:
+                  Parentesco con el alumno<span>*</span>:
                 </label>
                 <select
                   id=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   value={tutor.parentesto}
+                  required
                 >
                   <option value="1"> Padre </option>
                   <option value="2"> Madre </option>
