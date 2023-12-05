@@ -44,8 +44,7 @@ const SidebarContDirectivo = () => {
                         }}
                     </SidebarLinkGroup>
                     {sidebarItem("Consultar Alumno", base_rute+ "actionsStudent/consultStudents/")}
-                    {sidebarItem("Modificar Alumnos", base_rute+ "actionsStudent/modifyDataStudents")}
-                    {sidebarItem("Registrar Datos Medicos Alumno", base_rute+ "actionsStudent/registerDataFirstTutor")}
+                    {sidebarItem("Registrar Alumno", base_rute+ "actionsStudent/registrerDataPersonalStudent")}
                 </ul>
             </div>
             <div>

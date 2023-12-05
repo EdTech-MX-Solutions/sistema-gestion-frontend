@@ -16,7 +16,7 @@ function consultStudents() {
     const [alumnos, setAlumnos] = useState<InterfaceAlumno[]>([]);
     const [hayAlumnos, setHayAlumnos] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
-    
+
     const fetchAlumnos = async () => {
         const api = new SIGEAPICollection();
         const token = cookies.token;
@@ -66,8 +66,6 @@ function consultStudents() {
                 setAlumnos(newAlumnos);
                 setHayAlumnos(true);
                 setLoading(false);
-                console.log("Alumnos Actuales: ", newAlumnos);
-                console.log("Alumnos: ", alumnos);
             } else {
                 console.error(
                     `Error en la solicitud. Código de estado: ${response.status}`
@@ -87,6 +85,16 @@ function consultStudents() {
             <CardView title={"title"} customtitle={true} description={""}>
                 <PrincipalTitle title={"Consultar Alumnos"}></PrincipalTitle>
                 <InputSearch
+                    searchDataAutomcomplete={[
+                        ...alumnos.map((alumno) => ({
+                            key: alumno.no_boleta,
+                            value: alumno.no_boleta,
+                        })),
+                        ...alumnos.map((alumno) => ({
+                            key: alumno.no_boleta,
+                            value: `${alumno.nombre} ${alumno.apellido_paterno} ${alumno.apellido_materno}`,
+                        })),
+                    ]}
                     comment={
                         "Recuerda que puedes buscar a un alumno por nombre, apellidos o boleta"
                     }
