@@ -1,14 +1,17 @@
 import SIGEAPICollection from "@/api/apiHandler";
 import CardView from "@/components/CardView";
-import StudentCard from "@/components/Student.Card";
+import StudentCard from "@/components/student/Student.Card";
 import ParentsDataComponent from "@/components/student/data/ParentsData";
 import InterfaceAlumno from "@/interfaces/alumno";
 import InterfaceParent from "@/interfaces/parent";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
+import PersonalData from "@/components/student/data/PersonalData";
+import { useAlumno } from "@/components/context/AlumnoProvider";
 
 function ParentsData() {
-    const [cookies, setCookie] = useCookies(["token"]);
+    const { alumno } = useAlumno();
+    const [cookies, setCookie] = useCookies(["token", "user"]);
     const [dataGetted, setDataGetted] = useState(false);
     const loadingMessage = "cargando...";
     const [parentList, setParents] = useState<InterfaceParent[]>([
@@ -35,8 +38,15 @@ function ParentsData() {
             numeros: undefined,
         },
     ]);
+    var tutor = "";
 
-    const tutor = "Rodrigo Rubio";
+    try {
+        tutor = cookies.user || "";
+        console.log("tutor:", tutor);
+    } catch (error) {
+        console.log("error:", error);
+    }
+
     const title = "Datos Personales del Tutor";
     const description = `Datos registrados del tutor ${tutor}, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
 
@@ -56,7 +66,7 @@ function ParentsData() {
             })
             .then((data) => {
                 console.log("Datos de respuesta:", data);
-                var list:InterfaceParent[] = [];
+                var list: InterfaceParent[] = [];
                 data.forEach((dataParent: any) => {
                     list.push({
                         id_tutor: dataParent.idTutor,
@@ -92,31 +102,13 @@ function ParentsData() {
         setDataGetted(true);
     }
 
-    const alumno: InterfaceAlumno = {
-        no_boleta: "2019630523",
-        curp: "RUHR920101HDFRBR00",
-        nombre: "Ricardo",
-        apellido_paterno: "Urbina",
-        apellido_materno: "Hernández",
-        aniosPreescolar: 3,
-        edad: 12,
-        fecha_nacimiento: "01/01/2002",
-        sexo: "Hombre",
-        estatus: "Activo",
-        entidad_nacimiento: "Ciudad de México",
-        pais_origen: "Mexicana",
-    };
     return (
         <>
-            {/* <PrivateRoute> */}
             <CardView title={title} description={description}>
                 <StudentCard alumno={alumno}>
-                    <ParentsDataComponent
-                        parents={parentList}
-                    />
+                    <ParentsDataComponent parents={parentList} />
                 </StudentCard>
             </CardView>
-            {/* </PrivateRoute> */}
         </>
     );
 }

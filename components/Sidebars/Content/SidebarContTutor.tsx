@@ -50,7 +50,7 @@ const SidebarContTutor = () => {
                             return <React.Fragment></React.Fragment>;
                         }}
                     </SidebarLinkGroup>
-                    {sidebarItem("Datos Personales", base_rute + "/data/")}
+                    {sidebarItem("Datos Personales", base_rute + "/data/personal")}
                     {sidebarItem("Datos Medicos", base_rute + "/data/medic")}
                     {sidebarItem("Datos Tutor", base_rute + "/data/parent")}
                 </ul>

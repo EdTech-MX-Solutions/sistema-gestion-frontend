@@ -23,6 +23,17 @@ export class SharedAPICollection {
         });
     }
 
+    executeGetCalificaciones(token: string, boleta: string) {
+        const route = this.apiCaller.getCall() + "/calificaciones/alumno/" + boleta;
+        return fetch(route, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            }
+        });
+    }
+
     executeGetHorariosAlumno(token: string, boleta: string) {
         const route = this.apiCaller.getCall() + "/horarios/alumno/" + boleta;
         return fetch(route, {

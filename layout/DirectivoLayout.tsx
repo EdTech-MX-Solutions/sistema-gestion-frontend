@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PrivateRoute from "../components/auth/PrivateRoute";
 import SidebarDirectivo from "@/components/Sidebars/SidebarDirectivo";
-import Header from "@/components/Header";
+import Header from "@/components/template/Header";
 
 interface LayoutProps {
     children: React.ReactNode;

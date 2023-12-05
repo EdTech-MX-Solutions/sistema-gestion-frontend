@@ -11,6 +11,9 @@ interface InterfaceAlumno {
     sexo: string;
     estatus: string;
     entidad_nacimiento: string,
+    grado: string | null,
+    grupo: string | null,
+    actualizarDatosMedicos: boolean | null,
 }
 
 export default InterfaceAlumno;

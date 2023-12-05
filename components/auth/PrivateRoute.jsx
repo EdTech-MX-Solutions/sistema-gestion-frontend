@@ -5,13 +5,14 @@ import { useRouter } from "next/router";
 import { useCookies } from 'react-cookie';
 import { jwtDecode } from "jwt-decode";
 import SIGEAPICollection from "@/api/apiHandler";
+import { PeriodoProvider } from "../context/PeriodoProvider";
 
 
 const PrivateRoute = ({ children, allowedRoles }) => {
     if (allowedRoles == null)
         allowedRoles = ["DIRECTIVO"];
     const { data: session, status } = useSession();
-    const [cookies, setCookie] = useCookies(['token', 'user']);
+    const [cookies, setCookie] = useCookies(['token', 'user', 'boleta', 'childs']);
 
     const router = useRouter();
 
@@ -36,12 +37,13 @@ const PrivateRoute = ({ children, allowedRoles }) => {
                             return response.json(); // Analiza el cuerpo de la respuesta como JSON
                         })
                         .then(data => {
-                            console.log("Datos de respuesta:", data);
+                            // console.log("Datos de respuesta:", data);
                             console.log("token:", data.token);
                             setCookie('token', data.token);
                             const decodedToken = jwtDecode(data.token);
                             console.log("decodedToken:", decodedToken);
-                            console.log("cookie token:", cookies.token);
+                            setCookie('user', decodedToken.nombres);
+                            // console.log("cookie token:", cookies.token);
                         })
                         .catch(error => {
                             console.error("Error de solicitud:", error);
@@ -84,7 +86,11 @@ const PrivateRoute = ({ children, allowedRoles }) => {
 
     }, [session, status, router]);
 
-    return <>{children}</>;
+    return <>
+        <PeriodoProvider>
+            {children}
+        </PeriodoProvider>
+    </>;
 };
 
 export default PrivateRoute;

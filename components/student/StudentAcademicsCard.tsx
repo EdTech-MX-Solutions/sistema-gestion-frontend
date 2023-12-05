@@ -1,15 +1,15 @@
 import Card from "@/components/Card";
 import InterfaceAlumno from "@/interfaces/alumno";
-import StudentTabs from "./student/tabs";
-import StudentCardHeader from "./student/data/Header";
+import StudentCardHeader from "./data/Header";
+import AcademicsTabs from "./academics/AcademicsTabs";
 
-function StudentCard({ alumno, children }: { alumno: InterfaceAlumno, children: React.ReactNode }) {
+function StudentAcacemicsCard({ alumno, children }: { alumno: InterfaceAlumno | null , children: React.ReactNode }) {
   return (
     <>
       <Card>
         <div className=" p-3 selection:bg-green-100">
           <StudentCardHeader {...alumno} />
-          <StudentTabs />
+          <AcademicsTabs />
           {children}
         </div>
       </Card>
@@ -17,4 +17,4 @@ function StudentCard({ alumno, children }: { alumno: InterfaceAlumno, children: 
   );
 }
 
-export default StudentCard;
+export default StudentAcacemicsCard;
