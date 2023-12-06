@@ -11,7 +11,7 @@ export class SharedAPICollection {
         const route = this.apiCaller.getCall();
         return `${route}/alumnos`;
     }
-
+    
     executeGetAlumnos(token: string) {
         const route = this.getAlumnosCall();
         return fetch(route, {

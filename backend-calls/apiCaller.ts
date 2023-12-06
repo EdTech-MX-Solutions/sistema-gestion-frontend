@@ -13,11 +13,11 @@ export class APICaller {
     }
     getProfesorCall() {
         const baseURL: string = this.getCall();
-        return `${baseURL}/directivo`;
+        return `${baseURL}/profesores`;
     }
     getDirectivoCall() {
         const baseURL: string = this.getCall();
-        return `${baseURL}/tutor`;
+        return `${baseURL}/directivo`;
     }
     getAuthCall() {
         const baseURL: string = this.getCall();

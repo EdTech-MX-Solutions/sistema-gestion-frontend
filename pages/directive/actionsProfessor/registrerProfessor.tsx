@@ -11,6 +11,7 @@ function registrerProfessor() {
     nombre: "",
     apellidoPaterno: "",
     apellidoMaterno: "",
+    cedulaProfesional : "",
     email: "",
     telefono: "",
   };

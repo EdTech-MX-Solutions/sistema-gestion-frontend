@@ -60,13 +60,20 @@ export const FormMedic = ({dataMedic}: FormMedicProps) => {
               >
                 Tipo Sanguineo:
               </label>
-              <input
-                type="text"
-                name=""
+              <select
                 id=""
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                 value={dataMedic.tipoSanguineo}
-              />
+              >
+                <option value="O-"> O- </option>
+                <option value="O+"> O+ </option>
+                <option value="A+"> A+ </option>
+                <option value="A-"> A- </option>
+                <option value="B+"> B+ </option>
+                <option value="B-"> B- </option>
+                <option value="AB+"> AB+ </option>
+                <option value="AB-"> AB- </option>
+              </select>
             </div>
 
             <div>
@@ -74,7 +81,7 @@ export const FormMedic = ({dataMedic}: FormMedicProps) => {
                 htmlFor=""
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
-                Peso:
+                Peso (kg):
               </label>
               <input
                 type="number"
@@ -90,7 +97,7 @@ export const FormMedic = ({dataMedic}: FormMedicProps) => {
                 htmlFor=""
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
-                Altura:
+                Altura (cm):
               </label>
               <input
                 type="number"
@@ -188,7 +195,7 @@ export const FormMedic = ({dataMedic}: FormMedicProps) => {
                 htmlFor=""
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
-                Numero en caso de una emergencia médica:
+                Numero del médico familiar
               </label>
               <input
                 type="text"
@@ -203,10 +210,10 @@ export const FormMedic = ({dataMedic}: FormMedicProps) => {
                 htmlFor=""
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
-                Enfermedades Frecuentes:
+                Enfermedades Frecuentes (si es mas de una separe por comas):
               </label>
               <input
-                type="number"
+                type="text"
                 name=""
                 id=""
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
@@ -219,7 +226,7 @@ export const FormMedic = ({dataMedic}: FormMedicProps) => {
                 htmlFor=""
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
-                Enfermedades en el ultimo año:
+                Enfermedades en el ultimo año (si es mas de una separe por comas):
               </label>
               <input
                 type="text"
@@ -235,7 +242,7 @@ export const FormMedic = ({dataMedic}: FormMedicProps) => {
                 htmlFor=""
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
-                Alergias:
+                Alergias (si es mas de una separe por comas):
               </label>
               <input
                 type="text"
