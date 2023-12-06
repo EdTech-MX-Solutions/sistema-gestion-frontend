@@ -11,7 +11,7 @@ interface DefaultLayoutProps {
     children: ReactNode;
 }
 
-function consultStudents() {
+function ConsultStudents() {
     const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
     const [alumnos, setAlumnos] = useState<InterfaceAlumno[]>([]);
     const [hayAlumnos, setHayAlumnos] = useState<boolean>(false);
@@ -105,4 +105,4 @@ function consultStudents() {
     );
 }
 
-export default consultStudents;
+export default ConsultStudents;

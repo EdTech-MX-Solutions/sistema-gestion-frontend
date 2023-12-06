@@ -13,7 +13,7 @@ interface DefaultLayoutProps {
     children: ReactNode;
 }
 
-function notes() {
+function Notes() {
     const [cookies, setCookie] = useCookies(["token", "boleta"]);
     const { periodo } = usePeriodo();
     const { alumno } = useAlumno();
@@ -142,4 +142,4 @@ function notes() {
     }
 }
 
-export default notes;
+export default Notes;
