@@ -3,7 +3,7 @@ import PrincipalTitle from "@/components/directive/Principal.Title";
 import InputSearch from "@/components/template/InputSearch";
 import TableStudets from "@/components/directive/TableStudets";
 import CardView from "@/components/CardView";
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/backend-calls/apiHandler";
 import { useCookies } from "react-cookie";
 import InterfaceAlumno from "@/interfaces/alumno";
 
@@ -11,7 +11,7 @@ interface DefaultLayoutProps {
     children: ReactNode;
 }
 
-function consultStudents() {
+function ConsultStudents() {
     const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
     const [alumnos, setAlumnos] = useState<InterfaceAlumno[]>([]);
     const [hayAlumnos, setHayAlumnos] = useState<boolean>(false);
@@ -105,4 +105,4 @@ function consultStudents() {
     );
 }
 
-export default consultStudents;
+export default ConsultStudents;

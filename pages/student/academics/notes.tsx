@@ -5,7 +5,7 @@ import { InterfaceCalificaciones } from "@/interfaces/calificaciones";
 import { useAlumno } from "@/components/context/AlumnoProvider";
 import PrincipalTitle from "@/components/student/Principal.Title";
 import TableGrades from "@/components/student/academics/TableGrades";
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/backend-calls/apiHandler";
 import CardView from "@/components/CardView";
 import StudentAcacemicsCard from "@/components/student/StudentAcademicsCard";
 
@@ -13,7 +13,7 @@ interface DefaultLayoutProps {
     children: ReactNode;
 }
 
-function notes() {
+function Notes() {
     const [cookies, setCookie] = useCookies(["token", "boleta"]);
     const { periodo } = usePeriodo();
     const { alumno } = useAlumno();
@@ -142,4 +142,4 @@ function notes() {
     }
 }
 
-export default notes;
+export default Notes;

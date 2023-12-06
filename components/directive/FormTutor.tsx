@@ -32,11 +32,11 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
   const [tipoIdentificacion, setTipoIdentificacion] = useState("");
   const [claveElector, setclaveElector] = useState("");
 
-  const handleTipoIdentificacion = (event) => {
+  const handleTipoIdentificacion = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setTipoIdentificacion(event.target.value);
   };
 
-  const handleClaveElector = (event) => {
+  const handleClaveElector = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setclaveElector(event.target.value);
   };
 

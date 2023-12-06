@@ -4,7 +4,7 @@ import { useAlumno } from "@/components/context/AlumnoProvider";
 import StudentAcacemicsCard from "@/components/student/StudentAcademicsCard";
 import PrincipalTitle from "@/components/directive/Principal.Title";
 
-function schedule() {
+function Schedule() {
     const { alumno } = useAlumno();
     const title = "Horario";
 
@@ -41,4 +41,4 @@ function schedule() {
     );
 }
 
-export default schedule;
+export default Schedule;

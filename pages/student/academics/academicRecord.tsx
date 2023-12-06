@@ -10,7 +10,7 @@ interface DefaultLayoutProps {
     children: ReactNode;
 }
 
-function academicRecord() {
+function AcademicRecord() {
     const { alumno } = useAlumno();
     const calificaciones = [
         {
@@ -67,4 +67,4 @@ function academicRecord() {
     );
 }
 
-export default academicRecord;
+export default AcademicRecord;
