@@ -16,7 +16,7 @@ export const TableStudets = ({ students }: TableStudetsProps) => {
           <thead className="text-white uppercase bg-green-700">
             <tr>
               <th className="p-3"> Boleta </th>
-              <th colSpan={2}> Apellido Paterno Apellido Materno Nombres(s) </th>
+              <th colSpan={2}>  Nombres(s) Apellido Paterno Apellido Materno</th>
               <th> Grado y Grupo </th>
               <th> Acciones </th>
             </tr>
