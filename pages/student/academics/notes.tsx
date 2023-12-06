@@ -5,7 +5,7 @@ import { InterfaceCalificaciones } from "@/interfaces/calificaciones";
 import { useAlumno } from "@/components/context/AlumnoProvider";
 import PrincipalTitle from "@/components/student/Principal.Title";
 import TableGrades from "@/components/student/academics/TableGrades";
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/src/apiHandler";
 import CardView from "@/components/CardView";
 import StudentAcacemicsCard from "@/components/student/StudentAcademicsCard";
 

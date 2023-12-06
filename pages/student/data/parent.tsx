@@ -1,4 +1,4 @@
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/src/apiHandler";
 import CardView from "@/components/CardView";
 import StudentCard from "@/components/student/Student.Card";
 import ParentsDataComponent from "@/components/student/data/ParentsData";

@@ -1,4 +1,4 @@
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/src/apiHandler";
 import InterfaceAlumno from "@/interfaces/alumno";
 import {
     createContext,

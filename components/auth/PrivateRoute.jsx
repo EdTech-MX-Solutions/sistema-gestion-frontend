@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { useCookies } from 'react-cookie';
 import { jwtDecode } from "jwt-decode";
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/src/apiHandler";
 import { PeriodoProvider } from "../context/PeriodoProvider";
 
 

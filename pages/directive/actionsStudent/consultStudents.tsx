@@ -3,7 +3,7 @@ import PrincipalTitle from "@/components/directive/Principal.Title";
 import InputSearch from "@/components/template/InputSearch";
 import TableStudets from "@/components/directive/TableStudets";
 import CardView from "@/components/CardView";
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/src/apiHandler";
 import { useCookies } from "react-cookie";
 import InterfaceAlumno from "@/interfaces/alumno";
 
