@@ -17,15 +17,15 @@ export const authOptions = {
       session.accessToken = token.accessToken;
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      if (user) {
-        token.id = user.id;
-      }
-      if (account) {
-        token.accessToken = account.access_token;
-      }
-      return token;
-    },
+    // async jwt({ token, user, account, profile, isNewUser }) {
+    //   if (user) {
+    //     token.id = user.id;
+    //   }
+    //   if (account) {
+    //     token.accessToken = account.access_token;
+    //   }
+    //   return token;
+    // },
   },
 }
 export default NextAuth(authOptions)
