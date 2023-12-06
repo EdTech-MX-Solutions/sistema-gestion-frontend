@@ -47,19 +47,20 @@ export default function SignIn({
                       </div>
                     </div>
                     <div className="pt-10">
-                      {Object.values(providers).map((provider) => (
-                        <div key={provider.name}>
+                      {/* {Object.values(providers).map((provider) => ( */}
+                        {/* <div key={provider.name}> */}
                           <button
                             className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                             onClick={(e) => {
                               e.preventDefault();
-                              signIn(provider.id);
+                              signIn("google");
                             }}
                           >
-                            Continuar con {provider.name}
+                            Continuar con Google
+                            {/* {provider.name} */}
                           </button>
                         </div>
-                      ))}
+                      {/* ))} */}
                       <Link
                         href="/auth/loginEmail"
                         className="mt-5 flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
@@ -73,7 +74,7 @@ export default function SignIn({
             </div>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }
