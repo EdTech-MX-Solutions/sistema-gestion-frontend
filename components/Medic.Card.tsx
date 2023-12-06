@@ -1,8 +1,8 @@
 import DataMedicCard from "./Data.Medic.Card";
 import InstituteDataMedicCard from "./Institute.Data.Medic.Card";
 import { useState } from "react";
-import Loader from "./interface/Loader";
-import Button from "./interface/button";
+import Loader from "./elements/Loader";
+import Button from "./elements/Button";
 
 function MedicCard() {
     const [loadingData, setLoadingData] = useState(false);

@@ -40,8 +40,9 @@ const PrivateRoute = ({ children, allowedRoles }) => {
                             // console.log("Datos de respuesta:", data);
                             console.log("token:", data.token);
                             setCookie('token', data.token);
-                            // const decodedToken = jwtDecode(data.token);
-                            // console.log("decodedToken:", decodedToken);
+                            const decodedToken = jwtDecode(data.token);
+                            console.log("decodedToken:", decodedToken);
+                            setCookie('user', decodedToken.nombres);
                             // console.log("cookie token:", cookies.token);
                         })
                         .catch(error => {

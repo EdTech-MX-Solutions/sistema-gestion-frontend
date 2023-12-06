@@ -34,6 +34,9 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
         pais_origen: "cargando...",
         edad: 0,
         aniosPreescolar: 0,
+        grado: null,
+        grupo: null,
+        actualizarDatosMedicos: null,
     });
 
     const fetchAlumno = async () => {
@@ -60,6 +63,9 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
                     pais_origen: data[0].paisOrigen,
                     edad: data[0].edad,
                     aniosPreescolar: data[0].aniosPreescolar,
+                    grado: data[0].grado,
+                    grupo: data[0].grupo,
+                    actualizarDatosMedicos: data[0].actualizarDatosMedicos,
                 };
                 setCookie("childs", data.length);
                 setCookie("boleta", data[0].noBoleta);

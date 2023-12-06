@@ -23,8 +23,10 @@ export default function SignIn({
     // const base_rute = "https://sige-octavio-paz.azurewebsites.net/v1/auth/code?email=chavo0022009@gmail.com";
     const version = "v1";
     const route = "auth/code";
+    const redirectUrl = "http://localhost:3000";
+    const redirectUrlAzure = "https://sistema-gestion-frontend.vercel.app";
     const email = formData.get("email");
-    await fetch(`${base_rute}/${version}/${route}?email=${email}`, {
+    await fetch(`${base_rute}/${version}/${route}?email=${email}&redirectUrl=http://localhost:3000`, {
       method: "GET",
     });
     setLoading(false);
@@ -38,7 +40,7 @@ export default function SignIn({
           <div className="w-full m-20">
             <div className="block rounded-lg bg-white shadow-lg dark:bg-black">
               <div className="g-0 lg:flex lg:flex-wrap">
-                <div className="px-4 md:px-0 lg:w-6/12">
+                <div className="px-4 md:px-0 w-full lg:w-6/12">
                   <div className="md:mx-6 md:p-12">
                     <div className="text-center">
                       <img
@@ -50,8 +52,8 @@ export default function SignIn({
                   </div>
                 </div>
 
-                <div className="flex items-center rounded-b-lg lg:rounded-r-lg lg:rounded-bl-none">
-                  <div className="px-4 py-6 text-white md:mx-12 md:p-12 text-center">
+                <div className="w-full lg:w-6/12 flex items-center rounded-b-lg lg:rounded-r-lg lg:rounded-bl-none">
+                  <div className="mx-auto px-4 py-6 text-white lg:mx-12 md:p-12 text-center">
                     <div>
                       <div>
                         <span className="text-3xl font-bold text-neutral-800 dark:text-neutral-200">

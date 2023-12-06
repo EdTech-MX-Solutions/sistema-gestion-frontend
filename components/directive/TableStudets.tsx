@@ -1,23 +1,9 @@
 import React from "react";
 import ButtonComponentBiColor from "../ButtonComponentBiColor";
+import InterfaceAlumno from "@/interfaces/alumno";
 
 interface TableStudetsProps {
-  students: Array<{
-    no_boleta: string 
-    curp: string 
-    nombre: string 
-    apellido_paterno: string 
-    apellido_materno: string 
-    aniosPreescolar: number 
-    fecha_nacimiento: string 
-    edad: number 
-    pais_origen: string 
-    sexo: string 
-    estatus: string 
-    entidad_nacimiento: string 
-    grado : string
-    grupo : string
-  }>;
+  students: InterfaceAlumno[];
 }
 
 export const TableStudets = ({ students }: TableStudetsProps) => {
@@ -38,7 +24,7 @@ export const TableStudets = ({ students }: TableStudetsProps) => {
           <tbody>
             {students.map((student) => (
               <tr key = {student.no_boleta}>
-                <td className="p-5"> 1 </td>
+                <td className="p-5"> {student.no_boleta} </td>
                 <td colSpan={2}> {`${student.nombre}  ${student.apellido_paterno}  ${student.apellido_materno}`} </td>
                 <td> {`${student.grado} ${student.grupo}`} </td>
                 <td>
