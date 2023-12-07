@@ -8,6 +8,7 @@ import TableGrades from "@/components/student/academics/TableGrades";
 import SIGEAPICollection from "@/backend-calls/apiHandler";
 import CardView from "@/components/CardView";
 import StudentAcacemicsCard from "@/components/student/StudentAcademicsCard";
+import Loader from "@/components/elements/Loader";
 
 interface DefaultLayoutProps {
     children: ReactNode;
@@ -122,6 +123,7 @@ function Notes() {
                         <div className="flex justify-center items-center h-96">
                             <h1 className="text-2xl text-gray-400">
                                 Cargando...
+                                <Loader />
                             </h1>
                         </div>
                     </StudentAcacemicsCard>

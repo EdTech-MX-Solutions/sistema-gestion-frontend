@@ -13,7 +13,7 @@ function Loader({className, color }: ButtonInterface) {
     classNameButton += className;
     return (
         <>
-            <div className="flex mt-10 mx-auto gap-2 justify-center">
+            <div className="flex my-5 mx-auto gap-2 justify-center">
                 <div className={classNameButton}></div>
                 <div className={classNameButton + " delay-50"}></div>
                 <div className={classNameButton + " delay-200"}></div>

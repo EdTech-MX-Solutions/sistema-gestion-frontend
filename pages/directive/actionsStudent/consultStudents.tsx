@@ -6,6 +6,7 @@ import CardView from "@/components/CardView";
 import SIGEAPICollection from "@/backend-calls/apiHandler";
 import { useCookies } from "react-cookie";
 import InterfaceAlumno from "@/interfaces/alumno";
+import Loader from "@/components/elements/Loader";
 
 interface DefaultLayoutProps {
     children: ReactNode;
@@ -84,6 +85,7 @@ function ConsultStudents() {
         <>
             <CardView title={"title"} customtitle={true} description={""}>
                 <PrincipalTitle title={"Consultar Alumnos"}></PrincipalTitle>
+
                 <InputSearch
                     searchDataAutomcomplete={[
                         ...alumnos.map((alumno) => ({
@@ -99,7 +101,10 @@ function ConsultStudents() {
                         "Recuerda que puedes buscar a un alumno por nombre, apellidos o boleta"
                     }
                 ></InputSearch>
-                <TableStudets students={alumnos}></TableStudets>
+                {loading ? <Loader /> : null}
+                {hayAlumnos && !loading ? (
+                    <TableStudets students={alumnos}></TableStudets>
+                ) : null}
             </CardView>
         </>
     );
