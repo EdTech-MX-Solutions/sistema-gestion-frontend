@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 import InterfaceAlumno from "@/interfaces/alumno";
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/backend-calls/apiHandler";
 import { useCookies } from "react-cookie";
 
 interface FormStudentProps {

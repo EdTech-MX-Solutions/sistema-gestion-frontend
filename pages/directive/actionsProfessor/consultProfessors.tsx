@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import TableProfessors from "@/components/directive/TableProfessors";
 import InputSearch from "@/components/template/InputSearch";
 import PrincipalTitle from "@/components/directive/Principal.Title";
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/backend-calls/apiHandler";
 import { useCookies } from "react-cookie";
 import CardView from "@/components/CardView";
 import InterfaceProfessor from "@/interfaces/professor";
@@ -11,7 +11,7 @@ interface DefaultLayoutProps {
   children: ReactNode;
 }
 
-function consultProfessor() {
+function ConsultProfessor() {
 
   const [cookies, setCookie] = useCookies(["token", "idProfessor", "childs"]);
   const [profesores, setProfesores] = useState<InterfaceProfessor[]>([]);
@@ -99,4 +99,4 @@ function consultProfessor() {
   );
 }
 
-export default consultProfessor;
+export default ConsultProfessor;

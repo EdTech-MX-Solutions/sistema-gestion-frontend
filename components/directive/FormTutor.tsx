@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import ButtonComponent from "../ButtonComponent";
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/backend-calls/apiHandler";
 import { cookies } from "next/dist/client/components/headers";
 import { useCookies } from "react-cookie";
 import InterfaceTel from "@/interfaces/numeroTelefonico";
