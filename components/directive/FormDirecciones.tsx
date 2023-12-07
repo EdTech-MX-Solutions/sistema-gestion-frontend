@@ -1,162 +1,24 @@
-import React, { useState } from "react";
-import ButtonComponent from "@/components/ButtonComponent";
-import InterfaceProfessor from "@/interfaces/professor";
+import React from 'react'
+import ButtonComponent from '../ButtonComponent'
 
-interface FormDirectiveProps {
-  directive: InterfaceProfessor
+interface FormDireccionesProps{
+
 }
 
-export const FormDirective = ({ directive }: FormDirectiveProps) => {
-
-  const [formData, setFormData] = useState({
-    idProfesor : directive.idProfesor,
-    nombre : directive.nombre,
-    apellidoPaterno : directive.apellidoPaterno,
-    apellidoMaterno : directive.apellidoMaterno,
-    email : directive.email,
-    activo : directive.activo,
-    diretivo : directive.diretivo,
-    noCedulaProfesional : directive.noCedulaProfesional,
-    numero : directive.numero
-  })
-
-  const handleInputChange = (event: { target: { name: any; value: any; }; }) =>{
-    const {name, value} = event.target;
-    setFormData({
-      ...formData,
-      [name] : value
-    })
-  }
-
-  const handleSubmit = (event: { preventDefault: () => void; }) =>{
-    event.preventDefault();
-    console.log("Datos: ", formData);
-  }
-
-
+export const FormDirecciones = ({} : FormDireccionesProps) => {
   return (
     <>
-      <div className="grid grid-rows-1 grid-flow-col gap-4">
-        <div className="p-7 rounded-lg bg-white">
-          <h4 className="font-bold pb-5"> Datos personales </h4>
-          <form onSubmit={handleSubmit}>
+    <div className="grid grid-rows-1 grid-flow-col gap-4">
+        <div className="p-7 bg-white rounded-lg">
+          <h4 className="font-bold pb-5"> Registro de direccion </h4>
+          <form>
             <div className="grid grid-cols-3 gap-4 items-center">
               <div>
                 <label
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Apellido Paterno<span>*</span>:
-                </label>
-                <input
-                  type="text"
-                  name="apellidoPaterno"
-                  id="apellidoPaterno"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value = {formData.apellidoPaterno}
-                  onChange = {handleInputChange}
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor=""
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Apellido Materno:<span>*</span>:
-                </label>
-                <input
-                  type="text"
-                  name="apellidoMaterno"
-                  id="apellidoMaterno"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value = {formData.apellidoMaterno}
-                  onChange = {handleInputChange}
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor=""
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Nombres:<span>*</span>:
-                </label>
-                <input
-                  type="text"
-                  name="nombre"
-                  id="nombre"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value = {directive.nombre}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor=""
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Cédula Profesional<span>*</span>:
-                </label>
-                <input
-                  type="text"
-                  name="noCedulaProfesional"
-                  id="noCedulaProfesional"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value={formData.noCedulaProfesional}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor=""
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Permisos:
-                </label>
-                <select
-                  name=""
-                  id=""
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                >
-                  <option value="">Directivo</option>
-                  <option value="">Secretario</option>
-                  <option value="">Otro</option>
-                </select>
-              </div>
-            </div>
-
-            <h4 className="font-bold pb-5 pt-10"> Datos de contacto </h4>
-            <div className="grid grid-cols-3 gap-4">
-              <div>
-                <label
-                  htmlFor=""
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Correo electronico:
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value = {formData.email}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor=""
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Telefono de contacto<span>*</span>:
+                  Código Postal<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -166,18 +28,141 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   required
                 />
               </div>
+
+              <div>
+                <label
+                  htmlFor=""
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Municipio<span>*</span>:
+                </label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor=""
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Colonia<span>*</span>: 
+                </label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor=""
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Calle<span>*</span>:
+                </label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor=""
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  No. Exterior<span>*</span>:
+                </label>
+                <input
+                  type="number"
+                  name=""
+                  id=""
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor=""
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  No. Interior
+                </label>
+                <input
+                  type="number"
+                  name=""
+                  id=""
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor=""
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Entre Calle: 
+                </label>
+                <input
+                  type="text"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor=""
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Y calle:
+                </label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor=""
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Referencia adicional:
+                </label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                />
+              </div>
             </div>
-            <div className="text-center">
-            <ButtonComponent
-              title={"Registrar Directivo"}
-              color={"blue"}
-            ></ButtonComponent>
+
+            <div className="text-center pt-10">
+              <ButtonComponent
+                title={"Siguiente"}
+                color={"blue"}
+              ></ButtonComponent>
             </div>
           </form>
         </div>
       </div>
     </>
-  );
-};
-
-export default FormDirective;
+  )
+}
+export default FormDirecciones;

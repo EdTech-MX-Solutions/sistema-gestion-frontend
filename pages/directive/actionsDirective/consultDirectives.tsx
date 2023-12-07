@@ -18,8 +18,6 @@ function consultDirective() {
         "telefono" : "55112233444"
     }
   ]
-
-
   return (
     <>
       <div className="container mx-auto justify-center py-5">

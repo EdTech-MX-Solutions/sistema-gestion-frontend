@@ -1,5 +1,6 @@
 import React from "react";
 import ButtonComponentBiColor from "../ButtonComponentBiColor";
+import InterfaceProfessor from "@/interfaces/professor";
 
 interface TableProfessorsProps {
   professors : InterfaceProfessor[];

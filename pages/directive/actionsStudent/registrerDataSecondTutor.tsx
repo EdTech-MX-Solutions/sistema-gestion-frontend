@@ -6,7 +6,6 @@ interface DefaultLayoutProps {
   children: ReactNode;
 }
 
-
 function  registrerDataSecondTutor(){
 
     const InitialTutor = {

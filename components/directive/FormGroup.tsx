@@ -1,111 +1,132 @@
-import { Gruppo } from "next/font/google";
-import React from "react";
+import React, { useState } from "react";
 import ButtonComponent from "../ButtonComponent";
+import InterfaceGrupo from "@/interfaces/grupos";
 
 interface FormGroupProps {
-    group : {
-        idGrupo : Number,
-        grado : string,
-        subGrado : string,
-        turno : string,
-        responsable : string,
-        idResponsable : Number,
-        cupos : Number,
-        salon : string,
-        inscritos : Number,
-        cicloEscolar : string,
-    }
+  grupo: InterfaceGrupo;
 }
 
-export const FormGroup = ({group}: FormGroupProps) => {
+export const FormGroup = ({ grupo }: FormGroupProps) => {
+  const [formData, setFormData] = useState({
+    idGrupo: grupo.idGrupo,
+    grado: grupo.grado,
+    subGrado: grupo.subGrado,
+    turno: grupo.turno,
+    responsable: grupo.responsable,
+    idResponsable: grupo.idResponsable,
+    cupos: grupo.cupos,
+    salon: grupo.salon,
+    inscritos: grupo.inscritos,
+    cicloEscolar: grupo.cicloEscolar,
+  });
+
+  const handleInputChange = (event: { target: { name: any; value: any } }) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    console.log("Datos", formData);
+  };
+
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-3 gap-4 items-center px-5 pt-5">
           <div>
             <label
-              htmlFor=""
+              htmlFor="grado"
               className="block mb-2 text-sm font-medium text-gray-900"
             >
               Grado<span>*</span>:
             </label>
             <input
               type="text"
-              name=""
-              id=""
+              name="grado"
+              id="grado"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-              value = {group.grado}
+              value={formData.grado}
+              onChange={handleInputChange}
               required
             />
           </div>
 
           <div>
             <label
-              htmlFor=""
+              htmlFor="subGrado"
               className="block mb-2 text-sm font-medium text-gray-900"
             >
               Grupo<span>*</span>:
             </label>
             <input
               type="text"
-              name=""
-              id=""
+              name="subGrado"
+              id="subGrado"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-              value = {group.subGrado}
+              value={formData.subGrado}
+              onChange={handleInputChange}
               required
             />
           </div>
 
           <div>
             <label
-              htmlFor=""
+              htmlFor="turno"
               className="block mb-2 text-sm font-medium text-gray-900"
             >
               Turno<span>*</span>:
             </label>
             <input
               type="text"
-              name=""
-              id=""
+              name="turno"
+              id="turno"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-              value = {group.turno}
+              value={formData.turno}
+              onChange={handleInputChange}
+              required
             />
           </div>
 
           <div>
             <label
-              htmlFor=""
+              htmlFor="responsable"
               className="block mb-2 text-sm font-medium text-gray-900"
             >
               Responsable:
             </label>
             <input
               type="text"
-              name=""
-              id=""
+              name="responsable"
+              id="responsable"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-              value = {group.responsable}
+              value={formData.responsable}
+              onChange={handleInputChange}
             />
           </div>
 
           <div>
             <label
-              htmlFor=""
+              htmlFor="salon"
               className="block mb-2 text-sm font-medium text-gray-900"
             >
               Salon:
             </label>
             <input
               type="text"
-              name=""
-              id=""
+              name="salon"
+              id="salon"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-              value = {group.salon}
+              value={formData.salon}
+              onChange={handleInputChange}
             />
           </div>
         </div>
         <div className="text-center">
-            <ButtonComponent title = {"Guardar"} color = {"blue"}></ButtonComponent>
+          <ButtonComponent title={"Guardar"} color={"blue"}></ButtonComponent>
         </div>
       </form>
     </>

@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import PrincipalTitle from "@/components/directive/Principal.Title";
 import FormGroup from "@/components/directive/FormGroup";
 import TableStudentsGroup from "@/components/directive/TableStudentsGroup";
-import { Gruppo } from "next/font/google";
 
 interface DefaultLayoutProps {
   children: ReactNode;
@@ -29,7 +28,7 @@ function createGroup() {
       <PrincipalTitle title={title}></PrincipalTitle>
       <div className="justify-center bg-white p-5 rounded-lg">
         <h4 className="font-bold">Elementos del grupo: </h4>
-        <FormGroup group={Initialgroup}></FormGroup>
+        <FormGroup grupo={Initialgroup}></FormGroup>
         <TableStudentsGroup
           titleBtn1={"Ver Datos del Alumno"}
           titleBtn2={"Dar de Baja del Grupo"}

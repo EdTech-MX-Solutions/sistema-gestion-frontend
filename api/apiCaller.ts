@@ -19,6 +19,10 @@ export class APICaller {
         const baseURL: string = this.getCall();
         return `${baseURL}/directivo`;
     }
+    getGruposCall() {
+        const baseURL: string = this.getCall();
+        return `${baseURL}/grupos`;
+    }
     getAuthCall() {
         const baseURL: string = this.getCall();
         return `${baseURL}/auth`;
