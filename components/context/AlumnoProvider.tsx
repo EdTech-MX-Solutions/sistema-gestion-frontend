@@ -20,7 +20,6 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
     const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
-    // const [alumno, setAlumno] = useState<InterfaceAlumno | null>(null);
     const [alumno, setAlumno] = useState<InterfaceAlumno>({
         no_boleta: "cargando...",
         curp: "cargando...",
