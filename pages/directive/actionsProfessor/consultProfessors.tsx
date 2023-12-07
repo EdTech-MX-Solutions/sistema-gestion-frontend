@@ -5,6 +5,7 @@ import PrincipalTitle from "@/components/directive/Principal.Title";
 import SIGEAPICollection from "@/api/apiHandler";
 import { useCookies } from "react-cookie";
 import CardView from "@/components/CardView";
+import InterfaceProfessor from "@/interfaces/professor";
 
 interface DefaultLayoutProps {
   children: ReactNode;
@@ -44,11 +45,15 @@ function consultProfessor() {
           const element = data[i]
           
           const newProfessor : InterfaceProfessor = {
-            idProfesor : element.idProfesor,
-            nombre : element.nombre,
-            apellidoPaterno : element.apellidoPaterno,
-            apellidoMaterno : element.apellidoMaterno,
-            email : element.email,
+            idProfesor: element.idProfesor,
+            nombre: element.nombre,
+            apellidoPaterno: element.apellidoPaterno,
+            apellidoMaterno: element.apellidoMaterno,
+            email: element.email,
+            activo: false,
+            diretivo: false,
+            noCedulaProfesional: 0,
+            numero: []
           };
           newProfessors.push(newProfessor);
         }
