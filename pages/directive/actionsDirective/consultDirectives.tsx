@@ -98,4 +98,4 @@ function ConsultDirective() {
   );
 }
 
-export default consultDirective;
+export default ConsultDirective;

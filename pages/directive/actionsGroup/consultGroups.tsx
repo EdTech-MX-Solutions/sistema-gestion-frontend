@@ -104,4 +104,4 @@ function ConsultGroup() {
   );
 }
 
-export default consultGroup;
+export default ConsultGroup;
