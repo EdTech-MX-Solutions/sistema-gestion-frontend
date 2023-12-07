@@ -71,7 +71,10 @@ export const FormCicloEscolar = ({}: FormCicloEscolarProps) => {
             </div>
           </div>
           <div className="text-center pt-10">
-           <ButtonComponent title = {"Crear"} color = {"blue"}></ButtonComponent>
+           <ButtonComponent 
+            title = {"Crear"} 
+            color = {"blue"}
+            ></ButtonComponent>
           </div>
         </form>
       </div>

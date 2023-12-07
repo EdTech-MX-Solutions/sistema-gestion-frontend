@@ -9,7 +9,7 @@ interface InputSearchProps {
 export const InputSearch = ({ comment, searchDataAutomcomplete }: InputSearchProps) => {
     return (
         <>
-            <div className="grid grid-cols-1 gap-4 row-span-1">
+            <div className="p-5 grid grid-cols-1 gap-4 row-span-1">
                 <div>
                     <label
                         htmlFor=""
@@ -31,7 +31,7 @@ export const InputSearch = ({ comment, searchDataAutomcomplete }: InputSearchPro
                         onSelect={(record: any) => {}}
                         onFocus={() => {}}
                         onChange={(value) => console.log(value)}
-                        placeholder="Buscar Alumnos (Boleta o nombre)"
+                        placeholder="Busqueda"
                         autoFocus
                         
                     />
