@@ -1,14 +1,9 @@
+import InterfaceProfessor from "@/interfaces/professor";
 import React from "react";
+import ButtonComponentBiColor from "../ButtonComponentBiColor";
 
 interface TableDirectivesProps {
-  directives: Array<{
-    idDirective: string
-    nombre: String
-    apellidoPaterno: String
-    apellidoMaterno: String
-    email: String
-    telefono : String
-  }>;
+  directives: InterfaceProfessor[]
 }
 
 export const TableDirectives = ({ directives }: TableDirectivesProps) => {
@@ -24,28 +19,18 @@ export const TableDirectives = ({ directives }: TableDirectivesProps) => {
                 <th colSpan={2}>
                   Apellido Paterno Apellido Materno Nombres (s)
                 </th>
-                <th> Permisos </th>
                 <th> Email </th>
-
-
-                <th> Telefono </th>
                 <th> Acciones </th>
               </tr>
             </thead>
             <tbody>
               {directives.map((directive) => (
-                <tr key = {directive.idDirective}>
-                  <td className="p-5"> {directive.idDirective} </td>
+                <tr key = {directive.idProfesor}>
+                  <td className="p-5"> {directive.idProfesor} </td>
                   <td colSpan={2}> {`${directive.nombre}  ${directive.apellidoPaterno}  ${directive.apellidoMaterno}`} </td>
-                  <td> Consulta y modificacion </td>
                   <td> {directive.email} </td>
-                  <td> {directive.telefono} </td>
                   <td>
-                    <button className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300">
-                      <span className="relative px-1 py-0.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
-                        Consultar
-                      </span>
-                    </button>
+                    <ButtonComponentBiColor title = {"Consultar"} color1={"blue"} color2={"green"}></ButtonComponentBiColor>
                   </td>
                 </tr>
               ))}

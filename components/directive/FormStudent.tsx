@@ -6,22 +6,6 @@ import { useCookies } from "react-cookie";
 
 interface FormStudentProps {
     student : InterfaceAlumno
-
-    /*no_boleta: string;
-    curp: string;
-    nombre: string;
-    apellido_paterno: string;
-    apellido_materno: string;
-    aniosPreescolar: number;
-    fecha_nacimiento: string;
-    edad: number;
-    pais_origen: string;
-    sexo: string;
-    estatus: string;
-    entidad_nacimiento: string,
-    grado: string | null,
-    grupo: string | null,
-    actualizarDatosMedicos: boolean | null, */
 }
 
 export const FormStudent = ({student}: FormStudentProps) => {
@@ -153,7 +137,7 @@ export const FormStudent = ({student}: FormStudentProps) => {
                   name="grado"
                   id="grado"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value={formData.grado}
+                  value = {formData.grado || ""}
                   onChange={handleInputChange}
                 />
               </div>
@@ -170,7 +154,7 @@ export const FormStudent = ({student}: FormStudentProps) => {
                   id="grupo"
                   name="grupo"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value={formData.grupo}
+                  value={formData.grupo || ""}
                   onChange={handleInputChange}
                 />
               </div>
