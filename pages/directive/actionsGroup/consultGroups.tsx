@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import InputSearch from "@/components/template/InputSearch";
 import TableGroups from "@/components/directive/TableGroups";
 import PrincipalTitle from "@/components/directive/Principal.Title";
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/backend-calls/apiHandler";
 import { useCookies } from "react-cookie";
 import InterfaceGrupo from "@/interfaces/grupos";
 
@@ -11,7 +11,7 @@ interface DefaultLayoutProps {
   children: ReactNode;
 }
 
-function consultGroup() {
+function ConsultGroup() {
 
 
   const [cookies, setCookie] = useCookies(["token", "idGrupo", "childs"]);
@@ -104,4 +104,4 @@ function consultGroup() {
   );
 }
 
-export default consultGroup;
+export default ConsultGroup;

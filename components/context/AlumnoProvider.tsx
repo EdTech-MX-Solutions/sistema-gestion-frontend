@@ -1,4 +1,4 @@
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/backend-calls/apiHandler";
 import InterfaceAlumno from "@/interfaces/alumno";
 import {
     createContext,
@@ -20,7 +20,6 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
     const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
-    // const [alumno, setAlumno] = useState<InterfaceAlumno | null>(null);
     const [alumno, setAlumno] = useState<InterfaceAlumno>({
         no_boleta: "cargando...",
         curp: "cargando...",

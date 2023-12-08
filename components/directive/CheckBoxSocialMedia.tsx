@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CheckBoxSocialMedia = ({socialMediaState,handleCheckboxChange}) => {
+export const CheckBoxSocialMedia = ({socialMediaState,handleCheckboxChange}: any) => {
   const socialMedia = [
     "Facebook",
     "Whatsapp",

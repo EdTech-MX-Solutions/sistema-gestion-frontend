@@ -3,7 +3,7 @@ import MedicCard from "@/components/Medic.Card";
 import { useAlumno } from "@/components/context/AlumnoProvider";
 import StudentDataCard from "@/components/student/StudentData.Card";
 
-function medicData() {
+function MedicData() {
     const { alumno } = useAlumno();
     const title = "Datos Médicos del Alumno";
     const description = `Datos registrados del alumno, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
@@ -19,4 +19,4 @@ function medicData() {
     );
 }
 
-export default medicData;
+export default MedicData;

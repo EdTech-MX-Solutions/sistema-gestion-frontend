@@ -2,11 +2,11 @@ import { ReactNode, useEffect, useState } from "react";
 import InputSearch from "@/components/template/InputSearch";
 import TableDirectives from "@/components/directive/TableDirectives";
 import InterfaceProfessor from "@/interfaces/professor";
-import SIGEAPICollection from "@/api/apiHandler";
 import { useCookies } from "react-cookie";
 import CardView from "@/components/CardView";
 import PrincipalTitle from "@/components/directive/Principal.Title";
 import { useNavigate } from "react-router-dom";
+import SIGEAPICollection from "@/backend-calls/apiHandler";
 
 interface DefaultLayoutProps {
   children: ReactNode;

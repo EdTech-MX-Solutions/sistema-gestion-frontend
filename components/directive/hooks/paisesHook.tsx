@@ -6,7 +6,7 @@ interface Pais {
   pais: InterfacePais;
 }
 
-export const paisesHook = (cookies: any) => {
+export const PaisesHook = (cookies: any) => {
   const [paises, setPaises] = useState<Pais[]>([]);
 
   const fetchPaises = async () => {

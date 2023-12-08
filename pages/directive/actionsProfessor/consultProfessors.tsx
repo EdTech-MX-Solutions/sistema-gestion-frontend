@@ -2,6 +2,8 @@ import { ReactNode, useEffect, useState } from "react";
 import TableProfessors from "@/components/directive/TableProfessors";
 import InputSearch from "@/components/template/InputSearch";
 import PrincipalTitle from "@/components/directive/Principal.Title";
+import SIGEAPICollection from "@/backend-calls/apiHandler";
+import { useCookies } from "react-cookie";
 import CardView from "@/components/CardView";
 import { useProfesores } from "@/components/context/ProfesorProvider";
 
