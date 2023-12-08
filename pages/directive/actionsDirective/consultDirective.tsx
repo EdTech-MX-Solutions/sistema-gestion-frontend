@@ -1,24 +1,31 @@
 import PrincipalTitle from "@/components/directive/Principal.Title";
 import { ReactNode } from "react";
 import CardConsultDirective from "@/components/directive/CardConsultDirective";
+import { useRouter } from "next/router";
+
 
 interface DefaultLayoutProps {
   children: ReactNode;
 }
 
-
-function consultDirective() {
+function ConsultDirective() {
+  const title = "Detalles directivo: [nombre_directivo]";
 
   const directive = {
-    "idDirective" : "1",
-    "nombre" : "AbrahamD" ,
-    "apellidoPaterno" : "RomeroD",
-    "apellidoMaterno" : "AngelesD",
-    "email" : "directivoCorreo@gmail.com",
-    "telefono" : "5511223344"
+    idProfesor : "string",
+    nombre : "string",
+    apellidoPaterno : "string",
+    apellidoMaterno : "string",
+    email : "string",
+    activo : true,
+    diretivo : true,
+    noCedulaProfesional : 0,
+    numero : []
   }
 
-  const title = "Detalles directivo: [nombre_directivo]";
+  const router = useRouter();
+  const data = router.query;
+  console.log(router.query.id)
 
   return (
     <>
@@ -28,4 +35,4 @@ function consultDirective() {
   );
 }
 
-export default consultDirective;
+export default ConsultDirective;

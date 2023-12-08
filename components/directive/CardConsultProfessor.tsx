@@ -1,18 +1,13 @@
 import React from "react";
 import ButtonComponent from "../ButtonComponent";
+import InterfaceProfessor from "@/interfaces/professor";
 
 interface CardConsultProfessorProps {
-  professor : {
-    idProfessor: string
-    nombre: String
-    apellidoPaterno: String
-    apellidoMaterno: String
-    email: String
-    telefono : String
-}
+  professor : InterfaceProfessor
 }
 
 export const CardConsultProfessor = ({professor}: CardConsultProfessorProps) => {
+  
   return (
     <>
     <div className="bg-white rounded-lg">
@@ -29,7 +24,7 @@ export const CardConsultProfessor = ({professor}: CardConsultProfessorProps) => 
               htmlFor=""
               className="block mb-2 text-sm font-medium text-gray-900"
             >
-              {professor.idProfessor}
+              {professor.idProfesor}
             </label>
           </div>
 
@@ -104,7 +99,7 @@ export const CardConsultProfessor = ({professor}: CardConsultProfessorProps) => 
               htmlFor=""
               className="block mb-2 text-sm font-medium text-gray-900"
             >
-              {professor.telefono}
+              56494949
             </label>
           </div>
         </div>

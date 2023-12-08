@@ -12,6 +12,7 @@ export const metadata = {
 }
 
 
+
 export const AppContext = ({ Layout, pageProps, session, Component }) => {
     return (
         <CookiesProvider>

@@ -6,12 +6,13 @@ import SIGEAPICollection from "@/api/apiHandler";
 import { useCookies } from "react-cookie";
 import CardView from "@/components/CardView";
 import PrincipalTitle from "@/components/directive/Principal.Title";
+import { useNavigate } from "react-router-dom";
 
 interface DefaultLayoutProps {
   children: ReactNode;
 }
 
-function consultDirective() {
+function ConsultDirective() {
 
   const [cookies, setCookie] = useCookies(["token", "idProfessor", "childs"]);
   const [profesores, setProfesores] = useState<InterfaceProfessor[]>([]);
@@ -70,6 +71,7 @@ function consultDirective() {
     }
   };
 
+
   useEffect(() => {
     fetchProfesores();
   }, []);
@@ -98,4 +100,4 @@ function consultDirective() {
   );
 }
 
-export default consultDirective;
+export default ConsultDirective;

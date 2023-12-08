@@ -14,7 +14,6 @@ export const ButtonComponent = ({title, color, onClick} :  ButtonComponentProps)
     <>
       <div className="mx-auto justify-center p-5 m-3">
         <button 
-          type="submit" 
           className = {btnClassName}
           onClick={onClick}
         > 
