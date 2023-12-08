@@ -1,12 +1,21 @@
-import React from 'react'
-
-interface CardConsultGroupProps{
-
+import InterfaceGrupo from "@/interfaces/grupos";
+import React from "react";
+import ButtonComponent from "../ButtonComponent";
+import TableStudentsGroup from "./TableStudentsGroup";
+import router from "next/router";
+interface CardConsultGroupProps {
+  group: InterfaceGrupo;
 }
 
-export const CardConsultGroup = ({} : CardConsultGroupProps) => {
+export const CardConsultGroup = ({ group }: CardConsultGroupProps) => {
+  
+  const handleModifyGroup = (gropoId: any) => {
+    router.push(`/directive/actionsGroup/modifyGroup?id=${gropoId}`)
+  }
+
   return (
     <>
+      <div className="rounded-lg bg-white">
         <div className="p-5 grid grid-cols-3 row-span-2 grid-rows-3 gap-4 items-center bg-white rounded-lg">
           <div>
             <label
@@ -19,7 +28,7 @@ export const CardConsultGroup = ({} : CardConsultGroupProps) => {
               htmlFor=""
               className="block mb-2 text-sm font-medium text-gray-900"
             >
-              1
+              {group.grado}
             </label>
           </div>
 
@@ -34,7 +43,7 @@ export const CardConsultGroup = ({} : CardConsultGroupProps) => {
               htmlFor=""
               className="block mb-2 text-sm font-medium text-gray-900"
             >
-              A
+              {group.subGrado}
             </label>
           </div>
 
@@ -49,7 +58,7 @@ export const CardConsultGroup = ({} : CardConsultGroupProps) => {
               htmlFor=""
               className="block mb-2 text-sm font-medium text-gray-900"
             >
-              Matutino
+              {group.turno}
             </label>
           </div>
 
@@ -64,7 +73,7 @@ export const CardConsultGroup = ({} : CardConsultGroupProps) => {
               htmlFor=""
               className="block mb-2 text-sm font-medium text-gray-900"
             >
-              Abraham Romero Angeles
+              {group.responsable}
             </label>
           </div>
 
@@ -79,7 +88,7 @@ export const CardConsultGroup = ({} : CardConsultGroupProps) => {
               htmlFor=""
               className="block mb-2 text-sm font-medium text-gray-900"
             >
-              0
+              {group.cupos}
             </label>
           </div>
 
@@ -94,7 +103,7 @@ export const CardConsultGroup = ({} : CardConsultGroupProps) => {
               htmlFor=""
               className="block mb-2 text-sm font-medium text-gray-900"
             >
-              S-1
+              {group.salon}
             </label>
           </div>
 
@@ -109,12 +118,32 @@ export const CardConsultGroup = ({} : CardConsultGroupProps) => {
               htmlFor=""
               className="block mb-2 text-sm font-medium text-gray-900"
             >
-              S-1
+              {group.inscritos}
             </label>
           </div>
         </div>
+        <div className="grid grid-cols-2 row-span-1 gap-4 items-center text-center">
+          <ButtonComponent
+            title={"Modificar Grupo"}
+            color={"blue"}
+            onClick={() => handleModifyGroup(group.idGrupo)}
+          ></ButtonComponent>
+          <ButtonComponent 
+            title={"Eliminar"} 
+            color={"red"}
+          ></ButtonComponent>
+        </div>
+
+        <TableStudentsGroup
+            titleBtn1={"Ver Datos del Alumno"}
+            titleBtn2={"Ver Datos Del Alumno"}
+            titleTable={
+              "Listado de Alumnos disponibles para el grupo seleccionado"
+            }
+          ></TableStudentsGroup>
+      </div>
     </>
-  )
-}
+  );
+};
 
 export default CardConsultGroup;

@@ -1,5 +1,5 @@
 import InterfaceProfessor from "@/interfaces/professor";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 
 interface FormProfessorProps {
@@ -18,6 +18,8 @@ export const FormProfessor = ({ professor }: FormProfessorProps) => {
     noCedulaProfesional: professor.noCedulaProfesional,
     numero: professor.numero,
   });
+
+  console.log(professor);
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -149,10 +151,7 @@ export const FormProfessor = ({ professor }: FormProfessorProps) => {
           </div>
 
           <div className="grid grid-cols-2 row-span-2 gap-4 items-center bg-white text-center rounded-lg">
-            <ButtonComponent 
-              title={"Guardar"} 
-              color={"blue"}
-            ></ButtonComponent>
+            <ButtonComponent title={"Guardar"} color={"blue"}></ButtonComponent>
             <ButtonComponent
               title={"Dar de baja Profesor"}
               color={"red"}

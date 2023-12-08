@@ -3,16 +3,15 @@ import React from "react";
 import ButtonComponentBiColor from "../ButtonComponentBiColor";
 import router from "next/router";
 
-
 interface TableDirectivesProps {
-  directives: InterfaceProfessor[]
+  directives: InterfaceProfessor[];
 }
 
-
 export const TableDirectives = ({ directives }: TableDirectivesProps) => {
-  
   const handleConsultDirective = (directiveId: any) => {
-    router.push(`/directive/actionsDirective/consultDirective?id=${directiveId}`);
+    router.push(
+      `/directive/actionsDirective/consultDirective?id=${directiveId}`
+    );
   };
 
   return (
@@ -33,16 +32,21 @@ export const TableDirectives = ({ directives }: TableDirectivesProps) => {
             </thead>
             <tbody>
               {directives.map((directive) => (
-                <tr key = {directive.idProfesor}>
+                <tr key={directive.idProfesor}>
                   <td className="p-5"> {directive.idProfesor} </td>
-                  <td colSpan={2}> {`${directive.nombre}  ${directive.apellidoPaterno}  ${directive.apellidoMaterno}`} </td>
+                  <td colSpan={2}>
+                    {" "}
+                    {`${directive.nombre}  ${directive.apellidoPaterno}  ${directive.apellidoMaterno}`}{" "}
+                  </td>
                   <td> {directive.email} </td>
                   <td>
-                    <ButtonComponentBiColor 
-                      title = {"Consultar"} 
-                      color1={"blue"} 
+                    <ButtonComponentBiColor
+                      title={"Consultar"}
+                      color1={"blue"}
                       color2={"green"}
-                      onClick={() => handleConsultDirective(directive.idProfesor)}
+                      onClick={() =>
+                        handleConsultDirective(directive.idProfesor)
+                      }
                     ></ButtonComponentBiColor>
                   </td>
                 </tr>

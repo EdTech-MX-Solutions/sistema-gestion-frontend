@@ -3,7 +3,7 @@ import ButtonComponent from "../ButtonComponent";
 import InterfaceProfessor from "@/interfaces/professor";
 import router, { useRouter } from "next/router";
 import { useState } from "react";
-
+import { TableVistaTelefonos } from "./TableVistaTelefonos";
 interface CardConsultDirectiveProps {
   directive: InterfaceProfessor;
 }
@@ -12,16 +12,13 @@ export const CardConsultDirective = ({ directive }: CardConsultDirectiveProps) =
 
   const router = useRouter();
 
-  
-
   const handleModifyDirective = (directiveId: any) => {
-    router.push("/directive/actionsDirective/modifyDirective");
+    router.push(`/directive/actionsDirective/modifyDirective?id=${directiveId}`);
   };
 
   return (
     <>
       <div className="items-center bg-white rounded-lg">
-        <div className="grid grid-rows-6 gap-6 ">
           <div className="p-5 grid grid-cols-3 row-span-4 gap-4 ">
             <div>
               <label
@@ -97,22 +94,9 @@ export const CardConsultDirective = ({ directive }: CardConsultDirectiveProps) =
                 {directive.email}
               </label>
             </div>
-
-            <div>
-              <label
-                htmlFor=""
-                className="text-xl block mb-2 text-sm font-medium text-gray-900"
-              >
-                Telefono de contacto:
-              </label>
-              <label
-                htmlFor=""
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                515151
-              </label>
-            </div>
           </div>
+
+          <TableVistaTelefonos telefonos={[]}></TableVistaTelefonos>
 
           <div className="grid grid-cols-2 gap-4 row-span-2 items-center text-center">
             <div>
@@ -131,7 +115,6 @@ export const CardConsultDirective = ({ directive }: CardConsultDirectiveProps) =
               ></ButtonComponent>
             </div>
           </div>
-        </div>
       </div>
     </>
   );

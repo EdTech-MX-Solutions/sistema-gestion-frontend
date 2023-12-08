@@ -23,7 +23,7 @@ export const ProfesorProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [cookies, setCookie] = useCookies(["token", "idProfessor", "childs"]);
   const [profesores, setProfesores] = useState<InterfaceProfessor[]>([]);
-  const [profesor, setProfesor] = useState<InterfaceProfessor | null>(null); // Cambiar de [] a null
+  const [profesor, setProfesor] = useState<InterfaceProfessor | null>(null);
 
   const updateProfesor = (newProfesor: InterfaceProfessor) =>{
     setProfesor(newProfesor);

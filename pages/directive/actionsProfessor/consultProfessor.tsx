@@ -4,49 +4,54 @@ import CardConsultProfessor from "@/components/directive/CardConsultProfessor";
 import { useRouter } from "next/router";
 import { useProfesores } from "@/components/context/ProfesorProvider";
 import InterfaceProfessor from "@/interfaces/professor";
+import CardView from "@/components/CardView";
 
 interface DefaultLayoutProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 function ConsultProfessor() {
+  const router = useRouter();
+  const { id } = router.query;
+  const title = "Detalles profesor: [nombre_profesor]";
+  const { profesores } = useProfesores();
+  const [professorDetails, setProfessorDetails] = useState<InterfaceProfessor>({
+    idProfesor: "cargando...",
+    nombre: "cargando...",
+    apellidoPaterno: "cargando...",
+    apellidoMaterno: "cargando...",
+    email: "cargando...",
+    activo: false,
+    diretivo: false,
+    noCedulaProfesional: 0,
+    numero: [],
+  });
 
-    const router = useRouter();
-    const {id} =  router.query;
-    const title = "Detalles profesor: [nombre_profesor]";
-    const {profesores} = useProfesores();
-    const [professorDetails, setProfessorDetails] = useState<InterfaceProfessor>({
-        idProfesor : "cargando...",
-        nombre : "cargando...",
-        apellidoPaterno : "cargando...",
-        apellidoMaterno : "cargando...",
-        email : "cargando...",
-        activo : false,
-        diretivo : false,
-        noCedulaProfesional : 0,
-        numero : []
-    });
+  useEffect(() => {
+    if (id && profesores && profesores.length > 0) {
+      const foundProfesor = profesores.find(
+        (profesor) => profesor.idProfesor == id
+      );
+      if (foundProfesor) {
+        setProfessorDetails(foundProfesor);
+      } else {
+        console.error(`No se encontro un profesor con la ID: ${id}`);
+      }
+    }
+  }, [id, profesores]);
 
-    useEffect(() => {
-        if(id && profesores && profesores.length > 0){
-            const foundProfesor = profesores.find((profesor) => (profesor.idProfesor == id));
-            if(foundProfesor){
-                setProfessorDetails(foundProfesor);
-            }
-            else{
-                console.error(`No se encontro un profesor con la ID: ${id}`);
-            }
-        }
-    },[id, profesores])
-    
-    console.log(professorDetails);
-    
-    return (
-        <>
-            <PrincipalTitle title={title}></PrincipalTitle>
-            <CardConsultProfessor professor = {professorDetails}></CardConsultProfessor>
-        </>
-    );
+  console.log(professorDetails);
+
+  return (
+    <>
+      <CardView title={"title"} customtitle={true} description={""}>
+        <PrincipalTitle title={title}></PrincipalTitle>
+        <CardConsultProfessor
+          professor={professorDetails}
+        ></CardConsultProfessor>
+      </CardView>
+    </>
+  );
 }
 
 export default ConsultProfessor;

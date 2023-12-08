@@ -12,9 +12,10 @@ interface DefaultLayoutProps {
 }
 
 function ConsultProfessor() {
-
+  
   const {profesores} = useProfesores()
   console.log(profesores);
+
   return (
     <>
     <CardView title = {"title"} customtitle = {true} description = {""}>

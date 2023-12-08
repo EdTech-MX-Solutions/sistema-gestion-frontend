@@ -1,5 +1,5 @@
 interface InterfaceGrupo {
-  idGrupo: number;
+  idGrupo: string;
   grado: string;
   subGrado: string;
   turno: string;

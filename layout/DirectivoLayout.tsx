@@ -3,6 +3,7 @@ import PrivateRoute from "../components/auth/PrivateRoute";
 import SidebarDirectivo from "@/components/Sidebars/SidebarDirectivo";
 import Header from "@/components/template/Header";
 import { ProfesorProvider } from "@/components/context/ProfesorProvider";
+import { GrupoProvider } from "@/components/context/GruposProvides";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -14,6 +15,7 @@ const TutorLayout = ({ children }: LayoutProps) => {
     <>
       <PrivateRoute allowedRoles={["SUPERUSER", "DIRECTIVO"]}>
         <ProfesorProvider>
+          <GrupoProvider>
           <div className="dark:bg-boxdark-2 dark:text-bodydark">
             <div className="flex h-screen overflow-hidden">
               <SidebarDirectivo
@@ -33,6 +35,7 @@ const TutorLayout = ({ children }: LayoutProps) => {
               </div>
             </div>
           </div>
+          </GrupoProvider>
         </ProfesorProvider>
       </PrivateRoute>
     </>

@@ -20,6 +20,8 @@ export const FormGroup = ({ grupo }: FormGroupProps) => {
     cicloEscolar: grupo.cicloEscolar,
   });
 
+  console.log(grupo);
+
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
     setFormData({

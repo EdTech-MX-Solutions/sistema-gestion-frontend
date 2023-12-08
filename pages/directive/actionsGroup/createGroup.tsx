@@ -28,7 +28,7 @@ function createGroup() {
       <PrincipalTitle title={title}></PrincipalTitle>
       <div className="justify-center bg-white p-5 rounded-lg">
         <h4 className="font-bold">Elementos del grupo: </h4>
-        <FormGroup grupo={Initialgroup}></FormGroup>
+        <FormGroup grupo = {Initialgroup}></FormGroup>
         <TableStudentsGroup
           titleBtn1={"Ver Datos del Alumno"}
           titleBtn2={"Dar de Baja del Grupo"}
