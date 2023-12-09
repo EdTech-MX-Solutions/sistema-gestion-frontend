@@ -79,8 +79,8 @@ const SidebarContDirectivo = () => {
                             return <React.Fragment></React.Fragment>;
                         }}
                     </SidebarLinkGroup>
-                    {sidebarItem("Consultar Tutores", base_rute+ "actionsStudent/consultStudents/")}
-                    {sidebarItem("Registrar Datos Tutor", base_rute+ "actionsStudent/registerDataFirstTutor")}
+                    {sidebarItem("Consultar Tutores", base_rute+ "actionsStudent/registrerDataFirstTutor")}
+                    {sidebarItem("Registrar Datos Tutor", base_rute+ "actionsStudent/registrerDataFirstTutor")}
                 </ul>
             </div>
             {/* <!-- Others Group --> */}
