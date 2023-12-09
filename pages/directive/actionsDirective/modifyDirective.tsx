@@ -41,7 +41,7 @@ function ModifyDirective() {
   return (
     <>
       <PrincipalTitle title = {title}></PrincipalTitle>
-      <FormDirective directive = {professorDetails}></FormDirective>
+      <FormDirective directive = {professorDetails} isNewUser = {false}></FormDirective>
     </>
   );
 }

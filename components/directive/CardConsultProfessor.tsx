@@ -92,10 +92,40 @@ export const CardConsultProfessor = ({professor}: CardConsultProfessorProps) => 
                 {professor.email}
               </label>
             </div>
+
+            <div>
+              <label
+                htmlFor=""
+                className="text-xl block mb-2 text-sm font-medium text-gray-900"
+              >
+                ¿Profesor activo?
+              </label>
+              <label
+                htmlFor=""
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                {professor.activo ? "Si" : "No"}
+              </label>
+            </div>
+
+            <div>
+              <label
+                htmlFor=""
+                className="text-xl block mb-2 text-sm font-medium text-gray-900"
+              >
+                Numero de Cédula Profesional
+              </label>
+              <label
+                htmlFor=""
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                {professor.noCedulaProfesional}
+              </label>
+            </div>
           </div>
 
-          <TableVistaTelefonos telefonos={[]}></TableVistaTelefonos>
-
+          <TableVistaTelefonos telefonos={professor.numero}></TableVistaTelefonos>
+          
           <div className="grid grid-cols-2 row-span-2 gap-4 items-center bg-white text-center">
             <ButtonComponent
               title={"Modificar"}

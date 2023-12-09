@@ -94,9 +94,39 @@ export const CardConsultDirective = ({ directive }: CardConsultDirectiveProps) =
                 {directive.email}
               </label>
             </div>
+
+            <div>
+              <label
+                htmlFor=""
+                className="text-xl block mb-2 text-sm font-medium text-gray-900"
+              >
+                ¿Profesor activo?
+              </label>
+              <label
+                htmlFor=""
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                {directive.activo ? "Si" : "No"}
+              </label>
+            </div>
+
+            <div>
+              <label
+                htmlFor=""
+                className="text-xl block mb-2 text-sm font-medium text-gray-900"
+              >
+                Numero de Cédula Profesional
+              </label>
+              <label
+                htmlFor=""
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                {directive.noCedulaProfesional}
+              </label>
+            </div>
           </div>
 
-          <TableVistaTelefonos telefonos={[]}></TableVistaTelefonos>
+          <TableVistaTelefonos telefonos={directive.numero}></TableVistaTelefonos>
 
           <div className="grid grid-cols-2 gap-4 row-span-2 items-center text-center">
             <div>
@@ -111,7 +141,6 @@ export const CardConsultDirective = ({ directive }: CardConsultDirectiveProps) =
               <ButtonComponent
                 title={"Dar de Baja"}
                 color={"blue"}
-                
               ></ButtonComponent>
             </div>
           </div>

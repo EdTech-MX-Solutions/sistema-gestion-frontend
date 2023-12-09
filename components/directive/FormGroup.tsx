@@ -1,24 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 import InterfaceGrupo from "@/interfaces/grupos";
+import { useGrupos } from "../context/GruposProvides";
+import { useRouter } from "next/router";
 
 interface FormGroupProps {
   grupo: InterfaceGrupo;
+  isNewGroup: boolean;
 }
 
-export const FormGroup = ({ grupo }: FormGroupProps) => {
+export const FormGroup = ({ grupo, isNewGroup }: FormGroupProps) => {
+
+  const router = useRouter();
+  const { id } = router.query;
+
   const [formData, setFormData] = useState({
-    idGrupo: grupo.idGrupo,
-    grado: grupo.grado,
-    subGrado: grupo.subGrado,
-    turno: grupo.turno,
-    responsable: grupo.responsable,
-    idResponsable: grupo.idResponsable,
-    cupos: grupo.cupos,
-    salon: grupo.salon,
-    inscritos: grupo.inscritos,
-    cicloEscolar: grupo.cicloEscolar,
+    idGrupo: isNewGroup ? "" : grupo.idGrupo,
+    grado: isNewGroup ? "" : grupo.grado,
+    subGrado: isNewGroup ? "" : grupo.subGrado,
+    turno: isNewGroup ? "" : grupo.turno,
+    responsable: isNewGroup ? "" : grupo.responsable,
+    idResponsable: isNewGroup ? "" : grupo.idResponsable,
+    cupos: isNewGroup ? "" : grupo.cupos,
+    salon: isNewGroup ? "" : grupo.salon,
+    inscritos: isNewGroup ? "" : grupo.inscritos,
+    cicloEscolar: isNewGroup ? "" : grupo.cicloEscolar,
   });
+
+  const { grupos } = useGrupos();
+  
+  useEffect(() => {
+    if(id && grupos && grupos.length > 0){
+      const foundGroup = grupos.find((grupo) => grupo.idGrupo == id);
+      if(foundGroup){
+        setFormData(foundGroup);
+      }else{
+        console.error(`No se encontro un grupo con la ID: ${id}`);
+      }
+    }
+  },[id, grupos]);
 
   console.log(grupo);
 

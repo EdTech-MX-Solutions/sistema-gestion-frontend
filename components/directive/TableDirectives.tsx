@@ -35,7 +35,6 @@ export const TableDirectives = ({ directives }: TableDirectivesProps) => {
                 <tr key={directive.idProfesor}>
                   <td className="p-5"> {directive.idProfesor} </td>
                   <td colSpan={2}>
-                    {" "}
                     {`${directive.nombre}  ${directive.apellidoPaterno}  ${directive.apellidoMaterno}`}{" "}
                   </td>
                   <td> {directive.email} </td>

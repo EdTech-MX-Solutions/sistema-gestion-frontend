@@ -7,19 +7,21 @@ interface DefaultLayoutProps {
 
 function registrerProfessor() {
   const InitialProfessor = {
-    idProfessor: "",
-    nombre: "",
-    apellidoPaterno: "",
-    apellidoMaterno: "",
-    cedulaProfesional : "",
-    email: "",
-    telefono: "",
+    idProfesor : "",
+    nombre : "",
+    apellidoPaterno : "",
+    apellidoMaterno : "",
+    email : "",
+    activo : true,
+    diretivo : true,
+    noCedulaProfesional : 0,
+    numero : []
   };
 
   return (
     <>
       <PrincipalTitle title={"Registrar Profesor"}></PrincipalTitle>
-      <FormProfessor professor={InitialProfessor}></FormProfessor>
+      <FormProfessor professor={InitialProfessor} isNewUser = {true}></FormProfessor>
     </>
   );
 }

@@ -10,18 +10,21 @@ interface DefaultLayoutProps {
 function registrerDirective(){
 
   const initialDirective = {
-    idDirective: "",
-    nombre: "",
-    apellidoPaterno: "",
-    apellidoMaterno: "",
-    email: "",
-    telefono: "",
+    idProfesor : "",
+    nombre : "",
+    apellidoPaterno : "",
+    apellidoMaterno : "",
+    email : "",
+    activo : true,
+    diretivo : true,
+    noCedulaProfesional : 0,
+    numero : []
   };
 
     return(
         <>
           <PrincipalTitle title = {"Registrar Directivo"}></PrincipalTitle>
-          <FormDirective directive = {initialDirective}></FormDirective>
+          <FormDirective directive = {initialDirective} isNewUser = {true}></FormDirective>
         </>
     );
 }

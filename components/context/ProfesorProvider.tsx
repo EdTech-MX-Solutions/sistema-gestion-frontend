@@ -10,6 +10,7 @@ import {
 import { useCookies } from "react-cookie";
 
 interface ProfesorContextType {
+  length: number;
   profesores: InterfaceProfessor[];
   updateProfesor: (newProfesor: InterfaceProfessor) => void;
 }
@@ -44,14 +45,14 @@ export const ProfesorProvider: React.FC<{ children: ReactNode }> = ({
           const element = data[i];
           const newProfessor: InterfaceProfessor = {
             idProfesor: element.idProfesor,
-            nombre: element.nombre,
-            apellidoPaterno: element.apellidoPaterno,
-            apellidoMaterno: element.apellidoMaterno,
-            email: element.email,
-            activo: false,
-            diretivo: false,
-            noCedulaProfesional: 0,
-            numero: [],
+            nombre : element.nombre,
+            apellidoPaterno : element.apellidoPaterno,
+            apellidoMaterno : element.apellidoMaterno,
+            email : element.email,
+            activo : element.activo,
+            diretivo : element.directivo,
+            noCedulaProfesional : element.noCedulaProfesional,
+            numero : element.numero,
           };
           newProfessors.push(newProfessor);
         }
@@ -74,7 +75,7 @@ export const ProfesorProvider: React.FC<{ children: ReactNode }> = ({
   }, []);
 
   return (
-    <ProfesorContext.Provider value={{profesores, updateProfesor}}>
+    <ProfesorContext.Provider value={{ length: profesores.length, profesores, updateProfesor }}>
         {children}
     </ProfesorContext.Provider>
   );

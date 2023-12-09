@@ -7,6 +7,12 @@ interface TableTelefonosProps {
 }
 
 export const TableVistaTelefonos = ({ telefonos }: TableTelefonosProps) => {
+  
+  // Verificar si telefonos es undefined o null
+  if (!telefonos || telefonos.length === 0) {
+    return <p className="p-5">No hay datos de teléfonos disponibles.</p>;
+  }
+
   return (
     <>
       <div className="p-5 bg-white rounded-lg">
@@ -24,8 +30,8 @@ export const TableVistaTelefonos = ({ telefonos }: TableTelefonosProps) => {
             <tbody>
               {telefonos.map((telefono, index) => (
                 <tr key={index}>
-                  <td className="p-5"> {telefono.numero} </td>
-                  <td> {telefono.tipo} </td>
+                  <td className="p-3">{telefono.numero}</td>
+                  <td>{telefono.tipo}</td>
                 </tr>
               ))}
             </tbody>

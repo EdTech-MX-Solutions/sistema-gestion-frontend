@@ -1,5 +1,5 @@
 import PrincipalTitle from "@/components/directive/Principal.Title";
-import { ReactNode, use, useEffect, useState } from "react";
+import { ReactNode, use, useContext, useEffect, useState } from "react";
 import FormProfessor from "@/components/directive/FormProfessor";
 import { useRouter } from "next/router";
 import { useProfesores } from "@/components/context/ProfesorProvider";
@@ -25,7 +25,7 @@ function ModifyProfessor() {
     diretivo : false,
     noCedulaProfesional : 0,
     numero : []
-});
+  });
   
   useEffect(() => {
     if(id && profesores && profesores.length > 0){
@@ -42,7 +42,7 @@ function ModifyProfessor() {
   return (
     <>
       <PrincipalTitle title={title}></PrincipalTitle>
-      <FormProfessor professor = {professorDetails}></FormProfessor>
+      <FormProfessor professor = {professorDetails} isNewUser = {false}></FormProfessor>
     </>
   );
 }
