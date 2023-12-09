@@ -35,7 +35,7 @@ export class DirectivosAPICollection {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
-            }
+            },
         });
     } 
 }

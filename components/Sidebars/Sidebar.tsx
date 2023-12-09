@@ -61,7 +61,7 @@ const Sidebar = ({
     return (
         <aside
             ref={sidebar}
-            className={`absolute left-0 top-0 z-20 overflow-y-scroll flex h-screen w-72.5 flex-col duration-300 ease-linear dark:bg-boxdark  bg-white lg:static lg:translate-x-0 ${
+            className={`absolute left-0 top-0 z-20 overflow-y-scroll flex h-screen w-72.5 flex-col duration-300 ease-linear dark:bg-slate-500 bg-white dark:text-gray-200 lg:static lg:translate-x-0 ${
                 sidebarOpen ? "translate-x-0" : "-translate-x-full"
             }`}
         >
@@ -96,9 +96,9 @@ const Sidebar = ({
             {/* <!-- SIDEBAR HEADER --> */}
 
             <div className="no-scrollbar flex flex-col overflow-visible duration-300 ease-linear h-screen">
-                <nav className="mt-5 py-4 lg:mt-9 lg:pl-2 lg:pr-4 min-h-screen">
-                    <div>
-                        <Image src={Logo} alt="Logo" width={200} />
+                <nav className="pb-4 lg:pl-2 lg:pr-4 min-h-screen">
+                    <div className="py-16 ">
+                        <Image src={Logo} className="hidden lg:block" alt="Logo" width={200} />
                     </div>
                     <div>
                         {/* <!-- Menu Groups --> */}
@@ -117,7 +117,7 @@ const Sidebar = ({
                                 className={`group relative pb-3 flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:cursor-pointer hover:font-bold dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
                             >
                                 <svg
-                                    className="ml-1.5 inline-block mr-1.5 mb-0.5 text-bodydark2 text-black"
+                                    className="ml-1.5 inline-block mr-1.5 mb-0.5 dark:text-white text-black"
                                     display={"default"}
                                     width="20"
                                     height="20"
@@ -126,7 +126,7 @@ const Sidebar = ({
                                     id="signout"
                                 >
                                     <path
-                                        fill="#000000"
+                                        fill="currentColor"
                                         d="M4,12a1,1,0,0,0,1,1h7.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H5A1,1,0,0,0,4,12ZM17,2H7A3,3,0,0,0,4,5V8A1,1,0,0,0,6,8V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Z"
                                     ></path>
                                 </svg>
@@ -134,7 +134,7 @@ const Sidebar = ({
                             </li>
                             <Link href={"/" + role + "/system.info." + role}>
                                 <li
-                                    className={`group relative pb-3 flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:cursor-pointer hover:font-bold dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
+                                    className={`group relative pb-3 flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium dark:text-gray-200 text-black duration-300 ease-in-out hover:cursor-pointer hover:font-bold dark:hover:bg-meta-4`}
                                 >
                                     {/* info svg icon whitout fill */}
                                     <svg
@@ -142,7 +142,7 @@ const Sidebar = ({
                                         height="24px"
                                         viewBox="0 0 24 24"
                                         width="24px"
-                                        fill="#000000"
+                                        fill="currentColor"
                                     >
                                         <path d="M0 0h24v24H0V0z" fill="none" />
                                         <path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
@@ -151,7 +151,7 @@ const Sidebar = ({
                                 </li>
                             </Link>
                             <li
-                                className={`group mt-1 text-center relative items-center rounded-sm py-1 text-xs text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
+                                className={`group mt-1 text-center relative items-center rounded-sm py-1 text-xs dark:text-gray-200 text-black duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`}
                             >
                                 <p>{version_name}</p>
                             </li>

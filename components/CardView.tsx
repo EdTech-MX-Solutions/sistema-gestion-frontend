@@ -1,6 +1,6 @@
 interface CardProps {
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
     children: React.ReactNode;
     customtitle?: boolean;
 }
@@ -18,10 +18,10 @@ const CardView = ({ title, description, children, customtitle }: CardProps) => {
         return (
             <>
                 <div className="md:m-10 md:p-10">
-                    <div className="text-4xl font-semibold">
+                    <div className="text-4xl font-semibold text-gray-500 dark:text-white">
                         <h1>{title}</h1>
                     </div>
-                    <div className="mt-2">{description}</div>
+                    <div className="mt-2 text-gray-500 dark:text-gray-200">{description}</div>
                     {children}
                 </div>
             </>
