@@ -1,5 +1,5 @@
-import SIGEAPICollection from "@/backend-calls/apiHandler";
-import InterfacePeriodo from "@/interfaces/periodo";
+import SIGEAPICollection from "@/data/calls/apiHandler";
+import InterfacePeriodo from "@/data/interfaces/periodo";
 import {
     createContext,
     useContext,

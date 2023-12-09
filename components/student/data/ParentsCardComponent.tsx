@@ -1,4 +1,4 @@
-import InterfaceParent from "@/interfaces/parent";
+import InterfaceParent from "@/data/interfaces/parent";
 
 function ParentsCardComponent({ parentInst }: { parentInst: InterfaceParent }) {
     if (!parentInst) {

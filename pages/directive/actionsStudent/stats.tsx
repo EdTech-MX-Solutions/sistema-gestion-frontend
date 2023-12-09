@@ -1,12 +1,12 @@
 import { ReactNode, useEffect, useState } from "react";
 import PrincipalTitle from "@/components/directive/Principal.Title";
-import InputSearch from "@/components/template/InputSearch";
-import TableStudets from "@/components/directive/TableStudets";
 import CardView from "@/components/CardView";
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
 import InterfaceAlumno from "@/data/interfaces/alumno";
 import Loader from "@/components/elements/Loader";
+import { PieChart } from "@/components/stats/pie";
+import { Lines } from "@/components/stats/lines";
 
 interface DefaultLayoutProps {
     children: ReactNode;
@@ -84,30 +84,50 @@ function ConsultStudents() {
     return (
         <>
             <CardView title={"title"} customtitle={true} description={""}>
-                <PrincipalTitle title={"Consultar Alumnos"}></PrincipalTitle>
-
-                <InputSearch
-                    searchDataAutomcomplete={[
-                        ...alumnos.map((alumno) => ({
-                            key: alumno.no_boleta,
-                            value: alumno.no_boleta,
-                        })),
-                        ...alumnos.map((alumno) => ({
-                            key: alumno.no_boleta,
-                            value: `${alumno.nombre} ${alumno.apellido_paterno} ${alumno.apellido_materno}`,
-                        })),
-                    ]}
-                    comment={
-                        "Recuerda que puedes buscar a un alumno por nombre, apellidos o boleta"
-                    }
-                ></InputSearch>
-                {loading ? <Loader /> : null}
-                {hayAlumnos && !loading ? (
-                    <TableStudets students={alumnos}></TableStudets>
-                ) : null}
+                <PrincipalTitle title={"Estadisticas Alumnos"}></PrincipalTitle>
+                <StatsPanel />
             </CardView>
         </>
     );
 }
+
+const StatsPanel = () => {
+    return (
+        <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2">
+            <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                <div className="relative bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-white text-gray-700">
+                    <div className="p-3">
+                        <h1 className="text-2xl">Stats de Alumnos</h1>
+                        <p>Descripción de la estadistica</p>
+                        <div className="flex ">
+                            <div className="w-1/2">
+                                <PieChart />
+                            </div>
+                            <div className="w-1/2">
+                                Acciones: <br />
+                                <ul>
+                                    <li>Acción 1</li>
+                                    <li>Acción 2</li>
+                                    <li>Acción 3</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                <div className="relative bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-white text-gray-700">
+                    <div className="p-3">
+                        <h1 className="text-2xl">Stats de Alumnos</h1>
+                        <p>Descripción de la estadistica</p>
+                        <div className="w-full">
+                            <Lines />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default ConsultStudents;

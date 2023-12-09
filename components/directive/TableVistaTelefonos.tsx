@@ -1,6 +1,6 @@
 import React from "react";
 import ButtonComponentBiColor from "../ButtonComponentBiColor";
-import InterfaceTel from "@/interfaces/numeroTelefonico";
+import InterfaceTel from "@/data/interfaces/numeroTelefonico";
 
 interface TableTelefonosProps {
   telefonos: InterfaceTel[];

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useProfesores } from "@/components/context/ProfesorProvider";
 import { useState } from "react";
 import CardView from "@/components/CardView";
-import InterfaceProfessor from "@/interfaces/professor";
+import InterfaceProfessor from "@/data/interfaces/professor";
 interface DefaultLayoutProps {
   children: ReactNode;
 }

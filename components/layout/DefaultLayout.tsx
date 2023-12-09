@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import Header from "../components/template/Header";
+import Header from "../template/Header";
 
 import React from "react";
 
@@ -17,7 +17,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden w-full ">
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           <main>
-            <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+            <div className="mx-auto max-w-screen-2xl p-4 md:p-6">
               {children}
             </div>
           </main>

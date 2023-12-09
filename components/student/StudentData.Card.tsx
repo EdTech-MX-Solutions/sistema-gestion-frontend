@@ -1,5 +1,5 @@
 import Card from "@/components/Card";
-import InterfaceAlumno from "@/interfaces/alumno";
+import InterfaceAlumno from "@/data/interfaces/alumno";
 import StudentTabs from "./tabs";
 import StudentCardHeader from "./data/Header";
 import DataTabs from "./data/DataTabs";

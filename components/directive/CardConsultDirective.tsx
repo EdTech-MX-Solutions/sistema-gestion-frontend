@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import ButtonComponent from "../ButtonComponent";
-import InterfaceProfessor from "@/interfaces/professor";
+import InterfaceProfessor from "@/data/interfaces/professor";
 import router, { useRouter } from "next/router";
 import { useState } from "react";
 import { TableVistaTelefonos } from "./TableVistaTelefonos";

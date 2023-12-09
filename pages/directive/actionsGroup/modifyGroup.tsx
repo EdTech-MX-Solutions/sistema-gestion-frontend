@@ -5,7 +5,7 @@ import TableStudentsGroup from "@/components/directive/TableStudentsGroup";
 import ButtonComponent from "@/components/ButtonComponent";
 import { useRouter } from "next/router";
 import { useGrupos } from "@/components/context/GruposProvides";
-import InterfaceGrupo from "@/interfaces/grupos";
+import InterfaceGrupo from "@/data/interfaces/grupos";
 
 interface DefaultLayoutProps {
   children: ReactNode;

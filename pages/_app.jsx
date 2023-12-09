@@ -1,10 +1,10 @@
 import { SessionProvider } from "next-auth/react"
-import TutorLayout from "../layout/TutorLayout";
-import DirectivoLayout from "../layout/DirectivoLayout";
-import ProfesorLayout from "../layout/ProfesorLayout";
 
 import "global.styles.css";
 import { CookiesProvider } from 'react-cookie';
+import TutorLayout from "@/components/layout/TutorLayout";
+import DirectivoLayout from "@/components/layout/DirectivoLayout";
+import ProfesorLayout from "@/components/layout/ProfesorLayout";
 
 export const metadata = {
     title: 'Create Next App',
@@ -13,7 +13,7 @@ export const metadata = {
 
 
 
-export const AppContext = ({ Layout, pageProps, session, Component }) => {
+export const AppContext = ({ Layout, pageProps, session, Component } ) => {
     return (
         <CookiesProvider>
             <main className="bg-secondary dark:bg-slate-600">

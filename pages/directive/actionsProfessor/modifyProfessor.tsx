@@ -3,7 +3,7 @@ import { ReactNode, use, useContext, useEffect, useState } from "react";
 import FormProfessor from "@/components/directive/FormProfessor";
 import { useRouter } from "next/router";
 import { useProfesores } from "@/components/context/ProfesorProvider";
-import InterfaceProfessor from "@/interfaces/professor";
+import InterfaceProfessor from "@/data/interfaces/professor";
 
 interface DefaultLayoutProps {
   children: ReactNode;

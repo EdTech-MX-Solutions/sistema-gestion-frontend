@@ -1,9 +1,9 @@
-import SIGEAPICollection from "@/backend-calls/apiHandler";
+import SIGEAPICollection from "@/data/calls/apiHandler";
 import CardView from "@/components/CardView";
 import StudentCard from "@/components/student/Student.Card";
 import ParentsDataComponent from "@/components/student/data/ParentsData";
-import InterfaceAlumno from "@/interfaces/alumno";
-import InterfaceParent from "@/interfaces/parent";
+import InterfaceAlumno from "@/data/interfaces/alumno";
+import InterfaceParent from "@/data/interfaces/parent";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import PersonalData from "@/components/student/data/PersonalData";

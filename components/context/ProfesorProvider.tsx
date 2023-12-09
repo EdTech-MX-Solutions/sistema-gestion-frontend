@@ -1,5 +1,5 @@
-import SIGEAPICollection from "@/backend-calls/apiHandler";
-import InterfaceProfessor from "@/interfaces/professor";
+import SIGEAPICollection from "@/data/calls/apiHandler";
+import InterfaceProfessor from "@/data/interfaces/professor";
 import {
   createContext,
   useContext,

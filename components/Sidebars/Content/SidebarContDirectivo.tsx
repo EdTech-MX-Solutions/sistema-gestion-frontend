@@ -45,6 +45,7 @@ const SidebarContDirectivo = () => {
                     </SidebarLinkGroup>
                     {sidebarItem("Consultar Alumno", base_rute+ "actionsStudent/consultStudents/")}
                     {sidebarItem("Registrar Alumno", base_rute+ "actionsStudent/registrerDataPersonalStudent")}
+                    {sidebarItem("Estadisticas Alumno", base_rute+ "actionsStudent/stats")}
                 </ul>
             </div>
             <div>
@@ -105,7 +106,7 @@ const SidebarContDirectivo = () => {
                 </h3>
 
                 <ul className="mb-6 ml-4  flex flex-col gap-1.5">
-                    {sidebarItem("Consultar Profesores", base_rute+"/actionsProfessor/consultProfessor")}
+                    {sidebarItem("Consultar Profesores", base_rute+"/actionsProfessor/consultProfessors")}
                     {sidebarItem("Registrar Profesores", base_rute+"/actionsProfessor/registrerProfessor")}
                     {/* {sidebarItem("Historial Academico", base_rute+"/history")} */}
                 </ul>

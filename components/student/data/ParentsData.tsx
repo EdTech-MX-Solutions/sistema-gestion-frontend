@@ -1,7 +1,7 @@
-import InterfaceAlumno from "@/interfaces/alumno";
+import InterfaceAlumno from "@/data/interfaces/alumno";
 import Link from "next/link";
 import ParentsCardComponent from "./ParentsCardComponent";
-import InterfaceParent from "@/interfaces/parent";
+import InterfaceParent from "@/data/interfaces/parent";
 
 function ParentsDataComponent({ parents }: { parents: InterfaceParent[] }) {
   // let parentsList: InterfaceParent = [];

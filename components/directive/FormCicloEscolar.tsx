@@ -4,9 +4,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
 import AlertComponent from "../elements/Alert";
-import SIGEAPICollection from "@/backend-calls/apiHandler";
+import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
-import InterfacePeriodo from "@/interfaces/periodo";
+import InterfacePeriodo from "@/data/interfaces/periodo";
 
 interface FormCicloEscolarProps {}
 

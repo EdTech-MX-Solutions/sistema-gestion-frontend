@@ -1,4 +1,4 @@
-import InterfaceAlumno from "@/interfaces/alumno";
+import InterfaceAlumno from "@/data/interfaces/alumno";
 
 function PersonalData({ alumno }: { alumno: InterfaceAlumno }) {
   return (

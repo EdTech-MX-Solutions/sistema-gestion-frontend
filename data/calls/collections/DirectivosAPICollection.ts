@@ -1,4 +1,4 @@
-import InterfacePeriodo from "@/interfaces/periodo";
+import InterfacePeriodo from "@/data/interfaces/periodo";
 import { APICaller } from "../apiCaller";
 
 export class DirectivosAPICollection {

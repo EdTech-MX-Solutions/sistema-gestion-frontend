@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useState } from "react";
 import CardConsultProfessor from "@/components/directive/CardConsultProfessor";
 import { useRouter } from "next/router";
 import { useProfesores } from "@/components/context/ProfesorProvider";
-import InterfaceProfessor from "@/interfaces/professor";
+import InterfaceProfessor from "@/data/interfaces/professor";
 import CardView from "@/components/CardView";
 
 interface DefaultLayoutProps {

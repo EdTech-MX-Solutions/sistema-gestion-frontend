@@ -9,7 +9,7 @@ interface InputSearchProps {
 export const InputSearch = ({ comment, searchDataAutomcomplete }: InputSearchProps) => {
     return (
         <>
-            <div className="p-5 grid grid-cols-1 gap-4 row-span-1">
+            <div className="p-5 grid grid-cols-1 gap-4 row-span-1 print:hidden">
                 <div>
                     <label
                         htmlFor=""

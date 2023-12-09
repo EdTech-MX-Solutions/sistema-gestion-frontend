@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import ButtonComponent from "../ButtonComponent";
-import SIGEAPICollection from "@/backend-calls/apiHandler";
+import SIGEAPICollection from "@/data/calls/apiHandler";
 import { cookies } from "next/dist/client/components/headers";
 import { useCookies } from "react-cookie";
-import InterfaceTel from "@/interfaces/numeroTelefonico";
+import InterfaceTel from "@/data/interfaces/numeroTelefonico";
 import { CheckBoxSocialMedia } from "./CheckBoxSocialMedia";
-import InterfaceParent from "@/interfaces/parent";
+import InterfaceParent from "@/data/interfaces/parent";
 
 interface FormTutorProps {
   tutor : InterfaceParent;

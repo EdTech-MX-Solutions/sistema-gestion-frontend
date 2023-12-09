@@ -1,4 +1,4 @@
-import InterfaceProfessor from "@/interfaces/professor";
+import InterfaceProfessor from "@/data/interfaces/professor";
 import React, { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 import { useRouter } from "next/router";
