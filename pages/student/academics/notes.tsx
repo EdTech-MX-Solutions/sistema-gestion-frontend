@@ -101,7 +101,7 @@ function Notes() {
                     <StudentAcacemicsCard alumno={alumno}>
                         <div className="flex justify-center items-center h-96">
                             <div className="text-3xl text-gray-400">
-                                <h1 className="text-gray-800">
+                                <h1 className="text-gray-800 dark:text-gray-200">
                                     No hay calificaciones disponibles, para este
                                     periodo.
                                 </h1>

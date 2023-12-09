@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import Logo from "../../public/logo.png";
+import LogoDark from "../../public/logo.dark.png";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
@@ -97,8 +98,9 @@ const Sidebar = ({
 
             <div className="no-scrollbar flex flex-col overflow-visible duration-300 ease-linear h-screen">
                 <nav className="pb-4 lg:pl-2 lg:pr-4 min-h-screen">
-                    <div className="py-16 ">
-                        <Image src={Logo} className="hidden lg:block" alt="Logo" width={200} />
+                    <div className="pt-10 p-1">
+                        <Image src={Logo} className="hidden dark:hidden lg:block dark:lg:hidden pointer-events-none" alt="Logo" width={200} />
+                        <Image src={LogoDark} className="hidden dark:lg:block pointer-events-none" alt="Logo" width={200} />
                     </div>
                     <div>
                         {/* <!-- Menu Groups --> */}

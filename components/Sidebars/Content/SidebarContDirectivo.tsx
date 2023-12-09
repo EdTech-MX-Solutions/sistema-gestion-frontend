@@ -105,9 +105,9 @@ const SidebarContDirectivo = () => {
                 </h3>
 
                 <ul className="mb-6 ml-4  flex flex-col gap-1.5">
-                    {sidebarItem("Horario Escolar", base_rute+"/schedule")}
-                    {sidebarItem("Calificaciones", base_rute+"/notes")}
-                    {sidebarItem("Historial Academico", base_rute+"/history")}
+                    {sidebarItem("Consultar Profesores", base_rute+"/actionsProfessor/consultProfessor")}
+                    {sidebarItem("Registrar Profesores", base_rute+"/actionsProfessor/registrerProfessor")}
+                    {/* {sidebarItem("Historial Academico", base_rute+"/history")} */}
                 </ul>
             </div>
             <div>

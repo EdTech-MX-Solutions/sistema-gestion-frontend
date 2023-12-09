@@ -49,14 +49,14 @@ export default function App(
     else
         return (
             <>
-                <main className="bg-secondary">
+                <main className="bg-secondary dark:bg-slate-600">
                     <div class="w-full h-screen flex flex-col lg:flex-row items-center justify-center space-y-16 lg:space-y-0 space-x-8 2xl:space-x-0">
                         <div class="w-full lg:w-1/2 flex flex-col items-center justify-center lg:px-2 xl:px-0 text-center">
-                            <p class="text-7xl md:text-8xl lg:text-9xl font-bold tracking-wider text-cyan-600">404</p>
+                            <p class="text-7xl md:text-8xl lg:text-9xl font-bold tracking-wider text-cyan-600 dark:text-cyan-400 ">404</p>
                             <p class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-wider text-teal-500 mt-2">
                                 Página No Encontrada
                             </p>
-                            <p class="text-lg md:text-xl lg:text-2xl text-gray-500 my-12">
+                            <p class="text-lg md:text-xl lg:text-2xl text-gray-500 dark:text-gray-200 my-12">
                                 Lo sentimos, la página que buscas no ha sido encontrada.
                             </p>
                             <a href="/" class="flex items-center space-x-2 bg-cyan-600 hover:bg-cyan-700 text-gray-100 px-4 py-2 rounded transition duration-150" title="Return Home">

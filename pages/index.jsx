@@ -44,7 +44,7 @@ export default function Index() {
         <>
             <PrivateRoute>
 
-                <div className="m-10 p-10">
+                <div className="m-10 p-10 text-gray-800 dark:text-gray-200">
                     <div className="text-4xl font-semibold">
                         <h1>
                             Hola, bienvenido

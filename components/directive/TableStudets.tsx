@@ -10,9 +10,9 @@ export const TableStudets = ({ students }: TableStudetsProps) => {
   return (
     <>
       
-      <div className="justify-center bg-white p-5 rounded-lg">
-      <h4 className="font-bold text-gray-900 p-5"> Listado de alumnos </h4>
-        <table className="table-fixed w-full text-sm text-center font-semibold">
+      <div className="justify-center dark:bg-slate-500 bg-white p-5 rounded-lg">
+      <h4 className="font-bold text-gray-900 dark:text-gray-200 p-5"> Listado de alumnos </h4>
+        <table className="table-fixed w-full text-sm dark:text-gray-200 text-center font-semibold">
           <thead className="text-white uppercase bg-green-700">
             <tr>
               <th className="p-3"> Boleta </th>
