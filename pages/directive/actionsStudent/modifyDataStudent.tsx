@@ -1,29 +1,30 @@
 import { ReactNode } from "react";
 import PrincipalTitle from "@/components/directive/Principal.Title";
 import FormStudent from "@/components/directive/FormStudent";
+import InterfaceAlumno from "@/data/interfaces/alumno";
 
 interface DefaultLayoutProps {
   children: ReactNode;
 }
 
 function modifyDataPersonalStudent() {
-  const student = {
-    no_boleta: "2019630523",
-    curp: "RUHR920101HDFRBR00",
-    nombre: "Ricardo",
-    apellido_paterno: "Urbina",
-    apellido_materno: "Hernández",
-    aniosPreescolar: 3,
-    edad: 12,
-    fecha_nacimiento: "01/01/2002",
-    sexo: "Hombre",
-    estatus: "Activo",
-    entidad_nacimiento: "Ciudad de México",
-    pais_origen: "México",
-    grado: "1",
-    grupo: "A",
-  };
-
+  const student : InterfaceAlumno = {
+    no_boleta: "cargando...",
+    curp: "cargando...",
+    nombre: "cargando...",
+    apellido_paterno: "",
+    apellido_materno: "",
+    fecha_nacimiento: "cargando...",
+    sexo: "cargando...",
+    estatus: "cargando...",
+    entidad_nacimiento: "cargando...",
+    pais_origen: "cargando...",
+    edad: 0,
+    aniosPreescolar: 0,
+    grado: null,
+    grupo: null,
+    actualizarDatosMedicos: null,
+  }
   return (
     <>
       <PrincipalTitle title={"Registro Alumno"}></PrincipalTitle>
