@@ -4,6 +4,7 @@ import SidebarDirectivo from "@/components/Sidebars/SidebarDirectivo";
 import Header from "@/components/template/Header";
 import { ProfesorProvider } from "@/components/context/ProfesorProvider";
 import { GrupoProvider } from "@/components/context/GruposProvides";
+import { AlumnoProvider } from "@/components/context/AlumnoProvider";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -16,25 +17,27 @@ const TutorLayout = ({ children }: LayoutProps) => {
       <PrivateRoute allowedRoles={["SUPERUSER", "DIRECTIVO"]}>
         <ProfesorProvider>
           <GrupoProvider>
-          <div className="dark:bg-boxdark-2 dark:text-bodydark z-20">
-            <div className="flex h-screen overflow-hidden z-20">
-              <SidebarDirectivo
-                sidebarOpen={sidebarOpen}
-                setSidebarOpen={setSidebarOpen}
-              />
-              <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden w-full  z-20">
-                <Header
-                  sidebarOpen={sidebarOpen}
-                  setSidebarOpen={setSidebarOpen}
-                />
-                <main>
-                  <div className="mx-auto max-w-screen-2xl p-4 md:p-6">
-                    {children}
+            <AlumnoProvider>
+              <div className="dark:bg-boxdark-2 dark:text-bodydark">
+                <div className="flex h-screen overflow-hidden">
+                  <SidebarDirectivo
+                    sidebarOpen={sidebarOpen}
+                    setSidebarOpen={setSidebarOpen}
+                  />
+                  <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden w-full ">
+                    <Header
+                      sidebarOpen={sidebarOpen}
+                      setSidebarOpen={setSidebarOpen}
+                    />
+                    <main>
+                      <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+                        {children}
+                      </div>
+                    </main>
                   </div>
-                </main>
+                </div>
               </div>
-            </div>
-          </div>
+            </AlumnoProvider>
           </GrupoProvider>
         </ProfesorProvider>
       </PrivateRoute>

@@ -3,6 +3,7 @@ import React from "react";
 import ButtonComponent from "../ButtonComponent";
 import TableStudentsGroup from "./TableStudentsGroup";
 import router from "next/router";
+import { useAlumno } from "../context/AlumnoProvider";
 interface CardConsultGroupProps {
   group: InterfaceGrupo;
 }
@@ -12,6 +13,9 @@ export const CardConsultGroup = ({ group }: CardConsultGroupProps) => {
   const handleModifyGroup = (gropoId: any) => {
     router.push(`/directive/actionsGroup/modifyGroup?id=${gropoId}`)
   }
+
+  const { alumno } = useAlumno();
+  console.log(alumno);
 
   return (
     <>
