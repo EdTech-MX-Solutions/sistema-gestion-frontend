@@ -352,7 +352,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   onChange={handleInputChange}
                 >
                   <option value = ""> Selecciona un país </option>
-                  {paises.map((pais, index) =>(
+                  {paises.map((pais: any, index) =>(
                     <option key={index} value={pais.id}> {pais.nombre} </option>
                   ))}
                 </select>
@@ -374,7 +374,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   required
                 >
                   <option value=""> Selecciona un estado </option>
-                  {estados.map((estado, index) =>(
+                  {estados.map((estado:any, index) =>(
                     <option key={index} value={estado.id}> {estado.nombre} </option>
                   ))}
                 </select>

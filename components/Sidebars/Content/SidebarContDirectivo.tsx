@@ -80,7 +80,7 @@ const SidebarContDirectivo = () => {
                             return <React.Fragment></React.Fragment>;
                         }}
                     </SidebarLinkGroup>
-                    {sidebarItem("Consultar Tutores", base_rute+ "actionsStudent/registrerDataFirstTutor")}
+                    {sidebarItem("Consultar Tutores", base_rute+ "actionsStudent/consultParents")}
                     {sidebarItem("Registrar Datos Tutor", base_rute+ "actionsStudent/registrerDataFirstTutor")}
                 </ul>
             </div>
@@ -157,7 +157,7 @@ const SidebarContDirectivo = () => {
                 </h3>
 
                 <ul className="mb-6 ml-4  flex flex-col gap-1.5">
-                    {sidebarItem("Ciclo Escolar", base_rute+  "cicloEscolar/createCicloEscolar")}
+                    {sidebarItem("Ciclo Escolar", base_rute+  "cicloEscolar/cycle")}
                     {sidebarItem("Carga de Archivos", base_rute+  "cicloEscolar/dataUpload")}
                 </ul>
             </div>
