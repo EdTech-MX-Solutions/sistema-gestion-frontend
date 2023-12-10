@@ -1,8 +1,9 @@
 import Card from "@/components/Card";
 import CardView from "@/components/CardView";
 import PrivateRoute from "@/components/auth/PrivateRoute";
-import { signOut } from "next-auth/react";
+import { ConfirmElement } from "@/components/elements/Confirms/Confirm";
 import Link from "next/link";
+import React from "react";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
@@ -20,7 +21,13 @@ function GetGreetings() {
 
 export default function Index() {
     let greeting = GetGreetings();
-    const [cookies, setCookie, removeCookie] = useCookies(["token", "user", "childs", "boleta"]);
+    const [cookies, setCookie, removeCookie] = useCookies([
+        "token",
+        "user",
+        "childs",
+        "boleta",
+    ]);
+    const [confirmationisopen, setConfirmationOpen] = React.useState(false);
     const [name, setName] = useState("Cargando...");
 
     function getUserName() {
@@ -48,7 +55,6 @@ export default function Index() {
         onClick,
         route,
     }: PanelCardProps): JSX.Element => (
-        
         <Link
             href={route || "#"}
             onClick={onClick}
@@ -79,7 +85,9 @@ export default function Index() {
                 />
             </svg>
             <div className="relative pt-10 px-10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <h1 className={`relative w-full sm:w-auto font-semibold text-3xl text-white`} > 
+                <h1
+                    className={`relative w-full sm:w-auto font-semibold text-3xl text-white`}
+                >
                     {title}
                 </h1>
             </div>
@@ -90,40 +98,40 @@ export default function Index() {
     );
 
     const PanelCards = () => (
-        <div className="flex flex-wrap items-center mt-10">
-            <PanelCard
-                category="Datos Académicos"
-                title="Calificaciones"
-                bgColor="emerald-600"
-
-                route="/student/academics/notes"
+        <>
+            <div className="flex flex-wrap items-center mt-10">
+                <PanelCard
+                    category="Datos Académicos"
+                    title="Calificaciones"
+                    bgColor="emerald-600"
+                    route="/student/academics/notes"
+                />
+                <PanelCard
+                    category="Alumno"
+                    title="Horario"
+                    bgColor="emerald-600"
+                    route="/student/academics/schedule"
+                />
+                <PanelCard
+                    category="Otras Opciones"
+                    title="Reportes"
+                    bgColor="emerald-600"
+                    route="/student/othersOptions/suggestions"
+                />
+                <PanelCard
+                    category="Sistema"
+                    title="Cerrar Sesión"
+                    bgColor="gray-600"
+                    onClick={() => setConfirmationOpen(true)}
+                />
+                {/* Agregar más componentes PanelCard según sea necesario */}
+            </div>
+            <ConfirmElement
+                open={confirmationisopen}
+                text="¿Estás seguro que deseas cerrar sesión?"
+                handler={() => setConfirmationOpen(false)}
             />
-            <PanelCard
-                category="Alumno"
-                title="Horario"
-                bgColor="emerald-600"
-                route="/student/academics/schedule"
-            />
-            <PanelCard
-                category="Otras Opciones"
-                title="Reportes"
-                bgColor="emerald-600"
-                route="/student/othersOptions/suggestions"
-            />
-             <PanelCard
-                category="Sistema"
-                title="Salir"
-                bgColor="gray-600"
-                onClick={() => {
-                    removeCookie("token", { path: "/" });
-                    setCookie("user", "", { path: "/" });
-                    setCookie("childs", "", { path: "/" });
-                    setCookie("boleta", "", { path: "/" });
-                    signOut();
-                }}
-            />
-            {/* Agregar más componentes PanelCard según sea necesario */}
-        </div>
+        </>
     );
 
     return (
@@ -139,7 +147,6 @@ export default function Index() {
         </>
     );
 }
-function removeCookie(arg0: string, arg1: { path: string; }) {
+function removeCookie(arg0: string, arg1: { path: string }) {
     throw new Error("Function not implemented.");
 }
-

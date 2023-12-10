@@ -1,8 +1,11 @@
 import { useCookies } from "react-cookie";
 import PanelCard from "./CardPanel";
 import { signOut } from "next-auth/react";
+import React from "react";
+import { ConfirmElement } from "../Confirms/Confirm";
 
 export default function PanelCards() {
+    const [confirmationisopen, setConfirmationOpen] = React.useState(false);
     const [cookies, setCookie, removeCookie] = useCookies([
         "token",
         "user",
@@ -46,13 +49,7 @@ export default function PanelCards() {
                 category="Sistema"
                 title="Salir"
                 bgColor="gray-600"
-                onClick={() => {
-                    removeCookie("token", { path: "/" });
-                    setCookie("user", "", { path: "/" });
-                    setCookie("childs", "", { path: "/" });
-                    setCookie("boleta", "", { path: "/" });
-                    signOut();
-                }}
+                onClick={() => setConfirmationOpen(true)}
             />
         </>
     );
@@ -62,6 +59,11 @@ export default function PanelCards() {
             <div className="flex flex-wrap items-center mt-10">
                 <Panel />
             </div>
+            <ConfirmElement
+                open={confirmationisopen}
+                text="¿Estás seguro que deseas cerrar sesión?"
+                handler={() => setConfirmationOpen(false)}
+            />
         </>
     );
 }

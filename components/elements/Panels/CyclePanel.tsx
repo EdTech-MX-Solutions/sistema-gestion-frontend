@@ -40,7 +40,7 @@ export default function CyclePanel() {
             />
             <PanelCard
                 category="Sistema"
-                title="Salir"
+                title="Cerrar Sesión"
                 bgColor="gray-600"
                 onClick={() => {
                     removeCookie("token", { path: "/" });
