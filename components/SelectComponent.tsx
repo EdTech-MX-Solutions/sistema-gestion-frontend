@@ -16,7 +16,7 @@ export const SelectComponent = ({options, title}: SelectComponentProps) => {
         <div className="p-2">
           <label
             htmlFor="periodo"
-            className="block mb-2 text-sm font-medium text-gray-900"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200"
           >
             {title}
           </label>

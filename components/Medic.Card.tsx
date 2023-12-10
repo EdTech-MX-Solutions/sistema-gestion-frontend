@@ -56,8 +56,8 @@ function MedicCard() {
     if (!loadingData && haveData) {
         return (
             <>
-                <div className="flex flex-col space-y-2 p-3">
-                    <p className="md:text-lg text-gray-500 text-base">
+                <div className="flex flex-col space-y-2 p-3 text-gray-500 dark:text-gray-200 ">
+                    <p className="md:text-lg text-base">
                         {describeText} Datos Registrados:
                     </p>
                     <div className="flex gap-5 mt-2">
@@ -109,7 +109,7 @@ function MedicCard() {
     } else if (!loadingData && !haveData) {
         return (
             <>
-                <div className="flex flex-col space-y-2 p-3">
+                <div className="flex flex-col space-y-2 p-3 text-gray-500 dark:text-gray-200">
                     <p className="md:text-lg text-gray-500 text-base">
                         {describeText} Datos Registrados:
                     </p>
@@ -130,7 +130,7 @@ function MedicCard() {
                                 </div>
                             )}
                             {error && (
-                                <div className="text-red-800">
+                                <div className="text-red-800 dark:text-red-200 selection:bg-red-400 font-semibold">
                                     Error: Registro no permitido. Contacta con
                                     la dirección del plantel.
                                 </div>
@@ -147,8 +147,8 @@ function MedicCard() {
     } else {
         return (
             <>
-                <div className="flex flex-col space-y-2 p-3">
-                    <p className="md:text-lg text-gray-500 text-base">
+                <div className="flex flex-col space-y-2 p-3 text-gray-500 dark:text-gray-200 ">
+                    <p className="md:text-lg text-base">
                         {describeText} Datos Registrados:
                     </p>
 

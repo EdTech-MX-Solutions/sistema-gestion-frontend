@@ -145,7 +145,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
             Datos personales del tutor principal
           </h4>
           <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-3 gap-4 items-center">
+            <div className="grid grid-cols-3 gap-2 md:gap-4  items-center">
               <div>
                 <label
                   htmlFor=""

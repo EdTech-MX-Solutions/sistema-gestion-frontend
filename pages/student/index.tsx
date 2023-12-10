@@ -131,7 +131,7 @@ export default function Index() {
             <PrivateRoute allowedRoles={["SUPERUSER", "TUTOR"]}>
                 <CardView
                     title={"Hola, " + greeting + " " + name}
-                    description="Bienvenido a tu panel de control"
+                    description="Este es tu panel de control"
                 >
                     <PanelCards />
                 </CardView>

@@ -62,7 +62,7 @@ const Sidebar = ({
     return (
         <aside
             ref={sidebar}
-            className={`absolute left-0 top-0 z-20 overflow-y-scroll flex h-screen w-72.5 flex-col duration-300 ease-linear dark:bg-slate-500 bg-white dark:text-gray-200 lg:static lg:translate-x-0 ${
+            className={`absolute left-0 top-0 z-20 overflow-y-scroll flex h-screen w-full sm:w-auto flex-col duration-300 ease-linear dark:bg-slate-500 bg-white dark:text-gray-200 lg:static lg:translate-x-0 ${
                 sidebarOpen ? "translate-x-0" : "-translate-x-full"
             }`}
         >
@@ -98,7 +98,7 @@ const Sidebar = ({
 
             <div className="no-scrollbar flex flex-col overflow-visible duration-300 ease-linear h-screen">
                 <nav className="pb-4 lg:pl-2 lg:pr-4 min-h-screen">
-                    <div className="pt-10 p-1">
+                    <div className="pt-32 sm:pt-10 p-1">
                         <Image src={Logo} className="hidden dark:hidden lg:block dark:lg:hidden pointer-events-none" alt="Logo" width={200} />
                         <Image src={LogoDark} className="hidden dark:lg:block pointer-events-none" alt="Logo" width={200} />
                     </div>

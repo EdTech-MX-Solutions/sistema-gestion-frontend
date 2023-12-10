@@ -91,7 +91,7 @@ const Header = (props: {
                 <div className=" relative w-full text-gray-600 dark:text-gray-200 focus-within:text-gray-400">
                   <input id="search" type="search" name="q" className="cursor-pointer py-2 text-sm bg-transparent text-black dark:text-white rounded-md pl-10 focus:outline-none focus:cursor-auto dark:focus:bg-slate-600 focus:bg-secondary focus:bg-opacity-50 dark:focus:text-gray-200" placeholder="Buscar..." autoComplete="off"/>
                   <label htmlFor="search" className="absolute inset-y-0 left-0 flex items-center pl-2">
-                      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" className="w-4 h-4">
+                      <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="w-4 h-4">
                         <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                       </svg>
                   </label>

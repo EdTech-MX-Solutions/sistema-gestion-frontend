@@ -1,13 +1,11 @@
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import CardView from "@/components/CardView";
-import StudentCard from "@/components/student/Student.Card";
 import ParentsDataComponent from "@/components/student/data/ParentsData";
-import InterfaceAlumno from "@/data/interfaces/alumno";
 import InterfaceParent from "@/data/interfaces/parent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import PersonalData from "@/components/student/data/PersonalData";
 import { useAlumno } from "@/components/context/AlumnoProvider";
+import StudentDataCard from "@/components/student/StudentData.Card";
 
 function ParentsData() {
     const { alumno } = useAlumno();
@@ -50,64 +48,75 @@ function ParentsData() {
     const title = "Datos Personales del Tutor";
     const description = `Datos registrados del tutor ${tutor}, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
 
-    const api = new SIGEAPICollection();
-    const token = cookies.token;
-    if (dataGetted == false) {
-        api.sharedCollection
-            .executeGetTutores(token)
-            .then((response) => {
-                return response.ok
-                    ? response.json()
-                    : Promise.reject(
-                          new Error(
-                              `Error en la solicitud. Código de estado: ${response.status}`
-                          )
-                      );
-            })
-            .then((data) => {
-                console.log("Datos de respuesta:", data);
-                var list: InterfaceParent[] = [];
-                data.forEach((dataParent: any) => {
-                    list.push({
-                        id_tutor: dataParent.idTutor,
-                        leerYescribir: dataParent.leerYescribir,
-                        curp: dataParent.curp,
-                        nombres: dataParent.nombre,
-                        apellido_paterno: dataParent.apellidoPaterno,
-                        apellido_materno: dataParent.apellidoMaterno,
-                        correo: dataParent.correo,
-                        fecha_nacimiento: dataParent.fechaNacimiento,
-                        sexo: dataParent.sexo,
-                        pais_origen: dataParent.paisOrigen,
-                        estado_civil: dataParent.estadoCivil,
-                        red_social: dataParent.redSocial,
-                        tipo_identificacion: dataParent.tipoIdentificacion,
-                        no_identificacion: dataParent.noIdentificacion,
-                        tutor_principal: dataParent.tutorPrincipal,
-                        entidad_nacimiento: dataParent.entidad,
-                        gradoMaximoDeEstudios: dataParent.gradoMaximoDeEstudios,
-                        ocupacion: dataParent.ocupacion,
-                        parentesco: dataParent.parentescto,
-                        numeros: dataParent.numeros,
+    const fetchParents = async () => {
+        const api = new SIGEAPICollection();
+        const token = cookies.token;
+        if (dataGetted == false) {
+            api.sharedCollection
+                .executeGetTutores(token)
+                .then((response) => {
+                    return response.ok
+                        ? response.json()
+                        : Promise.reject(
+                              new Error(
+                                  `Error en la solicitud. Código de estado: ${response.status}`
+                              )
+                          );
+                })
+                .then((data) => {
+                    console.log("Datos de respuesta:", data);
+                    var list: InterfaceParent[] = [];
+                    data.forEach((dataParent: any) => {
+                        list.push({
+                            id_tutor: dataParent.idTutor,
+                            leerYescribir: dataParent.leerYescribir,
+                            curp: dataParent.curp,
+                            nombres: dataParent.nombre,
+                            apellido_paterno: dataParent.apellidoPaterno,
+                            apellido_materno: dataParent.apellidoMaterno,
+                            correo: dataParent.correo,
+                            fecha_nacimiento: dataParent.fechaNacimiento,
+                            sexo: dataParent.sexo,
+                            pais_origen: dataParent.paisOrigen,
+                            estado_civil: dataParent.estadoCivil,
+                            red_social: dataParent.redSocial,
+                            tipo_identificacion: dataParent.tipoIdentificacion,
+                            no_identificacion: dataParent.noIdentificacion,
+                            tutor_principal: dataParent.tutorPrincipal,
+                            entidad_nacimiento: dataParent.entidad,
+                            gradoMaximoDeEstudios:
+                                dataParent.gradoMaximoDeEstudios,
+                            ocupacion: dataParent.ocupacion,
+                            parentesco: dataParent.parentescto,
+                            numeros: dataParent.numeros,
+                        });
+                        console.log("pushing parent:", dataParent);
                     });
-                    console.log("pushing parent:", dataParent);
+                    setParents(list);
+                    console.log("lista tutores:", parentList);
+                    console.log("lista tutores inst:", list);
+                })
+                .catch((error) => {
+                    console.error("Error de solicitud:", error);
                 });
-                setParents(list);
-                console.log("lista tutores:", parentList);
-                console.log("lista tutores inst:", list);
-            })
-            .catch((error) => {
-                console.error("Error de solicitud:", error);
-            });
-        setDataGetted(true);
-    }
+            setDataGetted(true);
+        }
+    };
+
+    useEffect(() => {
+        fetchParents();
+    });
 
     return (
         <>
             <CardView title={title} description={description}>
-                <StudentCard alumno={alumno}>
-                    <ParentsDataComponent parents={parentList} />
-                </StudentCard>
+                <StudentDataCard alumno={alumno}>
+                    {dataGetted ? (
+                        <ParentsDataComponent parents={parentList} />
+                    ) : (
+                        <p>{loadingMessage}</p>
+                    )}
+                </StudentDataCard>
             </CardView>
         </>
     );

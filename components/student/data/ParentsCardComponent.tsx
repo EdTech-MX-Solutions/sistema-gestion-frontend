@@ -7,7 +7,8 @@ function ParentsCardComponent({ parentInst }: { parentInst: InterfaceParent }) {
     }
     let number = "";
     try {
-        number = "cel:" + parentInst.numeros[0].numero || "";
+        if (parentInst.numeros && parentInst.numeros.length > 0)
+            number = "cel:" + parentInst.numeros[0].numero || "";
     } catch (error) {
         console.log(error);
     }
