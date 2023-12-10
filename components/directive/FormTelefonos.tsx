@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ButtonComponent from "../ButtonComponent";
-import InterfaceTel from "@/interfaces/numeroTelefonico";
+import InterfaceTel from "@/data/interfaces/numeroTelefonico";
 import { TableTelefonos } from "./TableTelefonos";
 import router from "next/router";
 

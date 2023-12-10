@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import PrivateRoute from "../components/auth/PrivateRoute";
-import Sidebar from "../components/Sidebars/Content/SidebarContTutor";
-import Header from "../components/template/Header";
+import PrivateRoute from "../auth/PrivateRoute";
+import Sidebar from "../Sidebars/Content/SidebarContTutor";
+import Header from "../template/Header";
 import SidebarTutor from "@/components/Sidebars/SidebarTutor";
 import { AlumnoProvider } from "@/components/context/AlumnoProvider";
 
@@ -27,7 +27,7 @@ const TutorLayout = ({ children }: LayoutProps) => {
                                     setSidebarOpen={setSidebarOpen}
                                 />
                                 <main>
-                                    <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+                                    <div className="mx-auto max-w-screen-2xl p-4 md:p-6">
                                         {children}
                                     </div>
                                 </main>

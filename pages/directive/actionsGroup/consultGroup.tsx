@@ -6,7 +6,7 @@ import ButtonComponent from "@/components/ButtonComponent";
 import CardView from "@/components/CardView";
 import { useRouter } from "next/router";
 import { useGrupos } from "@/components/context/GruposProvides";
-import InterfaceGrupo from "@/interfaces/grupos";
+import InterfaceGrupo from "@/data/interfaces/grupos";
 
 interface DefaultLayoutProps {
   children: ReactNode;

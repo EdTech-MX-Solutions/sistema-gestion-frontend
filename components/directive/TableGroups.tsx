@@ -1,4 +1,4 @@
-import InterfaceGrupo from "@/interfaces/grupos";
+import InterfaceGrupo from "@/data/interfaces/grupos";
 import React from "react";
 import router from "next/router";
 import ButtonComponentBiColor from "../ButtonComponentBiColor";

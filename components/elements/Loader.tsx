@@ -7,7 +7,7 @@ interface ButtonInterface {
 function Loader({className, color }: ButtonInterface) {
     let buttonColor =
         color ||
-        "bg-green-600";
+        "bg-green-600 dark:bg-green-200";
     let classNameButton = `w-3 h-3 rounded-full animate-pulse ${buttonColor} `;
     const title = "loading";
     classNameButton += className;

@@ -27,6 +27,10 @@ export class APICaller {
         const baseURL: string = this.getCall();
         return `${baseURL}/auth`;
     }
+    getStatsCall() {
+        const baseURL: string = this.getCall();
+        return `${baseURL}/estadisticas`;
+    }
     getCall() {
         return this.apiContext.getBaseURL();
     }

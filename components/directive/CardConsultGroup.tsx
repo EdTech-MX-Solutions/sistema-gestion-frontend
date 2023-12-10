@@ -1,4 +1,4 @@
-import InterfaceGrupo from "@/interfaces/grupos";
+import InterfaceGrupo from "@/data/interfaces/grupos";
 import React from "react";
 import ButtonComponent from "../ButtonComponent";
 import TableStudentsGroup from "./TableStudentsGroup";

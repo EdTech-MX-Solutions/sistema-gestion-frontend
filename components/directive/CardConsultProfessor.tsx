@@ -1,6 +1,6 @@
 import React from "react";
 import ButtonComponent from "../ButtonComponent";
-import InterfaceProfessor from "@/interfaces/professor";
+import InterfaceProfessor from "@/data/interfaces/professor";
 import router from "next/router";
 import { TableVistaTelefonos } from "./TableVistaTelefonos";
 

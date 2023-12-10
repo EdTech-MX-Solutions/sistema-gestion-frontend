@@ -2,9 +2,9 @@ import { ReactNode, useEffect, useState } from "react";
 import InputSearch from "@/components/template/InputSearch";
 import TableGroups from "@/components/directive/TableGroups";
 import PrincipalTitle from "@/components/directive/Principal.Title";
-import SIGEAPICollection from "@/backend-calls/apiHandler";
+import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
-import InterfaceGrupo from "@/interfaces/grupos";
+import InterfaceGrupo from "@/data/interfaces/grupos";
 import { useGrupos } from "@/components/context/GruposProvides";
 
 

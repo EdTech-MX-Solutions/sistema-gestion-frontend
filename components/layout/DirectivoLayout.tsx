@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PrivateRoute from "../components/auth/PrivateRoute";
+import PrivateRoute from "../auth/PrivateRoute";
 import SidebarDirectivo from "@/components/Sidebars/SidebarDirectivo";
 import Header from "@/components/template/Header";
 import { ProfesorProvider } from "@/components/context/ProfesorProvider";

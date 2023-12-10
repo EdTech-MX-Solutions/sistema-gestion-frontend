@@ -1,11 +1,11 @@
 import { ReactNode, useEffect, useState } from "react";
 import { usePeriodo } from "@/components/context/PeriodoProvider";
 import { useCookies } from "react-cookie";
-import { InterfaceCalificaciones } from "@/interfaces/calificaciones";
+import { InterfaceCalificaciones } from "@/data/interfaces/calificaciones";
 import { useAlumno } from "@/components/context/AlumnoProvider";
 import PrincipalTitle from "@/components/student/Principal.Title";
 import TableGrades from "@/components/student/academics/TableGrades";
-import SIGEAPICollection from "@/backend-calls/apiHandler";
+import SIGEAPICollection from "@/data/calls/apiHandler";
 import CardView from "@/components/CardView";
 import StudentAcacemicsCard from "@/components/student/StudentAcademicsCard";
 import Loader from "@/components/elements/Loader";
@@ -101,7 +101,7 @@ function Notes() {
                     <StudentAcacemicsCard alumno={alumno}>
                         <div className="flex justify-center items-center h-96">
                             <div className="text-3xl text-gray-400">
-                                <h1 className="text-gray-800">
+                                <h1 className="text-gray-800 dark:text-gray-200">
                                     No hay calificaciones disponibles, para este
                                     periodo.
                                 </h1>

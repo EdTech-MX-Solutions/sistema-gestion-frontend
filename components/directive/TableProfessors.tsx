@@ -1,6 +1,6 @@
 import React from "react";
 import ButtonComponentBiColor from "../ButtonComponentBiColor";
-import InterfaceProfessor from "@/interfaces/professor";
+import InterfaceProfessor from "@/data/interfaces/professor";
 import router from "next/router";
 
 interface TableProfessorsProps {

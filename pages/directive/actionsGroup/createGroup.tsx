@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import PrincipalTitle from "@/components/directive/Principal.Title";
 import FormGroup from "@/components/directive/FormGroup";
 import TableStudentsGroup from "@/components/directive/TableStudentsGroup";
+import InterfaceGrupo from "@/data/interfaces/grupos";
 
 interface DefaultLayoutProps {
   children: ReactNode;
@@ -10,8 +11,8 @@ interface DefaultLayoutProps {
 function createGroup() {
   const title = "Crear Grupo";
 
-  const Initialgroup = {
-    idGrupo: 0,
+  const Initialgroup: InterfaceGrupo = {
+    idGrupo: "",
     grado: "",
     subGrado: "",
     turno: "",
@@ -28,7 +29,7 @@ function createGroup() {
       <PrincipalTitle title={title}></PrincipalTitle>
       <div className="justify-center bg-white p-5 rounded-lg">
         <h4 className="font-bold">Elementos del grupo: </h4>
-        <FormGroup grupo = {Initialgroup}></FormGroup>
+        <FormGroup grupo = {Initialgroup} isNewGroup ></FormGroup>
         <TableStudentsGroup
           titleBtn1={"Ver Datos del Alumno"}
           titleBtn2={"Dar de Baja del Grupo"}

@@ -4,9 +4,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
 import AlertComponent from "../elements/Alert";
-import SIGEAPICollection from "@/backend-calls/apiHandler";
 import { useCookies } from "react-cookie";
-import InterfacePeriodo from "@/interfaces/periodo";
+import InterfacePeriodo from "@/data/interfaces/periodo";
+import SIGEAPICollection from "@/data/calls/apiHandler";
 
 interface FormCicloEscolarProps {}
 
@@ -70,72 +70,74 @@ export const FormCicloEscolar = ({}: FormCicloEscolarProps) => {
     setLoading(false);
   };
 
-  return (
-    <>
-      <div className="p-5 bg-white rounded-lg">
-        <h4 className="font-bold pb-5"> Nuevo Ciclo Escolar </h4>
-        <form onSubmit={handleSubmmit}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div>
-              <label
-                htmlFor=""
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                Año inicio del ciclo escolar:
-              </label>
-              <DatePicker
-                locale={es}
-                selected={startDate}
-                onChange={(date) => {
-                  updateEndDate(date);
-                }}
-                showYearPicker
-                minDate={minDate}
-                maxDate={maxDate}
-                dateFormat="yyyy"
-                disabled
-                title="El año de finalización del ciclo escolar se calcula automáticamente"
-                className="bg-green-800 bg-opacity-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              />
-            </div>
+    return (
+        <>
+            <div className="p-5 bg-white rounded-lg">
+                <h4 className="font-bold pb-5"> Nuevo Ciclo Escolar </h4>
+                <form onSubmit={handleSubmmit}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div>
+                            <label
+                                htmlFor=""
+                                className="block mb-2 text-sm font-medium text-gray-900"
+                            >
+                                Año inicio del ciclo escolar:
+                            </label>
+                            <DatePicker
+                                locale={es}
+                                selected={startDate}
+                                onChange={(date) => {
+                                    updateEndDate(date);
+                                }}
+                                showYearPicker
+                                minDate={minDate}
+                                maxDate={maxDate}
+                                dateFormat="yyyy"
+                                
+                                title="El año de finalización del ciclo escolar se calcula automáticamente"
+                                className="bg-green-800 bg-opacity-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            />
+                        </div>
 
-            <div>
-              <label
-                htmlFor=""
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                Año de finalización del ciclo escolar:
-              </label>
-              <DatePicker
-                locale={es}
-                selected={endDate}
-                onChange={() => console.log()}
-                showYearPicker
-                dateFormat="yyyy"
-                disabled
-                title="El año de finalización del ciclo escolar se calcula automáticamente"
-                className="bg-green-800 bg-opacity-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              />
-            </div>
-            <div>
-              <div>
-                <span className="block mb-2 text-sm font-medium text-gray-900">
-                  Opciones del escolar:
-                </span>
-                <input
-                  name="Preinscripciones"
-                  id="Preinscripciones"
-                  type="checkbox"
-                  className="mr-2"
-                  checked={Preinscripciones || false}
-                  onChange={(e) => {
-                    setPreinscripciones(e.target.checked || false);
-                  }}
-                ></input>
-                <label htmlFor="Preinscripciones">
-                  Activar Periodo Preinscripciones
-                </label>
-                {/* <DatePicker
+                        <div>
+                            <label
+                                htmlFor=""
+                                className="block mb-2 text-sm font-medium text-gray-900"
+                            >
+                                Año de finalización del ciclo escolar:
+                            </label>
+                            <DatePicker
+                                locale={es}
+                                selected={endDate}
+                                onChange={() => console.log()}
+                                showYearPicker
+                                dateFormat="yyyy"
+                                
+                                title="El año de finalización del ciclo escolar se calcula automáticamente"
+                                className="bg-green-800 bg-opacity-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            />
+                        </div>
+                        <div>
+                            <div>
+                                <span className="block mb-2 text-sm font-medium text-gray-900">
+                                    Opciones del escolar:
+                                </span>
+                                <input
+                                    name="Preinscripciones"
+                                    id="Preinscripciones"
+                                    type="checkbox"
+                                    className="mr-2"
+                                    checked={Preinscripciones || false}
+                                    onChange={(e) => {
+                                        setPreinscripciones(
+                                            e.target.checked || false
+                                        );
+                                    }}
+                                ></input>
+                                <label htmlFor="Preinscripciones">
+                                    Activar Periodo Preinscripciones
+                                </label>
+                                {/* <DatePicker
                                     locale={es}
                                     selected={Preinscripciones}
                                     onChange={(date) =>
@@ -149,7 +151,7 @@ export const FormCicloEscolar = ({}: FormCicloEscolarProps) => {
               </div>
 
               <div className="pt-1">
-                <input
+                {/* <input
                   name="Calificaciones"
                   id="Calificaciones"
                   type="checkbox"
@@ -161,7 +163,7 @@ export const FormCicloEscolar = ({}: FormCicloEscolarProps) => {
                 ></input>
                 <label htmlFor="Calificaciones">
                   Activar Periodo Calificaciones
-                </label>
+                </label> */}
                 {/* <DatePicker
                                     locale={es}
                                     selected={Calificaciones}

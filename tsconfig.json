@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "pages/api/auth/[...nextauth].js", "app/page.tsx", "app/api/auth/_route.js", "components/Sidebar.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "pages/api/auth/[...nextauth].js", "app/page.tsx", "app/api/auth/_route.js", "components/Sidebar.jsx", "components/stats/pie.js", "pages/_app.jsx"],
   "exclude": ["node_modules"]
 }
