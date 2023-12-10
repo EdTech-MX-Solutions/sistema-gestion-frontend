@@ -9,7 +9,7 @@ interface DefaultLayoutProps {
     children: ReactNode;
 }
 
-function createCicloEscolar() {
+function CreateCicloEscolar() {
     // const title = "Ciclo Escolar";
     const { periodo } = usePeriodo();
     const title =
@@ -25,4 +25,4 @@ function createCicloEscolar() {
     );
 }
 
-export default createCicloEscolar;
+export default CreateCicloEscolar;
