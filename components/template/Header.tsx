@@ -121,6 +121,7 @@ const Header = (props: {
           {/* <!-- User Area --> */}
         </div>
       </div>
+      <div className="fixed bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-600 to-teal-500"></div>
     </header>
   );
 };

@@ -9,7 +9,7 @@ const CardView = ({ title, description, children, customtitle }: CardProps) => {
     if (customtitle) {
         return (
             <>
-                <div className="md:m-10 md:p-10">
+                <div className="md:m-4 lg:m-6">
                     {children}
                 </div>
             </>
@@ -17,7 +17,7 @@ const CardView = ({ title, description, children, customtitle }: CardProps) => {
     } else {
         return (
             <>
-                <div className="md:m-10 md:p-10">
+                <div className="md:m-4 lg:m-6">
                     <div className="text-4xl font-semibold text-gray-800 dark:text-white">
                         <h1>{title}</h1>
                     </div>

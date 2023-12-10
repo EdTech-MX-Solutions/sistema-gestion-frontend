@@ -13,13 +13,13 @@ const TutorLayout = ({ children }: LayoutProps) => {
   return (
     <>
       <PrivateRoute allowedRoles={["SUPERUSER", "PROFESOR"]}>
-          <div className="dark:bg-boxdark-2 dark:text-bodydark">
-            <div className="flex h-screen overflow-hidden">
+          <div className="dark:bg-boxdark-2 dark:text-bodydark z-20">
+            <div className="flex h-screen overflow-hidden z-20">
               <SidebarProfesor
                 sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}
               />
-              <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden w-full ">
+              <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden w-full  z-20">
                 <Header
                   sidebarOpen={sidebarOpen}
                   setSidebarOpen={setSidebarOpen}

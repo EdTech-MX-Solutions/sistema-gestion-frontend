@@ -7,6 +7,7 @@ import Image from "next/image";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useCookies } from "react-cookie";
+import { SignoutConfirm } from "../elements/Confirms/SingoutConfirm";
 
 interface SidebarProps {
     children: React.ReactNode;
@@ -21,8 +22,14 @@ const Sidebar = ({
     setSidebarOpen,
     role,
 }: SidebarProps) => {
-    const [cookies, setCookie, removeCookie] = useCookies(["token", "user", "childs", "boleta"]);
+    const [cookies, setCookie, removeCookie] = useCookies([
+        "token",
+        "user",
+        "childs",
+        "boleta",
+    ]);
     const router = useRouter();
+    const [confirmationisopen, setConfirmationOpen] = React.useState(false);
 
     const system_name = "EdTech-MX SIGE";
     const version = "V B0.1";
@@ -99,8 +106,18 @@ const Sidebar = ({
             <div className="no-scrollbar flex flex-col overflow-visible duration-300 ease-linear h-screen">
                 <nav className="pb-4 lg:pl-2 lg:pr-4 min-h-screen">
                     <div className="pt-32 sm:pt-10 p-1">
-                        <Image src={Logo} className="hidden dark:hidden lg:block dark:lg:hidden pointer-events-none" alt="Logo" width={200} />
-                        <Image src={LogoDark} className="hidden dark:lg:block pointer-events-none" alt="Logo" width={200} />
+                        <Image
+                            src={Logo}
+                            className="hidden dark:hidden lg:block dark:lg:hidden pointer-events-none"
+                            alt="Logo"
+                            width={200}
+                        />
+                        <Image
+                            src={LogoDark}
+                            className="hidden dark:lg:block pointer-events-none"
+                            alt="Logo"
+                            width={200}
+                        />
                     </div>
                     <div>
                         {/* <!-- Menu Groups --> */}
@@ -109,13 +126,7 @@ const Sidebar = ({
                     <div>
                         <ul className="self-end">
                             <li
-                                onClick={() => {
-                                    removeCookie("token", { path: "/" });
-                                    setCookie("user", "", { path: "/" });
-                                    setCookie("childs", "", { path: "/" });
-                                    setCookie("boleta", "", { path: "/" });
-                                    signOut();
-                                }}
+                                onClick={() => setConfirmationOpen(true)}
                                 className={`group relative pb-3 flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:cursor-pointer hover:font-bold dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
                             >
                                 <svg
@@ -158,6 +169,15 @@ const Sidebar = ({
                                 <p>{version_name}</p>
                             </li>
                         </ul>
+                        <div>
+                            <SignoutConfirm
+                                handler={() => {
+                                    setConfirmationOpen(!confirmationisopen);
+                                }}
+                                open={confirmationisopen}
+                                text={"¿Estás seguro de cerrar sesión?"}
+                            />
+                        </div>
                     </div>
                 </nav>
 
