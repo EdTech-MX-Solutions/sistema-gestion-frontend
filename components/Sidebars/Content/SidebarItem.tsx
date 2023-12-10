@@ -1,11 +1,14 @@
 import Link from "next/link";
 
-export const sidebarItem = (label: string, path: string) => (
+export const sidebarItem = (label: string, path: string) => {
+    const animation = "transition-all duration-500 ease-in-out rounded-lg hover:bg-green-700 dark:hover:text-white dark:hover:bg-green-100 dark:hover:bg-opacity-10 hover:bg-opacity-10 ";
+    return (
     <Link href={path}>
+        
         <div
-            className={`group relative flex items-center gap-2.5 rounded-sm py-1 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${"bg-graydark dark:bg-meta-4"}`}
+            className={`group relative flex items-center gap-2.5 py-1 px-4 font-medium text-sm lg:text-md ${animation}`}
         >
             {label}
         </div>
     </Link>
-);
+)};

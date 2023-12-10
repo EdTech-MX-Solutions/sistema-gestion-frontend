@@ -1,23 +1,45 @@
-import InterfaceProfessor from "@/interfaces/professor";
-import React, { useState } from "react";
+import InterfaceProfessor from "@/data/interfaces/professor";
+import React, { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
+import { useRouter } from "next/router";
+import { useProfesores } from "../context/ProfesorProvider";
+import { TableVistaTelefonos } from "./TableVistaTelefonos";
 
 interface FormProfessorProps {
   professor: InterfaceProfessor;
+  isNewUser: boolean;
 }
 
-export const FormProfessor = ({ professor }: FormProfessorProps) => {
+export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
+  const router = useRouter();
+  const { id } = router.query;
+
   const [formData, setFormData] = useState({
-    idProfesor: professor.idProfesor,
-    nombre: professor.nombre,
-    apellidoPaterno: professor.apellidoPaterno,
-    apellidoMaterno: professor.apellidoMaterno,
-    email: professor.email,
-    activo: professor.activo,
-    diretivo: professor.diretivo,
-    noCedulaProfesional: professor.noCedulaProfesional,
-    numero: professor.numero,
+    idProfesor: isNewUser ? "" : professor.idProfesor,
+    nombre: isNewUser ? "" : professor.nombre,
+    apellidoPaterno: isNewUser ? "" : professor.apellidoPaterno,
+    apellidoMaterno: isNewUser ? "" : professor.apellidoMaterno,
+    email: isNewUser ? "" : professor.email,
+    activo: isNewUser ? "" : professor.activo,
+    diretivo: isNewUser ? "" : professor.diretivo,
+    noCedulaProfesional: isNewUser ? "" : professor.noCedulaProfesional,
+    numero: isNewUser ? [] : professor.numero,
   });
+
+  const { profesores } = useProfesores();
+
+  useEffect(() => {
+    if (id && profesores && profesores.length > 0) {
+      const foundProfesor = profesores.find(
+        (profesor) => profesor.idProfesor == id
+      );
+      if (foundProfesor) {
+        setFormData(foundProfesor);
+      } else {
+        console.error(`No se encontro un profesor con la ID: ${id}`);
+      }
+    }
+  }, [id, profesores]);
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -30,6 +52,10 @@ export const FormProfessor = ({ professor }: FormProfessorProps) => {
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     console.log("Datos: ", formData);
+  };
+
+  const handleModifyTelefonos = ({ profesorId }: { profesorId: any }) => {
+    router.push(`/directive/registrerTelefonos/?id=${profesorId}`);
   };
 
   return (
@@ -45,32 +71,12 @@ export const FormProfessor = ({ professor }: FormProfessorProps) => {
               >
                 No. Empleado:
               </label>
-              <input
-                type="text"
-                name="idProfesor"
-                id="idProfesor"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={formData.idProfesor}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            <div>
               <label
                 htmlFor=""
                 className="text-xl block mb-2 text-sm font-medium text-gray-900"
               >
-                Nombre(s)<span>*</span>:
+                {isNewUser ? "Nuevo profesor" : formData.idProfesor}
               </label>
-              <input
-                type="text"
-                name="nombre"
-                id="nombre"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={formData.nombre}
-                onChange={handleInputChange}
-                required
-              />
             </div>
 
             <div>
@@ -113,7 +119,25 @@ export const FormProfessor = ({ professor }: FormProfessorProps) => {
                 htmlFor=""
                 className="text-xl block mb-2 text-sm font-medium text-gray-900"
               >
-                Cedula profesional:
+                Nombre(s)<span>*</span>:
+              </label>
+              <input
+                type="text"
+                name="nombre"
+                id="nombre"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                value={formData.nombre}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor=""
+                className="text-xl block mb-2 text-sm font-medium text-gray-900"
+              >
+                Cédula profesional:
               </label>
               <input
                 type="text"
@@ -124,11 +148,31 @@ export const FormProfessor = ({ professor }: FormProfessorProps) => {
                 onChange={handleInputChange}
               />
             </div>
+
+            <div>
+              <label
+                htmlFor=""
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                ¿Usuario activo?:
+              </label>
+              <select
+                id="activo"
+                name="activo"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                value={formData.activo ? "s" : "n"}
+                onChange={handleInputChange}
+              >
+                <option value=""> Seleccione una opción</option>
+                <option value="s"> Si </option>
+                <option value="n"> No </option>
+              </select>
+            </div>
           </div>
 
           <div className="px-5 pb-5">
             <h4 className="font-bold pb-5 pt-10"> Datos de contacto </h4>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <div>
                 <label
                   htmlFor=""
@@ -148,11 +192,23 @@ export const FormProfessor = ({ professor }: FormProfessorProps) => {
             </div>
           </div>
 
+          <div className="px-5 pb-5">
+            <TableVistaTelefonos
+              telefonos={formData.numero}
+            ></TableVistaTelefonos>
+            <div className="text-center">
+              <ButtonComponent
+                title={"Modificar numero telefonicos"}
+                color={"blue"}
+                onClick={() =>
+                  handleModifyTelefonos({ profesorId: formData.idProfesor })
+                }
+              ></ButtonComponent>
+            </div>
+          </div>
+
           <div className="grid grid-cols-2 row-span-2 gap-4 items-center bg-white text-center rounded-lg">
-            <ButtonComponent 
-              title={"Guardar"} 
-              color={"blue"}
-            ></ButtonComponent>
+            <ButtonComponent title={"Guardar"} color={"blue"}></ButtonComponent>
             <ButtonComponent
               title={"Dar de baja Profesor"}
               color={"red"}

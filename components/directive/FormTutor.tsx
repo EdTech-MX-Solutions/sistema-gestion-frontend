@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import ButtonComponent from "../ButtonComponent";
-import SIGEAPICollection from "@/api/apiHandler";
+import SIGEAPICollection from "@/data/calls/apiHandler";
 import { cookies } from "next/dist/client/components/headers";
 import { useCookies } from "react-cookie";
-import InterfaceTel from "@/interfaces/numeroTelefonico";
+import InterfaceTel from "@/data/interfaces/numeroTelefonico";
 import { CheckBoxSocialMedia } from "./CheckBoxSocialMedia";
-import InterfaceParent from "@/interfaces/parent";
+import InterfaceParent from "@/data/interfaces/parent";
 
 interface FormTutorProps {
   tutor : InterfaceParent;
@@ -145,7 +145,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
             Datos personales del tutor principal
           </h4>
           <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-3 gap-4 items-center">
+            <div className="grid grid-cols-3 gap-2 md:gap-4  items-center">
               <div>
                 <label
                   htmlFor=""
@@ -352,7 +352,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   onChange={handleInputChange}
                 >
                   <option value = ""> Selecciona un país </option>
-                  {paises.map((pais, index) =>(
+                  {paises.map((pais: any, index) =>(
                     <option key={index} value={pais.id}> {pais.nombre} </option>
                   ))}
                 </select>
@@ -374,7 +374,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   required
                 >
                   <option value=""> Selecciona un estado </option>
-                  {estados.map((estado, index) =>(
+                  {estados.map((estado:any, index) =>(
                     <option key={index} value={estado.id}> {estado.nombre} </option>
                   ))}
                 </select>

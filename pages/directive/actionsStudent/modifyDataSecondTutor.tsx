@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import PrincipalTitle from "@/components/directive/Principal.Title";
 import FormTutor from "@/components/directive/FormTutor";
+import InterfaceParent from "@/data/interfaces/parent";
 
 interface DefaultLayoutProps {
   children: ReactNode;
@@ -8,27 +9,27 @@ interface DefaultLayoutProps {
 
 function modifyDataSecondTutor() {
 
-  const tutor = {
-    "nombre" : "Abraham2",
-    "apellidoPaterno" : "Romero2",
-    "apellidoMaterno" : "Angeles2",
-    "email" : "alguien2@gmail.com",
-    "CURP" : "RUHR920101HDFRBR00",
-    "leerYEscribir" : true,
-    "gradoMaximoDeEstudios" : "C",
-    "ocupacion" : "Trabajador",
-    "fechaNacimiento" : "01/12/2000",
-    "edad" : 20,
-    "sexo" : "M",
-    "paisOrigen" : "MX",
-    "estadoOrigen" : "México",
-    "estadoCivil" : "Casado",
-    "redesSociales" : ["Facebook"],
-    "tipoIdentificacion" : "INE",
-    "noIdentificacion" : "16198481194",
-    "esPrincipal" : true,
-    "parentesto" : "1",
-    "numeros" : [5511223344]
+  const tutor : InterfaceParent = {
+    id_tutor: "1",
+    curp: "curp",
+    leerYescribir: "leerYescribir",
+    gradoMaximoDeEstudios: "gradoMaximoDeEstudios",
+    ocupacion: "ocupacion",
+    nombres: "nombres",
+    apellido_paterno: "apellido_paterno",
+    apellido_materno: "apellido_materno",
+    correo: "correo",
+    fecha_nacimiento: "fecha_nacimiento",
+    sexo: "sexo",
+    pais_origen: "pais_origen",
+    estado_civil: "estado_civil",
+    red_social: "red_social",
+    tipo_identificacion: "tipo_identificacion",
+    no_identificacion: "no_identificacion",
+    tutor_principal: "tutor_principal",
+    parentesco: "parentesco",
+    entidad_nacimiento: "entidad_nacimiento",
+    numeros: [{id_tutor: "1", numero: "numero"}]
   }
 
   return (

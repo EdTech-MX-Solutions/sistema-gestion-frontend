@@ -1,50 +1,53 @@
 import PrincipalTitle from "@/components/directive/Principal.Title";
-import { ReactNode } from "react";
+import { ReactNode, use, useEffect, useState } from "react";
 import FormGroup from "@/components/directive/FormGroup";
 import TableStudentsGroup from "@/components/directive/TableStudentsGroup";
 import ButtonComponent from "@/components/ButtonComponent";
+import { useRouter } from "next/router";
+import { useGrupos } from "@/components/context/GruposProvides";
+import InterfaceGrupo from "@/data/interfaces/grupos";
 
 interface DefaultLayoutProps {
   children: ReactNode;
 }
 
-function modifyGroup() {
-  const title = "Detalles grupo: [grado+grupo]";
+function ModifyGroup() {
 
-  const grupo = [
-    {
-      idGrupo: Number,
-      grado: String,
-      subGrado: String,
-      turno: String,
-      responsable: String,
-      idResponsable: Number,
-      cupos: Number,
-      salon: String,
-      inscritos: Number,
-      cicloEscolar: String,
-    },
-  ];
+  const router = useRouter();
+  const { id } = router.query;
+  const {grupos} = useGrupos();
+  const [gruposDetails, setGruposDetails] = useState<InterfaceGrupo>({
+    idGrupo: "cargando...",
+    grado: "cargando...",
+    subGrado: "cargando...",
+    turno: "cargando...",
+    responsable: "cargando...",
+    idResponsable: 0,
+    cupos: 0,
+    salon: "cargando...",
+    inscritos: 0,
+    cicloEscolar: "cargando...",
+  });
 
-  const group = {
-    idGrupo: 1,
-    grado: "1",
-    subGrado: "A",
-    turno: "Matutino",
-    responsable: "Profesor1",
-    idResponsable: 1,
-    cupos: 30,
-    salon: "S-1",
-    inscritos: 25,
-    cicloEscolar: "2023A",
-  };
+  useEffect(() => {
+    if (id && grupos && grupos.length > 0) {
+      const foundGroup = grupos.find((grupo) => grupo.idGrupo == id);
+      if (foundGroup) {
+        setGruposDetails(foundGroup);
+      } else {
+        console.error(`No se encontro un grupo con la ID: ${id}`);
+      }
+    }
+  }, [id, grupos])
+
+
+  const title = `Detalles grupo: ${gruposDetails.grado} ${gruposDetails.subGrado}`;
 
   return (
     <>
       <PrincipalTitle title={title}></PrincipalTitle>
-
       <div className="grid grid-rows-12 gap-6 bg-white rounded-lg">
-        <FormGroup group={group}></FormGroup>
+        <FormGroup grupo = {gruposDetails} isNewGroup = {false}></FormGroup>
         <TableStudentsGroup
           titleBtn1={"Ver Datos del Alumno"}
           titleBtn2={"Dar de Baja del Grupo"}
@@ -70,4 +73,4 @@ function modifyGroup() {
   );
 }
 
-export default modifyGroup;
+export default ModifyGroup;

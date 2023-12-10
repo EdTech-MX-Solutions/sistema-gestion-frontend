@@ -2,6 +2,7 @@ import CardView from "@/components/CardView";
 import StudentCard from "@/components/student/Student.Card";
 import { useAlumno } from "@/components/context/AlumnoProvider";
 import PersonalData from "@/components/student/data/PersonalData";
+import StudentDataCard from "@/components/student/StudentData.Card";
 
 function Personal() {
     const { alumno } = useAlumno();
@@ -11,9 +12,9 @@ function Personal() {
     return (
         <>
             <CardView title={title} description={description}>
-                <StudentCard alumno={alumno}>
+                <StudentDataCard alumno={alumno}>
                     <PersonalData alumno={alumno} />
-                </StudentCard>
+                </StudentDataCard>
             </CardView>
         </>
     );

@@ -1,78 +1,21 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import TableProfessors from "@/components/directive/TableProfessors";
 import InputSearch from "@/components/template/InputSearch";
 import PrincipalTitle from "@/components/directive/Principal.Title";
-import SIGEAPICollection from "@/api/apiHandler";
-import { useCookies } from "react-cookie";
 import CardView from "@/components/CardView";
-import InterfaceProfessor from "@/interfaces/professor";
+import { useProfesores } from "@/components/context/ProfesorProvider";
 
 interface DefaultLayoutProps {
   children: ReactNode;
 }
 
-function consultProfessor() {
+function ConsultProfessor() {
+  
+  const {profesores} = useProfesores()
+  console.log(profesores);
 
-  const [cookies, setCookie] = useCookies(["token", "idProfessor", "childs"]);
-  const [profesores, setProfesores] = useState<InterfaceProfessor[]>([]);
-  const [hayProfesores, setHayProfesores] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  const fetchProfesores = async () =>{
-    const api = new SIGEAPICollection();
-    const token = cookies.token;
-
-    try{
-      const response = await api.directivosCollection.executeGetProfessors(
-        token
-      );
-      if(response.ok){
-        console.log("Generando lista de profesores....");
-        const data = await response.json();
-        console.log(data);
-        if(!data || data.length == 0){
-          setHayProfesores(false);
-          setLoading(false);
-          return;
-        }
-        else{
-          setHayProfesores(true);
-        }
-        let newProfessors : InterfaceProfessor[] = [];
-        console.log("Entrando");
-
-        for(let i = 0; i < data.length; i++){
-          const element = data[i]
-          
-          const newProfessor : InterfaceProfessor = {
-            idProfesor: element.idProfesor,
-            nombre: element.nombre,
-            apellidoPaterno: element.apellidoPaterno,
-            apellidoMaterno: element.apellidoMaterno,
-            email: element.email,
-            activo: false,
-            diretivo: false,
-            noCedulaProfesional: 0,
-            numero: []
-          };
-          newProfessors.push(newProfessor);
-        }
-        console.log("Alumnos obtenidos ");
-        setProfesores(newProfessors);
-        setHayProfesores(true);
-        setLoading(false);
-      } 
-      else{
-        console.error(`Error en la solicitud. Código de estado: ${response.status}`);
-      }
-    } catch(error){
-      console.error("Error de solicitud:", error);
-    }
-  }
-
-  useEffect(() => {
-    fetchProfesores();
-}, []);
+  const filtredProfesores = profesores.filter((profesor) => (profesor.diretivo === false));
+  console.log(filtredProfesores);
 
   return (
     <>
@@ -80,23 +23,23 @@ function consultProfessor() {
     <PrincipalTitle title={"Consultar Profesores"}></PrincipalTitle>
       <InputSearch
         searchDataAutomcomplete={[
-          ...profesores.map((professor) =>({
-            key : professor.idProfesor,
-            value : professor.idProfesor,
+          ...filtredProfesores.map((profesor) =>({
+            key : profesor.idProfesor,
+            value : profesor.idProfesor,
           })),
-          ...profesores.map((professor) =>({
-            key : professor.idProfesor,
-            value : `${professor.nombre} ${professor.apellidoPaterno} ${professor.apellidoMaterno}`
+          ...filtredProfesores.map((profesor) =>({
+            key : profesor.idProfesor,
+            value : `${profesor.nombre} ${profesor.apellidoPaterno} ${profesor.apellidoMaterno}`
           }))
         ]}
         comment={
           "Recuerda que puedes buscar a un profesor por nombre, apellidos o No. de empleado."
         }
       ></InputSearch>
-      <TableProfessors professors = {profesores}></TableProfessors>
+      <TableProfessors professors = {filtredProfesores}></TableProfessors>
     </CardView>
     </>
   );
 }
 
-export default consultProfessor;
+export default ConsultProfessor;

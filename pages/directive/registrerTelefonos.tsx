@@ -7,15 +7,17 @@ interface DefaultLayoutProps {
   children: ReactNode;
 }
 
-function registrerTelefonos() {
+function RegistrerTelefonos() {
   return (
     <>
+
+
       <CardView title={"title"} customtitle={true} description={""}>
         <PrincipalTitle title={"Registro celulares"}></PrincipalTitle>
-        <FormTelefonos></FormTelefonos>
+        <FormTelefonos telefonos={[]}></FormTelefonos>
       </CardView>
     </>
   );
 }
 
-export default registrerTelefonos;
+export default RegistrerTelefonos;

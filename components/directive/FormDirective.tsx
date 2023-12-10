@@ -1,38 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonComponent from "@/components/ButtonComponent";
-import InterfaceProfessor from "@/interfaces/professor";
+import InterfaceProfessor from "@/data/interfaces/professor";
+import { TableVistaTelefonos } from "./TableVistaTelefonos";
+import { useProfesores } from "../context/ProfesorProvider";
+import { useRouter } from "next/router";
 
 interface FormDirectiveProps {
-  directive: InterfaceProfessor
+  directive: InterfaceProfessor;
+  isNewUser: boolean;
 }
 
-export const FormDirective = ({ directive }: FormDirectiveProps) => {
+export const FormDirective = ({ directive, isNewUser }: FormDirectiveProps) => {
+  const router = useRouter();
+  const { id } = router.query;
 
   const [formData, setFormData] = useState({
-    idProfesor : directive.idProfesor,
-    nombre : directive.nombre,
-    apellidoPaterno : directive.apellidoPaterno,
-    apellidoMaterno : directive.apellidoMaterno,
-    email : directive.email,
-    activo : directive.activo,
-    diretivo : directive.diretivo,
-    noCedulaProfesional : directive.noCedulaProfesional,
-    numero : directive.numero
-  })
+    idProfesor: isNewUser ? "" : directive.idProfesor,
+    nombre: isNewUser ? "" : directive.nombre,
+    apellidoPaterno: isNewUser ? "" : directive.apellidoPaterno,
+    apellidoMaterno: isNewUser ? "" : directive.apellidoMaterno,
+    email: isNewUser ? "" : directive.email,
+    activo: isNewUser ? "" : directive.activo,
+    diretivo: isNewUser ? "" : directive.diretivo,
+    noCedulaProfesional: isNewUser ? "" : directive.noCedulaProfesional,
+    numero: isNewUser ? [] : directive.numero,
+  });
 
-  const handleInputChange = (event: { target: { name: any; value: any; }; }) =>{
-    const {name, value} = event.target;
+  const handleInputChange = (event: { target: { name: any; value: any } }) => {
+    const { name, value } = event.target;
     setFormData({
       ...formData,
-      [name] : value
-    })
-  }
+      [name]: value,
+    });
+  };
 
-  const handleSubmit = (event: { preventDefault: () => void; }) =>{
+  const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     console.log("Datos: ", formData);
-  }
+  };
 
+  const { profesores } = useProfesores();
+
+  useEffect(() => {
+    if (id && profesores && profesores.length > 0) {
+      const foundProfesor = profesores.find(
+        (profesor) => profesor.idProfesor == id
+      );
+      if (foundProfesor) {
+        setFormData(foundProfesor);
+      } else {
+        console.error(`No se encontro un profesor con la ID: ${id}`);
+      }
+    }
+  }, [id, profesores]);
 
   return (
     <>
@@ -41,6 +61,21 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
           <h4 className="font-bold pb-5"> Datos personales </h4>
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-3 gap-4 items-center">
+              <div>
+                <label
+                  htmlFor=""
+                  className="text-xl block mb-2 text-sm font-medium text-gray-900"
+                >
+                  No. Empleado:
+                </label>
+                <label
+                  htmlFor=""
+                  className="text-xl block mb-2 text-sm font-medium text-gray-900"
+                >
+                  {isNewUser ? "Nuevo profesor" : formData.idProfesor}
+                </label>
+              </div>
+
               <div>
                 <label
                   htmlFor=""
@@ -53,8 +88,8 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   name="apellidoPaterno"
                   id="apellidoPaterno"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value = {formData.apellidoPaterno}
-                  onChange = {handleInputChange}
+                  value={formData.apellidoPaterno}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -71,8 +106,8 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   name="apellidoMaterno"
                   id="apellidoMaterno"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value = {formData.apellidoMaterno}
-                  onChange = {handleInputChange}
+                  value={formData.apellidoMaterno}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -82,14 +117,14 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Nombres:<span>*</span>:
+                  Nombre(s)<span>*</span>:
                 </label>
                 <input
                   type="text"
                   name="nombre"
                   id="nombre"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value = {directive.nombre}
+                  value={directive.nombre}
                   onChange={handleInputChange}
                   required
                 />
@@ -118,16 +153,18 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Permisos:
+                  ¿Usuario activo?:
                 </label>
                 <select
-                  name=""
-                  id=""
+                  id="activo"
+                  name="activo"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                  value={formData.activo ? "s" : "n"}
+                  onChange={handleInputChange}
                 >
-                  <option value="">Directivo</option>
-                  <option value="">Secretario</option>
-                  <option value="">Otro</option>
+                  <option value=""> Seleccione una opción</option>
+                  <option value="s"> Si </option>
+                  <option value="n"> No </option>
                 </select>
               </div>
             </div>
@@ -136,7 +173,7 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
             <div className="grid grid-cols-3 gap-4">
               <div>
                 <label
-                  htmlFor=""
+                  htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   Correo electronico:
@@ -146,32 +183,23 @@ export const FormDirective = ({ directive }: FormDirectiveProps) => {
                   name="email"
                   id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value = {formData.email}
+                  value={formData.email}
                   onChange={handleInputChange}
                 />
               </div>
-
-              <div>
-                <label
-                  htmlFor=""
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Telefono de contacto<span>*</span>:
-                </label>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  required
-                />
-              </div>
             </div>
-            <div className="text-center">
-            <ButtonComponent
-              title={"Registrar Directivo"}
-              color={"blue"}
-            ></ButtonComponent>
+
+            <div className="px-5 pb-5">
+              <TableVistaTelefonos
+                telefonos={formData.numero}
+              ></TableVistaTelefonos>
+              <div className="text-center">
+                <ButtonComponent
+                  title={"Guardar"}
+                  color={"blue"}
+                  onClick={() => {}}
+                ></ButtonComponent>
+              </div>
             </div>
           </form>
         </div>

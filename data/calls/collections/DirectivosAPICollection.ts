@@ -1,4 +1,4 @@
-import InterfacePeriodo from "@/interfaces/periodo";
+import InterfacePeriodo from "@/data/interfaces/periodo";
 import { APICaller } from "../apiCaller";
 
 export class DirectivosAPICollection {
@@ -35,7 +35,7 @@ export class DirectivosAPICollection {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
-            }
+            },
         });
     } 
 }

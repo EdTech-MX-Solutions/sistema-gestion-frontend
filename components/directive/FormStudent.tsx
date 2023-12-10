@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
-import InterfaceAlumno from "@/interfaces/alumno";
-import SIGEAPICollection from "@/api/apiHandler";
+import InterfaceAlumno from "@/data/interfaces/alumno";
+import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
 
 interface FormStudentProps {
@@ -302,7 +302,7 @@ export const FormStudent = ({student}: FormStudentProps) => {
                   onChange={handleInputChange}
                 >
                   <option value=""> Selecciona un estado </option>
-                  {estados.map((estado, index) =>(
+                  {estados.map((estado: any, index) =>(
                     <option key={index} value={estado.id}> {estado.nombre} </option>
                   ))}
                 </select>
@@ -324,7 +324,7 @@ export const FormStudent = ({student}: FormStudentProps) => {
                   onChange={handleInputChange}
                 >
                   <option value = ""> Selecciona un país </option>
-                  {paises.map((pais, index) =>(
+                  {paises.map((pais: any, index) =>(
                     <option key={index} value={pais.id}> {pais.nombre} </option>
                   ))}
                 </select>

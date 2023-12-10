@@ -1,48 +1,59 @@
 import React, { useState } from "react";
 import ButtonComponent from "../ButtonComponent";
-import InterfaceTel from "@/interfaces/numeroTelefonico";
+import InterfaceTel from "@/data/interfaces/numeroTelefonico";
 import { TableTelefonos } from "./TableTelefonos";
+import router from "next/router";
 
-interface FormTelefonosProps{
+interface FormTelefonosProps {
+  telefonos: InterfaceTel[];
 }
 
-export const FormTelefonos = ({} : FormTelefonosProps) => {
-
+export const FormTelefonos = ({ telefonos }: FormTelefonosProps) => {
   const [telefonoInput, setTelefonoInput] = useState("");
   const [tipoInput, setTipoInput] = useState("");
-  const [telefonosAgregados, setTelefonosAgregados] = useState<InterfaceTel[]>([]);
+  const [telefonosAgregados, setTelefonosAgregados] = useState<InterfaceTel[]>(
+    []
+  );
   const [telefonoEditado, setTelefonoEditado] = useState<number>();
 
-  const handleAgregarTelefono = () =>{
-    if(telefonoInput && tipoInput){
-      const nuevoTelefono : InterfaceTel = {
-        numero : telefonoInput,
-        tipo : tipoInput
+  const handleAgregarTelefono = () => {
+    if (telefonoInput && tipoInput) {
+      const nuevoTelefono: InterfaceTel = {
+        numero: telefonoInput,
+        tipo: tipoInput,
       };
       setTelefonosAgregados([...telefonosAgregados, nuevoTelefono]);
       setTelefonoInput("");
       setTipoInput("");
-    }    
-  }
+    }
+  };
 
-  const handleTelefonoInputChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handleTelefonoInputChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setTelefonoInput(event.target.value);
   };
 
-  const handleTipoInputChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handleTipoInputChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setTipoInput(event.target.value);
   };
 
-  const handleModificarTelefono = (index : number) => {
+  const handleModificarTelefono = (index: number) => {
     const telefono = telefonosAgregados[index];
     setTelefonoInput(telefono.numero);
     setTipoInput(telefono.tipo);
     setTelefonoEditado(index);
-  }
+  };
 
-  const handleEliminarTelefono = (index : number) =>{
+  const handleEliminarTelefono = (index: number) => {
     const nuevosTelefonos = telefonosAgregados.filter((_, i) => i !== index);
     setTelefonosAgregados(nuevosTelefonos);
+  };
+
+  const handleGuardarTelefono = () => {
+    router.push("/directive/registrerProfessors/");
   }
 
   return (
@@ -94,27 +105,33 @@ export const FormTelefonos = ({} : FormTelefonosProps) => {
         </div>
 
         <div className="text-center">
-            <ButtonComponent
-              color={"blue"}
-              title={"Agregar"}
-              onClick={() => { 
-                handleAgregarTelefono();
-                setTelefonoInput("");
-                setTipoInput("");
-              }}
-            ></ButtonComponent>
-          </div>
+          <ButtonComponent
+            color={"blue"}
+            title={"Agregar"}
+            onClick={() => {
+              handleAgregarTelefono();
+              setTelefonoInput("");
+              setTipoInput("");
+            }}
+          ></ButtonComponent>
+        </div>
 
         <div>
-          <TableTelefonos telefonos = {telefonosAgregados} handleEliminarTelefono={handleEliminarTelefono} handleModificarTelefono={handleModificarTelefono} setTelefonosAgregados={setTelefonosAgregados}></TableTelefonos>
+          <TableTelefonos
+            telefonos={telefonosAgregados}
+            handleEliminarTelefono={handleEliminarTelefono}
+            handleModificarTelefono={handleModificarTelefono}
+            setTelefonosAgregados={setTelefonosAgregados}
+          ></TableTelefonos>
         </div>
 
         <div className="text-center">
-            <ButtonComponent
-              color={"blue"}
-              title={"Siguiente"}
-            ></ButtonComponent>
-          </div>
+          <ButtonComponent 
+            color={"blue"} 
+            title={"Siguiente"}
+            onClick={() => {}}
+          ></ButtonComponent>
+        </div>
       </div>
     </>
   );

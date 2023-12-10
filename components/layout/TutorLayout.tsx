@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import PrivateRoute from "../components/auth/PrivateRoute";
-import Sidebar from "../components/Sidebars/Content/SidebarContTutor";
-import Header from "../components/template/Header";
+import PrivateRoute from "../auth/PrivateRoute";
+import Sidebar from "../Sidebars/Content/SidebarContTutor";
+import Header from "../template/Header";
 import SidebarTutor from "@/components/Sidebars/SidebarTutor";
 import { AlumnoProvider } from "@/components/context/AlumnoProvider";
 
@@ -15,19 +15,19 @@ const TutorLayout = ({ children }: LayoutProps) => {
         <>
             <PrivateRoute allowedRoles={["SUPERUSER", "TUTOR"]}>
                 <AlumnoProvider>
-                    <div className="dark:bg-boxdark-2 dark:text-bodydark">
-                        <div className="flex h-screen overflow-hidden">
+                    <div className="dark:bg-boxdark-2 dark:text-bodydark z-20">
+                        <div className="flex h-screen overflow-hidden z-20">
                             <SidebarTutor
                                 sidebarOpen={sidebarOpen}
                                 setSidebarOpen={setSidebarOpen}
                             />
-                            <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden w-full ">
+                            <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden w-full z-20 ">
                                 <Header
                                     sidebarOpen={sidebarOpen}
                                     setSidebarOpen={setSidebarOpen}
                                 />
                                 <main>
-                                    <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+                                    <div className="mx-auto max-w-screen-2xl p-4 md:p-6">
                                         {children}
                                     </div>
                                 </main>
