@@ -16,7 +16,6 @@ interface DefaultLayoutProps {
 }
 
 function ModifyGroup() {
-
   const router = useRouter();
   const { id } = router.query;
   const {alumnos} = useAlumno();
