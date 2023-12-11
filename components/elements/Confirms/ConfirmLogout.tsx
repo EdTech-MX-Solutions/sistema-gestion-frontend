@@ -6,20 +6,34 @@ import {
     DialogBody,
     DialogFooter,
 } from "@material-tailwind/react";
+import { signOut } from "next-auth/react";
 import { useCookies } from "react-cookie";
 
-export function ConfirmElement({
+export function ConfirmLogoutElement({
     open,
     text,
     handler,
-    handlerConfirm,
 }: {
     open: boolean;
     text: string;
     handler: () => void;
-    handlerConfirm: () => void;
 }) {
+    const [cookies, setCookie, removeCookie] = useCookies([
+        "token",
+        "user",
+        "childs",
+        "boleta",
+    ]);
+
     const [isopen, setOpen] = React.useState(false);
+
+    function handlerCloseSession() {
+        removeCookie("token", { path: "/" });
+        setCookie("user", "", { path: "/" });
+        setCookie("childs", "", { path: "/" });
+        setCookie("boleta", "", { path: "/" });
+        signOut();
+    }
 
     useEffect(() => {
         setOpen(open);
@@ -46,7 +60,9 @@ export function ConfirmElement({
                 <DialogHeader className="text-center justify-center text-gray-700 dark:text-gray-200 text-5xl">
                     Alerta:
                 </DialogHeader>
-                <DialogBody className="text-3xl font-semibold text-gray-700 dark:text-gray-200">{text}</DialogBody>
+                <DialogBody className="text-3xl font-semibold text-gray-700 dark:text-gray-200">
+                    {text}
+                </DialogBody>
                 <DialogFooter className="items-center justify-center">
                     <Button
                         variant="text"
@@ -59,7 +75,7 @@ export function ConfirmElement({
                     <Button
                         variant="text"
                         className="mr-1 bg-green-700 text-white hover:bg-green-600"
-                        onClick={handlerConfirm}
+                        onClick={handlerCloseSession}
                     >
                         <span>Confirmar</span>
                     </Button>

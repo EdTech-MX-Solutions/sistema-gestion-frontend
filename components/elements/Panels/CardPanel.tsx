@@ -1,12 +1,14 @@
 import Link from "next/link";
 
 type PanelCardProps = {
-    category: string;
+    category?: string;
     title: string;
     bgColor: string;
     onClick?: () => void;
     route?: string;
     textSize?: string;
+    isActionEnabled?: boolean;
+    ActionText?: string;
 };
 
 const PanelCard = ({
@@ -16,6 +18,8 @@ const PanelCard = ({
     onClick,
     route,
     textSize,
+    isActionEnabled,
+    ActionText,
 }: PanelCardProps): JSX.Element => (
     <Link
         href={route || "#"}
@@ -46,7 +50,7 @@ const PanelCard = ({
                 fill="white"
             />
         </svg>
-        <div className="relative pt-10 px-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+        <div className="relative pt-10 px-10 flex items-center group-hover:scale-110 transition-transform">
             {textSize == "sm" ? (
                 <h1
                     className={`relative w-full sm:w-auto font-semibold text-xl text-white`}
@@ -61,9 +65,34 @@ const PanelCard = ({
                 </h1>
             )}
         </div>
-        <div className="relative text-white px-6 pb-6 mt-6">
-            <span className="block opacity-75 -mb-1">{category}</span>
-        </div>
+        {
+            category ? (
+                <div className="relative text-white px-6 pb-6 mt-6 group-hover:opacity-75">
+                    <span className="block -mb-1">{category}</span>
+                </div>
+            ) : null
+        }
+        {isActionEnabled ? (
+            <div className="p-6 border-t border-blue-gray-50 px-6 py-5">
+                <p className="antialiased font-sans text-sm leading-normal flex items-center font-normal group-hover:scale-[1.02] transition-transform group-hover:text-white text-gray-100">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        className="w-4 h-4 group-hover:scale-[1.1] group-hover:rotate-180 transition-transform"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                        />
+                    </svg>
+                    &nbsp;{ActionText}
+                </p>
+            </div>
+        ) : null}
     </Link>
 );
 
