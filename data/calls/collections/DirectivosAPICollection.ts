@@ -8,6 +8,16 @@ export class DirectivosAPICollection {
         this.apiCaller = new APICaller();
     }
 
+    executeGetAlumnosPendientesReiscripcion(token : string){
+        const route = this.apiCaller.getCall() + `/reinscripciones/`;
+        return fetch (route, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+
     executeGetProfessors(token: string) {
         const route = this.apiCaller.getProfesorCall();
         return fetch(route, {
