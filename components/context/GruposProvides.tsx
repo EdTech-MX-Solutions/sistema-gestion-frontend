@@ -1,6 +1,5 @@
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import InterfaceGrupo from "@/data/interfaces/grupos";
-import InterfaceProfessor from "@/data/interfaces/professor";
 import {
   createContext,
   useContext,

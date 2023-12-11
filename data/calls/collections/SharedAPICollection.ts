@@ -76,6 +76,17 @@ export class SharedAPICollection {
                 Authorization: `Bearer ${token}`,
             },
         });
+    }    
+    
+    executeGetAlumnosGrupo(token : string, idGrupo : string){
+        const route = this.apiCaller.getCall() + "/alumnos/grupo/" + idGrupo;
+        return fetch(route, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        });
     }
 
     executeGetSEPOMEXColonias(token: string, codigoPostal: string) {
