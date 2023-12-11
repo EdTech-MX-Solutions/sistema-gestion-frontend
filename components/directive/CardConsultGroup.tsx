@@ -1,21 +1,78 @@
 import InterfaceGrupo from "@/data/interfaces/grupos";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 import TableStudentsGroup from "./TableStudentsGroup";
 import router from "next/router";
-import { useAlumno } from "../context/AlumnoProvider";
+import InterfaceAlumno from "@/data/interfaces/alumno";
+import SIGEAPICollection from "@/data/calls/apiHandler";
+import { useCookies } from "react-cookie";
+
 interface CardConsultGroupProps {
   group: InterfaceGrupo;
 }
 
 export const CardConsultGroup = ({ group }: CardConsultGroupProps) => {
-  
   const handleModifyGroup = (gropoId: any) => {
-    router.push(`/directive/actionsGroup/modifyGroup?id=${gropoId}`)
-  }
+    router.push(`/directive/actionsGroup/modifyGroup?id=${gropoId}`);
+  };
 
-  const { alumno } = useAlumno();
-  console.log(alumno);
+  const [cookies, setCookie] = useCookies(["token", "idGrupo", "childs"]);
+  const [alumnos, setAlumnos] = useState<InterfaceAlumno[]>([]);
+
+  const fetchAlumnosInscritos = async () => {
+    const api = new SIGEAPICollection();
+    const token = cookies.token;
+    const idGrupoSeleccionado = router.query.id + "";
+    if(idGrupoSeleccionado === undefined){
+      return;
+    }
+    else{
+      try {
+        const response = await api.sharedCollection.executeGetAlumnosGrupo(
+          token,
+          idGrupoSeleccionado
+        );
+        if (response.ok) {
+          const data = await response.json();
+  
+          let newAlumnos: InterfaceAlumno[] = [];
+          for (let i = 0; i < data.length; i++) {
+            const element = data[i];
+            const sexo = element.sexo === "M" ? "Masculino" : "Femenino";
+            const newAlumno: InterfaceAlumno = {
+              no_boleta: element.noBoleta,
+              curp: element.curp,
+              nombre: element.nombres,
+              apellido_paterno: element.apellidoPaterno,
+              apellido_materno: element.apellidoMaterno,
+              fecha_nacimiento: element.fechaNacimiento,
+              sexo: sexo,
+              estatus: element.estatus,
+              entidad_nacimiento: element.entidad,
+              pais_origen: element.paisOrigen,
+              edad: element.edad,
+              aniosPreescolar: element.aniosPreescolar,
+              grado: element.grado,
+              grupo: element.grupo,
+              actualizarDatosMedicos: element.actualizarDatosMedicos,
+            };
+            newAlumnos.push(newAlumno);
+          }
+          setAlumnos(newAlumnos);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  }
+   
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    fetchAlumnosInscritos();
+  }, []);
+
+  console.log(alumnos);
 
   return (
     <>
@@ -132,19 +189,15 @@ export const CardConsultGroup = ({ group }: CardConsultGroupProps) => {
             color={"blue"}
             onClick={() => handleModifyGroup(group.idGrupo)}
           ></ButtonComponent>
-          <ButtonComponent 
-            title={"Eliminar"} 
-            color={"red"}
-          ></ButtonComponent>
+          <ButtonComponent title={"Eliminar"} color={"red"}></ButtonComponent>
         </div>
 
         <TableStudentsGroup
-            titleBtn1={"Ver Datos del Alumno"}
-            titleBtn2={"Ver Datos Del Alumno"}
-            titleTable={
-              "Listado de Alumnos disponibles para el grupo seleccionado"
-            }
-          ></TableStudentsGroup>
+          titleBtn1={"Ver Datos del Alumno"}
+          titleBtn2={"Ver Datos Del Alumno"}
+          titleTable={"Listado de Alumnos inscritos"}
+          alumnosInscritos={alumnos}
+        ></TableStudentsGroup>
       </div>
     </>
   );

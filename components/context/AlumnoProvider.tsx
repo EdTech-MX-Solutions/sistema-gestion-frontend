@@ -10,7 +10,7 @@ import {
 import { useCookies } from "react-cookie";
 
 interface AlumnoContextType {
-    alumno: InterfaceAlumno;
+    alumnos: InterfaceAlumno[];
     updateAlumno: (newAlumno: InterfaceAlumno) => void;
 }
 
@@ -20,23 +20,12 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
     const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
-    const [alumno, setAlumno] = useState<InterfaceAlumno>({
-        no_boleta: "cargando...",
-        curp: "cargando...",
-        nombre: "cargando...",
-        apellido_paterno: "",
-        apellido_materno: "",
-        fecha_nacimiento: "cargando...",
-        sexo: "cargando...",
-        estatus: "cargando...",
-        entidad_nacimiento: "cargando...",
-        pais_origen: "cargando...",
-        edad: 0,
-        aniosPreescolar: 0,
-        grado: null,
-        grupo: null,
-        actualizarDatosMedicos: null,
-    });
+    const [alumnos, setAlumnos] = useState<InterfaceAlumno[]>([]);
+    const [alumno, setAlumno] = useState<InterfaceAlumno | null>(null);
+
+    const updateAlumno = (newAlumno: InterfaceAlumno) => {
+        setAlumno(newAlumno);
+    };
 
     const fetchAlumno = async () => {
         const api = new SIGEAPICollection();
@@ -48,27 +37,33 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
             );
             if (response.ok) {
                 const data = await response.json();
-                const sexo = data[0].sexo === "M" ? "Masculino" : "Femenino";
-                const newAlumno: InterfaceAlumno = {
-                    no_boleta: data[0].noBoleta,
-                    curp: data[0].curp,
-                    nombre: data[0].nombres,
-                    apellido_paterno: data[0].apellidoPaterno,
-                    apellido_materno: data[0].apellidoMaterno,
-                    fecha_nacimiento: data[0].fechaNacimiento,
-                    sexo: sexo,
-                    estatus: data[0].estatus,
-                    entidad_nacimiento: data[0].entidad,
-                    pais_origen: data[0].paisOrigen,
-                    edad: data[0].edad,
-                    aniosPreescolar: data[0].aniosPreescolar,
-                    grado: data[0].grado,
-                    grupo: data[0].grupo,
-                    actualizarDatosMedicos: data[0].actualizarDatosMedicos,
-                };
-                setCookie("childs", data.length);
-                setCookie("boleta", data[0].noBoleta);
-                setAlumno(newAlumno);
+                
+                let newAlumnos : InterfaceAlumno[] = [];
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i];
+                    const sexo = element.sexo === "M" ? "Masculino" : "Femenino";
+                    const newAlumno: InterfaceAlumno = {
+                        no_boleta: element.noBoleta,
+                        curp: element.curp,
+                        nombre: element.nombres,
+                        apellido_paterno: element.apellidoPaterno,
+                        apellido_materno: element.apellidoMaterno,
+                        fecha_nacimiento: element.fechaNacimiento,
+                        sexo: sexo,
+                        estatus: element.estatus,
+                        entidad_nacimiento: element.entidad,
+                        pais_origen: element.paisOrigen,
+                        edad: element.edad,
+                        aniosPreescolar: element.aniosPreescolar,
+                        grado: element.grado,
+                        grupo: element.grupo,
+                        actualizarDatosMedicos: element.actualizarDatosMedicos,
+                    };
+                    setCookie("childs", element.length);
+                    setCookie("boleta", element.noBoleta);
+                    newAlumnos.push(newAlumno);
+                }
+                setAlumnos(newAlumnos);
             } else {
                 console.error(
                     `Error en la solicitud. Código de estado: ${response.status}`
@@ -79,16 +74,12 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
         }
     };
 
-    const updateAlumno = (newAlumno: InterfaceAlumno) => {
-        setAlumno(newAlumno);
-    };
-
     useEffect(() => {
         fetchAlumno();
     }, []);
 
     return (
-        <AlumnoContext.Provider value={{ alumno, updateAlumno }}>
+        <AlumnoContext.Provider value={{ alumnos, updateAlumno }}>
             {children}
         </AlumnoContext.Provider>
     );
