@@ -8,6 +8,7 @@ import Loader from "../elements/Loader";
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
 import { Alert } from "@material-tailwind/react";
+import InterfacePeriodo from "@/data/interfaces/periodo";
 
 export default function CyclePanel() {
     const [cookies, setCookie] = useCookies(["token"]);
@@ -17,6 +18,7 @@ export default function CyclePanel() {
 
     const [message, setMessage] = React.useState("");
     const [haveMessage, setHaveMessage] = React.useState(false);
+    const [messageType, setMessageType] = React.useState("info");
 
     const [confirmationisopen, setConfirmationOpen] = React.useState(false);
     const [confirmationisopen2, setConfirmationOpen2] = React.useState(false);
@@ -32,53 +34,35 @@ export default function CyclePanel() {
     const isPreinscripciones = periodo_escuela.periodoPreinscripciones;
     const isReinscripciones = periodo_escuela.periodoReinscripciones;
 
-    const handleCalificaciones = async () => {
+    const handlePeriodo = async (periodo_escuela: InterfacePeriodo) => {
         const api = new SIGEAPICollection();
         const token = cookies.token;
-        periodo_escuela.periodoCalificaciones =
-            !periodo_escuela.periodoCalificaciones;
-        const response =
-            await api.directivosCollection.executePostPeriodo(
-                token,
-                periodo_escuela
-            );
+        const response = await api.directivosCollection.executePostPeriodo(
+            token,
+            periodo_escuela
+        );
         if (response.status === 200) {
-            console.log("Periodo de calificaciones actualizado");
+            console.log("Periodo actualizado");
             periodo.updatePeriodo(periodo_escuela);
         }
     };
-
-    const handlePreinscripciones = async () => {
-        const api = new SIGEAPICollection();
-        const token = cookies.token;
-        periodo_escuela.periodoPreinscripciones =
-            !periodo_escuela.periodoPreinscripciones;
-        const response =
-            await api.directivosCollection.executePostPeriodo(
-                token,
-                periodo_escuela
-            );
-        if (response.status === 200) {
-            console.log("Periodo de preinscripciones actualizado");
-            periodo.updatePeriodo(periodo_escuela);
-        }
-    }
-
-    const handleReinscripciones = async () => {
-        const api = new SIGEAPICollection();
-        const token = cookies.token;
-        periodo_escuela.periodoReinscripciones =
-            !periodo_escuela.periodoReinscripciones;
-        const response =
-            await api.directivosCollection.executePostPeriodo(
-                token,
-                periodo_escuela
-            );
-        if (response.status === 200) {
+    const handleCalificaciones = async () => {
+        periodo_escuela.periodoCalificaciones =
+            !periodo_escuela.periodoCalificaciones;
+        handlePeriodo(periodo_escuela).then(() => {
             console.log("Periodo de reinscripciones actualizado");
             periodo.updatePeriodo(periodo_escuela);
-        }
-    }
+        });
+    };
+
+    const handleReinscripciones = async () => {
+        periodo_escuela.periodoReinscripciones =
+            !periodo_escuela.periodoReinscripciones;
+        handlePeriodo(periodo_escuela).then(() => {
+            console.log("Periodo de reinscripciones actualizado");
+            periodo.updatePeriodo(periodo_escuela);
+        });
+    };
 
     useEffect(() => {
         setLoading(false);
@@ -143,21 +127,33 @@ export default function CyclePanel() {
                 <PanelCard
                     category="Estado del Periodo Preinscripciones"
                     title="Es Periodo"
-                    bgColor="emerald-600"
+                    bgColor="cyan-600"
                     textSize="sm"
                     isActionEnabled
-                    ActionText="Deshabilitar"
-                    onClick={() => setConfirmationOpen5(true)}
+                    ActionText="Configuración Automática"
+                    onClick={() => {
+                        setHaveMessage(true);
+                        setMessage(
+                            "El periodo de Preinscripciones es automático"
+                        );
+                        setMessageType("info");
+                    }}
                 />
             ) : (
                 <PanelCard
                     category="Estado del Periodo Preinscripciones"
                     title="Deshabilitado"
-                    bgColor="red-800"
+                    bgColor="cyan-600 bg-opacity-40"
                     textSize="sm"
                     isActionEnabled
-                    ActionText="Habilitar"
-                    onClick={() => setConfirmationOpen5(true)}
+                    ActionText="Configuración Automática"
+                    onClick={() => {
+                        setHaveMessage(true);
+                        setMessage(
+                            "El periodo de Preinscripciones es automático"
+                        );
+                        setMessageType("info");
+                    }}
                 />
             )}
             {isReinscripciones ? (
@@ -218,9 +214,15 @@ export default function CyclePanel() {
                             />
                         </svg>
                     }
-                    className={`${
-                        haveMessage ? "block" : "hidden"
-                    } w-full text-emerald-300 lg:w-2/3 border-2 border-emerald-300 border-opacity-50 mt-2 p-1 rounded-lg mb-4`}
+                    className={`${haveMessage ? "block" : "hidden"} w-full 
+                    ${
+                        messageType === "success"
+                            ? "border-emerald-300"
+                            : messageType === "info"
+                            ? "border-blue-300"
+                            : "border-red-300"
+                    }
+                    lg:w-2/3 border-2  border-opacity-50 mt-2 p-1 rounded-lg mb-4`}
                 >
                     {message}
                 </Alert>
@@ -235,7 +237,9 @@ export default function CyclePanel() {
                 {/* Finalizar Ciclo */}
                 <ConfirmElement
                     open={confirmationisopen2}
-                    text={`¿Estás seguro que deseas ${isAc ? "iniciar" : "finalizar"} el ciclo escolar?`}
+                    text={`¿Estás seguro que deseas ${
+                        isAc ? "iniciar" : "finalizar"
+                    } el ciclo escolar?`}
                     // text="¿Estás seguro que deseas iniciar el ciclo escolar?"
                     handler={() => {
                         setConfirmationOpen2(false);
@@ -271,21 +275,7 @@ export default function CyclePanel() {
                             setConfirmationOpen4(false);
                             setMessage("Periodo de calificaciones actualizado");
                             setHaveMessage(true);
-                        });
-                    }}
-                />
-                {/* Periodo de Preinscripciones */}
-                <ConfirmElement
-                    open={confirmationisopen5}
-                    text="¿Estás seguro que deseas iniciar el Periodo de Preinscripciones?"
-                    handler={() => {
-                        setConfirmationOpen5(false);
-                    }}
-                    handlerConfirm={() => {
-                        handlePreinscripciones().then(() => {
-                            setConfirmationOpen5(false);
-                            setMessage("Periodo de preinscripciones actualizado");
-                            setHaveMessage(true);
+                            setMessageType("success");
                         });
                     }}
                 />
@@ -300,12 +290,14 @@ export default function CyclePanel() {
                     handlerConfirm={() => {
                         handleReinscripciones().then(() => {
                             setConfirmationOpen6(false);
-                            setMessage("Periodo de reinscripciones actualizado");
+                            setMessage(
+                                "Periodo de reinscripciones actualizado"
+                            );
                             setHaveMessage(true);
+                            setMessageType("success");
                         });
                     }}
                 />
-               
             </>
         );
     }
