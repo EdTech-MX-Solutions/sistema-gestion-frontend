@@ -2,20 +2,27 @@ interface ButtonInterface {
     className?: string;
     title?: string;
     color?: string;
+    size?: "sm" | "md" | "lg" | "xl";
 }
 
-function Loader({className, color }: ButtonInterface) {
-    let buttonColor =
-        color ||
-        "bg-green-600 dark:bg-green-200";
-    let classNameButton = `w-3 h-3 rounded-full animate-pulse ${buttonColor} `;
+function Loader({ className, color, size }: ButtonInterface) {
+    let buttonColor = color || "bg-green-600 dark:bg-green-200";
+    let sz = "w-3 h-3";
+    if (size === "sm") {
+        sz = "w-2 h-2";
+    } else if (size === "lg") {
+        sz = "w-4 h-4";
+    } else if (size === "xl") {
+        sz = "w-6 h-6";
+    }
+    let classNameButton = `${sz} rounded-full animate-pulse ${buttonColor} `;
     const title = "loading";
     classNameButton += className;
     return (
         <>
             <div className="flex my-5 mx-auto gap-2 justify-center">
                 <div className={classNameButton}></div>
-                <div className={classNameButton + " delay-50"}></div>
+                <div className={classNameButton + " delay-100"}></div>
                 <div className={classNameButton + " delay-200"}></div>
             </div>
         </>

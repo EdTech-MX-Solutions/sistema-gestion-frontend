@@ -44,8 +44,9 @@ export const FormCicloEscolar = ({ autoStart }: FormCicloEscolarProps) => {
     }
 
     const handleSubmmit = async () => {
-        console.log("Enviando datos");
         setLoading(true);
+        console.log("Enviando datos de inicio de ciclo escolar...");
+
         const api = new SIGEAPICollection();
         const token = cookies.token;
 
@@ -114,7 +115,7 @@ export const FormCicloEscolar = ({ autoStart }: FormCicloEscolarProps) => {
                                 {title}
                             </h3>
                             <p className="text-gray-600 my-2">{subtitle}</p>
-                            <Link href={"/directive/cicloEscolar/cycle"}>
+                            <Link href={"/directive/cicloEscolar/cycle"} onClick={() => window.location.href ="/directive/cicloEscolar/cycle"}>
                                 <ButtonComponent
                                     color={"green"}
                                     title={"Regresar"}
@@ -127,103 +128,103 @@ export const FormCicloEscolar = ({ autoStart }: FormCicloEscolarProps) => {
         );
     }
 
-    return (
-        <>
-            <div className="p-5 bg-white rounded-lg">
-                <h4 className="font-bold pb-5"> Nuevo Ciclo Escolar </h4>
-                <form onSubmit={handleSubmmit}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div>
-                            <label
-                                htmlFor=""
-                                className="block mb-2 text-sm font-medium text-gray-900"
-                            >
-                                Año inicio del ciclo escolar:
-                            </label>
-                            <DatePicker
-                                locale={es}
-                                selected={startDate}
-                                onChange={(date) => {
-                                    updateEndDate(date);
-                                }}
-                                showYearPicker
-                                minDate={minDate}
-                                maxDate={maxDate}
-                                dateFormat="yyyy"
-                                title="El año de finalización del ciclo escolar se calcula automáticamente"
-                                className="bg-green-800 bg-opacity-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            />
-                        </div>
+    // return (
+    //     <>
+    //         <div className="p-5 bg-white rounded-lg">
+    //             <h4 className="font-bold pb-5"> Nuevo Ciclo Escolar </h4>
+    //             <form onSubmit={handleSubmmit}>
+    //                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    //                     <div>
+    //                         <label
+    //                             htmlFor=""
+    //                             className="block mb-2 text-sm font-medium text-gray-900"
+    //                         >
+    //                             Año inicio del ciclo escolar:
+    //                         </label>
+    //                         <DatePicker
+    //                             locale={es}
+    //                             selected={startDate}
+    //                             onChange={(date) => {
+    //                                 updateEndDate(date);
+    //                             }}
+    //                             showYearPicker
+    //                             minDate={minDate}
+    //                             maxDate={maxDate}
+    //                             dateFormat="yyyy"
+    //                             title="El año de finalización del ciclo escolar se calcula automáticamente"
+    //                             className="bg-green-800 bg-opacity-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    //                         />
+    //                     </div>
 
-                        <div>
-                            <label
-                                htmlFor=""
-                                className="block mb-2 text-sm font-medium text-gray-900"
-                            >
-                                Año de finalización del ciclo escolar:
-                            </label>
-                            <DatePicker
-                                locale={es}
-                                selected={endDate}
-                                onChange={() => console.log()}
-                                showYearPicker
-                                dateFormat="yyyy"
-                                title="El año de finalización del ciclo escolar se calcula automáticamente"
-                                className="bg-green-800 bg-opacity-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            />
-                        </div>
-                    </div>
-                    {warning && (
-                        <>
-                            <div className="pt-10">
-                                <AlertComponent
-                                    bgColor="orange-100 bg-opacity-40"
-                                    borderColor="orange-100"
-                                    textColor="orange-100"
-                                    title="¡Cuidado!"
-                                    message=" El ciclo escolar actual no coincide con el año actual, ¿Aún así deseas continuar?"
-                                />
-                            </div>
-                        </>
-                    )}
-                    {PeriodoIniciado && (
-                        <>
-                            <div className="pt-10">
-                                <AlertComponent
-                                    bgColor="green-100 bg-opacity-40"
-                                    borderColor="green-100"
-                                    textColor="green-100"
-                                    title="¡Éxito!"
-                                    message=" El ciclo escolar ha sido iniciado correctamente."
-                                />
-                            </div>
-                        </>
-                    )}
-                    {error && (
-                        <>
-                            <div className="pt-10">
-                                <AlertComponent
-                                    bgColor="red-100 bg-opacity-40"
-                                    borderColor="red-100"
-                                    textColor="red-100"
-                                    title="¡Error!"
-                                    message=" El ciclo escolar no pudo ser iniciado."
-                                />
-                            </div>
-                        </>
-                    )}
-                    <div className="text-center pt-10">
-                        <ButtonComponent
-                            type="submit"
-                            title={"Crear"}
-                            color={"blue"}
-                            loading={loading}
-                        ></ButtonComponent>
-                    </div>
-                </form>
-            </div>
-        </>
-    );
+    //                     <div>
+    //                         <label
+    //                             htmlFor=""
+    //                             className="block mb-2 text-sm font-medium text-gray-900"
+    //                         >
+    //                             Año de finalización del ciclo escolar:
+    //                         </label>
+    //                         <DatePicker
+    //                             locale={es}
+    //                             selected={endDate}
+    //                             onChange={() => console.log()}
+    //                             showYearPicker
+    //                             dateFormat="yyyy"
+    //                             title="El año de finalización del ciclo escolar se calcula automáticamente"
+    //                             className="bg-green-800 bg-opacity-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    //                         />
+    //                     </div>
+    //                 </div>
+    //                 {warning && (
+    //                     <>
+    //                         <div className="pt-10">
+    //                             <AlertComponent
+    //                                 bgColor="orange-100 bg-opacity-40"
+    //                                 borderColor="orange-100"
+    //                                 textColor="orange-100"
+    //                                 title="¡Cuidado!"
+    //                                 message=" El ciclo escolar actual no coincide con el año actual, ¿Aún así deseas continuar?"
+    //                             />
+    //                         </div>
+    //                     </>
+    //                 )}
+    //                 {PeriodoIniciado && (
+    //                     <>
+    //                         <div className="pt-10">
+    //                             <AlertComponent
+    //                                 bgColor="green-100 bg-opacity-40"
+    //                                 borderColor="green-100"
+    //                                 textColor="green-100"
+    //                                 title="¡Éxito!"
+    //                                 message=" El ciclo escolar ha sido iniciado correctamente."
+    //                             />
+    //                         </div>
+    //                     </>
+    //                 )}
+    //                 {error && (
+    //                     <>
+    //                         <div className="pt-10">
+    //                             <AlertComponent
+    //                                 bgColor="red-100 bg-opacity-40"
+    //                                 borderColor="red-100"
+    //                                 textColor="red-100"
+    //                                 title="¡Error!"
+    //                                 message=" El ciclo escolar no pudo ser iniciado."
+    //                             />
+    //                         </div>
+    //                     </>
+    //                 )}
+    //                 <div className="text-center pt-10">
+    //                     <ButtonComponent
+    //                         type="submit"
+    //                         title={"Crear"}
+    //                         color={"blue"}
+    //                         loading={loading}
+    //                     ></ButtonComponent>
+    //                 </div>
+    //             </form>
+    //         </div>
+    //     </>
+    // );
 };
 
 export default FormCicloEscolar;

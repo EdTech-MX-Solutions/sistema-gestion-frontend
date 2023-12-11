@@ -1,7 +1,7 @@
 import React from "react";
-import PanelCard from "../CardPanel";
-import { ConfirmLogoutElement } from "../../Confirms/ConfirmLogout";
-import { ConfirmElement } from "../../Confirms/Confirm";
+import PanelCard from "../elements/Panels/CardPanel";
+import { ConfirmLogoutElement } from "../elements/Confirms/ConfirmLogout";
+import { ConfirmElement } from "../elements/Confirms/Confirm";
 
 export default function PanelDirectiveStudents() {
     const [confirmationisopen, setConfirmationOpen] = React.useState(false);
