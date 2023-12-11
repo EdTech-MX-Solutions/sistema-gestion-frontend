@@ -1,0 +1,37 @@
+import { APIContext } from './apiContext';
+
+export class APICaller {
+    apiContext: APIContext;
+
+    constructor() {
+        this.apiContext = new APIContext();
+    }
+
+    getTutorCall() {
+        const baseURL: string = this.getCall();
+        return `${baseURL}/tutores`;
+    }
+    getProfesorCall() {
+        const baseURL: string = this.getCall();
+        return `${baseURL}/profesores`;
+    }
+    getDirectivoCall() {
+        const baseURL: string = this.getCall();
+        return `${baseURL}/directivo`;
+    }
+    getGruposCall() {
+        const baseURL: string = this.getCall();
+        return `${baseURL}/grupos`;
+    }
+    getAuthCall() {
+        const baseURL: string = this.getCall();
+        return `${baseURL}/auth`;
+    }
+    getStatsCall() {
+        const baseURL: string = this.getCall();
+        return `${baseURL}/estadisticas`;
+    }
+    getCall() {
+        return this.apiContext.getBaseURL();
+    }
+}

@@ -1,0 +1,43 @@
+import React, { useState } from "react";
+import PrivateRoute from "../auth/PrivateRoute";
+import Sidebar from "../Sidebars/Content/SidebarContTutor";
+import Header from "../template/Header";
+import SidebarTutor from "@/components/Sidebars/SidebarTutor";
+import { AlumnoProvider } from "@/components/context/AlumnoProvider";
+
+interface LayoutProps {
+    children: React.ReactNode;
+}
+
+const TutorLayout = ({ children }: LayoutProps) => {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    return (
+        <>
+            <PrivateRoute allowedRoles={["SUPERUSER", "TUTOR"]}>
+                <AlumnoProvider>
+                    <div className="dark:bg-boxdark-2 dark:text-bodydark z-20">
+                        <div className="flex h-screen overflow-hidden z-20">
+                            <SidebarTutor
+                                sidebarOpen={sidebarOpen}
+                                setSidebarOpen={setSidebarOpen}
+                            />
+                            <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden w-full z-20 ">
+                                <Header
+                                    sidebarOpen={sidebarOpen}
+                                    setSidebarOpen={setSidebarOpen}
+                                />
+                                <main>
+                                    <div className="mx-auto max-w-screen-2xl p-4 md:p-6">
+                                        {children}
+                                    </div>
+                                </main>
+                            </div>
+                        </div>
+                    </div>
+                </AlumnoProvider>
+            </PrivateRoute>
+        </>
+    );
+};
+
+export default TutorLayout;

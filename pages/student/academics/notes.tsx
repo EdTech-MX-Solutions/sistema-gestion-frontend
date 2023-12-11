@@ -1,121 +1,147 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { usePeriodo } from "@/components/context/PeriodoProvider";
+import { useCookies } from "react-cookie";
+import { InterfaceCalificaciones } from "@/data/interfaces/calificaciones";
+import { useAlumno } from "@/components/context/AlumnoProvider";
+import PrincipalTitle from "@/components/student/Principal.Title";
+import TableGrades from "@/components/student/academics/TableGrades";
+import SIGEAPICollection from "@/data/calls/apiHandler";
+import CardView from "@/components/CardView";
+import StudentAcacemicsCard from "@/components/student/StudentAcademicsCard";
+import Loader from "@/components/elements/Loader";
 
 interface DefaultLayoutProps {
-  children: ReactNode;
+    children: ReactNode;
 }
 
-function notes(){
+function Notes() {
+    const [cookies, setCookie] = useCookies(["token", "boleta"]);
+    const { periodo } = usePeriodo();
+    const { alumno } = useAlumno();
+    const [loading, setLoading] = useState<boolean>(false); // [true, setLoading
+    const [hayCalificaciones, setHayCalificaciones] = useState<boolean>(false); // [false, setHayCalificaciones
+    const [calificaciones, setCalificaciones] = useState<
+        InterfaceCalificaciones[]
+    >([
+        {
+            Grado: "1",
+            SubGrado: "A",
+            materia: "Matemáticas",
+            claveMateria: "MAT-1",
+            primerTrimestre: "10",
+            segundoTrimestre: "10",
+            tercerTrimestre: "10",
+            calificacionFinal: "10",
+        },
+    ]);
 
-    const calificacionM1 = {
-        materia : "Español",
-        trimestre1 : 10,
-        trimestre2 : 10,  
-        trimestre3 : 10,
-        final : 10,
-        alumnoBoleta : ""  
+    const fetchNotes = async () => {
+        setLoading(true);
+        const api = new SIGEAPICollection();
+        const token = cookies.token;
+        const boleta = cookies.boleta;
+        try {
+            const response =
+                await api.sharedCollection.executeGetCalificaciones(
+                    token,
+                    boleta
+                );
+            if (response.ok) {
+                const data = await response.json();
+                if (data.length == 0) {
+                    setHayCalificaciones(false);
+                    setLoading(false);
+                    return;
+                }
+                let newCalificaciones: InterfaceCalificaciones[] = [];
+                for (let i = 0; i < data.calificaciones.length; i++) {
+                    const element = data.calificaciones[i];
+                    const newCalificacion: InterfaceCalificaciones = {
+                        Grado: element.grado,
+                        SubGrado: element.subGrado,
+                        materia: element.materia,
+                        claveMateria: element.claveMateria,
+                        primerTrimestre: element.primerTrimestre,
+                        segundoTrimestre: element.segundoTrimestre,
+                        tercerTrimestre: element.tercerTrimestre,
+                        calificacionFinal: element.calificacionFinal,
+                    };
+                    newCalificaciones.push(newCalificacion);
+                }
+
+                setCalificaciones(newCalificaciones);
+                setHayCalificaciones(true);
+                setLoading(false);
+                console.log("Calificaciones Actuales: ", newCalificaciones);
+            } else {
+                console.error(
+                    `Error en la solicitud. Código de estado: ${response.status}`
+                );
+                setLoading(false);
+            }
+        } catch (error) {
+            console.error("Error de solicitud:", error);
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchNotes();
+    }, []);
+
+    // const periodo = "Periodo_actual";
+    const title =
+        "Calificaciones " + periodo.anioInicio + "-" + periodo.anioFin;
+
+    if (!hayCalificaciones && !loading) {
+        return (
+            <>
+                <CardView title={title} description={title} customtitle={true}>
+                    <PrincipalTitle title={title}></PrincipalTitle>
+                    <StudentAcacemicsCard alumno={alumno}>
+                        <div className="flex justify-center items-center h-96">
+                            <div className="text-3xl text-gray-400">
+                                <h1 className="text-gray-800 dark:text-gray-200">
+                                    No hay calificaciones disponibles, para este
+                                    periodo.
+                                </h1>
+                                <p className="text-1xl">
+                                    Favor de revisar más tarde.
+                                </p>
+                            </div>
+                        </div>
+                    </StudentAcacemicsCard>
+                </CardView>
+            </>
+        );
+    } else if (loading) {
+        return (
+            <>
+                <CardView title={title} description={title} customtitle={true}>
+                    <PrincipalTitle title={title}></PrincipalTitle>
+                    <StudentAcacemicsCard alumno={alumno}>
+                        <div className="flex justify-center items-center h-96">
+                            <h1 className="text-2xl text-gray-400">
+                                Cargando...
+                                <Loader />
+                            </h1>
+                        </div>
+                    </StudentAcacemicsCard>
+                </CardView>
+            </>
+        );
+    } else {
+        return (
+            <>
+                <CardView title={title} description={title} customtitle={true}>
+                    <PrincipalTitle title={title}></PrincipalTitle>
+                    <StudentAcacemicsCard alumno={alumno}>
+                        <TableGrades calificaciones={calificaciones} />
+                    </StudentAcacemicsCard>
+                </CardView>
+            </>
+        );
     }
-
-    const calificacionM2 = {
-        materia : "Matematicas",
-        trimestre1 : 10,
-        trimestre2 : 10,  
-        trimestre3 : 10,
-        final : 10,
-        alumnoBoleta : ""  
-    }
-
-    const calificacionM3 = {
-        materia : "Español",
-        trimestre1 : 10,
-        trimestre2 : 10,  
-        trimestre3 : 10,
-        final : 10,
-        alumnoBoleta : ""  
-    }
-
-    const calificacionM4 = {
-        materia : "Español",
-        trimestre1 : 10,
-        trimestre2 : 10,  
-        trimestre3 : 10,
-        final : 10,
-        alumnoBoleta : ""  
-    }
-
-    const calificacionM5 = {
-        materia : "Español",
-        trimestre1 : 10,
-        trimestre2 : 10,  
-        trimestre3 : 10,
-        final : 10,
-        alumnoBoleta : ""  
-    }
-
-    const calificacionesAlumno = [calificacionM1, calificacionM2, calificacionM3, calificacionM4, calificacionM5];
-
-
-    return (
-        <>
-            <div className="container mx-auto justify-center py-5">
-                <h1 className="text-4xl font-bold text-center bg-white p-3 rounded-full"> Calificaciones [Periodo_actual] </h1>
-            </div>
-
-            <div className="flex mx-auto justify-center bg-white p-5 rounded-lg">
-                <table className="table-fixed w-full text-sm text-center font-semibold">
-                    <thead className="text-white uppercase bg-green-700">
-                        <tr className="">
-                            <th className="p-3">Materia</th>
-                            <th>1er Trimestre</th>
-                            <th>2do Trimestre</th>
-                            <th>3er Trimestre</th>
-                            <th>Final</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td className="p-5"> Español </td>
-                            <td> 10 </td>
-                            <td> 10 </td>
-                            <td> 10 </td>
-                            <td> 10 </td>
-                        </tr>
-
-                        <tr>
-                            <td className="p-5">Matemáticas</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                        </tr>
-
-                        <tr>
-                            <td className="p-5">Exploración de la Naturaleza y la Sociedad</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                        </tr>
-
-                        <tr>
-                            <td className="p-5">Formación Cívica y Ètica</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                        </tr>
-
-                        <tr>
-                            <td className="p-5">Educación Artística</td>
-                            <td>8</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </>
-    )
 }
 
-export default notes;
+export default Notes;
