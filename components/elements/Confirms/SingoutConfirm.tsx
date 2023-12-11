@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { ConfirmElement } from "./Confirm";
+import { ConfirmLogoutElement } from "./ConfirmLogout";
 
 interface DialogDefaultProps {
     open: boolean;
@@ -16,7 +17,7 @@ export function SignoutConfirm({ open, text, handler }: DialogDefaultProps) {
 
     return (
         <>
-            <ConfirmElement open={isopen} text={text} handler={handler} />
+            <ConfirmLogoutElement open={isopen} text={text} handler={handler} />
         </>
     );
 }

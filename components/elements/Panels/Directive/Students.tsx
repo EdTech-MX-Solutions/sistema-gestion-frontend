@@ -1,49 +1,46 @@
-import { useCookies } from "react-cookie";
-import PanelCard from "./CardPanel";
 import React from "react";
-import { ConfirmLogoutElement } from "../Confirms/ConfirmLogout";
+import PanelCard from "../CardPanel";
+import { ConfirmLogoutElement } from "../../Confirms/ConfirmLogout";
+import { ConfirmElement } from "../../Confirms/Confirm";
 
-export default function PanelCards() {
+export default function PanelDirectiveStudents() {
     const [confirmationisopen, setConfirmationOpen] = React.useState(false);
-    const [cookies, setCookie, removeCookie] = useCookies([
-        "token",
-        "user",
-        "childs",
-        "boleta",
-    ]);
 
     const Panel = () => (
         <>
             <PanelCard
-                category="Panel de Control"
-                title="Alumnos"
+                category="Panel de Alumnos"
+                title="Consultar Alumno"
                 bgColor="emerald-600"
-                route="/directive/actionsStudent"
+                route="/directive/actionsStudent/consultStudents"
             />
             <PanelCard
-                category="Panel de Control"
-                title="Tutores"
+                category="Panel de Alumnos"
+                title="Registrar Alumno"
                 bgColor="emerald-600"
-                route="/directive/actionsStudent/consultParents"
+                route="/directive/actionsStudent/registrerDataPersonalStudent"
             />
-            <PanelCard
-                category="Panel de Control"
-                title="Grupos"
-                bgColor="emerald-600"
-                route="/directive/othersOptions/suggestions"
-            />
-            <PanelCard
-                category="Panel de Control"
-                title="Directivos"
-                bgColor="emerald-600"
-                route="/directive/othersOptions/suggestions"
-            />
+           
             <PanelCard
                 category="Panel de Control"
                 title="Reportes y Avisos"
-                bgColor="cyan-600"
+                bgColor="emerald-600"
+                textSize="sm"
                 route="/directive/othersOptions/suggestions"
             />
+            <PanelCard
+                category="Sistema"
+                title="Regresar al Inicio"
+                bgColor="gray-600"
+                route="/"
+            />
+            <PanelCard
+                category="Sistema"
+                title="Ayuda"
+                bgColor="cyan-600 bg-opacity-50"
+                route="/"
+            />
+
             <PanelCard
                 category="Sistema"
                 title="Cerrar Sesión"
@@ -66,4 +63,3 @@ export default function PanelCards() {
         </>
     );
 }
-

@@ -1,7 +1,7 @@
 import Card from "@/components/Card";
 import CardView from "@/components/CardView";
 import PrivateRoute from "@/components/auth/PrivateRoute";
-import { ConfirmElement } from "@/components/elements/Confirms/Confirm";
+import { ConfirmLogoutElement } from "@/components/elements/Confirms/ConfirmLogout";
 import Link from "next/link";
 import React from "react";
 import { useEffect, useState } from "react";
@@ -126,7 +126,7 @@ export default function Index() {
                 />
                 {/* Agregar más componentes PanelCard según sea necesario */}
             </div>
-            <ConfirmElement
+            <ConfirmLogoutElement
                 open={confirmationisopen}
                 text="¿Estás seguro que deseas cerrar sesión?"
                 handler={() => setConfirmationOpen(false)}

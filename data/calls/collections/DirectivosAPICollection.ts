@@ -17,7 +17,7 @@ export class DirectivosAPICollection {
             },
         });
     }
-    
+
     executeGetGrupos(token: string) {
         const route = this.apiCaller.getGruposCall();
         return fetch(route, {
@@ -37,5 +37,21 @@ export class DirectivosAPICollection {
                 Authorization: `Bearer ${token}`,
             },
         });
-    } 
+    }
+
+    executeEndCycle(token: string) {
+        const route = this.apiCaller.getCall() + `/ciclos`;
+        return fetch(route, {
+            method: "PATCH",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                finalizado: true,
+                periodoReinscripciones: false,
+                periodoCalificaciones: false,
+            }),
+        });
+    }
 }

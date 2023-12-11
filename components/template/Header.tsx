@@ -11,7 +11,7 @@ const Header = (props: {
 }) => {
   return (
     <header className="print:hidden sticky top-0 z-50 flex w-full bg-white dark:bg-slate-500 drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
-      <div className="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11">
+      <div className="flex flex-grow items-center justify-between p-4 pl-2 shadow-2 md:pr-6 2xl:pr-11">
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
           {/* <!-- Hamburger Toggle BTN --> */}
           <button
@@ -88,6 +88,15 @@ const Header = (props: {
                 </svg>
               </button>
               <div className="flex  items-center justify-center">
+                <Link href="/">
+                  <div className=" relative w-full text-gray-600 dark:text-gray-200 focus-within:text-gray-400">
+                    <button className="flex items-center py-2 px-2 rounded-xl mx-2 focus:outline-none focus:cursor-auto dark:focus:bg-slate-600 focus:bg-secondary focus:bg-opacity-50 dark:focus:text-gray-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+                      </button>
+                  </div>
+                </Link>
                 <div className=" relative w-full text-gray-600 dark:text-gray-200 focus-within:text-gray-400">
                   <input id="search" type="search" name="q" className="cursor-pointer py-2 text-sm bg-transparent text-black dark:text-white rounded-md pl-10 focus:outline-none focus:cursor-auto dark:focus:bg-slate-600 focus:bg-secondary focus:bg-opacity-50 dark:focus:text-gray-200" placeholder="Buscar..." autoComplete="off"/>
                   <label htmlFor="search" className="absolute inset-y-0 left-0 flex items-center pl-2">
