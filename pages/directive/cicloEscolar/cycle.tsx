@@ -1,25 +1,22 @@
 import PrincipalTitle from "@/components/directive/Principal.Title";
 import { ReactNode } from "react";
-import FormCicloEscolar from "@/components/directive/FormCicloEscolar";
 import CardView from "@/components/CardView";
 import { usePeriodo } from "@/components/context/PeriodoProvider";
 import CardPeriodos from "@/components/directive/Periodos/CardPeriodos";
-
-interface DefaultLayoutProps {
-    children: ReactNode;
-}
+import { BreadcrumbsWithIcon } from "@/components/elements/BreadCrumbs/BreadcrumbsWithIcon";
+import { BreadcrumbsDirective } from "@/components/elements/BreadCrumbs/BreadDirective";
 
 function CreateCicloEscolar() {
     // const title = "Ciclo Escolar";
     const { periodo } = usePeriodo();
     const title =
-    "Periodo Actual: " + periodo.anioInicio + "-" + periodo.anioFin;
+        "Periodo Actual: " + periodo.anioInicio + "-" + periodo.anioFin;
 
     return (
         <>
-            <CardView title={title} description={title} customtitle={true}>
-                <PrincipalTitle title={title}></PrincipalTitle>
-                <CardPeriodos/>
+            <BreadcrumbsDirective ActualRoute={"Ciclo Escolar"} />
+            <CardView title={title} description={title}>
+                <CardPeriodos />
             </CardView>
         </>
     );

@@ -3,34 +3,40 @@ import ButtonComponent from "../ButtonComponent";
 import InterfaceAlumno from "@/data/interfaces/alumno";
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
+import router from "next/router";
 
 interface FormStudentProps {
     student : InterfaceAlumno
+    isNewUser : boolean
 }
 
-export const FormStudent = ({student}: FormStudentProps) => {
+export const FormStudent = ({student, isNewUser}: FormStudentProps) => {
 
   const [formData, setFormData] = useState({
-    no_boleta: student.no_boleta,
-    curp: student.curp,
-    nombre: student.nombre,
-    apellido_paterno: student.apellido_paterno,
-    apellido_materno: student.apellido_materno,
-    aniosPreescolar: student.aniosPreescolar,
-    fecha_nacimiento: student.fecha_nacimiento,
-    edad: student.edad,
-    pais_origen: student.pais_origen,
-    sexo: student.sexo,
-    estatus: student.estatus,
-    entidad_nacimiento: student.entidad_nacimiento,
-    grado: student.grado,
-    grupo: student.grado,
-    actualizarDatosMedicos: student.actualizarDatosMedicos 
+    no_boleta: isNewUser ? "" : student.no_boleta,
+    curp: isNewUser ? "" : student.curp,
+    nombre:  isNewUser ? "" : student.nombre,
+    apellido_paterno: isNewUser ? "" : student.apellido_paterno,
+    apellido_materno: isNewUser ? "" : student.apellido_materno,
+    aniosPreescolar: isNewUser ? "" : student.aniosPreescolar,
+    fecha_nacimiento: isNewUser ? "" : student.fecha_nacimiento,
+    edad:  isNewUser ? "" : student.edad,
+    pais_origen: isNewUser ? "" : student.pais_origen,
+    sexo: isNewUser ? "" : student.sexo,
+    estatus: isNewUser ? "" : student.estatus,
+    entidad_nacimiento:  isNewUser ? "" : student.entidad_nacimiento,
+    grado: isNewUser ? "" : student.grado,
+    grupo: isNewUser ? "" : student.grado,
+    actualizarDatosMedicos: isNewUser ? "" :student.actualizarDatosMedicos 
   })
 
   const [cookies, setCookie] = useCookies(["token", "idProfesor", "childs"]);
   const [paises, setPaises] = useState([])
   const [estados, setEstados] = useState([])
+
+  const handlePasoSiguienteDireccion = (boleta : any) => {
+    router.push(`/directive/actionsStudent/registrer/?boleta=${boleta}`);
+  }
 
   const handleInputChange = (event: { target: { name: any; value: any; }; }) => {
     const {name, value} = event.target;
@@ -243,7 +249,7 @@ export const FormStudent = ({student}: FormStudentProps) => {
                   name="edad"
                   id="edad"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value={formData.edad}
+                  value={formData.edad ?? ''}
                   onChange={handleInputChange}
                 />
               </div>
@@ -261,7 +267,7 @@ export const FormStudent = ({student}: FormStudentProps) => {
                   id="aniosPreescolar"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   required
-                  value={formData.aniosPreescolar}
+                  value={formData.aniosPreescolar ?? ''}
                   onChange={handleInputChange}
                 />
               </div>
@@ -281,8 +287,8 @@ export const FormStudent = ({student}: FormStudentProps) => {
                   onChange={handleInputChange}
                 >
                   <option value = ""> Seleccione una opción</option>
-                  <option value="h"> Masculino </option>
-                  <option value="m"> Femenino </option>
+                  <option value="Masculino"> Masculino </option>
+                  <option value="Femenino"> Femenino </option>
                 </select>
               </div>
 
@@ -335,6 +341,7 @@ export const FormStudent = ({student}: FormStudentProps) => {
               <ButtonComponent
                 title={"Siguiente"}
                 color={"blue"}
+                onClick={() => handlePasoSiguienteDireccion(formData.no_boleta)}
               ></ButtonComponent>
             </div>
           </form>

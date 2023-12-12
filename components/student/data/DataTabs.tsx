@@ -1,11 +1,14 @@
 import { Tab } from "@/components/interfaces/TabInterface";
 import StudentTabs from "../tabs";
+import { base } from "@faker-js/faker";
 
-function DataTabs() {
+function DataTabs(
+    { baseRuta, id, isDirective }: { baseRuta?: string; id?: string; isDirective?: boolean} = {}
+) {
     const tabs: Tab[] = [
         {
             text: "Datos Personales",
-            route: "data/personal",
+            route: `${baseRuta}/personal/?id=${id}`,
             icon: (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +21,7 @@ function DataTabs() {
         },
         {
             text: "Datos de Salud",
-            route: "data/medic",
+            route: `${baseRuta}/medic/?id=${id}`,
             icon: (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +34,7 @@ function DataTabs() {
         },
         {
             text: "Datos del Tutor",
-            route: "data/parent",
+            route: `${baseRuta}/parent/?id=${id}`,
             icon: (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +48,7 @@ function DataTabs() {
         // Añadir más pestañas si se ocupa
     ];
 
-    return <StudentTabs tabs={tabs} />;
+    return <StudentTabs tabs={tabs} isDirective = {isDirective}/>;
 }
 
 export default DataTabs;

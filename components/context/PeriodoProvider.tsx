@@ -12,7 +12,6 @@ import { useCookies } from "react-cookie";
 interface PeriodoContextType {
     periodo: InterfacePeriodo;
     updatePeriodo: (newPeriodo: InterfacePeriodo) => void;
-    refetchPeriodo: () => void;
 }
 
 const PeriodoContext = createContext<PeriodoContextType | undefined>(undefined);
@@ -63,10 +62,6 @@ export const PeriodoProvider: React.FC<{ children: ReactNode }> = ({
         }
     };
 
-    const refetchPeriodo = ()  => {
-        fetchPeriodo();
-    }
-
     const updatePeriodo = (newPeriodo: InterfacePeriodo) => {
         setPeriodo(newPeriodo);
     };
@@ -76,7 +71,7 @@ export const PeriodoProvider: React.FC<{ children: ReactNode }> = ({
     }, []); 
 	
     return (
-        <PeriodoContext.Provider value={{ periodo, updatePeriodo, refetchPeriodo }}>
+        <PeriodoContext.Provider value={{ periodo, updatePeriodo }}>
             {children}
         </PeriodoContext.Provider>
     );

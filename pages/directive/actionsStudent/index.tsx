@@ -1,25 +1,15 @@
 import CardView from "@/components/CardView";
 import PrivateRoute from "@/components/auth/PrivateRoute";
-import PanelDirectiveStudents from "@/components/elements/Panels/Directive/Students";
+import { useGreet } from "@/components/context/GreetProvider";
+import PanelDirectiveStudents from "@/components/directive/Students";
 import PanelCards from "@/components/elements/Panels/DirectivePanel";
 import { Breadcrumbs } from "@material-tailwind/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-function GetGreetings() {
-    var today = new Date();
-    var curHr = today.getHours();
-    if (curHr < 12) {
-        return "Buenos días";
-    } else if (curHr < 18) {
-        return "Buenas tardes";
-    } else {
-        return "Buenas noches";
-    }
-}
 
 export default function Index() {
-    let greeting = GetGreetings();
+    let greetingProvider = useGreet();
     const [cookies, setCookie, removeCookie] = useCookies(["token", "user", "childs", "boleta"]);
     const [name, setName] = useState("Cargando...");
 
@@ -38,7 +28,7 @@ export default function Index() {
             <PrivateRoute allowedRoles={["SUPERUSER", "DIRECTIVE"]}>
                 <BreadcrumbsWithIcon />
                 <CardView
-                    title={"Hola, " + greeting + " " + name}
+                    title={"Hola, " + greetingProvider.greet + " " + name}
                     description="Este es tu panel de control para gestionar a los alumnos."
                 >
                     <PanelDirectiveStudents />

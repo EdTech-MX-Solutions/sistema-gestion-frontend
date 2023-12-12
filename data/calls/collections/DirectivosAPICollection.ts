@@ -9,8 +9,47 @@ export class DirectivosAPICollection {
     }
 
     executeGetAlumnosPendientesReiscripcion(token : string){
-        const route = this.apiCaller.getCall() + `/reinscripciones/`;
+        const route = this.apiCaller.getCall() + `/reinscripciones`;
         return fetch (route, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+
+    executeGetPadecimientosMedicos(token : string){
+        const route = this.apiCaller.getCall() + `/datos-medicos/condiciones-medicas`;
+        return fetch (route, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+
+    executeGetPreguntasHereditarias(token : string){
+        const route = this.apiCaller.getCall() + `/datos-medicos/preguntas-hereditarias`;
+        return fetch (route, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+
+    executeGetPreguntasMedicas(token : string){
+        const route = this.apiCaller.getCall() + `/datos-medicos/preguntas-medicas`;
+        return fetch (route, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+    executeGetMaterias(token: string) {
+        const route = this.apiCaller.getCall() + `/materias`;
+        return fetch(route, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -49,6 +88,19 @@ export class DirectivosAPICollection {
         });
     }
 
+    executePostPeriodo(token: string, periodo: InterfacePeriodo) {
+        const route = this.apiCaller.getCall() + `/ciclos`;
+        return fetch(route, {
+            method: "PATCH",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(periodo),
+        });
+        
+    }
+
     executeEndCycle(token: string) {
         const route = this.apiCaller.getCall() + `/ciclos`;
         return fetch(route, {
@@ -61,7 +113,8 @@ export class DirectivosAPICollection {
                 finalizado: true,
                 periodoReinscripciones: false,
                 periodoCalificaciones: false,
+                periodoPreinscripciones: false,
             }),
-        });
+        }); 
     }
 }

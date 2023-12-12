@@ -1,25 +1,14 @@
 import CardView from "@/components/CardView";
 import PrivateRoute from "@/components/auth/PrivateRoute";
-import PanelCards from "@/components/elements/Panels/DirectivePanel";
+import { useGreet } from "@/components/context/GreetProvider";
+import PanelDirectiveCards from "@/components/elements/Panels/DirectiveDirectivePanel";
 import { Breadcrumbs } from "@material-tailwind/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
-function GetGreetings() {
-    var today = new Date();
-    var curHr = today.getHours();
-    if (curHr < 12) {
-        return "Buenos días";
-    } else if (curHr < 18) {
-        return "Buenas tardes";
-    } else {
-        return "Buenas noches";
-    }
-}
-
 export default function Index() {
-    let greeting = GetGreetings();
+    let greeting = useGreet().greet;
     const [cookies, setCookie, removeCookie] = useCookies([
         "token",
         "user",
@@ -46,7 +35,7 @@ export default function Index() {
                     title={"Hola, " + greeting + " " + name}
                     description="Este es tu panel de control"
                 >
-                    <PanelCards />
+                    <PanelDirectiveCards />
                 </CardView>
             </PrivateRoute>
         </>
@@ -66,7 +55,7 @@ function BreadcrumbsWithIcon() {
                     <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                 </svg>
             </Link>
-            <a href="#">Panel Alumnos</a>
+            <a href="#">Panel Dirección</a>
         </Breadcrumbs>
     );
 }

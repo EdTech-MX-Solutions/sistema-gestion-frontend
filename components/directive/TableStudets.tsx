@@ -10,7 +10,7 @@ interface TableStudetsProps {
 export const TableStudets = ({ students }: TableStudetsProps) => {
 
   const handleConsultarAlumno = (idAlumno: any) => {
-    router.push(`/directive/actionsStudent/consultDataPersonalStudent?id=${idAlumno}`);
+    router.push(`/directive/actionsStudent/personal?id=${idAlumno}`);
   }
 
   return (
@@ -27,7 +27,7 @@ export const TableStudets = ({ students }: TableStudetsProps) => {
             </tr>
           </thead>
           <tbody>
-            {students.map((student) => (
+            {students.map((student) => ( 
               <tr key = {student.no_boleta}>
                 <td className="p-5"> {student.no_boleta} </td>
                 <td colSpan={2}> {`${student.nombre}  ${student.apellido_paterno}  ${student.apellido_materno}`} </td>

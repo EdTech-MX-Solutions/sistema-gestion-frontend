@@ -14,6 +14,7 @@ export default function PanelCards() {
 
     const Panel = () => (
         <>
+            <div className="bg-teal-700" />
             <PanelCard
                 category="Panel de Control"
                 title="Alumnos"
@@ -36,12 +37,18 @@ export default function PanelCards() {
                 category="Panel de Control"
                 title="Directivos"
                 bgColor="emerald-600"
-                route="/directive/othersOptions/suggestions"
+                route="/directive/actionsDirective"
+            />
+             <PanelCard
+                category="Panel de Control"
+                title="Ciclo Escolar"
+                bgColor="emerald-600"
+                route="/directive/cicloEscolar"
             />
             <PanelCard
                 category="Panel de Control"
                 title="Reportes y Avisos"
-                bgColor="cyan-600"
+                bgColor="teal-700"
                 route="/directive/othersOptions/suggestions"
             />
             <PanelCard
@@ -55,7 +62,7 @@ export default function PanelCards() {
 
     return (
         <>
-            <div className="flex flex-wrap items-center mt-10">
+            <div className="flex flex-wrap mt-10">
                 <Panel />
             </div>
             <ConfirmLogoutElement

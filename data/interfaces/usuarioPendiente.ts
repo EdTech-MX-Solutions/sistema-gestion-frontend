@@ -1,8 +1,12 @@
+import InterfaceAlumno from "./alumno"
+
 interface InterfaceUsuarioPendiente{
     estatus: string,
-    gradoSolicitado: "string",
+    gradoSolicitado: string,
     idTramite: number,
-    noBoleta: "string"
+    noBoleta: string
+    nombre: string,
+    alumno : InterfaceAlumno
 }
 
 export default InterfaceUsuarioPendiente;

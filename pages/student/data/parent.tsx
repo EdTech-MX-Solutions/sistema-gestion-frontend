@@ -8,7 +8,7 @@ import { useAlumno } from "@/components/context/AlumnoProvider";
 import StudentDataCard from "@/components/student/StudentData.Card";
 
 function ParentsData() {
-    const { alumno } = useAlumno();
+    const { alumnos } = useAlumno();
     const [cookies, setCookie] = useCookies(["token", "user"]);
     const [dataGetted, setDataGetted] = useState(false);
     const loadingMessage = "cargando...";
@@ -110,7 +110,7 @@ function ParentsData() {
     return (
         <>
             <CardView title={title} description={description}>
-                <StudentDataCard alumno={alumno}>
+                <StudentDataCard alumno={alumnos[0]}>
                     {dataGetted ? (
                         <ParentsDataComponent parents={parentList} />
                     ) : (
