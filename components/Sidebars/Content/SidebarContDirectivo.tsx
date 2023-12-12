@@ -434,7 +434,7 @@ const SidebarContDirectivo = () => {
                                                 d="M19.9 12.66a1 1 0 0 1 0-1.32l1.28-1.44a1 1 0 0 0 .12-1.17l-2-3.46a1 1 0 0 0-1.07-.48l-1.88.38a1 1 0 0 1-1.15-.66l-.61-1.83a1 1 0 0 0-.95-.68h-4a1 1 0 0 0-1 .68l-.56 1.83a1 1 0 0 1-1.15.66L5 4.79a1 1 0 0 0-1 .48L2 8.73a1 1 0 0 0 .1 1.17l1.27 1.44a1 1 0 0 1 0 1.32L2.1 14.1a1 1 0 0 0-.1 1.17l2 3.46a1 1 0 0 0 1.07.48l1.88-.38a1 1 0 0 1 1.15.66l.61 1.83a1 1 0 0 0 1 .68h4a1 1 0 0 0 .95-.68l.61-1.83a1 1 0 0 1 1.15-.66l1.88.38a1 1 0 0 0 1.07-.48l2-3.46a1 1 0 0 0-.12-1.17ZM18.41 14l.8.9-1.28 2.22-1.18-.24a3 3 0 0 0-3.45 2L12.92 20h-2.56L10 18.86a3 3 0 0 0-3.45-2l-1.18.24-1.3-2.21.8-.9a3 3 0 0 0 0-4l-.8-.9 1.28-2.2 1.18.24a3 3 0 0 0 3.45-2L10.36 4h2.56l.38 1.14a3 3 0 0 0 3.45 2l1.18-.24 1.28 2.22-.8.9a3 3 0 0 0 0 3.98Zm-6.77-6a4 4 0 1 0 4 4 4 4 0 0 0-4-4Zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2Z"
                                             ></path>
                                         </svg>
-                                        CICLO ESC...
+                                        DIRECCIÓN
                                         <svg
                                             className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
                                                 open && "rotate-180"
@@ -462,18 +462,19 @@ const SidebarContDirectivo = () => {
                                         <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-4">
                                             <li>
                                                 {sidebarItem(
-                                                    "Ciclo Escolar",
+                                                    "Panel Dirección",
                                                     base_rute +
-                                                        "cicloEscolar/cycle"
+                                                        "actionsDirective/"
                                                 )}
                                                 {sidebarItem(
-                                                    "Carga de Archivos",
+                                                    "Consultar Directivos",
                                                     base_rute +
-                                                        "cicloEscolar/dataUpload"
+                                                        "actionsDirective/consultDirectives"
                                                 )}
                                                 {sidebarItem(
-                                                    "Materias",
-                                                    base_rute + "/subjects"
+                                                    "Registrar Directivo",
+                                                    base_rute +
+                                                        "actionsDirective/registerDirective"
                                                 )}
                                             </li>
                                         </ul>
@@ -515,7 +516,7 @@ const SidebarContDirectivo = () => {
                                         }}
                                     >
                                         <svg
-                                            className="ml-1.5 inline-block mr-1.5 mb-0.5 text-gray-800 dark:text-gray-200 text-black"
+                                            className="ml-1.5 inline-block mb-0.5 text-gray-800 dark:text-gray-200 text-black"
                                             display={"default"}
                                             width="20"
                                             height="20"
@@ -529,7 +530,7 @@ const SidebarContDirectivo = () => {
                                                 d="M19.9 12.66a1 1 0 0 1 0-1.32l1.28-1.44a1 1 0 0 0 .12-1.17l-2-3.46a1 1 0 0 0-1.07-.48l-1.88.38a1 1 0 0 1-1.15-.66l-.61-1.83a1 1 0 0 0-.95-.68h-4a1 1 0 0 0-1 .68l-.56 1.83a1 1 0 0 1-1.15.66L5 4.79a1 1 0 0 0-1 .48L2 8.73a1 1 0 0 0 .1 1.17l1.27 1.44a1 1 0 0 1 0 1.32L2.1 14.1a1 1 0 0 0-.1 1.17l2 3.46a1 1 0 0 0 1.07.48l1.88-.38a1 1 0 0 1 1.15.66l.61 1.83a1 1 0 0 0 1 .68h4a1 1 0 0 0 .95-.68l.61-1.83a1 1 0 0 1 1.15-.66l1.88.38a1 1 0 0 0 1.07-.48l2-3.46a1 1 0 0 0-.12-1.17ZM18.41 14l.8.9-1.28 2.22-1.18-.24a3 3 0 0 0-3.45 2L12.92 20h-2.56L10 18.86a3 3 0 0 0-3.45-2l-1.18.24-1.3-2.21.8-.9a3 3 0 0 0 0-4l-.8-.9 1.28-2.2 1.18.24a3 3 0 0 0 3.45-2L10.36 4h2.56l.38 1.14a3 3 0 0 0 3.45 2l1.18-.24 1.28 2.22-.8.9a3 3 0 0 0 0 3.98Zm-6.77-6a4 4 0 1 0 4 4 4 4 0 0 0-4-4Zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2Z"
                                             ></path>
                                         </svg>
-                                        DIRECCIÓN
+                                        CICLO ESCOLAR
                                         <svg
                                             className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
                                                 open && "rotate-180"
@@ -556,6 +557,25 @@ const SidebarContDirectivo = () => {
                                     >
                                         <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-4">
                                             <li>
+                                                {sidebarItem(
+                                                    "Panel Ciclo Escolar",
+                                                    base_rute +
+                                                        "cicloEscolar/"
+                                                )}
+                                                {sidebarItem(
+                                                    "Ciclo Escolar",
+                                                    base_rute +
+                                                        "cicloEscolar/cycle"
+                                                )}
+                                                {sidebarItem(
+                                                    "Carga de Archivos",
+                                                    base_rute +
+                                                        "cicloEscolar/dataUpload"
+                                                )}
+                                                {sidebarItem(
+                                                    "Materias",
+                                                    base_rute + "/cicloEscolar/subjects"
+                                                )}
                                                 {sidebarItem(
                                                     "Mensajes o Avisos",
                                                     base_rute + "/messages"

@@ -8,7 +8,7 @@ export const CardPeriodos = ({}: CardPeriodosProps) => {
     return (
         <>
             <div>
-              <CyclePanel/>
+              <MateriasPanel/>
             </div>
         </>
     );

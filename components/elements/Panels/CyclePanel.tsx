@@ -1,10 +1,10 @@
-import PanelCard from "../elements/Panels/CardPanel";
+import PanelCard from "./CardPanel";
 import React, { useEffect } from "react";
 import { usePeriodo } from "@/components/context/PeriodoProvider";
-import { ConfirmLogoutElement } from "../elements/Confirms/ConfirmLogout";
-import { ConfirmElement } from "../elements/Confirms/Confirm";
+import { ConfirmLogoutElement } from "../Confirms/ConfirmLogout";
+import { ConfirmElement } from "../Confirms/Confirm";
 import { useRouter } from "next/router";
-import Loader from "../elements/Loader";
+import Loader from "../Loader";
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
 import { Alert } from "@material-tailwind/react";
@@ -24,7 +24,6 @@ export default function CyclePanel() {
     const [confirmationisopen2, setConfirmationOpen2] = React.useState(false);
     const [confirmationisopen3, setConfirmationOpen3] = React.useState(false);
     const [confirmationisopen4, setConfirmationOpen4] = React.useState(false);
-    const [confirmationisopen5, setConfirmationOpen5] = React.useState(false);
     const [confirmationisopen6, setConfirmationOpen6] = React.useState(false);
 
     const periodo_escuela = periodo.periodo;
@@ -219,10 +218,10 @@ export default function CyclePanel() {
                         messageType === "success"
                             ? "border-emerald-300"
                             : messageType === "info"
-                            ? "border-blue-300"
+                            ? "dark:border-blue-300 border-gray-700"
                             : "border-red-300"
                     }
-                    lg:w-2/3 border-2  border-opacity-50 mt-2 p-1 rounded-lg mb-4`}
+                    lg:w-2/3 border-2  border-opacity-50 mt-2 p-1 rounded-lg mb-4 text-black`}
                 >
                     {message}
                 </Alert>

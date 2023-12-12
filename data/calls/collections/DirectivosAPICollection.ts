@@ -17,6 +17,15 @@ export class DirectivosAPICollection {
             },
         });
     }
+    executeGetMaterias(token: string) {
+        const route = this.apiCaller.getCall() + `/materias`;
+        return fetch(route, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
 
     executeGetProfessors(token: string) {
         const route = this.apiCaller.getProfesorCall();

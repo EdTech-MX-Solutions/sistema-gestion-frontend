@@ -3,7 +3,7 @@ import PanelCard from "./CardPanel";
 import React from "react";
 import { ConfirmLogoutElement } from "../Confirms/ConfirmLogout";
 
-export default function PanelCards() {
+export default function PanelDirectiveCards() {
     const [confirmationisopen, setConfirmationOpen] = React.useState(false);
     const [cookies, setCookie, removeCookie] = useCookies([
         "token",
@@ -17,37 +17,13 @@ export default function PanelCards() {
             <div className="bg-teal-700" />
             <PanelCard
                 category="Panel de Control"
-                title="Alumnos"
-                bgColor="emerald-600"
-                route="/directive/actionsStudent"
-            />
-            <PanelCard
-                category="Panel de Control"
-                title="Tutores"
-                bgColor="emerald-600"
-                route="/directive/actionsStudent/consultParents"
-            />
-            <PanelCard
-                category="Panel de Control"
-                title="Grupos"
-                bgColor="emerald-600"
+                title="Consultar Directivos"
+                bgColor="teal-700"
                 route="/directive/othersOptions/suggestions"
             />
             <PanelCard
                 category="Panel de Control"
-                title="Directivos"
-                bgColor="emerald-600"
-                route="/directive/actionsDirective"
-            />
-             <PanelCard
-                category="Panel de Control"
-                title="Ciclo Escolar"
-                bgColor="emerald-600"
-                route="/directive/cicloEscolar"
-            />
-            <PanelCard
-                category="Panel de Control"
-                title="Reportes y Avisos"
+                title="Registrar Directivo"
                 bgColor="teal-700"
                 route="/directive/othersOptions/suggestions"
             />

@@ -52,7 +52,7 @@ export default function PanelDirectiveStudents() {
 
     return (
         <>
-            <div className="flex flex-wrap items-center mt-10">
+            <div className="flex flex-wrap mt-10">
                 <Panel />
             </div>
             <ConfirmLogoutElement
