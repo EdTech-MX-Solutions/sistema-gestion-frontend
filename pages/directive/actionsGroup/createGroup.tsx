@@ -35,12 +35,14 @@ function createGroup() {
           titleBtn2={"Dar de Baja del Grupo"}
           titleTable={"Listado de Alumnos inscritos en el grupo"}
           alumnosInscritos={[]}
+          evento={() => {}}
         ></TableStudentsGroup>
         <TableStudentsGroup
           titleBtn1={"Ver Datos del Alumno"}
           titleBtn2={"Inscribir al Grupo"}
           titleTable={"Listado de Alumnos disponibles para el grupo seleccionado"          }
           alumnosInscritos={[]}
+          evento={() => {}}
         ></TableStudentsGroup>
       </div>
     </>

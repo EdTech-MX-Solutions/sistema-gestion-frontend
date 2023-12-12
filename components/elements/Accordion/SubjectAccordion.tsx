@@ -1,42 +1,136 @@
 import React, { useState, ReactNode } from "react";
 import { AccordionCustomIcon } from "./Accordion";
+import SIGEAPICollection from "@/data/calls/apiHandler";
+import { useCookies } from "react-cookie";
+import InterfaceMateria from "@/data/interfaces/materia";
+import {
+    Button,
+    IconButton,
+    List,
+    ListItem,
+    ListItemSuffix,
+} from "@material-tailwind/react";
+import { TrashIcon } from "../icons/Trash";
+import ButtonComponent from "@/components/ButtonComponent";
 
-export function SubjectAccordion() {
+export function SubjectAccordion({
+    subjects,
+}: {
+    subjects: InterfaceMateria[];
+}) {
+    const nivelel1 = subjects.filter((subject) => subject.nivel == "Primero");
+    const nivelel2 = subjects.filter((subject) => subject.nivel == "Segundo");
+    const nivelel3 = subjects.filter((subject) => subject.nivel == "Tercero");
+    const nivelel4 = subjects.filter((subject) => subject.nivel == "Cuarto");
+    const nivelel5 = subjects.filter((subject) => subject.nivel == "Quinto");
+    const nivelel6 = subjects.filter((subject) => subject.nivel == "Sexto");
+
     return (
         <>
             <AccordionCustomIcon
                 items={[
                     {
-                        AccordionHeaderTitle: "What is Material Tailwind?",
+                        AccordionHeaderTitle: "NIVEL 1",
                         AccordionChild: (
                             <p>
-                                We're not always in the position that we want to
-                                be at. We're constantly growing. We're
-                                constantly making mistakes. We're constantly
-                                trying to express ourselves and actualize our
-                                dreams.
+                                <List>
+                                    {nivelel1.map((subject, index) => (
+                                        <ListItem key={index} className="rounded-none mr-10 border-b border-b-blue-gray-100">
+                                            <p>
+                                                <span className="font-semibold">
+                                                    {subject.clave} - Nombre:
+                                                </span>{" "}
+                                                {subject.nombre}
+                                            </p>
+                                        </ListItem>
+                                    ))}
+                                </List>
                             </p>
                         ),
                     },
                     {
-                        AccordionHeaderTitle: "How to use Material Tailwind?",
+                        AccordionHeaderTitle: "NIVEL 2",
                         AccordionChild: (
-                            <div>
-                                <p>Instructions:</p>
-                                <ul>
-                                    <li>Step 1</li>
-                                    <li>Step 2</li>
-                                </ul>
-                            </div>
+                            <p>
+                                {nivelel2.map((subject, index) => (
+                                    <ListItem key={index} className="rounded-none mr-10 border-b border-b-blue-gray-100">
+                                        <p>
+                                            <span className="font-semibold">
+                                                {subject.clave} - Nombre:
+                                            </span>{" "}
+                                            {subject.nombre}
+                                        </p>
+                                    </ListItem>
+                                ))}
+                            </p>
                         ),
                     },
                     {
-                        AccordionHeaderTitle:
-                            "What can I do with Material Tailwind?",
+                        AccordionHeaderTitle: "NIVEL 3",
                         AccordionChild: (
-                            <span>
-                                You can do many things with Material Tailwind!
-                            </span>
+                            <p>
+                                {nivelel3.map((subject, index) => (
+                                    <ListItem key={index} className="rounded-none mr-10 border-b border-b-blue-gray-100">
+                                        <p>
+                                            <span className="font-semibold">
+                                                {subject.clave} - Nombre:
+                                            </span>{" "}
+                                            {subject.nombre}
+                                        </p>
+                                    </ListItem>
+                                ))}
+                            </p>
+                        ),
+                    },
+                    {
+                        AccordionHeaderTitle: "NIVEL 4",
+                        AccordionChild: (
+                            <p>
+                                {nivelel4.map((subject, index) => (
+                                    <ListItem key={index} className="rounded-none mr-10 border-b border-b-blue-gray-100">
+                                        <p>
+                                            <span className="font-semibold">
+                                                {subject.clave} - Nombre:
+                                            </span>{" "}
+                                            {subject.nombre}
+                                        </p>
+                                    </ListItem>
+                                ))}
+                            </p>
+                        ),
+                    },
+                    {
+                        AccordionHeaderTitle: "NIVEL 5",
+                        AccordionChild: (
+                            <p>
+                                {nivelel5.map((subject, index) => (
+                                    <ListItem key={index} className="rounded-none mr-10 border-b border-b-blue-gray-100">
+                                        <p>
+                                            <span className="font-semibold">
+                                                {subject.clave} - Nombre:
+                                            </span>{" "}
+                                            {subject.nombre}
+                                        </p>
+                                    </ListItem>
+                                ))}
+                            </p>
+                        ),
+                    },
+                    {
+                        AccordionHeaderTitle: "NIVEL 6",
+                        AccordionChild: (
+                            <p>
+                                {nivelel6.map((subject, index) => (
+                                    <ListItem key={index} className="rounded-none mr-10 border-b border-b-blue-gray-100">
+                                        <p>
+                                            <span className="font-semibold">
+                                                {subject.clave} - Nombre:
+                                            </span>{" "}
+                                            {subject.nombre}
+                                        </p>
+                                    </ListItem>
+                                ))}
+                            </p>
                         ),
                     },
                 ]}

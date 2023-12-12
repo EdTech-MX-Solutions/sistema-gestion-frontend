@@ -15,7 +15,7 @@ import CardView from "../CardView";
 import { da } from "@faker-js/faker";
 
 interface FormMedicProps {
-  dataMedic: InterfaceDatosMedicos;
+  dataMedic: any;
   isNewUsuario : boolean;
 }
 
