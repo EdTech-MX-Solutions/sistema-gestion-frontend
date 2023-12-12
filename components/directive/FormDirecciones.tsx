@@ -7,7 +7,7 @@ import InterfaceDireccion from "@/data/interfaces/direccion";
 import InterfaceColonia from "@/data/interfaces/colonia";
 
 interface FormDireccionesProps {
-  direccion: InterfaceDireccion;
+  direccion: any;
   isNewUser: boolean;
 }
 

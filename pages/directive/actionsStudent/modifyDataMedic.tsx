@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import PrincipalTitle from "@/components/directive/Principal.Title";
 import FormMedic from "@/components/directive/FormMedic";
+import InterfaceDatosMedicos from "@/data/interfaces/datosMedicos";
 
 interface DefaultLayoutProps {
   children: ReactNode;
@@ -122,7 +123,7 @@ function registrerDataMedicStudent() {
   return (
     <>
       <PrincipalTitle title={"Registro Datos Médicos Alumno"}></PrincipalTitle>
-      <FormMedic dataMedic={dataMedic}></FormMedic>
+      <FormMedic isNewUsuario dataMedic={dataMedic}></FormMedic>
     </>
   );
 }

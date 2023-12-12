@@ -4,6 +4,7 @@ import {
     AccordionHeader,
     AccordionBody,
 } from "@material-tailwind/react";
+import Card from "@/components/Card";
 
 interface IconProps {
     id: number;
@@ -48,16 +49,19 @@ export function AccordionCustomIcon({ items }: AccordionCustomIconProps) {
     return (
         <>
             {items.map((item, index) => (
-                <Accordion
-                    key={index}
-                    open={open === index + 1}
-                    icon={<Icon id={index + 1} open={open} />}
+                <Card
+                key={index}
                 >
-                    <AccordionHeader onClick={() => handleOpen(index + 1)}>
-                        {item.AccordionHeaderTitle}
-                    </AccordionHeader>
-                    <AccordionBody>{item.AccordionChild}</AccordionBody>
-                </Accordion>
+                    <Accordion
+                        open={open === index + 1}
+                        icon={<Icon id={index + 1} open={open} />}
+                    >
+                        <AccordionHeader className="pb-3" onClick={() => handleOpen(index + 1)}>
+                            {item.AccordionHeaderTitle}
+                        </AccordionHeader>
+                        <AccordionBody>{item.AccordionChild}</AccordionBody>
+                    </Accordion>
+                </Card>
             ))}
         </>
     );
