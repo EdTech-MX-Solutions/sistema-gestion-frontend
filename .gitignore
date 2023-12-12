@@ -35,3 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 app/api/auth/_route.js
+
+.idea/discord.xml
+
+.idea/misc.xml
