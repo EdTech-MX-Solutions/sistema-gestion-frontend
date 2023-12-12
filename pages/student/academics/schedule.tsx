@@ -5,7 +5,7 @@ import StudentAcacemicsCard from "@/components/student/StudentAcademicsCard";
 import PrincipalTitle from "@/components/directive/Principal.Title";
 
 function Schedule() {
-    const { alumno } = useAlumno();
+    const { alumnos } = useAlumno();
     const title = "Horario";
 
     const horario = [
@@ -33,7 +33,7 @@ function Schedule() {
         <>
             <CardView title={title} description={title} customtitle={true}>
                 <PrincipalTitle title={title}></PrincipalTitle>
-                <StudentAcacemicsCard alumno={alumno}>
+                <StudentAcacemicsCard alumno={alumnos[0]}>
                     <TableSchedule horario={horario}></TableSchedule>
                 </StudentAcacemicsCard>
             </CardView>

@@ -11,7 +11,7 @@ interface DefaultLayoutProps {
 }
 
 function AcademicRecord() {
-    const { alumno } = useAlumno();
+    const { alumnos } = useAlumno();
     const calificaciones = [
         {
             Grado: "1",
@@ -37,7 +37,7 @@ function AcademicRecord() {
         <>
             <CardView title={title} description={title} customtitle={true}>
                 <PrincipalTitle title={title}></PrincipalTitle>
-                <StudentAcacemicsCard alumno={alumno}>
+                <StudentAcacemicsCard alumno={alumnos[0]}>
                     <SelectComponent
                         options={optionsSelectPeriodo}
                         title="Selecciona.."

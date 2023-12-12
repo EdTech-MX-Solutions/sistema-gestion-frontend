@@ -125,8 +125,8 @@ function registrerDataMedicStudent() {
         <PrincipalTitle
           title={"Registro Datos Médicos Alumno"}
         ></PrincipalTitle>
-        <FormMedic dataMedic={InitialDataMedic}></FormMedic>
-      </CardView>
+        <FormMedic isNewUsuario dataMedic={InitialDataMedic}></FormMedic>
+      </CardView> 
     </>
   );
 }

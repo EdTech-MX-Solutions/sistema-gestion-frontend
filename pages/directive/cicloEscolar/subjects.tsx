@@ -6,6 +6,7 @@ import MateriasPanel from "@/components/elements/Panels/MateriasPanel";
 
 function CreateCicloEscolar() {
     // const title = "Ciclo Escolar";
+    
     const { periodo } = usePeriodo();
     const title =
         "Materias Escolares: Ciclo " + periodo.anioInicio + "-" + periodo.anioFin;

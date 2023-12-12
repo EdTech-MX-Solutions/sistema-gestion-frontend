@@ -16,8 +16,8 @@ const initialDireccion : InterfaceDireccion = {
   entreCalle1: "",
   entreCalle2: "",
   referenciaExtra: "",
-  colonia: {},
-  estado : {},
+  colonia: null,
+  estado : null,
 };
 
 

@@ -17,7 +17,7 @@ interface DefaultLayoutProps {
 function Notes() {
     const [cookies, setCookie] = useCookies(["token", "boleta"]);
     const { periodo } = usePeriodo();
-    const { alumno } = useAlumno();
+    const { alumnos } = useAlumno();
     const [loading, setLoading] = useState<boolean>(false); // [true, setLoading
     const [hayCalificaciones, setHayCalificaciones] = useState<boolean>(false); // [false, setHayCalificaciones
     const [calificaciones, setCalificaciones] = useState<
@@ -98,7 +98,7 @@ function Notes() {
             <>
                 <CardView title={title} description={title} customtitle={true}>
                     <PrincipalTitle title={title}></PrincipalTitle>
-                    <StudentAcacemicsCard alumno={alumno}>
+                    <StudentAcacemicsCard alumno={alumnos[0]}>
                         <div className="flex justify-center items-center h-96">
                             <div className="text-3xl text-gray-400">
                                 <h1 className="text-gray-800 dark:text-gray-200">
@@ -119,7 +119,7 @@ function Notes() {
             <>
                 <CardView title={title} description={title} customtitle={true}>
                     <PrincipalTitle title={title}></PrincipalTitle>
-                    <StudentAcacemicsCard alumno={alumno}>
+                    <StudentAcacemicsCard alumno={alumnos[0]}>
                         <div className="flex justify-center items-center h-96">
                             <h1 className="text-2xl text-gray-400">
                                 Cargando...
@@ -135,7 +135,7 @@ function Notes() {
             <>
                 <CardView title={title} description={title} customtitle={true}>
                     <PrincipalTitle title={title}></PrincipalTitle>
-                    <StudentAcacemicsCard alumno={alumno}>
+                    <StudentAcacemicsCard alumno={alumnos[0]}>
                         <TableGrades calificaciones={calificaciones} />
                     </StudentAcacemicsCard>
                 </CardView>

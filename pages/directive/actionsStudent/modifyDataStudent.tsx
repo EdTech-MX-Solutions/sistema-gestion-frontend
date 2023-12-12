@@ -28,7 +28,7 @@ function modifyDataPersonalStudent() {
   return (
     <>
       <PrincipalTitle title={"Registro Alumno"}></PrincipalTitle>
-      <FormStudent student = {student}></FormStudent>
+      <FormStudent isNewUser student = {student}></FormStudent>
     </>
   );
 }

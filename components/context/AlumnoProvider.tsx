@@ -11,7 +11,7 @@ import { useCookies } from "react-cookie";
 
 interface AlumnoContextType {
     alumnos: InterfaceAlumno[];
-    updateAlumno: (newAlumno: InterfaceAlumno) => void;
+    updateAlumno: (newAlumno: InterfaceAlumno[]) => void;
 }
 
 const AlumnoContext = createContext<AlumnoContextType | undefined>(undefined);
@@ -20,11 +20,28 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
     const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
-    const [alumnos, setAlumnos] = useState<InterfaceAlumno[]>([]);
-    const [alumno, setAlumno] = useState<InterfaceAlumno | null>(null);
+    const [alumnos, setAlumnos] = useState<InterfaceAlumno[]>([
+        {
+            no_boleta: "",
+            curp: "",
+            nombre: "",
+            apellido_paterno: "",
+            apellido_materno: "",
+            fecha_nacimiento: "",
+            sexo: "",
+            estatus: "",
+            entidad_nacimiento: "",
+            pais_origen: "",
+            edad: 0,
+            aniosPreescolar: 0,
+            grado: null,
+            grupo: null,
+            actualizarDatosMedicos: null,
+        },
+    ]);
 
-    const updateAlumno = (newAlumno: InterfaceAlumno) => {
-        setAlumno(newAlumno);
+    const updateAlumno = (newAlumno: InterfaceAlumno[]) => {
+        setAlumnos(newAlumno);
     };
 
     const fetchAlumno = async () => {
