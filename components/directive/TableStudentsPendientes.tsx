@@ -3,7 +3,7 @@ import ButtonComponentBiColor from "../ButtonComponentBiColor";
 import InterfaceAlumno from "@/data/interfaces/alumno";
 import router from "next/router";
 
-interface TableStudentsGroupProps {
+interface TableStudentsPendientesProps {
   titleBtn1: string;
   titleBtn2: string;
   titleTable: string;
@@ -11,14 +11,13 @@ interface TableStudentsGroupProps {
   evento : (alumno : InterfaceAlumno) => void
 }
 
-export const TableStudentsGroup = ({
+export const TableStudentsPendientes = ({
   titleBtn1,
   titleBtn2,
   titleTable,
   alumnosInscritos,
   evento,
-}: TableStudentsGroupProps) => {
-
+}: TableStudentsPendientesProps) => {
   const handleVerAlumnoInscrito = (boleta: any) => {
     router.push(`/directive/actionsStudent/personal/?id=${boleta}`);
   };
@@ -74,4 +73,4 @@ export const TableStudentsGroup = ({
   );
 };
 
-export default TableStudentsGroup;
+export default TableStudentsPendientes;

@@ -40,8 +40,6 @@ export const FormGroup = ({ grupo, isNewGroup }: FormGroupProps) => {
     }
   },[id, grupos]);
 
-  console.log(grupo);
-
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
     setFormData({

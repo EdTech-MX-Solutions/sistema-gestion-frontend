@@ -9,7 +9,37 @@ export class DirectivosAPICollection {
     }
 
     executeGetAlumnosPendientesReiscripcion(token : string){
-        const route = this.apiCaller.getCall() + `/reinscripciones/`;
+        const route = this.apiCaller.getCall() + `/reinscripciones`;
+        return fetch (route, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+
+    executeGetPadecimientosMedicos(token : string){
+        const route = this.apiCaller.getCall() + `/datos-medicos/condiciones-medicas`;
+        return fetch (route, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+
+    executeGetPreguntasHereditarias(token : string){
+        const route = this.apiCaller.getCall() + `/datos-medicos/preguntas-hereditarias`;
+        return fetch (route, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+
+    executeGetPreguntasMedicas(token : string){
+        const route = this.apiCaller.getCall() + `/datos-medicos/preguntas-medicas`;
         return fetch (route, {
             method: "GET",
             headers: {

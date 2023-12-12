@@ -54,7 +54,7 @@ function ConsultDataPersonalStudent() {
   return (
     <>
       <CardView title={title} description={description}>
-        <StudentDataCard alumno={alumnosDetails}>
+        <StudentDataCard alumno={alumnosDetails} baseRuta={"/directive/actionsStudent"} id = {alumnosDetails.no_boleta} isDirective = {true}>
           <PersonalData alumno={alumnosDetails} />
         </StudentDataCard>
       </CardView>

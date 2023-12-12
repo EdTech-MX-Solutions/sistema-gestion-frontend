@@ -4,9 +4,9 @@ interface InterfaceAlumno {
     nombre: string;
     apellido_paterno: string;
     apellido_materno: string;
-    aniosPreescolar: number;
+    aniosPreescolar: number | null;
     fecha_nacimiento: string;
-    edad: number;
+    edad: number | null;
     pais_origen: string;
     sexo: string;
     estatus: string;
