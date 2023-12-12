@@ -7,9 +7,15 @@ import DataTabs from "./data/DataTabs";
 function StudentDataCard({
   alumno,
   children,
+  baseRuta,
+  id,
+  isDirective,
 }: {
   alumno: InterfaceAlumno | null;
   children: React.ReactNode;
+  baseRuta ?: string;
+  id ?: string;
+  isDirective? : boolean;
 }) {
   return (
     <>
@@ -17,7 +23,7 @@ function StudentDataCard({
         <>
           <div className=" p-3 selection:bg-green-100">
             <StudentCardHeader {...alumno} />
-            <DataTabs />
+            {baseRuta ? <DataTabs baseRuta = {baseRuta} id = {id} isDirective = {isDirective} /> : null}
             {children}
           </div>
           <div>

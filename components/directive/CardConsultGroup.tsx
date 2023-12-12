@@ -197,6 +197,7 @@ export const CardConsultGroup = ({ group }: CardConsultGroupProps) => {
           titleBtn2={"Ver Datos Del Alumno"}
           titleTable={"Listado de Alumnos inscritos"}
           alumnosInscritos={alumnos}
+          evento={() => {}}
         ></TableStudentsGroup>
       </div>
     </>

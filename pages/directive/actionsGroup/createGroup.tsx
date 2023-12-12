@@ -29,18 +29,18 @@ function createGroup() {
       <PrincipalTitle title={title}></PrincipalTitle>
       <div className="justify-center bg-white p-5 rounded-lg">
         <h4 className="font-bold">Elementos del grupo: </h4>
-        <FormGroup grupo = {Initialgroup} isNewGroup ></FormGroup>
+        <FormGroup grupo = {Initialgroup} isNewGroup = {true} ></FormGroup>
         <TableStudentsGroup
           titleBtn1={"Ver Datos del Alumno"}
           titleBtn2={"Dar de Baja del Grupo"}
           titleTable={"Listado de Alumnos inscritos en el grupo"}
+          alumnosInscritos={[]}
         ></TableStudentsGroup>
         <TableStudentsGroup
           titleBtn1={"Ver Datos del Alumno"}
           titleBtn2={"Inscribir al Grupo"}
-          titleTable={
-            "Listado de Alumnos disponibles para el grupo seleccionado"
-          }
+          titleTable={"Listado de Alumnos disponibles para el grupo seleccionado"          }
+          alumnosInscritos={[]}
         ></TableStudentsGroup>
       </div>
     </>
