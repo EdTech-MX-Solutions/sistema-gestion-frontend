@@ -3,7 +3,7 @@ import PanelCard from "./CardPanel";
 import React from "react";
 import { ConfirmLogoutElement } from "../Confirms/ConfirmLogout";
 
-export default function PanelCards() {
+export default function MateriasPanel() {
     const [confirmationisopen, setConfirmationOpen] = React.useState(false);
     const [cookies, setCookie, removeCookie] = useCookies([
         "token",
@@ -17,39 +17,27 @@ export default function PanelCards() {
             <div className="bg-teal-700" />
             <PanelCard
                 category="Panel de Control"
-                title="Alumnos"
+                title="Consulta de Materias"
                 bgColor="emerald-600"
-                route="/directive/actionsStudent"
+                route="/directive/cicloEscolar/consultSubject"
             />
             <PanelCard
                 category="Panel de Control"
-                title="Tutores"
+                title="Registro de Materias"
                 bgColor="emerald-600"
-                route="/directive/actionsStudent/consultParents"
+                route="/directive/cicloEscolar/createSubject"
             />
             <PanelCard
-                category="Panel de Control"
-                title="Grupos"
-                bgColor="emerald-600"
-                route="/directive/othersOptions/suggestions"
-            />
-            <PanelCard
-                category="Panel de Control"
-                title="Directivos"
-                bgColor="emerald-600"
-                route="/directive/actionsDirective"
-            />
-             <PanelCard
                 category="Panel de Control"
                 title="Ciclo Escolar"
                 bgColor="emerald-600"
-                route="/directive/cicloEscolar"
+                route="/directive/cicloEscolar/cycle"
             />
             <PanelCard
-                category="Panel de Control"
-                title="Reportes y Avisos"
+                category="Sistema"
+                title="Regresar"
                 bgColor="teal-700"
-                route="/directive/othersOptions/suggestions"
+                route="/directive/cicloEscolar/"
             />
             <PanelCard
                 category="Sistema"
@@ -73,4 +61,3 @@ export default function PanelCards() {
         </>
     );
 }
-

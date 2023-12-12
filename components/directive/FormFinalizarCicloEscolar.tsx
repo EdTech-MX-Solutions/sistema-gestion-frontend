@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import es from "date-fns/locale/es";
-import AlertComponent from "../elements/Alert";
 import { useCookies } from "react-cookie";
 import InterfacePeriodo from "@/data/interfaces/periodo";
 import SIGEAPICollection from "@/data/calls/apiHandler";
@@ -99,7 +95,7 @@ export const FormFinalizarCicloEscolar = ({
                                 {title}
                             </h3>
                             <p className="text-gray-600 my-2">{subtitle}</p>
-                            <Link href={"/directive/cicloEscolar/cycle"}>
+                            <Link href={"/directive/cicloEscolar/cycle"} onClick={() => window.location.href ="/directive/cicloEscolar/cycle"}>
                                 <ButtonComponent
                                     color={"green"}
                                     title={"Regresar"}

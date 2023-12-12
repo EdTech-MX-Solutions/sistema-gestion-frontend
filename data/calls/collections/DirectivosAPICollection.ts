@@ -47,6 +47,15 @@ export class DirectivosAPICollection {
             },
         });
     }
+    executeGetMaterias(token: string) {
+        const route = this.apiCaller.getCall() + `/materias`;
+        return fetch(route, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
 
     executeGetProfessors(token: string) {
         const route = this.apiCaller.getProfesorCall();
@@ -79,6 +88,19 @@ export class DirectivosAPICollection {
         });
     }
 
+    executePostPeriodo(token: string, periodo: InterfacePeriodo) {
+        const route = this.apiCaller.getCall() + `/ciclos`;
+        return fetch(route, {
+            method: "PATCH",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(periodo),
+        });
+        
+    }
+
     executeEndCycle(token: string) {
         const route = this.apiCaller.getCall() + `/ciclos`;
         return fetch(route, {
@@ -91,7 +113,8 @@ export class DirectivosAPICollection {
                 finalizado: true,
                 periodoReinscripciones: false,
                 periodoCalificaciones: false,
+                periodoPreinscripciones: false,
             }),
-        });
+        }); 
     }
 }

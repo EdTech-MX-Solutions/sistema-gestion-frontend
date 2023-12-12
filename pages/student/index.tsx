@@ -99,7 +99,7 @@ export default function Index() {
 
     const PanelCards = () => (
         <>
-            <div className="flex flex-wrap items-center mt-10">
+            <div className="flex flex-wrap mt-10">
                 <PanelCard
                     category="Datos Académicos"
                     title="Calificaciones"

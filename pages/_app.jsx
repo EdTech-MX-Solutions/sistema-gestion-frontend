@@ -6,6 +6,7 @@ import TutorLayout from "@/components/layout/TutorLayout";
 import DirectivoLayout from "@/components/layout/DirectivoLayout";
 import ProfesorLayout from "@/components/layout/ProfesorLayout";
 import Link from "next/link";
+import { GreetProvider } from "@/components/context/GreetProvider";
 
 export const metadata = {
     title: 'Create Next App',
@@ -17,6 +18,7 @@ export const metadata = {
 export const AppContext = ({ Layout, pageProps, session, Component }) => {
     return (
         <CookiesProvider>
+            <GreetProvider>
             <main className="bg-secondary dark:bg-slate-700 -z-10">
                 <div className="z-20">
                 <SessionProvider session={session}>
@@ -53,6 +55,7 @@ export const AppContext = ({ Layout, pageProps, session, Component }) => {
                     </div>
                 </div>
             </main>
+            </GreetProvider>
         </CookiesProvider>
     )
 }
