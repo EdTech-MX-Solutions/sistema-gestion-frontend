@@ -1,6 +1,7 @@
 import InterfacePeriodo from "@/data/interfaces/periodo";
 import { APICaller } from "../apiCaller";
 import InterfaceMateria from "@/data/interfaces/materia";
+import InterfaceProfessor from "@/data/interfaces/professor";
 
 export class DirectivosAPICollection {
     apiCaller: APICaller;
@@ -31,6 +32,16 @@ export class DirectivosAPICollection {
 
     executeGetPreguntasHereditarias(token : string){
         const route = this.apiCaller.getCall() + `/datos-medicos/preguntas-hereditarias`;
+        return fetch (route, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+
+    executeGetDatosMedicosAlumnos(token : string, boleta : string){
+        const route = this.apiCaller.getCall() + `/datos-medicos/${boleta}`;
         return fetch (route, {
             method: "GET",
             headers: {
@@ -112,6 +123,24 @@ export class DirectivosAPICollection {
             body: JSON.stringify(periodo),
         });
         
+    }
+
+    executePostNuevoProfesor(token : string, nuevoProfesor : InterfaceProfessor){
+        const route = this.apiCaller.getCall() + `/profesores`;
+        return fetch(route, {
+            method : "POST",
+            headers : {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body : JSON.stringify({
+                nombre: nuevoProfesor.nombre,
+                apellidoPaterno: nuevoProfesor.apellidoPaterno,
+                apellidoMaterno: nuevoProfesor.apellidoMaterno,
+                email: nuevoProfesor.email,
+                activo: nuevoProfesor.activo
+            })
+        })
     }
 
     executeEndCycle(token: string) {

@@ -123,7 +123,7 @@ function registrerDataMedicStudent() {
   return (
     <>
       <PrincipalTitle title={"Registro Datos Médicos Alumno"}></PrincipalTitle>
-      <FormMedic isNewUsuario dataMedic={dataMedic}></FormMedic>
+      <FormMedic dataMedic={dataMedic} isNewUsuario = {false}></FormMedic>
     </>
   );
 }
