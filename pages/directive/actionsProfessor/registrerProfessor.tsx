@@ -14,7 +14,7 @@ function registrerProfessor() {
     email : "",
     activo : true,
     diretivo : true,
-    noCedulaProfesional : 0,
+    noCedulaProfesional : "",
     numero : []
   };
 

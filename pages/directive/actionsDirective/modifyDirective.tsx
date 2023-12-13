@@ -21,7 +21,7 @@ function ModifyDirective() {
     email : "cargando...",
     activo : false,
     diretivo : false,
-    noCedulaProfesional : 0,
+    noCedulaProfesional : "",
     numero : []
 });
   
