@@ -1,5 +1,6 @@
 import InterfacePeriodo from "@/data/interfaces/periodo";
 import { APICaller } from "../apiCaller";
+import InterfaceMateria from "@/data/interfaces/materia";
 
 export class DirectivosAPICollection {
     apiCaller: APICaller;
@@ -75,6 +76,18 @@ export class DirectivosAPICollection {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
             },
+        });
+    }
+
+    executePostMaterial(token: string, material: InterfaceMateria) {
+        const route = this.apiCaller.getCall() + `/materias`;
+        return fetch(route, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(material),
         });
     }
 

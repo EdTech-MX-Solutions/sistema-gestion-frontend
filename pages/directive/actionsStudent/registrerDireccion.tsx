@@ -4,10 +4,6 @@ import FormDirecciones from "@/components/directive/FormDirecciones";
 import CardView from "@/components/CardView";
 import InterfaceDireccion from "@/data/interfaces/direccion";
 
-interface DefaultLayoutProps {
-  children: ReactNode;
-}
-
 const initialDireccion : InterfaceDireccion = {
   id: null,
   calle: "",

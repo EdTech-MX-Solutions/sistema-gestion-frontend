@@ -6,38 +6,29 @@ import SIGEAPICollection from "@/data/calls/apiHandler";
 import Loader from "../elements/Loader";
 import Link from "next/link";
 import { usePeriodo } from "../context/PeriodoProvider";
+import { Button, Input, Typography } from "@material-tailwind/react";
+import InterfaceMateria from "@/data/interfaces/materia";
 
 interface FormCreateSubjectProps {
     autoStart?: boolean;
 }
 
 export const FormCreateSubject = ({ autoStart }: FormCreateSubjectProps) => {
-    const [PeriodoIniciado, setPeriodoIniciado] = useState<boolean>(false);
     const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
     const [loading, setLoading] = useState<boolean>(false);
+    const [nombreMateria, setNombreMateria] = useState<string>("");
+    const [nivel, setNivel] = useState<string>("");
     const [error, setError] = useState<boolean>(false);
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+
     const periodo = usePeriodo();
 
     const currentDate = new Date();
     const [warning, setWarning] = useState(false);
     const minDate = new Date(new Date());
     const maxDate = new Date(new Date().setFullYear(minDate.getFullYear()));
-    endDate.setFullYear(startDate.getFullYear() + 1);
 
     const title = "Ciclo Escolar Iniciado";
     const subtitle = "¡Bienvenido al nuevo ciclo escolar!";
-
-    function updateEndDate(date: Date | null) {
-        setStartDate(date || new Date());
-        if (date)
-            setEndDate(
-                new Date(new Date().setFullYear(date.getFullYear() + 1))
-            );
-        if (currentDate.getFullYear() - endDate.getFullYear() < -1)
-            setWarning(true);
-    }
 
     const handleSubmmit = async () => {
         setLoading(true);
@@ -45,32 +36,24 @@ export const FormCreateSubject = ({ autoStart }: FormCreateSubjectProps) => {
 
         const api = new SIGEAPICollection();
         const token = cookies.token;
+        const materia: InterfaceMateria = {
+            clave: "",
+            nombre: nombreMateria,
+            nivel: nivel,
+        };
 
         try {
-            const response = await api.directivosCollection.executePostCycle(
-                token
+            const response = await api.directivosCollection.executePostMaterial(
+                token,
+                materia
             );
             if (response.status === 201) {
                 const data = await response.json();
                 console.log(data);
-                setPeriodoIniciado(true);
-                const response2 = await api.sharedCollection.executeGetCiclos(
-                    token
-                );
-                if (response2.ok) {
-                    const data2 = await response2.json();
-                    const newPeriodo: InterfacePeriodo = {
-                        anioInicio: data2.añoInicio,
-                        anioFin: data2.añoFin,
-                        periodoCalificaciones: data2.periodoCalificaciones,
-                        periodoPreinscripciones: data2.periodoPreinscripciones,
-                        periodoReinscripciones: data2.periodoReinscripciones,
-                        finalizado: data2.finalizado,
-                    };
-                    periodo.updatePeriodo(newPeriodo);
-                }
             } else {
                 setError(true);
+                console.log("Error al crear la materia");
+                console.log(materia);
             }
         } catch (error) {
             console.error("Error de solicitud:", error);
@@ -95,132 +78,112 @@ export const FormCreateSubject = ({ autoStart }: FormCreateSubjectProps) => {
     } else {
         return (
             <>
-                <div className="p-5 bg-white rounded-lg">
-                    <div className="bg-white p-6  md:mx-auto">
-                        <svg
-                            viewBox="0 0 24 24"
-                            className="text-green-600 w-16 h-16 mx-auto my-6"
-                        >
-                            <path
-                                fill="currentColor"
-                                d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z"
-                            ></path>
-                        </svg>
-                        <div className="text-center">
-                            <h3 className="md:text-2xl text-base text-gray-900 font-semibold text-center">
-                                {title}
-                            </h3>
-                            <p className="text-gray-600 my-2">{subtitle}</p>
-                            <Link href={"/directive/cicloEscolar/cycle"} onClick={() => window.location.href ="/directive/cicloEscolar/cycle"}>
-                                <ButtonComponent
-                                    color={"green"}
-                                    title={"Regresar"}
-                                />
+                <div className="mt-10 p-5 bg-white  dark:bg-slate-500 dark:text-gray-200 rounded-lg">
+                    <div className="bg-white dark:bg-slate-500 dark:text-gray-200 p-6  md:mx-auto">
+                        <Typography variant="h4" color="blue-gray">
+                            Registro de nueva materia
+                        </Typography>
+                        <Typography color="gray" className="mt-1 font-normal dark:text-gray-200">
+                            Recuerda que las materias deben estar reglamentadas
+                            por la Secretaría de Educación Pública.
+                            <br />
+                            Para más información consulta el siguiente enlace:{" "}
+                            <Link
+                                className="text-green-700 text-green-200"
+                                href="https://www.sep.gob.mx/es/sep1/Reglamento_de_la_Ley_General_de_Educacion"
+                            >
+                                Ley General de Educación{" "}
                             </Link>
-                        </div>
+                            o bien el siguiente enlace:
+                            <Link
+                                className="text-green-700 text-green-200 pl-2"
+                                href="https://www.gob.mx/sep/acciones-y-programas/primaria-educacion-basica"
+                            >
+                                Educación Básica (2023)
+                            </Link>
+                        </Typography>
+                        <form className="mt-8 mb-2 ">
+                            <div className="mb-1 flex flex-col sm:flex-row gap-4 items-end">
+                                <div className="w-full">
+                                    <label htmlFor="nombre-materia">
+                                        <Typography
+                                            variant="h6"
+                                            color="blue-gray"
+                                        >
+                                            Nombre de la Materia
+                                        </Typography>
+                                    </label>
+                                    <Input
+                                        id="nombre-materia"
+                                        size="lg"
+                                        placeholder="Ejemplo: Lenguajes"
+                                        value={nombreMateria}
+                                        onChange={(e) =>
+                                            setNombreMateria(e.target.value)
+                                        }
+                                        className=" focus:border-secondary"
+                                        labelProps={{
+                                            className:
+                                                "before:content-none after:content-none",
+                                        }}
+                                    />
+                                </div>
+                                <div className="w-full ">
+                                    <label htmlFor="nivel">
+                                        <Typography
+                                            variant="h6"
+                                            color="blue-gray"
+                                        >
+                                            Nivel
+                                        </Typography>
+                                    </label>
+                                    <select
+                                        name="nivel"
+                                        id="nivel"
+                                        required
+                                        value={nivel}
+                                        onChange={(e) =>
+                                            setNivel(e.target.value)
+                                        }
+                                        className="w-full bg-transparent border border-gray-300 text-gray-400 text-sm rounded-md focus:ring-green-500 focus:border-green-500 block p-2.5"
+                                    >
+                                        <option disabled selected>
+                                            Selecciona una opción
+                                        </option>
+                                        <option key={1} value={"Primero"}>
+                                            Primero
+                                        </option>
+                                        <option key={2} value={"Segundo"}>
+                                            Segundo
+                                        </option>
+                                        <option key={3} value={"Tercero"}>
+                                            Tercero
+                                        </option>
+                                        <option key={4} value={"Cuarto"}>
+                                            Cuarto
+                                        </option>
+                                        <option key={5} value={"Quinto"}>
+                                            Quinto
+                                        </option>
+                                        <option key={6} value={"Sexto"}>
+                                            Sexto
+                                        </option>
+                                    </select>
+                                </div>
+                                <div className="w-1/3">
+                                    <Button onClick={
+                                        handleSubmmit
+                                    } className="bg-secondary text-gray-700">
+                                        Registrar
+                                    </Button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </>
         );
     }
-
-    // return (
-    //     <>
-    //         <div className="p-5 bg-white rounded-lg">
-    //             <h4 className="font-bold pb-5"> Nuevo Ciclo Escolar </h4>
-    //             <form onSubmit={handleSubmmit}>
-    //                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    //                     <div>
-    //                         <label
-    //                             htmlFor=""
-    //                             className="block mb-2 text-sm font-medium text-gray-900"
-    //                         >
-    //                             Año inicio del ciclo escolar:
-    //                         </label>
-    //                         <DatePicker
-    //                             locale={es}
-    //                             selected={startDate}
-    //                             onChange={(date) => {
-    //                                 updateEndDate(date);
-    //                             }}
-    //                             showYearPicker
-    //                             minDate={minDate}
-    //                             maxDate={maxDate}
-    //                             dateFormat="yyyy"
-    //                             title="El año de finalización del ciclo escolar se calcula automáticamente"
-    //                             className="bg-green-800 bg-opacity-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-    //                         />
-    //                     </div>
-
-    //                     <div>
-    //                         <label
-    //                             htmlFor=""
-    //                             className="block mb-2 text-sm font-medium text-gray-900"
-    //                         >
-    //                             Año de finalización del ciclo escolar:
-    //                         </label>
-    //                         <DatePicker
-    //                             locale={es}
-    //                             selected={endDate}
-    //                             onChange={() => console.log()}
-    //                             showYearPicker
-    //                             dateFormat="yyyy"
-    //                             title="El año de finalización del ciclo escolar se calcula automáticamente"
-    //                             className="bg-green-800 bg-opacity-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-    //                         />
-    //                     </div>
-    //                 </div>
-    //                 {warning && (
-    //                     <>
-    //                         <div className="pt-10">
-    //                             <AlertComponent
-    //                                 bgColor="orange-100 bg-opacity-40"
-    //                                 borderColor="orange-100"
-    //                                 textColor="orange-100"
-    //                                 title="¡Cuidado!"
-    //                                 message=" El ciclo escolar actual no coincide con el año actual, ¿Aún así deseas continuar?"
-    //                             />
-    //                         </div>
-    //                     </>
-    //                 )}
-    //                 {PeriodoIniciado && (
-    //                     <>
-    //                         <div className="pt-10">
-    //                             <AlertComponent
-    //                                 bgColor="green-100 bg-opacity-40"
-    //                                 borderColor="green-100"
-    //                                 textColor="green-100"
-    //                                 title="¡Éxito!"
-    //                                 message=" El ciclo escolar ha sido iniciado correctamente."
-    //                             />
-    //                         </div>
-    //                     </>
-    //                 )}
-    //                 {error && (
-    //                     <>
-    //                         <div className="pt-10">
-    //                             <AlertComponent
-    //                                 bgColor="red-100 bg-opacity-40"
-    //                                 borderColor="red-100"
-    //                                 textColor="red-100"
-    //                                 title="¡Error!"
-    //                                 message=" El ciclo escolar no pudo ser iniciado."
-    //                             />
-    //                         </div>
-    //                     </>
-    //                 )}
-    //                 <div className="text-center pt-10">
-    //                     <ButtonComponent
-    //                         type="submit"
-    //                         title={"Crear"}
-    //                         color={"blue"}
-    //                         loading={loading}
-    //                     ></ButtonComponent>
-    //                 </div>
-    //             </form>
-    //         </div>
-    //     </>
-    // );
 };
 
 export default FormCreateSubject;

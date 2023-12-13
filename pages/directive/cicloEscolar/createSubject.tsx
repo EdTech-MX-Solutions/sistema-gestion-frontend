@@ -1,17 +1,18 @@
 import PrincipalTitle from "@/components/directive/Principal.Title";
-import { ReactNode } from "react";
-import FormCicloEscolar from "@/components/directive/FormCicloEscolar";
 import CardView from "@/components/CardView";
 import FormCreateSubject from "@/components/directive/FormCreateSubject";
+import ConsultSubject from "./consultSubject";
 
 function createSubject() {
-    const title = "Iniciar Ciclo Escolar";
+    const title = "Registro de Nueva Materia";
+    const subtitle = "En esta sección puedes crear las materias que pueden ser asignadas a los alumnos"
 
     return (
         <>
-            <CardView title={title} description={title} customtitle={true}>
-                <PrincipalTitle title={title}></PrincipalTitle>
+            <CardView title={title} description={subtitle}>
+                {/* <PrincipalTitle title={title}></PrincipalTitle> */}
                 <FormCreateSubject />
+                <ConsultSubject />
             </CardView>
         </>
     );

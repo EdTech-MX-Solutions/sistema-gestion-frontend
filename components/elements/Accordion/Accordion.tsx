@@ -56,10 +56,10 @@ export function AccordionCustomIcon({ items }: AccordionCustomIconProps) {
                         open={open === index + 1}
                         icon={<Icon id={index + 1} open={open} />}
                     >
-                        <AccordionHeader className="pb-3" onClick={() => handleOpen(index + 1)}>
+                        <AccordionHeader className="pb-3 text-gray-100" onClick={() => handleOpen(index + 1)}>
                             {item.AccordionHeaderTitle}
                         </AccordionHeader>
-                        <AccordionBody>{item.AccordionChild}</AccordionBody>
+                        <AccordionBody className="text-gray-200">{item.AccordionChild}</AccordionBody>
                     </Accordion>
                 </Card>
             ))}
