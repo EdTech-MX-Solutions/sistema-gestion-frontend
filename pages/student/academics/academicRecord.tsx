@@ -6,10 +6,6 @@ import StudentAcacemicsCard from "@/components/student/StudentAcademicsCard";
 import CardView from "@/components/CardView";
 import {useAlumno} from "@/components/context/AlumnoProvider";
 
-interface DefaultLayoutProps {
-    children: ReactNode;
-}
-
 function AcademicRecord() {
     const {alumnos} = useAlumno();
     const [alumno,setAlumno] = useState(alumnos[0]);
