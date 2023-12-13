@@ -10,7 +10,6 @@ interface FormGroupProps {
 }
 
 export const FormGroup = ({ grupo, isNewGroup }: FormGroupProps) => {
-
   const router = useRouter();
   const { id } = router.query;
 

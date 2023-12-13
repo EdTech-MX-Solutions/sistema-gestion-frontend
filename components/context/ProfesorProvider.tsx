@@ -10,9 +10,8 @@ import {
 import { useCookies } from "react-cookie";
 
 interface ProfesorContextType {
-  length: number;
   profesores: InterfaceProfessor[];
-  updateProfesor: (newProfesor: InterfaceProfessor) => void;
+  updateProfesor: (newProfesor: InterfaceProfessor[]) => void | InterfaceProfessor[];
 }
 
 const ProfesorContext = createContext<ProfesorContextType | undefined>(
@@ -24,10 +23,9 @@ export const ProfesorProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [cookies, setCookie] = useCookies(["token", "idProfessor", "childs"]);
   const [profesores, setProfesores] = useState<InterfaceProfessor[]>([]);
-  const [profesor, setProfesor] = useState<InterfaceProfessor | null>(null);
 
-  const updateProfesor = (newProfesor: InterfaceProfessor) =>{
-    setProfesor(newProfesor);
+  const updateProfesor = (newProfesor: InterfaceProfessor[]) =>{
+    setProfesores(newProfesor);
   }
 
   const fetchProfesores = async () => {
@@ -75,7 +73,7 @@ export const ProfesorProvider: React.FC<{ children: ReactNode }> = ({
   }, []);
 
   return (
-    <ProfesorContext.Provider value={{ length: profesores.length, profesores, updateProfesor }}>
+    <ProfesorContext.Provider value={{ profesores, updateProfesor }}>
         {children}
     </ProfesorContext.Provider>
   );

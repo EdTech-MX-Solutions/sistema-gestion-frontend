@@ -1,13 +1,13 @@
-import InterfacePreguntasCondiciones from "./preguntasCondiciones"
-import InterfacePreguntasHereditarias from "./preguntasHereditarias"
-import InterfacePreguntasMedicas from "./preguntasMedicas"
+import InterfaceRespuestasMedicasCondiciones from "./respuestasMedicasCondiciones"
+import InterfaceRespuestasPreguntasMedicas from "./respuestasMedicasPreguntasMedicas"
+import InterfaceRespuestasMedicasHereditarias from "./respuestasMedicasHereditarias"
 
 interface InterfaceDatosMedicos{
     tipoSanguineo: string,
     peso: number,
     talla: number,
-    zapatoOrtopedico: boolean,
-    lentes: boolean,
+    zapatoOrtopedico: boolean | null,
+    lentes: boolean | null,
     seguroMedico: string,
     recomendacionesEspeciales: string, 
     nombreMedicoFamiliar: string,
@@ -15,9 +15,9 @@ interface InterfaceDatosMedicos{
     enfermadesFrecuentes: string,
     enfermadesUltimoAnio: string,
     alergias: string,
-    respuestasPreguntasMedicas : InterfacePreguntasMedicas,
-    respuestasPreguntasHereditarias : InterfacePreguntasHereditarias,
-    respuestasCondicionesMedicas : InterfacePreguntasCondiciones
+    respuestasPreguntasMedicas : InterfaceRespuestasPreguntasMedicas[],
+    respuestasPreguntasHereditarias : InterfaceRespuestasMedicasHereditarias[],
+    respuestasCondicionesMedicas : InterfaceRespuestasMedicasCondiciones[]
 }
 
 export default InterfaceDatosMedicos

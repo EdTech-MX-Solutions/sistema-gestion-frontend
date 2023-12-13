@@ -2,10 +2,19 @@ import InterfaceDatosMedicos from "@/data/interfaces/datosMedicos";
 import React from "react";
 
 interface FormBasicDataMedicProps {
-    dataMedic : InterfaceDatosMedicos;
+  dataMedic: InterfaceDatosMedicos;
+  formData: InterfaceDatosMedicos;
+  setFormData: React.Dispatch<React.SetStateAction<InterfaceDatosMedicos>>; 
 }
 
-export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
+export const FormBasicDataMedic = ({ dataMedic, formData ,setFormData }: FormBasicDataMedicProps) => {
+  const handleInputChange = (event: { target: { name: any; value: any } }) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
   return (
     <>
       <div className="">
@@ -20,9 +29,11 @@ export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
                 Tipo Sanguineo:
               </label>
               <select
-                id=""
+                id="tipoSanguineo"
+                name="tipoSanguineo"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={dataMedic.tipoSanguineo}
+                value={formData.tipoSanguineo}
+                onChange={handleInputChange}
               >
                 <option value=""> Selecciona una opción </option>
                 <option value="O-"> O- </option>
@@ -45,10 +56,11 @@ export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
               </label>
               <input
                 type="number"
-                name=""
-                id=""
+                name="peso"
+                id="peso"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={dataMedic.peso}
+                value={formData.peso}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -61,10 +73,11 @@ export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
               </label>
               <input
                 type="number"
-                name=""
-                id=""
+                name="peso"
+                id="peso"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={dataMedic.peso}
+                value={formData.peso}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -76,9 +89,11 @@ export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
                 ¿Usa zapato o plantillas ortopedicas?
               </label>
               <select
-                id=""
+                id="zapatoOrtopedico"
+                name="zapatoOrtopedico"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={dataMedic.zapatoOrtopedico ? "s" : "n"}
+                value={formData.zapatoOrtopedico ? "s" : "n"}
+                onChange={handleInputChange}
               >
                 <option value=""> Selecciona una opción </option>
                 <option value="s"> Sí </option>
@@ -94,9 +109,11 @@ export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
                 ¿Usa lentes?
               </label>
               <select
-                id=""
+                id="lentes"
+                name="lentes"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={dataMedic.lentes ? "s" : "n"}
+                value={formData.lentes ? "s" : "n"}
+                onChange={handleInputChange}
               >
                 <option value=""> Selecciona una opción </option>
                 <option value="s"> Sí </option>
@@ -113,10 +130,11 @@ export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
               </label>
               <input
                 type="text"
-                name=""
-                id=""
+                name="seguroMedico"
+                id="seguroMedico"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={dataMedic.seguroMedico}
+                value={formData.seguroMedico}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -129,10 +147,11 @@ export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
               </label>
               <input
                 type="text"
-                name=""
-                id=""
+                name="recomendacionesEspeciales"
+                id="recomendacionesEspeciales"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={dataMedic.recomendacionesEspeciales}
+                value={formData.recomendacionesEspeciales}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -145,10 +164,11 @@ export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
               </label>
               <input
                 type="text"
-                name=""
-                id=""
+                name="nombreMedicoFamiliar"
+                id="nombreMedicoFamiliar"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={dataMedic.nombreMedicoFamiliar}
+                value={formData.nombreMedicoFamiliar}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -161,9 +181,11 @@ export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
               </label>
               <input
                 type="text"
-                name=""
-                id=""
+                name="telefonoMedicoFamiliar"
+                id="telefonoMedicoFamiliar"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
+                value={formData.telefonoMedicoFamiliar}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -176,10 +198,11 @@ export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
               </label>
               <input
                 type="text"
-                name=""
-                id=""
+                name="enfermadesFrecuentes"
+                id="enfermadesFrecuentes"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={dataMedic.enfermadesFrecuentes}
+                value={formData.enfermadesFrecuentes}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -193,10 +216,11 @@ export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
               </label>
               <input
                 type="text"
-                name=""
-                id=""
+                name="enfermadesUltimoAnio"
+                id="enfermadesUltimoAnio"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={dataMedic.enfermadesUltimoAnio}
+                value={formData.enfermadesUltimoAnio}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -209,10 +233,11 @@ export const FormBasicDataMedic = ({dataMedic}: FormBasicDataMedicProps) => {
               </label>
               <input
                 type="text"
-                name=""
-                id=""
+                name="alergias"
+                id="alergias"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={dataMedic.alergias}
+                value={formData.alergias}
+                onChange={handleInputChange}
               />
             </div>
           </div>

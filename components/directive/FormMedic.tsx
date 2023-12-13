@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
-import { data } from "autoprefixer";
 import InterfaceDatosMedicos from "@/data/interfaces/datosMedicos";
 import InterfacePreguntasHereditarias from "@/data/interfaces/preguntasHereditarias";
 import InterfacePreguntasCondiciones from "@/data/interfaces/preguntasCondiciones";
@@ -12,7 +11,7 @@ import { FormPreguntasCondiciones } from "./FormPreguntasCondiciones";
 import { FormPreguntasMedicas } from "./FormPreguntasMedicas";
 import { FormPreguntasHereditarias } from "./FormPreguntasHereditarias";
 import CardView from "../CardView";
-import { da } from "@faker-js/faker";
+import { useRouter } from "next/router";
 
 interface FormMedicProps {
   dataMedic: any;
@@ -20,6 +19,10 @@ interface FormMedicProps {
 }
 
 export const FormMedic = ({ dataMedic, isNewUsuario}: FormMedicProps) => {
+  
+  const router = useRouter();
+  const { id } = router.query;
+  
   const [cookies, setCookie] = useCookies(["token", "", "childs"]);
   const [preguntasCondiciones, setPreguntasCondiciones] = useState<
     InterfacePreguntasCondiciones[]
@@ -31,12 +34,12 @@ export const FormMedic = ({ dataMedic, isNewUsuario}: FormMedicProps) => {
     InterfacePreguntasMedicas[]
   >([]);
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<InterfaceDatosMedicos>({
     tipoSanguineo: isNewUsuario ?  "" : dataMedic.tipoSanguineo,
-    peso: isNewUsuario ? "" : dataMedic.peso,
-    talla: isNewUsuario ? "" : dataMedic.talla,
-    zapatoOrtopedico: isNewUsuario ? "" : dataMedic.zapatoOrtopedico,
-    lentes: isNewUsuario ? "" : dataMedic.lentes,
+    peso: isNewUsuario ? 0 : dataMedic.peso,
+    talla: isNewUsuario ? 0 : dataMedic.talla,
+    zapatoOrtopedico: isNewUsuario ? null : dataMedic.zapatoOrtopedico,
+    lentes: isNewUsuario ? null : dataMedic.lentes,
     seguroMedico: isNewUsuario ? "" : dataMedic.seguroMedico,
     recomendacionesEspeciales: isNewUsuario ? "" : dataMedic.recomendacionesEspeciales, 
     nombreMedicoFamiliar: isNewUsuario ? "" : dataMedic.nombreMedicoFamiliar,
@@ -44,10 +47,44 @@ export const FormMedic = ({ dataMedic, isNewUsuario}: FormMedicProps) => {
     enfermadesFrecuentes: isNewUsuario ? "" : dataMedic.enfermadesFrecuentes,
     enfermadesUltimoAnio: isNewUsuario ? "" : dataMedic.enfermadesUltimoAnio,
     alergias: isNewUsuario ? "" : dataMedic.alergias,
-    respuestasPreguntasMedicas : [],
-    respuestasPreguntasHereditarias : [],
-    respuestasCondicionesMedicas : []
+    respuestasPreguntasMedicas : isNewUsuario ? [] : dataMedic.respuestasPreguntasMedicas,
+    respuestasPreguntasHereditarias : isNewUsuario ? [] : dataMedic.respuestasPreguntasHereditarias,
+    respuestasCondicionesMedicas : isNewUsuario ? [] : dataMedic.respuestasCondicionesMedicas
   });
+
+  const fetchDatosMedicosAlumno = async () => {
+    const api = new SIGEAPICollection();
+    const token = cookies.token;
+    try{
+      const response = await api.directivosCollection.executeGetDatosMedicosAlumnos(
+        token, 
+        "202301A143" /*id + "" */);
+      if(response.ok){
+        const data = await response.json();
+        const newDatosMedicos : InterfaceDatosMedicos = {
+          tipoSanguineo: data.tipoSanguineo,
+          peso: data.peso,
+          talla: data.talla,
+          zapatoOrtopedico: data.zapatoOrtopedico,
+          lentes: data.lentes,
+          seguroMedico: data.seguroMedico,
+          recomendacionesEspeciales: data.recomendacionesEspeciales,
+          nombreMedicoFamiliar: data.nombreMedicoFamiliar,
+          telefonoMedicoFamiliar: data.telefonoMedicoFamiliar,
+          enfermadesFrecuentes: data.enfermadesFrecuentes,
+          enfermadesUltimoAnio: data.enfermadesUltimoAnio,
+          alergias: data.alergias,
+          respuestasPreguntasMedicas : data.respuestasPreguntasMedicas,
+          respuestasPreguntasHereditarias : data.respuestasPreguntasHereditarias,
+          respuestasCondicionesMedicas : data.respuestasCondicionesMedicas
+        }
+        setFormData(newDatosMedicos);
+        console.log(data);
+      }
+    }catch(error){
+      console.error(error);
+    }
+  }
 
   const fetchPreguntasMedicas = async () => {
     const api = new SIGEAPICollection();
@@ -121,31 +158,44 @@ export const FormMedic = ({ dataMedic, isNewUsuario}: FormMedicProps) => {
     }
   };
 
+  console.log(formData.respuestasCondicionesMedicas);
+
   useEffect(() => {
     fetchPreguntasMedicas();
     fetchPreguntasHereditarias();
     fetchPreguntasCondiciones();
+    fetchDatosMedicosAlumno();
   }, []);
 
   return (
     <>
       <CardView title={""} description={""}>
         <div className="p-7 bg-white rounded-lg">
-          <FormBasicDataMedic dataMedic={dataMedic}></FormBasicDataMedic>
+          <FormBasicDataMedic 
+            dataMedic={dataMedic} 
+            formData={formData} 
+            setFormData={setFormData}
+          ></FormBasicDataMedic>
 
           <FormPreguntasCondiciones
             dataMedic={dataMedic}
             preguntasCondiciones={preguntasCondiciones}
+            formData={formData} 
+            setFormData={setFormData}
           ></FormPreguntasCondiciones>
 
           <FormPreguntasMedicas
             preguntasMedicas={preguntasMedicas}
             dataMedic={dataMedic}
+            formData={formData} 
+            setFormData={setFormData}
           ></FormPreguntasMedicas>
 
           <FormPreguntasHereditarias
             preguntasHereditarias={preguntasHereditarias}
             dataMedic={dataMedic}
+            formData={formData} 
+            setFormData={setFormData}
           ></FormPreguntasHereditarias>
 
           <div className="text-center pt-10">

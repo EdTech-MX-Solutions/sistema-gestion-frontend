@@ -4,6 +4,9 @@ import ButtonComponent from "../ButtonComponent";
 import { useRouter } from "next/router";
 import { useProfesores } from "../context/ProfesorProvider";
 import { TableVistaTelefonos } from "./TableVistaTelefonos";
+import SIGEAPICollection from "@/data/calls/apiHandler";
+import { cookies } from "next/dist/client/components/headers";
+import { useCookies } from "react-cookie";
 
 interface FormProfessorProps {
   professor: InterfaceProfessor;
@@ -14,19 +17,42 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
   const router = useRouter();
   const { id } = router.query;
 
-  const [formData, setFormData] = useState({
+  const [cookies, setCookie] = useCookies(["token"]);
+
+  const [formData, setFormData] = useState<InterfaceProfessor>({
     idProfesor: isNewUser ? "" : professor.idProfesor,
     nombre: isNewUser ? "" : professor.nombre,
     apellidoPaterno: isNewUser ? "" : professor.apellidoPaterno,
     apellidoMaterno: isNewUser ? "" : professor.apellidoMaterno,
     email: isNewUser ? "" : professor.email,
-    activo: isNewUser ? "" : professor.activo,
-    diretivo: isNewUser ? "" : professor.diretivo,
+    activo: isNewUser ? false : professor.activo,
+    diretivo: isNewUser ? false : professor.diretivo,
     noCedulaProfesional: isNewUser ? "" : professor.noCedulaProfesional,
     numero: isNewUser ? [] : professor.numero,
   });
 
-  const { profesores } = useProfesores();
+  const { profesores, updateProfesor } = useProfesores();
+
+  const handleInscribirProfesor = async (nuevoProfesor : InterfaceProfessor) =>{
+    const api = new SIGEAPICollection();
+    const token = cookies.token;
+    const response = await api.directivosCollection.executePostNuevoProfesor(
+      token,
+      nuevoProfesor
+    );
+
+    if(response.status == 200){
+      const response2 = await api.directivosCollection.executeGetProfessors(
+        token,
+      );
+
+      if(response2.ok){
+        const data = await response2.json();
+        console.log("Profesor inscrito con exito");
+        updateProfesor(data);
+      }
+    }
+  }
 
   useEffect(() => {
     if (id && profesores && profesores.length > 0) {
@@ -154,18 +180,18 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
                 htmlFor=""
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
-                ¿Usuario activo?:
+                ¿Usuario activo?
               </label>
               <select
                 id="activo"
                 name="activo"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                value={formData.activo ? "s" : "n"}
+                value={formData.activo ? "true" : "false"}
                 onChange={handleInputChange}
               >
                 <option value=""> Seleccione una opción</option>
-                <option value="s"> Si </option>
-                <option value="n"> No </option>
+                <option value = {"true"}> Si </option>
+                <option value = {"false"}> No </option>
               </select>
             </div>
           </div>
@@ -208,7 +234,11 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
           </div>
 
           <div className="grid grid-cols-2 row-span-2 gap-4 items-center bg-white text-center rounded-lg">
-            <ButtonComponent title={"Guardar"} color={"blue"}></ButtonComponent>
+            <ButtonComponent 
+              title={"Guardar"} 
+              color={"blue"}
+              onClick={() => handleInscribirProfesor(formData)}
+            ></ButtonComponent>
             <ButtonComponent
               title={"Dar de baja Profesor"}
               color={"red"}
