@@ -59,7 +59,7 @@ const TableSchedule = ({ horarioId }: TableScheduleprops) => {
             <>
                 <div className="flex justify-center items-center h-96">
                     <h1 className="text-2xl text-gray-400">
-                        Cargando...
+                        Cargando Datos...
                         <Loader/>
                     </h1>
                 </div>
