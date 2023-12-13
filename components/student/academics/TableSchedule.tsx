@@ -1,20 +1,31 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import InterfaceHorario from "@/data/interfaces/horario";
+import SIGEAPICollection from "@/data/calls/apiHandler";
+import {useCookies} from "react-cookie";
 
 interface TableScheduleprops {}
 
 interface TableScheduleprops {
-    horario: Array<{
-        claveMateria: string;
-        nombreMateria: string;
-        horaLunes: string;
-        horaMartes: string;
-        horaMiercoles: string;
-        horaJueves: string;
-        horaViernes: string;
-    }>;
+    horarioId: string;
 }
 
-const TableSchedule = ({ horario }: TableScheduleprops) => {
+const TableSchedule = ({ horarioId }: TableScheduleprops) => {
+    const [horario, setHorario] = useState<InterfaceHorario[]>([]);
+    const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
+    useEffect(()=>{
+        const api = new SIGEAPICollection();
+        api.sharedCollection.executeGetHorarioAlumno(cookies.token, horarioId)
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }else{
+                    return [];
+                }
+            })
+            .then((data) => {
+                setHorario(data);
+            });
+    },[])
     return (
         <>
             <div className="flex mx-auto justify-center p-5 bg-white rounded-lg">
@@ -30,7 +41,10 @@ const TableSchedule = ({ horario }: TableScheduleprops) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {horario.map((materia) => (
+                        {
+                            horario.length === 0 ?
+                                <tr><td colSpan={6}>No hay materias registradas</td></tr>:
+                            horario.map((materia) => (
                             <tr key={materia.claveMateria}>
                                 <td className="p-5">
                                     {" "}
