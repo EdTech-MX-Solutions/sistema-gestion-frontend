@@ -1,17 +1,18 @@
-import { ReactNode, useState } from "react";
+import {ReactNode, useState} from "react";
 import PrincipalTitle from "@/components/student/Principal.Title";
 import TableGrades from "@/components/student/academics/TableGrades";
 import SelectComponent from "@/components/SelectComponent";
 import StudentAcacemicsCard from "@/components/student/StudentAcademicsCard";
 import CardView from "@/components/CardView";
-import { useAlumno } from "@/components/context/AlumnoProvider";
+import {useAlumno} from "@/components/context/AlumnoProvider";
 
 interface DefaultLayoutProps {
     children: ReactNode;
 }
 
 function AcademicRecord() {
-    const { alumnos } = useAlumno();
+    const {alumnos} = useAlumno();
+    const [alumno,setAlumno] = useState(alumnos[0]);
     const calificaciones = [
         {
             Grado: "1",
@@ -26,9 +27,9 @@ function AcademicRecord() {
     ];
 
     const optionsSelectPeriodo = [
-        { value: "primerAño", label: "Ver mensajes" },
-        { value: "segundoAño", label: "Ver reportes" },
-        { value: "tercerAño", label: "Ver archivos" },
+        {value: "primerAño", label: "Ver mensajes"},
+        {value: "segundoAño", label: "Ver reportes"},
+        {value: "tercerAño", label: "Ver archivos"},
     ];
 
     const title = "Historial academico";
@@ -37,12 +38,7 @@ function AcademicRecord() {
         <>
             <CardView title={title} description={title} customtitle={true}>
                 <PrincipalTitle title={title}></PrincipalTitle>
-                <StudentAcacemicsCard alumno={alumnos[0]}>
-                    <SelectComponent
-                        options={optionsSelectPeriodo}
-                        title="Selecciona.."
-                    ></SelectComponent>
-
+                <StudentAcacemicsCard alumno={alumno}>
                     <div className="bg-white grid grid-cols-2 gap-4">
                         <div className="col-span-1">
                             <div className="grid grid-rows-4 gap-">
@@ -51,13 +47,6 @@ function AcademicRecord() {
                                         calificaciones={calificaciones}
                                     ></TableGrades>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div className="col-span-1">
-                            <div className="grid grid-rows-6 gap-2">
-                                <div className="p-4 row-span-3">Grafica 1</div>
-                                <div className="p-4 row-span-3">Grafica 2</div>
                             </div>
                         </div>
                     </div>
