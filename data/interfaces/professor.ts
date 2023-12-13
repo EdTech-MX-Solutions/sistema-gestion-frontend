@@ -8,7 +8,7 @@ interface InterfaceProfessor {
     email : string;
     activo : boolean;
     diretivo : boolean;
-    noCedulaProfesional : number;
+    noCedulaProfesional : string;
     numero : InterfaceTel[]
 }
 
