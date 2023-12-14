@@ -45,25 +45,25 @@ function ConsultStudents() {
                     const sexo =
                         element.sexo === "M" ? "Masculino" : "Femenino";
                     const newAlumno: InterfaceParent = {
-                        id_tutor: element.id,
+                        id: element.id,
                         curp: element.curp,
                         leerYescribir: element.leerYescribir,
                         gradoMaximoDeEstudios: element.gradoMaximoDeEstudios,
                         ocupacion: element.ocupacion,
                         nombres: element.nombre,
-                        apellido_paterno: element.apellidoPaterno,
-                        apellido_materno: element.apellidoMaterno,
+                        apellidoPaterno: element.apellidoPaterno,
+                        apellidoMaterno: element.apellidoMaterno,
                         correo: element.email,
-                        fecha_nacimiento: element.fecha_nacimiento,
+                        fechaNacimiento: element.fechaNacimiento,
                         sexo: sexo,
-                        pais_origen: element.pais_origen,
-                        estado_civil: element.estado_civil,
-                        red_social: element.red_social,
-                        tipo_identificacion: element.tipo_identificacion,
-                        no_identificacion: element.no_identificacion,
-                        tutor_principal: element.tutor_principal,
+                        paisOrigen: element.paisOrigen,
+                        estadoCivil: element.estadoCivil,
+                        redesSociales: element.redesSociales,
+                        tipoIdentificacion: element.tipoIdentificacion,
+                        noIdentificacion: element.noIdentificacion,
+                        esPrincipal: element.esPrincipal,
                         parentesco: element.parentesco,
-                        entidad_nacimiento: element.entidad_nacimiento,
+                        estadoOrigen: element.estadoOrigen,
                         numeros: element.numeros,
                     };
                     newTutores.push(newAlumno);
@@ -95,15 +95,15 @@ function ConsultStudents() {
                     route="/directive/actionsStudent/tutores?id="
                     searchDataAutomcomplete={[
                         ...tutores.map((tutor) => ({
-                            key: tutor.id_tutor,
-                            value: tutor.id_tutor,
+                            key: tutor.id,
+                            value: tutor.id,
                         })),
                         ...tutores.map((tutor) => ({
-                            key: tutor.id_tutor,
-                            value: `${tutor.nombres} ${tutor.apellido_paterno} ${tutor.apellido_materno}`,
+                            key: tutor.id,
+                            value: `${tutor.nombres} ${tutor.apellidoPaterno} ${tutor.apellidoMaterno}`,
                         })),
                         ...tutores.map((tutor) => ({
-                            key: tutor.id_tutor,
+                            key: tutor.id,
                             value: `${tutor.correo}`,
                         })),
                     ]}

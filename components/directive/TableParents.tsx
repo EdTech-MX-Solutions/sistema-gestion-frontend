@@ -40,14 +40,14 @@ export const TableParents = ({ parents }: TableParentsProps) => {
                 </thead>
                 <tbody>
                     {parents.map((student) => (
-                        <tr key={student.id_tutor} className="text-left">
+                        <tr key={student.id} className="text-left">
                             <td className="p-5 text-center">
                                 {" "}
-                                {student.id_tutor}{" "}
+                                {student.id}{" "}
                             </td>
                             <td colSpan={2} className="text-left	">
                                 {" "}
-                                {`${student.nombres}  ${student.apellido_paterno}  ${student.apellido_materno}`}{" "}
+                                {`${student.nombres}  ${student.apellidoMaterno}  ${student.apellidoPaterno}`}{" "}
                             </td>
                             <td className="group hidden lg:table-cell" colSpan={2}>
                                 {" "}
@@ -73,7 +73,7 @@ export const TableParents = ({ parents }: TableParentsProps) => {
                                     color1={"blue"}
                                     color2={"green"}
                                     onClick={() =>
-                                        handleConsultar(student.id_tutor)
+                                        handleConsultar(student.id)
                                     }
                                 ></ButtonComponentBiColor>
                             </td>
