@@ -38,9 +38,30 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
   const handleInscribirDataNuevoAlumno = async (
     nuevoAlumno: InterfaceAlumno
   ) => {
+    const requiredFields = [
+      "nombres",
+      "apellidoPaterno",
+      "apellidoMaterno",
+      "curp",
+      "fechaNacimiento",
+      "sexo",
+      "paisOrigen",
+      "entidad",
+    ];
 
-    
+    const emptyRequiredFields = requiredFields.filter(
+      (field) => !formData[field as keyof InterfaceAlumno]
+    );
 
+    if (emptyRequiredFields.length == 0) {
+      console.log("NO hay campos obligatorios vacios");
+      setRequiredCamposCompletos(true);
+    } else {
+      console.log("SI hay campos obligatorios vacios");
+      setRequiredCamposCompletos(false);
+    }
+
+    console.log(requiredCamposCompletos);
       /* 
       const api = new SIGEAPICollection();
       const token = cookies.token;
@@ -79,7 +100,6 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
           }
       }
       */
-    
   };
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
@@ -96,8 +116,6 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
       ...formData,
       [name]: value,
     });
-
-    handleCampos();
   };
 
   const fetchPaises = async () => {
@@ -146,10 +164,8 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
     }
   };
 
-  const handleSubmit = (event: { preventDefault: () => void }) => {
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-
-    console.log("Datos: ", formData);
   };
 
   const handleSiguientePasoMedic = ({ id }: { id: string }) => {
@@ -158,35 +174,9 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
 
   const { alumnos, updateAlumno } = useAlumno();
 
-  const handleCampos = () => {
-    const requiredFields = [
-      "nombres",
-      "apellidoPaterno",
-      "apellidoMaterno",
-      "curp",
-      "fechaNacimiento",
-      "sexo",
-      "paisOrigen",
-      "entidad",
-    ];
-
-    const emptyRequiredFields = requiredFields.filter(
-      (field) => !formData[field as keyof InterfaceAlumno]
-    );
-
-    if (emptyRequiredFields.length == 0) {
-      console.log("NO hay campos obligatorios vacios");
-      setRequiredCamposCompletos(true);
-    } else {
-      console.log("SI hay campos obligatorios vacios");
-      setRequiredCamposCompletos(false);
-    }
-  }
-
   useEffect(() => {
     fetchPaises();
     fetchEstados();
-    handleCampos();
   }, []);
 
   return (
@@ -194,7 +184,7 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
       <div className="grid grid-rows-1 grid-flow-col gap-4">
         <div className="p-7 bg-white rounded-lg">
           <h4 className="font-bold pb-5"> Datos Personales Alumno </h4>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-3 gap-4 items-center">
               <div>
                 <label
@@ -416,10 +406,7 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
                   title={"Siguiente"}
                   color={"blue"}
                   onClick={() => {
-                    //handleInscribirDataNuevoAlumno(formData);
-                    
-                    console.log(requiredCamposCompletos);
-                    //handleSiguientePasoMedic({ id: formData.noBoleta })
+                    handleInscribirDataNuevoAlumno(formData);
                   }}
                 ></ButtonComponent>
             </div>
