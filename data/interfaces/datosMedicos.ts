@@ -1,6 +1,7 @@
 import InterfaceRespuestasMedicasCondiciones from "./respuestasMedicasCondiciones"
 import InterfaceRespuestasPreguntasMedicas from "./respuestasMedicasPreguntasMedicas"
 import InterfaceRespuestasMedicasHereditarias from "./respuestasMedicasHereditarias"
+import {floated} from "@material-tailwind/react/types/components/card";
 
 interface InterfaceDatosMedicos{
     tipoSanguineo: string,

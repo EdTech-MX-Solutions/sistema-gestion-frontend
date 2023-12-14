@@ -223,4 +223,14 @@ export class SharedAPICollection {
             }
         });
   }
+  executeGetDatosMedicos(token: string, noBoleta: string) {
+    const route = this.apiCaller.getCall() + "/datos-medicos/" + noBoleta;
+    return fetch(route, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        }
+    });
+  }
 }
