@@ -1,26 +1,105 @@
+import Loader from "@/components/elements/Loader";
+import SIGEAPICollection from "@/data/calls/apiHandler";
+import InterfaceDireccion from "@/data/interfaces/direccion";
 import InterfaceParent from "@/data/interfaces/parent";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 function ParentsCardComponent({ parentInst }: { parentInst: InterfaceParent }) {
-    if (!parentInst) {
-        // Manejar el caso cuando parentInst es nulo o indefinido
-        return null;
-    }
+    const [cookies, setCookie] = useCookies(["token"]);
+    const [loading, setLoading] = useState(false);
+    const [hayDireccion, setHayDireccion] = useState(false);
+    const [direccion, setDireccion] = useState<InterfaceDireccion>();
+    const [parent, setParent] = useState<any>();
     let number = "";
-    try {
-        if (parentInst.numeros && parentInst.numeros.length > 0)
-            number = "cel:" + parentInst.numeros[0].numero || "";
-    } catch (error) {
-        console.log(error);
-    }
-    const parent = {
-        name: `${parentInst.nombres || ""} ${
-            parentInst.apellidoPaterno || ""
-        } ${parentInst.apellidoMaterno || ""}`,
-        email: parentInst.correo || "",
-        phone: number,
-        relationship: parentInst.parentesco || "",
-        bloodType: "O- (Compatible)",
+
+    const fetchDireccion = async () => {
+        if (!parentInst) {
+            // Manejar el caso cuando parentInst es nulo o indefinido
+            return null;
+        }
+        try {
+            if (parentInst.numeros && parentInst.numeros.length > 0)
+                number = "cel:" + parentInst.numeros[0].numero || "";
+        } catch (error) {
+            console.log(error);
+        }
+        setParent({
+            name: `${parentInst.nombres || ""} ${
+                parentInst.apellidoPaterno || ""
+            } ${parentInst.apellidoMaterno || ""}`,
+            email: parentInst.correo || "",
+            phone: number,
+            relationship: parentInst.parentesco || "",
+            bloodType: "O- (Compatible)",
+        });
+
+        const api = new SIGEAPICollection();
+        const token = cookies.token;
+        setLoading(true);
+        try {
+            const response = await api.sharedCollection.executeGetAlumnos(
+                token
+            );
+            if (response.ok) {
+                console.log("Generando Lista de Alumnos");
+                const data = await response.json();
+                console.log(data);
+                if (!data || data.length == 0) {
+                    setHayDireccion(false);
+                    setLoading(false);
+                    return;
+                } else {
+                    setHayDireccion(true);
+                }
+                let newAlumnos: InterfaceDireccion[] = [];
+                console.log("Entrando al for");
+
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i];
+                    const newAlumno: InterfaceDireccion = {
+                        id: element.id,
+                        calle: element.calle,
+                        numeroExterior: element.numeroExterior,
+                        numeroInterior: element.numeroInterior,
+                        entreCalle1: element.entreCalle1,
+                        entreCalle2: element.entreCalle2,
+                        referenciaExtra: element.referenciaExtra,
+                        colonia: {
+                            codigoPostal: element.colonia.codigoPostal,
+                            municipio: element.colonia.municipio.nombre,
+                            municipioId: element.colonia.municipio.municipioId,
+                            estadoId: element.colonia.estado.id,
+                            estado: element.colonia.estado.nombre,
+                            colonias: [],
+                        },
+                        estado: {
+                            id: element.colonia.estado.id,
+                            nombre: element.colonia.estado.nombre,
+                        },
+                    };
+                    newAlumnos.push(newAlumno);
+                }
+                setDireccion(newAlumnos[0]);
+
+                console.log("Alumnos obtenidos ");
+                setHayDireccion(true);
+                setLoading(false);
+            } else {
+                console.error(
+                    `Error en la solicitud. Código de estado: ${response.status}`
+                );
+            }
+        } catch (error) {
+            console.error("Error de solicitud:", error);
+        }
+        setLoading(false);
     };
+
+    useEffect(() => {
+        fetchDireccion();
+    }, []);
 
     return (
         <>
@@ -123,11 +202,43 @@ function ParentsCardComponent({ parentInst }: { parentInst: InterfaceParent }) {
                     </div>
 
                     <div className="">
-                        <button className="w-full px-4 py-2 pb-4 hover:bg-gray-100 flex">
-                            <p className="text-sm font-medium text-gray-800 leading-none">
-                                Ver detalle
+                        <a
+                            // href={`https://www.google.com/maps/place/${parentInst.calle}+${parentInst.direccion.numeroExterior},+${parentInst.direccion.colonia},+${parentInst.direccion.municipio},+${parentInst.direccion.estado},+${parentInst.direccion.codigoPostal}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full px-4 py-2 pb-4 hover:bg-gray-100 flex"
+                        >
+                            <p className="flex text-sm font-medium text-gray-800 leading-none items-center">
+                                {loading ? (
+                                    <Loader size="sm" color="bg-green-600" />
+                                ) : hayDireccion ? (
+                                    <>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
+                                            className="w-4 h-4 inline mr-2"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                                            />
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                                            />
+                                        </svg>
+                                        Abrir en Maps
+                                    </>
+                                ) : (
+                                    <p>No hay dirección</p>
+                                )}
                             </p>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

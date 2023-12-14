@@ -26,6 +26,7 @@ export const FormCreateSubject = ({
     const [nivel, setNivel] = useState<string>("");
     const [created, setCreated] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
+    const [message, setMessage] = useState<string>("");
 
     const handleSubmmit = async () => {
         setLoading(true);
@@ -49,27 +50,49 @@ export const FormCreateSubject = ({
                     );
                 } else {
                     setError(true);
+                    setLoading(false);
                     console.log("Error al modificar la materia");
                     return;
                 }
             } else {
-                response = await api.directivosCollection.executePostMaterial(
-                    token,
-                    materia
-                );
-            }
-            if (response.status === 201 || response.status === 200) {
-                const data = await response.json();
-                console.log(data);
-                setCreated(true);
-            } else {
-                setError(true);
-                console.log(
-                    `Error al ${
-                        modifiyingSubject ? "modificar" : "crear"
-                    } la materia`
-                );
-                console.log(materia);
+                if (!nombreMateria || nombreMateria.length < 3 || nombreMateria == "") {
+                    setError(true);
+                    setLoading(false);
+                    setMessage("El nombre de la materia debe ser válido. No estar vacío y tener al menos 3 caracteres.");
+                    return;
+                } else if (
+                    !nivel ||
+                    (nivel != "Primero" &&
+                        nivel != "Segundo" &&
+                        nivel != "Tercero" &&
+                        nivel != "Cuarto" &&
+                        nivel != "Quinto" &&
+                        nivel != "Sexto")
+                ) {
+                    setError(true);
+                    setLoading(false);
+                    setMessage("El nivel debe ser válido");
+                    return;
+                } else {
+                    response =
+                        await api.directivosCollection.executePostMaterial(
+                            token,
+                            materia
+                        );
+                    if (response.status === 201 || response.status === 200) {
+                        const data = await response.json();
+                        console.log(data);
+                        setCreated(true);
+                    } else {
+                        setError(true);
+                        console.log(
+                            `Error al ${
+                                modifiyingSubject ? "modificar" : "crear"
+                            } la materia`
+                        );
+                        console.log(materia);
+                    }
+                }
             }
         } catch (error) {
             console.error("Error de solicitud:", error);
@@ -236,7 +259,7 @@ export const FormCreateSubject = ({
                                 title="¡Error!"
                                 message={`La materia ${nombreMateria} no ha sido ${
                                     modifiyingSubject ? "modificada" : "creada"
-                                }.`}
+                                }. ${message || ""}`}
                             />
                         </div>
                     </>
