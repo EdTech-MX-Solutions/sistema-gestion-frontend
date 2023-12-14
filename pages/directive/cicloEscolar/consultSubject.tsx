@@ -6,6 +6,7 @@ import Loader from "@/components/elements/Loader";
 import InterfaceMateria from "@/data/interfaces/materia";
 import { SubjectAccordion } from "@/components/elements/Accordion/SubjectAccordion";
 import { BreadcrumbsDirective } from "@/components/elements/BreadCrumbs/BreadDirective";
+import PanelCard from "@/components/elements/Panels/CardPanel";
 
 function ConsultSubject() {
     const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
@@ -79,6 +80,14 @@ function ConsultSubject() {
                         </>
                     ) : null}
                 </>
+                <div className="flex flex-wrap mt-10">
+                    <PanelCard
+                        category="Sistema"
+                        title="Regresar al Panel de Control"
+                        bgColor="teal-700 bg-opacity-50"
+                        route="/directive/cicloEscolar/subjects"
+                    />
+                </div>
             </CardView>
         </>
     );

@@ -175,8 +175,8 @@ export default function CyclePanel() {
       <PanelCard
         category="Sistema"
         title="Regresar al Inicio"
-        bgColor="gray-600"
-        route="/directive"
+        bgColor="teal-700"
+        route="/directive/cicloEscolar"
       />
       <PanelCard
         category="Sistema"

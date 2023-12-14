@@ -11,12 +11,14 @@ function dataUpload() {
     return (
         <>
             <CardView title={"title"} description={"title"} customtitle={true}>
-                <PrincipalTitle title={"Carga Por Lote"}></PrincipalTitle>
+                <PrincipalTitle title={"Carga de Datos Por Lote"}></PrincipalTitle>
+                <div>
                 <CardCargaPorLote
                     title={
                         "Recuerda que en el CSV que subas debe tener 30 columnas y debe ser el que descargaste del formulario de google docs"
                     }
                 ></CardCargaPorLote>
+                </div>
             </CardView>
         </>
     );

@@ -90,6 +90,18 @@ export class DirectivosAPICollection {
         });
     }
 
+    executePutMateria(token: string, materia: InterfaceMateria) {
+        const route = this.apiCaller.getCall() + `/materias`;
+        return fetch(route, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(materia),
+        });
+    }
+    
     executePostMaterial(token: string, material: InterfaceMateria) {
         const route = this.apiCaller.getCall() + `/materias`;
         return fetch(route, {
@@ -158,5 +170,19 @@ export class DirectivosAPICollection {
                 periodoPreinscripciones: false,
             }),
         }); 
+    }
+
+    executePostFileAlumnos(token: string, file: File) {
+        const route = this.apiCaller.getCall() + `/archivos/alumnoslote/upload`;
+        const formData = new FormData();
+        formData.append("data", file);
+        return fetch(route, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                ContentType: "multipart/form-data",
+            },
+            body: formData,
+        });
     }
 }

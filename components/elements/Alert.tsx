@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 
 interface AlertProps {
     bgColor: string;
@@ -6,6 +6,7 @@ interface AlertProps {
     textColor: string;
     title: string;
     message: string;
+    showMessage?: boolean;
 }
 
 const AlertComponent: React.FC<AlertProps> = ({
@@ -14,10 +15,17 @@ const AlertComponent: React.FC<AlertProps> = ({
     textColor,
     title,
     message,
+    showMessage
 }) => {
     const [show, setShow] = useState<boolean>(true);
     const containerStyle = `bg-${bgColor} border border-${borderColor} text-${textColor} px-4 py-3 rounded relative`;
 
+    useEffect(() => {
+        if (showMessage) {
+            setShow(true);
+        }
+    });
+    
     if (!show) {
         return null;
     }

@@ -8,16 +8,26 @@ import Link from "next/link";
 import { usePeriodo } from "../context/PeriodoProvider";
 import { Button, Input, Typography } from "@material-tailwind/react";
 import InterfaceMateria from "@/data/interfaces/materia";
+import ConsultSubject from "@/pages/directive/cicloEscolar/consultSubject";
+import PanelCard from "../elements/Panels/CardPanel";
+import AlertComponent from "../elements/Alert";
 
 interface FormCreateSubjectProps {
     autoStart?: boolean;
+    modifiyingSubject?: boolean;
+    subbject?: InterfaceMateria;
 }
 
-export const FormCreateSubject = ({ autoStart }: FormCreateSubjectProps) => {
+export const FormCreateSubject = ({
+    autoStart,
+    subbject,
+    modifiyingSubject,
+}: FormCreateSubjectProps) => {
     const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
     const [loading, setLoading] = useState<boolean>(false);
     const [nombreMateria, setNombreMateria] = useState<string>("");
     const [nivel, setNivel] = useState<string>("");
+    const [created, setCreated] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
 
     const periodo = usePeriodo();
@@ -32,7 +42,6 @@ export const FormCreateSubject = ({ autoStart }: FormCreateSubjectProps) => {
 
     const handleSubmmit = async () => {
         setLoading(true);
-        console.log("Enviando datos de inicio de ciclo escolar...");
 
         const api = new SIGEAPICollection();
         const token = cookies.token;
@@ -43,16 +52,36 @@ export const FormCreateSubject = ({ autoStart }: FormCreateSubjectProps) => {
         };
 
         try {
-            const response = await api.directivosCollection.executePostMaterial(
-                token,
-                materia
-            );
-            if (response.status === 201) {
+            let response;
+            if (modifiyingSubject) {
+                if (subbject) {
+                    materia.clave = subbject.clave;
+                    response = await api.directivosCollection.executePutMateria(
+                        token,
+                        materia
+                    );
+                } else {
+                    setError(true);
+                    console.log("Error al modificar la materia");
+                    return;
+                }
+            } else {
+                response = await api.directivosCollection.executePostMaterial(
+                    token,
+                    materia
+                );
+            }
+            if (response.status === 201 || response.status === 200) {
                 const data = await response.json();
                 console.log(data);
+                setCreated(true);
             } else {
                 setError(true);
-                console.log("Error al crear la materia");
+                console.log(
+                    `Error al ${
+                        modifiyingSubject ? "modificar" : "crear"
+                    } la materia`
+                );
                 console.log(materia);
             }
         } catch (error) {
@@ -67,7 +96,14 @@ export const FormCreateSubject = ({ autoStart }: FormCreateSubjectProps) => {
             console.log("Starting...");
             handleSubmmit();
         }
-    }, []);
+        if (modifiyingSubject) {
+            if (subbject) {
+                console.log("Modifying...");
+                setNombreMateria(subbject.nombre || "");
+                setNivel(subbject.nivel || "");
+            }
+        }
+    }, [modifiyingSubject, subbject]);
 
     if (loading) {
         return (
@@ -83,7 +119,10 @@ export const FormCreateSubject = ({ autoStart }: FormCreateSubjectProps) => {
                         <Typography variant="h4" color="blue-gray">
                             Registro de nueva materia
                         </Typography>
-                        <Typography color="gray" className="mt-1 font-normal dark:text-gray-200">
+                        <Typography
+                            color="gray"
+                            className="mt-1 font-normal dark:text-gray-200"
+                        >
                             Recuerda que las materias deben estar reglamentadas
                             por la Secretaría de Educación Pública.
                             <br />
@@ -171,15 +210,62 @@ export const FormCreateSubject = ({ autoStart }: FormCreateSubjectProps) => {
                                     </select>
                                 </div>
                                 <div className="w-1/3">
-                                    <Button onClick={
-                                        handleSubmmit
-                                    } className="bg-secondary text-gray-700">
-                                        Registrar
+                                    <Button
+                                        onClick={handleSubmmit}
+                                        value={subbject ? subbject.clave : ""}
+                                        className="bg-secondary text-gray-700"
+                                    >
+                                        {subbject ? "Modificar" : "Crear"}
                                     </Button>
                                 </div>
                             </div>
                         </form>
                     </div>
+                </div>
+                {created && (
+                    <>
+                        <div className="pt-10">
+                            <AlertComponent
+                                bgColor="green-100 bg-opacity-40"
+                                borderColor="green-100"
+                                textColor="green-100 dark:text-gray-200"
+                                title="¡Éxito!"
+                                message={`La materia ${nombreMateria} ha sido ${
+                                    modifiyingSubject ? "modificada" : "creada"
+                                }.`}
+                            />
+                        </div>
+                    </>
+                )}
+                {error && (
+                    <>
+                        <div className="pt-10">
+                            <AlertComponent
+                                bgColor="red-100 bg-opacity-40"
+                                borderColor="red-100"
+                                textColor="red-100 dark:text-gray-200"
+                                title="¡Error!"
+                                message={`La materia ${nombreMateria} no ha sido ${
+                                    modifiyingSubject ? "modificada" : "creada"
+                                }.`}
+                            />
+                        </div>
+                    </>
+                )}
+
+                <div className="flex flex-wrap mt-10">
+                    <PanelCard
+                        category="Consultar Materias"
+                        title="Consultar Materias"
+                        bgColor="emerald-600"
+                        route="/directive/cicloEscolar/consultSubject"
+                    />
+                    <PanelCard
+                        category="Sistema"
+                        title="Regresar al Panel de Control"
+                        bgColor="teal-700 bg-opacity-50"
+                        route="/directive/cicloEscolar/subjects"
+                    />
                 </div>
             </>
         );

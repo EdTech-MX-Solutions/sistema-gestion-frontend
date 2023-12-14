@@ -19,13 +19,13 @@ export default function PanelCycleCards() {
                 category="Panel de Control"
                 title="Ciclo Escolar"
                 bgColor="emerald-600"
-                route="/directive/actionsStudent"
+                route="/directive/cicloEscolar/cycle"
             />
             <PanelCard
                 category="Inicialización del Sistema"
                 title="Carga de Archivo"
                 bgColor="emerald-600"
-                route="/directive/actionsStudent/consultParents"
+                route="/directive/cicloEscolar/dataUpload"
             />
             <PanelCard
                 category="Panel de Control"
@@ -33,17 +33,24 @@ export default function PanelCycleCards() {
                 bgColor="emerald-600"
                 route="/directive/cicloEscolar/subjects"
             />
-            <PanelCard
+            <div className="bg-emerald-800" />
+            {/* <PanelCard
                 category="Panel de Control"
                 title="Mensajes"
-                bgColor="teal-700"
+                bgColor="emerald-800"
                 route="/directive/cicloEscolar/suggestions"
             />
             <PanelCard
                 category="Panel de Control"
                 title="Reportes y Avisos"
-                bgColor="teal-700"
+                bgColor="emerald-800 bg-opacity-40"
                 route="/directive/cicloEscolar/suggestions"
+            /> */}
+            <PanelCard
+                category="Panel de Control"
+                title="Regresar"
+                bgColor="teal-700"
+                route="/directive/"
             />
             <PanelCard
                 category="Sistema"
@@ -56,7 +63,7 @@ export default function PanelCycleCards() {
 
     return (
         <>
-            <div className="flex flex-wrap items-center mt-10">
+            <div className="flex flex-wrap mt-10">
                 <Panel />
             </div>
             <ConfirmLogoutElement
