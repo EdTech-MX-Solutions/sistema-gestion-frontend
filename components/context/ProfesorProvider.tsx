@@ -10,6 +10,8 @@ import {
 import { useCookies } from "react-cookie";
 
 interface ProfesorContextType {
+  loading: boolean;
+  hayProfesores: boolean;
   profesores: InterfaceProfessor[];
   updateProfesor: (newProfesor: InterfaceProfessor[]) => void | InterfaceProfessor[];
 }
@@ -23,12 +25,15 @@ export const ProfesorProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [cookies, setCookie] = useCookies(["token", "idProfessor", "childs"]);
   const [profesores, setProfesores] = useState<InterfaceProfessor[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [hayProfesores, setHayProfesores] = useState<boolean>(false);
 
   const updateProfesor = (newProfesor: InterfaceProfessor[]) =>{
     setProfesores(newProfesor);
   }
 
   const fetchProfesores = async () => {
+    setLoading(true);
     const api = new SIGEAPICollection();
     const token = cookies.token;
 
@@ -39,6 +44,11 @@ export const ProfesorProvider: React.FC<{ children: ReactNode }> = ({
       if (response.ok) {
         const data = await response.json();
         let newProfessors: InterfaceProfessor[] = [];
+        if (!data || data.length == 0) {
+          setHayProfesores(false);
+          setLoading(false);
+          return;
+        }
         for (let i = 0; i < data.length; i++) {
           const element = data[i];
           const newProfessor: InterfaceProfessor = {
@@ -58,6 +68,7 @@ export const ProfesorProvider: React.FC<{ children: ReactNode }> = ({
         setCookie("childs", data.length);
         setCookie("idProfessor", data[0].idProfesor);
         setProfesores(newProfessors);
+        setHayProfesores(true);
       } else {
         console.error(
           `Error en la solicitud. Código de estado: ${response.status}`
@@ -66,6 +77,7 @@ export const ProfesorProvider: React.FC<{ children: ReactNode }> = ({
     } catch (error) {
       console.error("Error de solicitud:", error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -73,7 +85,7 @@ export const ProfesorProvider: React.FC<{ children: ReactNode }> = ({
   }, []);
 
   return (
-    <ProfesorContext.Provider value={{ profesores, updateProfesor }}>
+    <ProfesorContext.Provider value={{ profesores, updateProfesor, loading, hayProfesores }}>
         {children}
     </ProfesorContext.Provider>
   );

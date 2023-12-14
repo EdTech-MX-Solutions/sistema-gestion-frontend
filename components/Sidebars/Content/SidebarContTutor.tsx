@@ -82,7 +82,7 @@ const SidebarContTutor = () => {
                     {sidebarItem("Horario", base_rute + "/academics/schedule")}
                 </ul>
             </div>
-            <div>
+            {/* <div>
                 <h3 className="mb-4 ml-2 font-bold text-sm text-gray-800 dark:text-gray-200">
                     <svg
                         className="ml-1.5 inline-block mr-1.5 mb-0.5 text-gray-800 dark:text-gray-200 text-black"
@@ -106,7 +106,7 @@ const SidebarContTutor = () => {
                     {sidebarItem("Mensajes o Avisos", base_rute + "/othersOptions/messages")}
                     {sidebarItem("Reportes o Sugerencias", base_rute + "/othersOptions/suggestions")}
                 </ul>
-            </div>
+            </div> */}
         </>
     );
 };

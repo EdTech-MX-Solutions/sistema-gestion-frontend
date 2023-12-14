@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CardView from "@/components/CardView";
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";

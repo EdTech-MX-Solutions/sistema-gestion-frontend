@@ -12,6 +12,8 @@ import { useCookies } from "react-cookie";
 interface AlumnoContextType {
     alumnos: InterfaceAlumno[];
     updateAlumno: (newAlumno: InterfaceAlumno[]) => void;
+    loading: boolean;
+    hayalumnos: boolean;
 }
 
 const AlumnoContext = createContext<AlumnoContextType | undefined>(undefined);
@@ -20,6 +22,8 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
     const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [hayalumnos, setHayalumnos] = useState<boolean>(false);
     const [alumnos, setAlumnos] = useState<InterfaceAlumno[]>([
         {
             no_boleta: "",
@@ -45,6 +49,7 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
     };
 
     const fetchAlumno = async () => {
+        setLoading(true);
         const api = new SIGEAPICollection();
         const token = cookies.token;
 
@@ -56,6 +61,11 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
                 const data = await response.json();
                 
                 let newAlumnos : InterfaceAlumno[] = [];
+                if (!data || data.length == 0) {
+                    setHayalumnos(false);
+                    setLoading(false);
+                    return;
+                }
                 for (let i = 0; i < data.length; i++) {
                     const element = data[i];
                     const sexo = element.sexo === "M" ? "Masculino" : "Femenino";
@@ -81,6 +91,7 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
                     newAlumnos.push(newAlumno);
                 }
                 setAlumnos(newAlumnos);
+                setHayalumnos(true);
             } else {
                 console.error(
                     `Error en la solicitud. Código de estado: ${response.status}`
@@ -89,6 +100,7 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
         } catch (error) {
             console.error("Error de solicitud:", error);
         }
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -96,7 +108,7 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
     }, []);
 
     return (
-        <AlumnoContext.Provider value={{ alumnos, updateAlumno }}>
+        <AlumnoContext.Provider value={{ alumnos, updateAlumno, loading, hayalumnos }}>
             {children}
         </AlumnoContext.Provider>
     );

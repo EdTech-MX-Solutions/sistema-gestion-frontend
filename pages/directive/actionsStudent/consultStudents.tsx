@@ -11,7 +11,7 @@ interface DefaultLayoutProps {
 }
 
 function ConsultStudents() {
-    const {alumnos} = useAlumno();
+    const {alumnos, loading, hayalumnos} = useAlumno();
 
     return (
         <>
@@ -31,10 +31,13 @@ function ConsultStudents() {
                         })),
                     ]}
                     comment={
-                        "Recuerda que puedes buscar a un alumno por nombre, apellidos o boleta"
+                        "Recuerda que puedes buscar a un alumno por apellido paterno o boleta"
                     }
                 ></InputSearch>
+                {loading ? <Loader /> : null}
+                {hayalumnos && !loading ? (
                 <TableStudets students={alumnos}></TableStudets>
+                ) : null}
             </CardView>
         </>
     );

@@ -11,7 +11,9 @@ import { useCookies } from "react-cookie";
 
 interface GrupoContextType {
   grupos: InterfaceGrupo[];
-  updateGrupo: (newGrupo: InterfaceGrupo) => void;
+  updateGrupo: (newGrupo: InterfaceGrupo[]) => void;
+  loading: boolean;
+  hayGrupos: boolean;
 }
 
 const GrupoContext = createContext<GrupoContextType | undefined>(undefined);
@@ -19,15 +21,17 @@ const GrupoContext = createContext<GrupoContextType | undefined>(undefined);
 export const GrupoProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [cookies, setCookie] = useCookies(["token", "idGrupo", "childs"]);
+  const [cookies, setCookie] = useCookies(["token"]);
   const [grupos, setGrupos] = useState<InterfaceGrupo[]>([]);
-  const [grupo, setGrupo] = useState<InterfaceGrupo | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [hayGrupos, setHayGrupos] = useState<boolean>(false);
 
-  const updateGrupo = (newGrupo: InterfaceGrupo) => {
-    setGrupo(newGrupo);
+  const updateGrupo = (newGrupo: InterfaceGrupo[]) => {
+    setGrupos(newGrupo);
   };
 
   const fetchGrupos = async () => {
+    setLoading(true);
     const api = new SIGEAPICollection();
     const token = cookies.token;
 
@@ -36,6 +40,11 @@ export const GrupoProvider: React.FC<{ children: ReactNode }> = ({
       if (response.ok) {
         const data = await response.json();
         let newGrupos: InterfaceGrupo[] = [];
+        if (!data || data.length == 0) {
+          setHayGrupos(false);
+          setLoading(false);
+          return;
+        }
         for (let i = 0; i < data.length; i++) {
           const element = data[i];
           const newGrupo: InterfaceGrupo = {
@@ -52,6 +61,7 @@ export const GrupoProvider: React.FC<{ children: ReactNode }> = ({
           };
           newGrupos.push(newGrupo);
         }
+        setHayGrupos(true);
         setGrupos(newGrupos);
       } else {
         console.error(
@@ -61,6 +71,7 @@ export const GrupoProvider: React.FC<{ children: ReactNode }> = ({
     } catch (error) {
       console.error("Error de solicitud:", error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -68,7 +79,7 @@ export const GrupoProvider: React.FC<{ children: ReactNode }> = ({
   }, []);
 
     return (
-        <GrupoContext.Provider value={{ grupos, updateGrupo }}>
+        <GrupoContext.Provider value={{ grupos, updateGrupo, loading, hayGrupos }}>
         {children}
         </GrupoContext.Provider>
     );

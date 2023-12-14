@@ -4,6 +4,8 @@ import InterfaceAlumno from "@/data/interfaces/alumno";
 import router from "next/router";
 import InterfaceParent from "@/data/interfaces/parent";
 import TableContainer from "./Tables/TableContainter";
+import TableCopyButton from "./Tables/TableButton";
+import TableEmailButton from "./Tables/TableEmail";
 
 interface TableParentsProps {
     parents: InterfaceParent[];
@@ -47,9 +49,19 @@ export const TableParents = ({ parents }: TableParentsProps) => {
                                 {" "}
                                 {`${student.nombres}  ${student.apellido_paterno}  ${student.apellido_materno}`}{" "}
                             </td>
-                            <td className="hidden lg:table-cell" colSpan={2}>
+                            <td className="group hidden lg:table-cell" colSpan={2}>
                                 {" "}
-                                {`${student.correo}`}{" "}
+                                {`${student.correo}`}
+                                {student.correo !== null && student.correo !== "" ? (
+                                    <span className="opacity-0 group-hover:opacity-100">
+                                        <TableCopyButton
+                                            text={student.correo}
+                                        />
+                                        <TableEmailButton
+                                            text={student.correo}
+                                        />
+                                    </span>
+                                ) : "No tiene correo"}
                             </td>
                             <td className="hidden lg:table-cell" colSpan={2}>
                                 {" "}

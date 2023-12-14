@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import ButtonComponent from "../ButtonComponent";
 import { useCookies } from "react-cookie";
-import InterfacePeriodo from "@/data/interfaces/periodo";
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import Loader from "../elements/Loader";
 import Link from "next/link";
 import { usePeriodo } from "../context/PeriodoProvider";
 import { Button, Input, Typography } from "@material-tailwind/react";
 import InterfaceMateria from "@/data/interfaces/materia";
-import ConsultSubject from "@/pages/directive/cicloEscolar/consultSubject";
 import PanelCard from "../elements/Panels/CardPanel";
 import AlertComponent from "../elements/Alert";
 
@@ -29,16 +26,6 @@ export const FormCreateSubject = ({
     const [nivel, setNivel] = useState<string>("");
     const [created, setCreated] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
-
-    const periodo = usePeriodo();
-
-    const currentDate = new Date();
-    const [warning, setWarning] = useState(false);
-    const minDate = new Date(new Date());
-    const maxDate = new Date(new Date().setFullYear(minDate.getFullYear()));
-
-    const title = "Ciclo Escolar Iniciado";
-    const subtitle = "¡Bienvenido al nuevo ciclo escolar!";
 
     const handleSubmmit = async () => {
         setLoading(true);

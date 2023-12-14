@@ -102,12 +102,16 @@ function ConsultStudents() {
                             key: tutor.id_tutor,
                             value: `${tutor.nombres} ${tutor.apellido_paterno} ${tutor.apellido_materno}`,
                         })),
+                        ...tutores.map((tutor) => ({
+                            key: tutor.id_tutor,
+                            value: `${tutor.correo}`,
+                        })),
                     ]}
                     comment={
-                        "Recuerda que puedes buscar a un alumno por nombre, apellidos o boleta"
+                        "Recuerda que puedes buscar a un tutor por apellido parterno o id"
                     }
                 ></InputSearch>
-                {loading ? <Loader /> : null}
+                {loading ? <Loader size="lg" /> : null}
                 {hayTutores && !loading ? (
                     <TableParents parents={tutores}></TableParents>
                 ) : null}

@@ -132,4 +132,15 @@ export class SharedAPICollection {
             }
         });
     }
+
+    executeGetParentByAlumno(token: string, boleta: string) {
+        const route = this.apiCaller.getCall() + "/tutores/alumno/" + boleta;
+        return fetch(route, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            }
+        });
+    }
 }
