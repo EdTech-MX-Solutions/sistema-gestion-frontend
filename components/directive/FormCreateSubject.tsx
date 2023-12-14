@@ -117,7 +117,9 @@ export const FormCreateSubject = ({
                 <div className="mt-10 p-5 bg-white  dark:bg-slate-500 dark:text-gray-200 rounded-lg">
                     <div className="bg-white dark:bg-slate-500 dark:text-gray-200 p-6  md:mx-auto">
                         <Typography variant="h4" color="blue-gray">
-                        
+                            {modifiyingSubject
+                                ? "Modificar Materia"
+                                : "Registrar Materia"}
                         </Typography>
                         <Typography
                             color="gray"
@@ -128,14 +130,14 @@ export const FormCreateSubject = ({
                             <br />
                             Para más información consulta el siguiente enlace:{" "}
                             <Link
-                                className="text-green-700 text-green-200"
+                                className="text-green-700 dark:text-green-200"
                                 href="https://www.sep.gob.mx/es/sep1/Reglamento_de_la_Ley_General_de_Educacion"
                             >
                                 Ley General de Educación{" "}
                             </Link>
                             o bien el siguiente enlace:
                             <Link
-                                className="text-green-700 text-green-200 pl-2"
+                                className="text-green-700 dark:text-green-200 pl-2"
                                 href="https://www.gob.mx/sep/acciones-y-programas/primaria-educacion-basica"
                             >
                                 Educación Básica (2023)
@@ -160,7 +162,7 @@ export const FormCreateSubject = ({
                                         onChange={(e) =>
                                             setNombreMateria(e.target.value)
                                         }
-                                        className=" focus:border-secondary"
+                                        className=" focus:border-secondary dark:focus:text-white"
                                         labelProps={{
                                             className:
                                                 "before:content-none after:content-none",
@@ -184,7 +186,7 @@ export const FormCreateSubject = ({
                                         onChange={(e) =>
                                             setNivel(e.target.value)
                                         }
-                                        className="w-full bg-transparent border border-gray-300 text-gray-400 text-sm rounded-md focus:ring-green-500 focus:border-green-500 block p-2.5"
+                                        className="w-full bg-transparent border border-gray-300 text-gray-200 text-sm rounded-md focus:ring-green-500 focus:border-green-500 block p-2.5"
                                     >
                                         <option disabled selected>
                                             Selecciona una opción

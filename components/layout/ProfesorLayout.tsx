@@ -22,7 +22,7 @@ const TutorLayout = ({ children }: LayoutProps) => {
                   sidebarOpen={sidebarOpen}
                   setSidebarOpen={setSidebarOpen}
                 />
-                <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden w-full ">
+                <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden w-full  z-20">
                   <Header
                     sidebarOpen={sidebarOpen}
                     setSidebarOpen={setSidebarOpen}

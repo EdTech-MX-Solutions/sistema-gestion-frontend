@@ -1,24 +1,24 @@
 import { ReactNode, useEffect, useState } from "react";
 import PrincipalTitle from "@/components/directive/Principal.Title";
 import InputSearch from "@/components/template/InputSearch";
-import TableStudets from "@/components/directive/TableStudets";
 import CardView from "@/components/CardView";
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
-import InterfaceAlumno from "@/data/interfaces/alumno";
 import Loader from "@/components/elements/Loader";
+import InterfaceParent from "@/data/interfaces/parent";
+import TableParents from "@/components/directive/TableParents";
 
 interface DefaultLayoutProps {
     children: ReactNode;
 }
 
 function ConsultStudents() {
-    const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
-    const [alumnos, setAlumnos] = useState<InterfaceAlumno[]>([]);
-    const [hayAlumnos, setHayAlumnos] = useState<boolean>(false);
+    const [cookies, setCookie] = useCookies(["token"]);
+    const [tutores, setTutores] = useState<InterfaceParent[]>([]);
+    const [hayTutores, setHayTutores] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const fetchAlumnos = async () => {
+    const fetchTutores = async () => {
         const api = new SIGEAPICollection();
         const token = cookies.token;
 
@@ -27,45 +27,50 @@ function ConsultStudents() {
                 token
             );
             if (response.ok) {
-                console.log("Generando Lista de Alumnos");
+                console.log("Generando Lista de Tutores");
                 const data = await response.json();
                 console.log(data);
                 if (!data || data.length == 0) {
-                    setHayAlumnos(false);
+                    setHayTutores(false);
                     setLoading(false);
                     return;
                 } else {
-                    setHayAlumnos(true);
+                    setHayTutores(true);
                 }
-                let newAlumnos: InterfaceAlumno[] = [];
+                let newTutores: InterfaceParent[] = [];
                 console.log("Entrando al for");
 
                 for (let i = 0; i < data.length; i++) {
                     const element = data[i];
                     const sexo =
                         element.sexo === "M" ? "Masculino" : "Femenino";
-                    const newAlumno: InterfaceAlumno = {
-                        no_boleta: element.noBoleta,
+                    const newAlumno: InterfaceParent = {
+                        id_tutor: element.id,
                         curp: element.curp,
-                        nombre: element.nombres,
+                        leerYescribir: element.leerYescribir,
+                        gradoMaximoDeEstudios: element.gradoMaximoDeEstudios,
+                        ocupacion: element.ocupacion,
+                        nombres: element.nombre,
                         apellido_paterno: element.apellidoPaterno,
                         apellido_materno: element.apellidoMaterno,
-                        aniosPreescolar: element.aniosPreescolar,
-                        fecha_nacimiento: element.fechaNacimiento,
-                        edad: element.edad,
-                        pais_origen: element.paisOrigen,
+                        correo: element.email,
+                        fecha_nacimiento: element.fecha_nacimiento,
                         sexo: sexo,
-                        estatus: element.estatus,
-                        entidad_nacimiento: element.entidad,
-                        grado: element.grado || "Sin asignar",
-                        grupo: element.grupo || "",
-                        actualizarDatosMedicos: element.actualizarDatosMedicos,
+                        pais_origen: element.pais_origen,
+                        estado_civil: element.estado_civil,
+                        red_social: element.red_social,
+                        tipo_identificacion: element.tipo_identificacion,
+                        no_identificacion: element.no_identificacion,
+                        tutor_principal: element.tutor_principal,
+                        parentesco: element.parentesco,
+                        entidad_nacimiento: element.entidad_nacimiento,
+                        numeros: element.numeros,
                     };
-                    newAlumnos.push(newAlumno);
+                    newTutores.push(newAlumno);
                 }
-                console.log("Alumnos obtenidos ");
-                setAlumnos(newAlumnos);
-                setHayAlumnos(true);
+                console.log("Tutores obtenidos ");
+                setTutores(newTutores);
+                setHayTutores(true);
                 setLoading(false);
             } else {
                 console.error(
@@ -78,7 +83,7 @@ function ConsultStudents() {
     };
 
     useEffect(() => {
-        fetchAlumnos();
+        fetchTutores();
     }, []);
 
     return (
@@ -87,14 +92,15 @@ function ConsultStudents() {
                 <PrincipalTitle title={"Consultar Tutores"}></PrincipalTitle>
 
                 <InputSearch
+                    route="/directive/actionsStudent/tutores?id="
                     searchDataAutomcomplete={[
-                        ...alumnos.map((alumno) => ({
-                            key: alumno.no_boleta,
-                            value: alumno.no_boleta,
+                        ...tutores.map((tutor) => ({
+                            key: tutor.id_tutor,
+                            value: tutor.id_tutor,
                         })),
-                        ...alumnos.map((alumno) => ({
-                            key: alumno.no_boleta,
-                            value: `${alumno.nombre} ${alumno.apellido_paterno} ${alumno.apellido_materno}`,
+                        ...tutores.map((tutor) => ({
+                            key: tutor.id_tutor,
+                            value: `${tutor.nombres} ${tutor.apellido_paterno} ${tutor.apellido_materno}`,
                         })),
                     ]}
                     comment={
@@ -102,8 +108,8 @@ function ConsultStudents() {
                     }
                 ></InputSearch>
                 {loading ? <Loader /> : null}
-                {hayAlumnos && !loading ? (
-                    <TableStudets students={alumnos}></TableStudets>
+                {hayTutores && !loading ? (
+                    <TableParents parents={tutores}></TableParents>
                 ) : null}
             </CardView>
         </>

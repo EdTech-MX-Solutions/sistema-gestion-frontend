@@ -22,6 +22,7 @@ function ConsultProfessor() {
     <CardView title = {"title"} customtitle = {true} description = {""}>
     <PrincipalTitle title={"Consultar Profesores"}></PrincipalTitle>
       <InputSearch
+        route="/directive/actionsProfessor/consultProfessor?id="
         searchDataAutomcomplete={[
           ...filtredProfesores.map((profesor) =>({
             key : profesor.idProfesor,

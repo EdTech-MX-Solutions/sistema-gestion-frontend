@@ -1,12 +1,15 @@
+import { useRouter } from "next/router";
 import React from "react";
 import ReactSearchBox from "react-search-box";
 
 interface InputSearchProps {
     comment: string;
     searchDataAutomcomplete?: any;
+    route: string;
 }
 
-export const InputSearch = ({ comment, searchDataAutomcomplete }: InputSearchProps) => {
+export const InputSearch = ({ comment, searchDataAutomcomplete, route }: InputSearchProps) => {
+    const router = useRouter();
     return (
         <>
             <div className="p-5 grid grid-cols-1 gap-4 row-span-1 print:hidden">
@@ -15,7 +18,7 @@ export const InputSearch = ({ comment, searchDataAutomcomplete }: InputSearchPro
                         htmlFor=""
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200"
                     >
-                        Busqueda
+                        Búsqueda
                     </label>
                     <ReactSearchBox
                         clearOnSelect={false}
@@ -28,10 +31,13 @@ export const InputSearch = ({ comment, searchDataAutomcomplete }: InputSearchPro
 
                         }}
                         data={searchDataAutomcomplete}
-                        onSelect={(record: any) => {}}
+                        onSelect={(record: any) => {
+                            // console.log("key:", record.item.key);
+                            router.push( route + record.item.key);
+                        }}
                         onFocus={() => {}}
                         onChange={(value) => console.log(value)}
-                        placeholder="Busqueda"
+                        placeholder="Búsqueda"
                         autoFocus
                         
                     />

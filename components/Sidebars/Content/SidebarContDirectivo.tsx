@@ -576,14 +576,14 @@ const SidebarContDirectivo = () => {
                                                     "Materias",
                                                     base_rute + "/cicloEscolar/subjects"
                                                 )}
-                                                {sidebarItem(
+                                                {/* {sidebarItem(
                                                     "Mensajes o Avisos",
                                                     base_rute + "/messages"
                                                 )}
                                                 {sidebarItem(
                                                     "Reportes o Sugerencias",
                                                     base_rute + "/reports"
-                                                )}
+                                                )} */}
                                             </li>
                                         </ul>
                                     </div>

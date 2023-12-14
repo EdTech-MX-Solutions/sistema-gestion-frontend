@@ -189,9 +189,9 @@ export const CardCargaPorLote = ({ title }: CardCargaPorLoteProps) => {
                                     </label>
                                 </div>
                             </div>
-                            <p className="text-sm text-teal-600 hover:text-teal-400 dark:text-teal-500 hover:underline dark:hover:text-teal-400 pt-4 pointer cursor-pointer">
+                            <a  href="https://docs.google.com/spreadsheets/d/1gN1c_DkvYHkyTwVBo8jKt3qdBMZw7PsOX1x-UuaNJG0/copy" className="text-sm text-teal-600 hover:text-teal-400 dark:text-teal-500 hover:underline dark:hover:text-teal-400 pt-4 pointer cursor-pointer" target="_blank">
                                 <span>Descargar Archivo de Ejemplo</span>
-                            </p>
+                            </a>
                             <div className="my-5 w-full flex justify-center">
                                 <ButtonComponent
                                   

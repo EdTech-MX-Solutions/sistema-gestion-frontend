@@ -19,6 +19,7 @@ function ConsultStudents() {
                 <PrincipalTitle title={"Consultar Alumnos"}></PrincipalTitle>
 
                 <InputSearch
+                    route="/directive/actionsStudent/personal?id="
                     searchDataAutomcomplete={[
                         ...alumnos.map((alumno) => ({
                             key: alumno.no_boleta,
