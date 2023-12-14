@@ -12,6 +12,8 @@ import { useCookies } from "react-cookie";
 interface AlumnoContextType {
     alumnos: InterfaceAlumno[];
     updateAlumno: (newAlumno: InterfaceAlumno[]) => void;
+    alumnoActual: InterfaceAlumno;
+    setAlumnoActual: (newAlumno: InterfaceAlumno) => void;
 }
 
 const AlumnoContext = createContext<AlumnoContextType | undefined>(undefined);
@@ -39,6 +41,8 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
             actualizarDatosMedicos: null,
         },
     ]);
+
+    const [alumnoActual, setAlumnoActual] = useState<InterfaceAlumno>(alumnos[0]);
 
     const updateAlumno = (newAlumno: InterfaceAlumno[]) => {
         setAlumnos(newAlumno);
@@ -81,6 +85,9 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
                     newAlumnos.push(newAlumno);
                 }
                 setAlumnos(newAlumnos);
+                if (newAlumnos.length > 0) {
+                    setAlumnoActual(newAlumnos[0])
+                }
             } else {
                 console.error(
                     `Error en la solicitud. Código de estado: ${response.status}`
@@ -96,7 +103,7 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
     }, []);
 
     return (
-        <AlumnoContext.Provider value={{ alumnos, updateAlumno }}>
+        <AlumnoContext.Provider value={{ alumnos, updateAlumno, alumnoActual, setAlumnoActual}}>
             {children}
         </AlumnoContext.Provider>
     );

@@ -1,5 +1,5 @@
 
-function StudentCardHeader({nombre, apellido_paterno, apellido_materno, no_boleta, estatus}: any) {
+function StudentCardHeader({nombre, apellido_paterno, apellido_materno, no_boleta, estatus, grado,grupo}: any) {
   const nombreCompleto = `${nombre} ${apellido_paterno} ${apellido_materno}`;
   return (
     <>

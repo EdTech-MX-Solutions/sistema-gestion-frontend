@@ -17,45 +17,33 @@ interface DefaultLayoutProps {
 function Notes() {
     const [cookies, setCookie] = useCookies(["token", "boleta"]);
     const { periodo } = usePeriodo();
-    const { alumnos } = useAlumno();
-    const [loading, setLoading] = useState<boolean>(false); // [true, setLoading
+    const { alumnos, alumnoActual } = useAlumno();
+    const [loading, setLoading] = useState<boolean>(true); // [true, setLoading
     const [hayCalificaciones, setHayCalificaciones] = useState<boolean>(false); // [false, setHayCalificaciones
     const [calificaciones, setCalificaciones] = useState<
         InterfaceCalificaciones[]
-    >([
-        {
-            Grado: "1",
-            SubGrado: "A",
-            materia: "Matemáticas",
-            claveMateria: "MAT-1",
-            primerTrimestre: "10",
-            segundoTrimestre: "10",
-            tercerTrimestre: "10",
-            calificacionFinal: "10",
-        },
-    ]);
+    >([]);
 
     const fetchNotes = async () => {
         setLoading(true);
         const api = new SIGEAPICollection();
         const token = cookies.token;
-        const boleta = cookies.boleta;
         try {
             const response =
                 await api.sharedCollection.executeGetCalificaciones(
                     token,
-                    boleta
+                    alumnoActual.no_boleta
                 );
             if (response.ok) {
                 const data = await response.json();
-                if (data.length == 0) {
+                if (data.length === 0) {
                     setHayCalificaciones(false);
                     setLoading(false);
                     return;
                 }
                 let newCalificaciones: InterfaceCalificaciones[] = [];
-                for (let i = 0; i < data.calificaciones.length; i++) {
-                    const element = data.calificaciones[i];
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i];
                     const newCalificacion: InterfaceCalificaciones = {
                         Grado: element.grado,
                         SubGrado: element.subGrado,
@@ -89,6 +77,9 @@ function Notes() {
         fetchNotes();
     }, []);
 
+    useEffect(() => {
+        fetchNotes();
+    }, [alumnoActual]);
     // const periodo = "Periodo_actual";
     const title =
         "Calificaciones " + periodo.anioInicio + "-" + periodo.anioFin;
@@ -98,7 +89,7 @@ function Notes() {
             <>
                 <CardView title={title} description={title} customtitle={true}>
                     <PrincipalTitle title={title}></PrincipalTitle>
-                    <StudentAcacemicsCard alumno={alumnos[0]}>
+                    <StudentAcacemicsCard alumno={alumnoActual}>
                         <div className="flex justify-center items-center h-96">
                             <div className="text-3xl text-gray-400">
                                 <h1 className="text-gray-800 dark:text-gray-200">
@@ -119,7 +110,7 @@ function Notes() {
             <>
                 <CardView title={title} description={title} customtitle={true}>
                     <PrincipalTitle title={title}></PrincipalTitle>
-                    <StudentAcacemicsCard alumno={alumnos[0]}>
+                    <StudentAcacemicsCard alumno={alumnoActual}>
                         <div className="flex justify-center items-center h-96">
                             <h1 className="text-2xl text-gray-400">
                                 Cargando...
@@ -135,8 +126,8 @@ function Notes() {
             <>
                 <CardView title={title} description={title} customtitle={true}>
                     <PrincipalTitle title={title}></PrincipalTitle>
-                    <StudentAcacemicsCard alumno={alumnos[0]}>
-                        <TableGrades calificaciones={calificaciones} />
+                    <StudentAcacemicsCard alumno={alumnoActual}>
+                        <TableGrades calificaciones={calificaciones} isKardex={false} />
                     </StudentAcacemicsCard>
                 </CardView>
             </>
