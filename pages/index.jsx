@@ -7,7 +7,7 @@ import Loader from "@/components/elements/Loader";
 import { useGreet } from '@/components/context/GreetProvider';
 
 export default function Index() {
-    const [cookies] = useCookies(['token']);
+    const [cookies, setCookie] = useCookies(['token', 'rol']);
     const router = useRouter();
     let token = ""
     let user_roles = ""
@@ -21,7 +21,17 @@ export default function Index() {
             token = cookies.token
             const decodedToken = jwtDecode(token);
             user_roles = decodedToken.roles;
-            user_roles.includes("DIRECTIVO") ? router.push('/directive/') : (user_roles.includes("TUTOR") ? router.push('/student/') : router.push('/professors/'))
+            if (user_roles.includes("DIRECTIVO")) {
+                setCookie('rol', 'DIRECTIVO', { path: '/' });
+                router.push('/directive/')
+            } else if (user_roles.includes("TUTOR")) {
+                setCookie('rol', 'TUTOR', { path: '/' });
+                router.push('/student/')
+            } else {
+                setCookie('rol', 'PROFESOR', { path: '/' });
+                router.push('/professors/')
+            }
+            // user_roles.includes("DIRECTIVO") ? router.push('/directive/') : (user_roles.includes("TUTOR") ? router.push('/student/') : router.push('/professors/'))
         }
     })
 

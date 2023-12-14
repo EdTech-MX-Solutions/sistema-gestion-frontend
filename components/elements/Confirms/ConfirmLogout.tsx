@@ -23,6 +23,7 @@ export function ConfirmLogoutElement({
         "user",
         "childs",
         "boleta",
+        "rol",
     ]);
 
     const [isopen, setOpen] = React.useState(false);
@@ -32,6 +33,7 @@ export function ConfirmLogoutElement({
         setCookie("user", "", { path: "/" });
         setCookie("childs", "", { path: "/" });
         setCookie("boleta", "", { path: "/" });
+        setCookie("rol", "", { path: "/" });
         signOut();
     }
 

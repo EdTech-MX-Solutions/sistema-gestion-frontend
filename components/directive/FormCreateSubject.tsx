@@ -117,7 +117,7 @@ export const FormCreateSubject = ({
                 <div className="mt-10 p-5 bg-white  dark:bg-slate-500 dark:text-gray-200 rounded-lg">
                     <div className="bg-white dark:bg-slate-500 dark:text-gray-200 p-6  md:mx-auto">
                         <Typography variant="h4" color="blue-gray">
-                            Registro de nueva materia
+                        
                         </Typography>
                         <Typography
                             color="gray"
