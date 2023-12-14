@@ -14,7 +14,7 @@ function ParentsDataDetails() {
     const [dataGetted, setDataGetted] = useState(false);
     const loadingMessage = "cargando...";
     const router = useRouter();
-    const boleta = router.query.id + "";
+    const boleta = router.query.id;
     const [parentList, setParents] = useState<InterfaceParent[]>([
         {
             id_tutor: loadingMessage,

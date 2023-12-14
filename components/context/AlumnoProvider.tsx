@@ -115,7 +115,7 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
     }, []);
 
     return (
-        <AlumnoContext.Provider value={{ alumnos, updateAlumno, loading, hayalumnos,setAlumnoActual }}>
+        <AlumnoContext.Provider value={{ alumnos, updateAlumno, loading, hayalumnos,setAlumnoActual, alumnoActual }}>
             {children}
         </AlumnoContext.Provider>
     );

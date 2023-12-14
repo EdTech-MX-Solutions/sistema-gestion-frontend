@@ -212,20 +212,8 @@ export class SharedAPICollection {
       },
     });
   }
-}
-
-    executeGetHorarioAlumno(token: string, boleta: string) {
-        const route = this.apiCaller.getCall() + "/horarios/alumno/" + boleta;
-        return fetch(route, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            }
-        });
-    }
-
-    executeGetParentByAlumno(token: string, boleta: string) {
+  
+  executeGetParentByAlumno(token: string, boleta: string) {
         const route = this.apiCaller.getCall() + "/tutores/alumno/" + boleta;
         return fetch(route, {
             method: "GET",
@@ -234,5 +222,5 @@ export class SharedAPICollection {
                 Authorization: `Bearer ${token}`,
             }
         });
-    }
+  }
 }
