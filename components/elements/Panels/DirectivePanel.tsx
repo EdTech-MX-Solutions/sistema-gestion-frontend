@@ -45,12 +45,12 @@ export default function PanelCards() {
                 bgColor="emerald-600"
                 route="/directive/cicloEscolar"
             />
-            <PanelCard
+            {/* <PanelCard
                 category="Panel de Control"
                 title="Reportes y Avisos"
                 bgColor="teal-700"
                 route="/directive/othersOptions/suggestions"
-            />
+            /> */}
             <PanelCard
                 category="Sistema"
                 title="Cerrar Sesión"
