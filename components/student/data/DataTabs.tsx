@@ -48,7 +48,7 @@ function DataTabs(
         // Añadir más pestañas si se ocupa
     ];
 
-    return <StudentTabs tabs={tabs} isDirective = {isDirective}/>;
+    return <StudentTabs tabs={tabs} isDirective={isDirective}/>;
 }
 
 export default DataTabs;
