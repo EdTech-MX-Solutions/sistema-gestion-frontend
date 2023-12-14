@@ -15,7 +15,7 @@ const Header = (props: {
   const tipoUsuario = cookies.rol;
   const {alumnoActual, setAlumnoActual, alumnos} = useAlumno();
   const cambioDeAlumno = (e: { target: { value: string; }; }) =>{
-    const nuevoAlumno = alumnos.find(alumno => alumno.no_boleta === e.target.value);
+    const nuevoAlumno = alumnos.find(alumno => alumno.noBoleta === e.target.value);
     if(nuevoAlumno !== undefined){
       setAlumnoActual(nuevoAlumno);
     }
@@ -40,14 +40,14 @@ const Header = (props: {
                 id="selectAlumnos"
                 name="selectAlumnos"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-50 w-full p-2.5"
-                value={alumnoActual.no_boleta}
+                value={alumnoActual.noBoleta}
                 onChange={cambioDeAlumno}
                 placeholder="Selecciona un alumno"
             >
               {
                 alumnos.length>0?
                   alumnos.map((alumno) => {
-                    return <option key={alumno.no_boleta} value={alumno.no_boleta}>{alumno.nombre} {alumno.apellido_paterno} {alumno.apellido_materno}</option>
+                    return <option key={alumno.noBoleta} value={alumno.noBoleta}>{alumno.nombres} {alumno.apellidoPaterno} {alumno.apellidoMaterno}</option>
                   })
                     :
                     <option key={0} value={""} disabled={true}>No hay alumnos registrados</option>

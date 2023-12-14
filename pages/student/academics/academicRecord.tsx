@@ -29,7 +29,7 @@ function AcademicRecord() {
             const response =
                 await api.sharedCollection.executeGetCalificaciones(
                     token,
-                    alumnoActual.no_boleta
+                    alumnoActual.noBoleta
                 );
             if (response.ok) {
                 const data = await response.json();
