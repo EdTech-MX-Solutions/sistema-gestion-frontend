@@ -56,7 +56,7 @@ function ConsultDataPersonalStudent() {
     <>
       <CardView title={title} description={description}>
         <StudentDataCard alumno={alumnosDetails}>
-          <MedicCard />
+          <MedicCard alumnoActual={alumnosDetails}/>
         </StudentDataCard>
       </CardView>
     </>
