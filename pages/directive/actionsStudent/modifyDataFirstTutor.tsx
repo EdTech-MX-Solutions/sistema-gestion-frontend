@@ -36,7 +36,7 @@ function modifyDataFirstTutor() {
     <>
       <CardView title={"title"} customtitle={true} description={""}>
         <PrincipalTitle title={"Modificar Datos de Tutor"}></PrincipalTitle>
-        <FormTutor tutor={tutor}></FormTutor>
+        <FormTutor tutor={tutor} isNewUsuario={false}></FormTutor>
       </CardView>
     </>
   );

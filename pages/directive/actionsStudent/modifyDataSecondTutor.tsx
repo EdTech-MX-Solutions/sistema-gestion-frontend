@@ -35,7 +35,7 @@ function modifyDataSecondTutor() {
   return (
     <>
       <PrincipalTitle title={"Modificar Datos de Tutor"}></PrincipalTitle>
-      <FormTutor tutor = {tutor}></FormTutor>
+      <FormTutor tutor = {tutor} isNewUsuario={false}></FormTutor>
     </>
   );
 }
