@@ -105,8 +105,7 @@ export class SharedAPICollection {
   }
 
   executePostTelefonos(token: string, idUsuario: string, numero : InterfaceTel) {
-    const route =
-      this.apiCaller.getCall() + `/numeros-telefonicos/${idUsuario}`;
+    const route = this.apiCaller.getCall() + `/numeros-telefonicos/${idUsuario}`;
     return fetch(route, {
       method: "POST",
       headers: {

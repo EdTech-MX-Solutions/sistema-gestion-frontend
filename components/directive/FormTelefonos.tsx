@@ -3,6 +3,8 @@ import ButtonComponent from "../ButtonComponent";
 import InterfaceTel from "@/data/interfaces/numeroTelefonico";
 import { TableTelefonos } from "./TableTelefonos";
 import { useRouter } from "next/router";
+import SIGEAPICollection from "@/data/calls/apiHandler";
+import { useCookies } from "react-cookie";
 
 interface FormTelefonosProps {
   telefonos: InterfaceTel[];
@@ -12,8 +14,6 @@ interface FormTelefonosProps {
 export const FormTelefonos = ({ telefonos }: FormTelefonosProps) => {
   const router = useRouter();
   const { id } = router.query;
-
-  
 
   const [telefonoInput, setTelefonoInput] = useState("");
   const [tipoInput, setTipoInput] = useState("");
@@ -53,13 +53,31 @@ export const FormTelefonos = ({ telefonos }: FormTelefonosProps) => {
     setTelefonoEditado(index);
   };
 
+  const [cookies, setCookie] = useCookies(["token"]);
+  
   const handleEliminarTelefono = (index: number) => {
     const nuevosTelefonos = telefonosAgregados.filter((_, i) => i !== index);
     setTelefonosAgregados(nuevosTelefonos);
   };
 
-  const handleGuardarTelefono = () => {
-    router.push("/directive/registrerProfessors/");
+  const handleRegistrarNuevoTelefono = async (nuevoNumero : InterfaceTel) =>{
+    const api = new SIGEAPICollection();
+    const token = cookies.token;
+    const response = await api.sharedCollection.executePostTelefonos(
+      token,
+      id+"",
+      nuevoNumero
+    );
+    if (response.ok) {
+      const response2 = await api.sharedCollection.executeGetTelefonos(
+        token,
+        id+""
+      );
+      if (response2.ok) {
+        const data = await response2.json();
+        console.log("Telefono inscrito");
+      }
+    }
   }
 
   return (
@@ -118,6 +136,7 @@ export const FormTelefonos = ({ telefonos }: FormTelefonosProps) => {
               handleAgregarTelefono();
               setTelefonoInput("");
               setTipoInput("");
+              handleRegistrarNuevoTelefono({numero: telefonoInput, tipo: tipoInput});
             }}
           ></ButtonComponent>
         </div>

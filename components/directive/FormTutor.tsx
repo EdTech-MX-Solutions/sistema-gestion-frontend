@@ -10,9 +10,10 @@ import { TableVistaTelefonos } from "./TableVistaTelefonos";
 
 interface FormTutorProps {
   tutor : InterfaceParent;
+  isNewUsuario : boolean
 }
 
-export const FormTutor = ({tutor}: FormTutorProps) => {
+export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
 
   const router = useRouter();
   const { id } = router.query;
@@ -23,26 +24,26 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
   const [estados, setEstados] = useState([])
   const [telefono, setTelefono] = useState("Cargando...")
   const [formData, setFormData] = useState<InterfaceParent>({
-    id: tutor.id,
-    curp: tutor.curp,
-    leerYescribir: tutor.leerYescribir,
-    gradoMaximoDeEstudios: tutor.gradoMaximoDeEstudios,
-    ocupacion: tutor.ocupacion,
-    nombres: tutor.nombres,
-    apellidoPaterno: tutor.apellidoPaterno,
-    apellidoMaterno: tutor.apellidoMaterno,
-    correo: tutor.correo,
-    fechaNacimiento: tutor.fechaNacimiento,
-    sexo: tutor.sexo,
-    paisOrigen: tutor.paisOrigen,
-    estadoOrigen: tutor.estadoOrigen,
-    redesSociales: tutor.redesSociales,
-    tipoIdentificacion: tutor.tipoIdentificacion,
-    noIdentificacion: tutor.noIdentificacion,
-    esPrincipal: tutor.esPrincipal,
-    parentesco: tutor.parentesco,
-    numeros: tutor.numeros,
-    estadoCivil : tutor.estadoCivil
+    id: isNewUsuario ? 0 : tutor.id,
+    curp: isNewUsuario ? "" : tutor.curp,
+    leerYescribir: isNewUsuario ? "" : tutor.leerYescribir,
+    gradoMaximoDeEstudios: isNewUsuario ? "" : tutor.gradoMaximoDeEstudios,
+    ocupacion: isNewUsuario ? "" : tutor.ocupacion,
+    nombres: isNewUsuario ? "" : tutor.nombres,
+    apellidoPaterno: isNewUsuario ? "" : tutor.apellidoPaterno,
+    apellidoMaterno: isNewUsuario ? "" : tutor.apellidoMaterno,
+    correo: isNewUsuario ? "" : tutor.correo,
+    fechaNacimiento: isNewUsuario ? "" : tutor.fechaNacimiento,
+    sexo: isNewUsuario ? "" : tutor.sexo,
+    paisOrigen: isNewUsuario ? "" : tutor.paisOrigen,
+    estadoOrigen: isNewUsuario ? "" : tutor.estadoOrigen,
+    redesSociales: isNewUsuario ? [] : tutor.redesSociales,
+    tipoIdentificacion: isNewUsuario ? "" : tutor.tipoIdentificacion,
+    noIdentificacion: isNewUsuario ? "" : tutor.noIdentificacion,
+    esPrincipal: isNewUsuario ? "" : tutor.esPrincipal,
+    parentesco: isNewUsuario ? "" : tutor.parentesco,
+    numeros: isNewUsuario ? [] : tutor.numeros,
+    estadoCivil : isNewUsuario ? "" : tutor.estadoCivil
   })
 
   const handleDarDeAltaTutor = async (nuevoTutor : InterfaceParent) => {
@@ -136,6 +137,10 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
   const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     console.log("Datos: ", formData);
+  };
+
+  const handleSiguientePasoDireccion = (id: any) =>{
+    router.push(`/directive/actionsStudent/registrerDireccion/?id=${id}`);
   }
 
   const fetchPaises = async () =>{
@@ -548,9 +553,9 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
               <ButtonComponent
                 title={"Modificar numero telefonicos"}
                 color={"blue"}
-                onClick={() =>
+                onClick={() =>{
                   handleModifyTelefonos({ Id: formData.id })
-                }
+                }}
               ></ButtonComponent>
             </div>
           </div>
@@ -560,7 +565,8 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
               title = {"Siguiente"} 
               color = {"blue"}
               onClick={() => {
-                handleDarDeAltaTutor(formData);
+                //handleDarDeAltaTutor(formData);
+                handleSiguientePasoDireccion(formData.id);
               }}
              ></ButtonComponent>
             </div>

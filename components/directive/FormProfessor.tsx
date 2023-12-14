@@ -7,6 +7,7 @@ import { TableVistaTelefonos } from "./TableVistaTelefonos";
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
 import { Alert, Button } from "@material-tailwind/react";
+import InterfaceTel from "@/data/interfaces/numeroTelefonico";
 
 function Icon() {
   return (
@@ -36,6 +37,7 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
   const [open, setOpen] = useState(false);
   const [requiredCampos, setRequiredCampos] = useState(false);
   const [cookies, setCookie] = useCookies(["token"]);
+  const [telefonos, setTelefonos] = useState<InterfaceTel[]>([]);
   const [formData, setFormData] = useState<InterfaceProfessor>({
     idProfesor: isNewUser ? "" : professor.idProfesor,
     nombre: isNewUser ? "" : professor.nombre,
@@ -49,6 +51,31 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
   });
 
   const { profesores, updateProfesor } = useProfesores();
+
+  const handleVerTelefonos = async () => {
+    const api = new SIGEAPICollection();
+    const token = cookies.token;
+    try{
+      const response = await api.sharedCollection.executeGetTelefonos(
+        token,
+        id+""
+      );
+      if (response.ok) {
+        const data = await response.json();
+        if (!data || data.length == 0) {
+          console.error("Respuesta fallida");
+          return;
+        }
+        setTelefonos(data);
+      }else{
+        console.error(
+          `Error en la solicitud. Código de estado: ${response.status}`
+        );
+      }
+    }catch(error){
+      console.log(error);
+    }
+  }
 
   const handleInscribirProfesor = async (nuevoProfesor: InterfaceProfessor) => {
     const requiredFields = [
@@ -78,7 +105,6 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
         const response2 = await api.directivosCollection.executeGetProfessors(
           token
         );
-
         if (response2.ok) {
           const data = await response2.json();
           console.log("Profesor inscrito con exito");
@@ -112,6 +138,7 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
         console.error(`No se encontro un profesor con la ID: ${id}`);
       }
     }
+    handleVerTelefonos();
   }, [id, profesores]);
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
@@ -272,7 +299,7 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
 
           <div className="px-2 pb-2">
             <TableVistaTelefonos
-              telefonos={formData.numero}
+              telefonos={telefonos}
             ></TableVistaTelefonos>
             <div className="text-center">
               <ButtonComponent

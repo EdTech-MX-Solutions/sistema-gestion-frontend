@@ -11,24 +11,24 @@ interface DefaultLayoutProps {
 function registrerDataFirstTutor() {
   const tutor: InterfaceParent = {
     id: 1,
-    curp: "curp",
-    leerYescribir: "leerYescribir",
-    gradoMaximoDeEstudios: "gradoMaximoDeEstudios",
-    ocupacion: "ocupacion",
-    nombres: "nombres",
-    apellidoPaterno: "apellido_paterno",
-    apellidoMaterno: "apellido_materno",
-    correo: "correo",
-    fechaNacimiento: "fecha_nacimiento",
-    sexo: "sexo",
-    paisOrigen: "pais_origen",
-    estadoCivil: "estado_civil",
+    curp: "",
+    leerYescribir: "",
+    gradoMaximoDeEstudios: "",
+    ocupacion: "",
+    nombres: "",
+    apellidoPaterno: "",
+    apellidoMaterno: "",
+    correo: "",
+    fechaNacimiento: "",
+    sexo: "",
+    paisOrigen: "",
+    estadoCivil: "",
     redesSociales: [],
-    tipoIdentificacion: "tipo_identificacion",
-    noIdentificacion: "no_identificacion",
-    esPrincipal: "tutor_principal",
-    parentesco: "parentesco",
-    estadoOrigen: "entidad_nacimiento",
+    tipoIdentificacion: "",
+    noIdentificacion: "",
+    esPrincipal: "",
+    parentesco: "",
+    estadoOrigen: "",
     numeros: [],
   };
 
@@ -36,7 +36,7 @@ function registrerDataFirstTutor() {
     <>
       <CardView title={""} description={""}>
         <PrincipalTitle title={"Registro de Tutor Principal"}></PrincipalTitle>
-        <FormTutor tutor={tutor}></FormTutor>
+        <FormTutor tutor={tutor} isNewUsuario></FormTutor>
       </CardView>
     </>
   );
