@@ -54,7 +54,7 @@ export const ProfesorProvider: React.FC<{ children: ReactNode }> = ({
           };
           newProfessors.push(newProfessor);
         }
-        console.log("Alumnos obtenidos ");
+        console.log("Profesores obtenidos");
         setCookie("childs", data.length);
         setCookie("idProfessor", data[0].idProfesor);
         setProfesores(newProfessors);

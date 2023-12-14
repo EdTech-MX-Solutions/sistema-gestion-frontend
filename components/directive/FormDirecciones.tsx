@@ -5,10 +5,28 @@ import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 import InterfaceDireccion from "@/data/interfaces/direccion";
 import InterfaceColonia from "@/data/interfaces/colonia";
+import { Alert, Button } from "@material-tailwind/react";
 
 interface FormDireccionesProps {
   direccion: any;
   isNewUser: boolean;
+}
+
+function Icon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="h-6 w-6"
+    >
+      <path
+        fillRule="evenodd"
+        d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
 }
 
 export const FormDirecciones = ({
@@ -17,11 +35,12 @@ export const FormDirecciones = ({
 }: FormDireccionesProps) => {
   const router = useRouter();
   const { id } = router.query;
+  const [open, setOpen] = useState(false);
   const [cookies, setCookie] = useCookies(["token", "idProfesor", "childs"]);
   const [codigosPostales, setCodigosPostales] = useState<InterfaceColonia>();
   const [inputCodigoPostal, setCodigoPostal] = useState("");
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<InterfaceDireccion>({
     id: isNewUser ? null : direccion.id,
     calle: isNewUser ? "" : direccion.calle,
     numeroExterior: isNewUser ? "" : direccion.numeroExterior,
@@ -29,8 +48,8 @@ export const FormDirecciones = ({
     entreCalle1: isNewUser ? "" : direccion.entreCalle1,
     entreCalle2: isNewUser ? "" : direccion.entreCalle2,
     referenciaExtra: isNewUser ? "" : direccion.referenciaExtra,
-    colonia: isNewUser ? "" : direccion.colonia,
-    estado: isNewUser ? "" : direccion.estado,
+    colonia: isNewUser ? null : direccion.colonia,
+    estado: isNewUser ? null : direccion.estado,
   });
 
   const fetchCodigosPostales = async () => {
@@ -79,15 +98,61 @@ export const FormDirecciones = ({
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
-    if (name === "cp") {
+    if(name == "codigoPostal"){
       setCodigoPostal(value);
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+    else{
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
     }
   };
+
+  const handleRegistrarNuevaDireccion = async (nuevaDireccion:InterfaceDireccion) => {
+    const requiredFields = [
+      "codigoPostal",
+      "noExterior",
+      "calle"
+    ];
+
+    const emptyRequiredFields = requiredFields.filter(
+      field => !formData[field as keyof InterfaceDireccion]);
+
+    if(emptyRequiredFields.length > 0){
+      //alert("Por favor, completa todos los campos obligatorios.");
+      setOpen(true);
+      return;
+    }
+    else{
+      const api = new SIGEAPICollection();
+      const token = cookies.token;
+      const response = await api.sharedCollection.executePostDireccion(
+        token,
+        nuevaDireccion
+      );
+      if(response.ok){
+        const data = await response.json();
+        console.log("Direccion data de alta");
+
+        setFormData({
+          id : null,
+          calle: "",
+          numeroExterior: "",
+          numeroInterior: "",
+          entreCalle1: "",
+          entreCalle2: "",
+          referenciaExtra: "",
+          colonia: null,
+          estado: null,
+        })
+      }
+    }
+  }
 
   return (
     <>
@@ -105,8 +170,8 @@ export const FormDirecciones = ({
                 </label>
                 <input
                   type="text"
-                  name="cp"
-                  id="cp"
+                  name="codigoPostal"
+                  id="codigoPostal"
                   value={
                     isNewUser ? inputCodigoPostal : (direccion.colonia?.codigoPostal)
                   }
@@ -155,8 +220,8 @@ export const FormDirecciones = ({
                 </label>
 
                 <select
-                  id="entidad_nacimiento"
-                  name="entidad_nacimiento"
+                  id="colonia"
+                  name="colonia"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   required
                   onChange={handleInputChange}
@@ -277,10 +342,37 @@ export const FormDirecciones = ({
             </div>
 
             <div className="text-center pt-10">
-              <ButtonComponent
+              {!open && (
+                <ButtonComponent
                 title={"Siguiente"}
                 color={"blue"}
+                onClick={() => {
+                  if (isNewUser) {
+                    //handleRegistrarNuevaDireccion(formData);
+                  }
+                  setOpen(true);
+                }}
               ></ButtonComponent>
+              )}
+              <div className="p-5 flex justify-center items-center">
+              <Alert
+                variant="gradient"
+                className="bg-black text-white text-center p-5"
+                open={open}
+                icon={<Icon />}
+              >
+                Campo obligatorio en blanco
+                <Button
+                  variant="text"
+                  color="white"
+                  size="sm"
+                  className="!absolute top-3 right-3 text-center border-solid border-2 border-white rounded-full items-center justify-center"
+                  onClick={() => setOpen(false)}
+                >
+                  Cerrar
+                </Button>
+              </Alert>
+            </div>
             </div>
           </form>
         </div>

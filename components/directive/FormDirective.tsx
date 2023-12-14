@@ -26,8 +26,6 @@ export const FormDirective = ({ directive, isNewUser }: FormDirectiveProps) => {
     numero: isNewUser ? [] : directive.numero,
   });
 
-  
-
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
     setFormData({

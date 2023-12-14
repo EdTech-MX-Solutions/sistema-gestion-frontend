@@ -2,6 +2,9 @@ import InterfacePeriodo from "@/data/interfaces/periodo";
 import { APICaller } from "../apiCaller";
 import InterfaceMateria from "@/data/interfaces/materia";
 import InterfaceProfessor from "@/data/interfaces/professor";
+import InterfaceGrupo from "@/data/interfaces/grupos";
+import InterfaceAlumno from "@/data/interfaces/alumno";
+import InterfaceParent from "@/data/interfaces/parent";
 
 export class DirectivosAPICollection {
     apiCaller: APICaller;
@@ -69,15 +72,25 @@ export class DirectivosAPICollection {
         });
     }
 
-    executeGetProfessors(token: string) {
-        const route = this.apiCaller.getProfesorCall();
-        return fetch(route, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-    }
+  executeGetProfessors(token: string) {
+    const route = this.apiCaller.getProfesorCall();
+    return fetch(route, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  executGetProfesoresSinAsignar(token: string) {
+    const route = this.apiCaller.getCall() + `/profesores/sin-asignar`;
+    return fetch(route, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
 
     executeGetGrupos(token: string) {
         const route = this.apiCaller.getGruposCall();
@@ -101,7 +114,7 @@ export class DirectivosAPICollection {
             body: JSON.stringify(materia),
         });
     }
-    
+
     executePostMaterial(token: string, material: InterfaceMateria) {
         const route = this.apiCaller.getCall() + `/materias`;
         return fetch(route, {
@@ -137,23 +150,102 @@ export class DirectivosAPICollection {
         
     }
 
-    executePostNuevoProfesor(token : string, nuevoProfesor : InterfaceProfessor){
-        const route = this.apiCaller.getCall() + `/profesores`;
-        return fetch(route, {
-            method : "POST",
-            headers : {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            body : JSON.stringify({
-                nombre: nuevoProfesor.nombre,
-                apellidoPaterno: nuevoProfesor.apellidoPaterno,
-                apellidoMaterno: nuevoProfesor.apellidoMaterno,
-                email: nuevoProfesor.email,
-                activo: nuevoProfesor.activo
-            })
-        })
-    }
+  executePostNuevoProfesor(token: string, nuevoProfesor: InterfaceProfessor) {
+    const route = this.apiCaller.getCall() + `/profesores`;
+    return fetch(route, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nombre: nuevoProfesor.nombre,
+        apellidoPaterno: nuevoProfesor.apellidoPaterno,
+        apellidoMaterno: nuevoProfesor.apellidoMaterno,
+        email: nuevoProfesor.email,
+        activo: nuevoProfesor.activo,
+      }),
+    });
+  }
+
+  executePostNuevoGrupo(token: string, nuevoGrupo: InterfaceGrupo) {
+    const route = this.apiCaller.getCall() + `/grupos`;
+    return fetch(route, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        grado: nuevoGrupo.grado,
+        subGrado: nuevoGrupo.subGrado,
+        turno: nuevoGrupo.turno,
+        responsable: nuevoGrupo.responsable,
+        idResponsable: nuevoGrupo.idResponsable,
+        salon: nuevoGrupo.salon,
+        inscritos: nuevoGrupo.inscritos,
+      }),
+    });
+  }
+
+  executePostNuevoAlumno(token: string, nuevoAlumno: InterfaceAlumno) {
+    const route = this.apiCaller.getCall() + `/alumnos`;
+    return fetch(route, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nombres: nuevoAlumno.nombres,
+        apellidoPaterno: nuevoAlumno.apellidoPaterno,
+        apellidoMaterno: nuevoAlumno.apellidoMaterno,
+        aniosPreescolar: nuevoAlumno.aniosPreescolar,
+        fechaNacimiento: nuevoAlumno.fechaNacimiento,
+        edad: nuevoAlumno.edad,
+        paisOrigen: nuevoAlumno.paisOrigen,
+        sexo: nuevoAlumno.sexo,
+        estatus: nuevoAlumno.estatus,
+        entidad: nuevoAlumno.entidad,
+        grado: nuevoAlumno.grado,
+        grupo: nuevoAlumno.grupo,
+        actualizarDatosMedicos: nuevoAlumno.actualizarDatosMedicos,
+        curp: nuevoAlumno.curp,
+      }),
+    });
+  }
+
+  executePostNuevoTutor(token: string,nuevoTutor: InterfaceParent ,id: string) {
+    const route = this.apiCaller.getCall() + `/tutores/alumno/${id}`;
+    return fetch(route, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body : JSON.stringify({
+        id: nuevoTutor.id,
+        curp: nuevoTutor.curp,
+        leerYescribir: nuevoTutor.leerYescribir,
+        gradoMaximoDeEstudios: nuevoTutor.gradoMaximoDeEstudios,
+        ocupacion: nuevoTutor.ocupacion,
+        nombres: nuevoTutor.nombres,
+        apellidoPaterno: nuevoTutor.apellidoPaterno,
+        apellidoMaterno: nuevoTutor.apellidoMaterno,
+        correo: nuevoTutor.correo,
+        fechaNacimiento: nuevoTutor.fechaNacimiento,
+        sexo: nuevoTutor.sexo,
+        paisOrigen: nuevoTutor.paisOrigen,
+        estadoOrigen: nuevoTutor.estadoOrigen,
+        redesSociales: nuevoTutor.redesSociales,
+        tipoIdentificacion: nuevoTutor.tipoIdentificacion,
+        noIdentificacion: nuevoTutor.noIdentificacion,
+        esPrincipal: nuevoTutor.esPrincipal,
+        parentesco: nuevoTutor.parentesco,
+        estadoCivil : nuevoTutor.estadoCivil
+      })
+    });
+  }
 
     executeEndCycle(token: string) {
         const route = this.apiCaller.getCall() + `/ciclos`;

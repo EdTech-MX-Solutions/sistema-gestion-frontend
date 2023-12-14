@@ -42,18 +42,18 @@ export const TableStudentsGroup = ({
             </thead>
             <tbody>
               {alumnosInscritos.map((alumno) => (
-                <tr key={alumno.no_boleta}>
-                  <td className="p-5"> {alumno.no_boleta} </td>
+                <tr key={alumno.noBoleta}>
+                  <td className="p-5"> {alumno.noBoleta} </td>
                   <td>
                     {" "}
-                    {`${alumno.apellido_paterno}  ${alumno.apellido_materno} ${alumno.nombre}`}{" "}
+                    {`${alumno.apellidoPaterno}  ${alumno.apellidoMaterno} ${alumno.nombres}`}{" "}
                   </td>
                   <td>
                     <ButtonComponentBiColor
                       title={titleBtn1}
                       color1={"blue"}
                       color2={"green"}
-                      onClick={() => handleVerAlumnoInscrito(alumno.no_boleta)}
+                      onClick={() => handleVerAlumnoInscrito(alumno.noBoleta)}
                     ></ButtonComponentBiColor>
                   </td>
                   <td>

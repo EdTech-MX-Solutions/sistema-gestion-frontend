@@ -10,18 +10,18 @@ interface DefaultLayoutProps {
 
 function registrerDataPersonalStudent() {
   const student: InterfaceAlumno = {
-    no_boleta: "cargando...",
+    noBoleta: "cargando...",
     curp: "",
-    nombre: "",
-    apellido_paterno: "",
-    apellido_materno: "",
-    fecha_nacimiento: "",
+    nombres: "",
+    apellidoPaterno: "",
+    apellidoMaterno: "",
+    fechaNacimiento: "",
     sexo: "",
     estatus: "",
-    entidad_nacimiento: "",
-    pais_origen: "",
+    entidad: "",
+    paisOrigen: "",
     edad: null,
-    aniosPreescolar: null,
+    aniosPreescolar: 0,
     grado: null,
     grupo: null,
     actualizarDatosMedicos: null,
@@ -29,7 +29,7 @@ function registrerDataPersonalStudent() {
 
   return (
     <>
-      <CardView>
+      <CardView title = {""} description = {""}>
         <PrincipalTitle title={"Registro Alumno"}></PrincipalTitle>
         <FormStudent student={student} isNewUser = {true}></FormStudent>
       </CardView>

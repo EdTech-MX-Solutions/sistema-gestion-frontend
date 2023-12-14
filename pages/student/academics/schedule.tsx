@@ -14,7 +14,7 @@ function Schedule() {
             <CardView title={title} description={title} customtitle={true}>
                 <PrincipalTitle title={title}></PrincipalTitle>
                 <StudentAcacemicsCard alumno={alumnoActual}>
-                    <TableSchedule horarioId={alumnoActual.no_boleta}></TableSchedule>
+                    <TableSchedule horarioId={alumnoActual.noBoleta}></TableSchedule>
                 </StudentAcacemicsCard>
             </CardView>
         </>

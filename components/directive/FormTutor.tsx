@@ -2,55 +2,115 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 import SIGEAPICollection from "@/data/calls/apiHandler";
-import { cookies } from "next/dist/client/components/headers";
 import { useCookies } from "react-cookie";
-import InterfaceTel from "@/data/interfaces/numeroTelefonico";
 import { CheckBoxSocialMedia } from "./CheckBoxSocialMedia";
 import InterfaceParent from "@/data/interfaces/parent";
+import { useRouter } from "next/router";
+import { TableVistaTelefonos } from "./TableVistaTelefonos";
 
 interface FormTutorProps {
   tutor : InterfaceParent;
 }
 
 export const FormTutor = ({tutor}: FormTutorProps) => {
+
+  const router = useRouter();
+  const { id } = router.query;
+  const [open, setOpen] = useState(false);
   const [claveElector, setclaveElector] = useState("");
-  const [formData, setFormData] = useState({
-    id_tutor: tutor.id_tutor,
+  const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
+  const [paises, setPaises] = useState([])
+  const [estados, setEstados] = useState([])
+  const [telefono, setTelefono] = useState("Cargando...")
+  const [formData, setFormData] = useState<InterfaceParent>({
+    id: tutor.id,
     curp: tutor.curp,
     leerYescribir: tutor.leerYescribir,
     gradoMaximoDeEstudios: tutor.gradoMaximoDeEstudios,
     ocupacion: tutor.ocupacion,
     nombres: tutor.nombres,
-    apellido_paterno: tutor.apellido_paterno,
-    apellido_materno: tutor.apellido_materno,
+    apellidoPaterno: tutor.apellidoPaterno,
+    apellidoMaterno: tutor.apellidoMaterno,
     correo: tutor.correo,
-    fecha_nacimiento: tutor.fecha_nacimiento,
+    fechaNacimiento: tutor.fechaNacimiento,
     sexo: tutor.sexo,
-    pais_origen: tutor.pais_origen,
-    estado_civil: tutor.estado_civil,
-    red_social: tutor.red_social,
-    tipo_identificacion: tutor.tipo_identificacion,
-    no_identificacion: tutor.no_identificacion,
-    tutor_principal: tutor.tutor_principal,
+    paisOrigen: tutor.paisOrigen,
+    estadoOrigen: tutor.estadoOrigen,
+    redesSociales: tutor.redesSociales,
+    tipoIdentificacion: tutor.tipoIdentificacion,
+    noIdentificacion: tutor.noIdentificacion,
+    esPrincipal: tutor.esPrincipal,
     parentesco: tutor.parentesco,
-    entidad_nacimiento: tutor.entidad_nacimiento,
-    numeros: tutor.numeros
+    numeros: tutor.numeros,
+    estadoCivil : tutor.estadoCivil
   })
 
-  const [socialMediaState, setSocialMediaState] = useState({
-    Facebook: false,
-    Whatsapp: false,
-    Instagram: false,
-    Twitter: false,
-    Tiktok: false,
-    Telegram: false
-  });
+  const handleDarDeAltaTutor = async (nuevoTutor : InterfaceParent) => {
+    const requiredFields = [
+      "curp",
+      "leerYescribir",
+      "gradoMaximoDeEstudios",
+      "ocupacion",
+      "nombres",
+      "apellidoPaterno",
+      "apellidoMaterno",
+      "correo",
+      "fechaNacimiento",
+      "sexo",
+      "paisOrigen",
+      "estadoOrigen",
+      "tipoIdentificacion",
+      "esPrincipal",
+      "parentesco",
+      "numeros",
+      "estadoCivil",
+    ];
 
-  const handleCheckboxChange = (id: any, checked: any) => {
-    setSocialMediaState(prevState => ({
-      ...prevState,
-      [id]: checked
-    }));
+    const emptyRequiredFields = requiredFields.filter(
+      (field) => !formData[field as keyof InterfaceParent] 
+    );
+
+    if (emptyRequiredFields.length > 0) {
+      //alert("Por favor, completa todos los campos obligatorios.");
+      setOpen(true);
+      return;
+    }
+    else{
+      const api = new SIGEAPICollection();
+      const token = cookies.token;
+      const response = await api.directivosCollection.executePostNuevoTutor(
+        token,
+        nuevoTutor,
+        id+""
+      );
+
+      setFormData({
+        id: 0,
+        curp: "",
+        leerYescribir: "",
+        gradoMaximoDeEstudios: "",
+        ocupacion: "",
+        nombres: "",
+        apellidoPaterno: "",
+        apellidoMaterno: "",
+        correo: "",
+        fechaNacimiento: "",
+        sexo: "",
+        paisOrigen: "",
+        estadoOrigen: "",
+        redesSociales: [],
+        tipoIdentificacion: "",
+        noIdentificacion: "",
+        esPrincipal: "",
+        parentesco: "",
+        numeros: [],
+        estadoCivil : ""
+      })
+    }
+  }
+
+  const handleModifyTelefonos = ({ Id }: { Id: any }) => {
+    router.push(`/directive/registrerTelefonos/?id=${Id}`);
   };
 
   const handleTipoIdentificacion = (event: { target: { value: any; }; }) => {
@@ -65,11 +125,6 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
     setclaveElector(event.target.value);
   };
 
-  const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
-  const [paises, setPaises] = useState([])
-  const [estados, setEstados] = useState([])
-  const [telefono, setTelefono] = useState("Cargando...")
-  
   const handleInputChange = (event: { target: { name: any; value: any; }; }) => {
     const {name, value} = event.target;
     setFormData({
@@ -129,7 +184,6 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
     } catch (error) {
       console.log(error)
     }
-
   }
 
   useEffect(()=>{
@@ -173,10 +227,10 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                 </label>
                 <input
                   type="text"
-                  name="apellido_paterno"
-                  id="apellido_paterno"
+                  name="apellidoPaterno"
+                  id="apellidoPaterno"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value={formData.apellido_paterno}
+                  value={formData.apellidoPaterno}
                   onChange={handleInputChange}
                   required
                 />
@@ -187,14 +241,14 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Apellido Materno:
+                  Apellido Materno<span>*</span>:
                 </label>
                 <input
                   type="text"
-                  name="apellido_materno"
-                  id="apellido_materno"
+                  name="apellidoMaterno"
+                  id="apellidoMaterno"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value={formData.apellido_materno}
+                  value={formData.apellidoMaterno}
                   onChange={handleInputChange}
                 />
               </div>
@@ -204,7 +258,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Correo Electrónico:
+                  Correo Electrónico<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -260,7 +314,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Grado Maximo de estudios:
+                  Grado Maximo de estudios<span>*</span>:
                 </label>
                 <select
                   name="gradoMaximoDeEstudios"
@@ -285,7 +339,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   htmlFor=""
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Ocupación:
+                  Ocupación<span>*</span>:
                 </label>
                 <input
                   type="text"
@@ -305,12 +359,12 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   Fecha de Nacimiento<span>*</span>:
                 </label>
                 <input
-                  name="fecha_nacimiento"
-                  id="fecha_nacimiento"
+                  name="fechaNacimiento"
+                  id="fechaNacimiento"
                   type="date"
                   className="text-left bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 ps-10 p-2.5"
                   placeholder="Select date"
-                  value={formData.fecha_nacimiento}
+                  value={formData.fechaNacimiento}
                   onChange={handleInputChange}
                   required
                 />
@@ -318,10 +372,10 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
 
               <div>
                 <label
-                  htmlFor=""
+                  htmlFor="sexo"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Sexo:
+                  Sexo<span>*</span>:
                 </label>
                 <select
                   name="sexo"
@@ -339,16 +393,16 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
 
               <div>
                 <label
-                  htmlFor=""
+                  htmlFor="paisOrigen"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   Pais de Origen<span>*</span>:
                 </label>
                 <select
-                  name="pais_origen"
-                  id="pais_origen"
+                  name="paisOrigen"
+                  id="paisOrigen"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value={formData.pais_origen}
+                  value={formData.paisOrigen}
                   onChange={handleInputChange}
                 >
                   <option value = ""> Selecciona un país </option>
@@ -360,16 +414,16 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
 
               <div>
                 <label
-                  htmlFor=""
+                  htmlFor="estadoOrigen"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   Estado de Origen<span>*</span>:
                 </label>
                 <select
-                  name="entidad_nacimiento"
-                  id="entidad_nacimiento"
+                  name="estadoOrigen"
+                  id="estadoOrigen"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value={formData.entidad_nacimiento}
+                  value={formData.estadoOrigen}
                   onChange={handleInputChange}
                   required
                 >
@@ -382,16 +436,16 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
 
               <div>
                 <label
-                  htmlFor=""
+                  htmlFor="estadoCivil"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Estado Civil:
+                  Estado Civil<span>*</span>:
                 </label>
                 <select
-                  name="estado_civil"
-                  id="estado_civil"
+                  name="estadoCivil"
+                  id="estadoCivil"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value={formData.estado_civil}
+                  value={formData.estadoCivil}
                   onChange={handleInputChange}
                 >
                   <option value = ""> Selecciona una opción</option>
@@ -404,21 +458,24 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                 </select>
               </div>
 
-              <CheckBoxSocialMedia socialMediaState={socialMediaState} handleCheckboxChange={handleCheckboxChange}></CheckBoxSocialMedia>
+              <CheckBoxSocialMedia
+                formData={formData}
+                setFormData={setFormData}
+              ></CheckBoxSocialMedia>
 
               <div>
                 <label
-                  htmlFor=""
+                  htmlFor="tipoIdentificacion"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   Tipo de Identificación<span>*</span>:
                 </label>
                 <select
-                  name="tipo_identificacion"
-                  id="tipo_identificacion"
+                  name="tipoIdentificacion"
+                  id="tipoIdentificacion"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
                   onChange={handleTipoIdentificacion}
-                  value={formData.tipo_identificacion}
+                  value={formData.tipoIdentificacion}
                 >
                   <option value="" selected> Selecciona una opción </option>
                   <option value="1"> INE </option>
@@ -428,7 +485,7 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                 </select>
               </div>
 
-              {formData.tipo_identificacion == "1" && (
+              {formData.tipoIdentificacion == "1" && (
                 <div>
                   <label
                     htmlFor=""
@@ -438,10 +495,10 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                   </label>
                   <input
                     type="text"
-                    name="no_identificacion"
-                    id="no_identificacion"
+                    name="noIdentificacion"
+                    id="noIdentificacion"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                    value={formData.no_identificacion}
+                    value={formData.noIdentificacion}
                     onChange={handleClaveElector}
                     required
                   />
@@ -482,9 +539,30 @@ export const FormTutor = ({tutor}: FormTutorProps) => {
                 </select>
               </div>
             </div>
-
+            
+            <div className="px-2 pb-2">
+            <TableVistaTelefonos
+              telefonos={formData.numeros}
+            ></TableVistaTelefonos>
+            <div className="text-center">
+              <ButtonComponent
+                title={"Modificar numero telefonicos"}
+                color={"blue"}
+                onClick={() =>
+                  handleModifyTelefonos({ Id: formData.id })
+                }
+              ></ButtonComponent>
+            </div>
+          </div>
+          
             <div className="text-center pt-10">
-             <ButtonComponent title = {"Siguiente"} color = {"blue"}></ButtonComponent>
+             <ButtonComponent 
+              title = {"Siguiente"} 
+              color = {"blue"}
+              onClick={() => {
+                handleDarDeAltaTutor(formData);
+              }}
+             ></ButtonComponent>
             </div>
           </form>
         </div>

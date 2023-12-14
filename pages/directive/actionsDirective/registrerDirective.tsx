@@ -1,7 +1,8 @@
 import { ReactNode} from "react";
 
 import PrincipalTitle from "@/components/directive/Principal.Title";
-import FormDirective from "@/components/directive/FormDirective";
+import CardView from "@/components/CardView";
+import FormProfessor from "@/components/directive/FormProfessor";
 
 interface DefaultLayoutProps {
   children: ReactNode;
@@ -23,8 +24,10 @@ function registrerDirective(){
 
     return(
         <>
+        <CardView title = {""} description = {""}>
           <PrincipalTitle title = {"Registrar Directivo"}></PrincipalTitle>
-          <FormDirective directive = {initialDirective} isNewUser = {true}></FormDirective>
+          <FormProfessor professor = {initialDirective} isNewUser = {true}></FormProfessor>
+        </CardView>
         </>
     );
 }

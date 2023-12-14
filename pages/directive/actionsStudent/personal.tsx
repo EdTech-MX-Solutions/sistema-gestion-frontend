@@ -16,27 +16,27 @@ function ConsultDataPersonalStudent() {
     const { id } = router.query;
     const {alumnos} = useAlumno();
     const [alumnosDetails, setalumnosDetails] = useState<InterfaceAlumno>({
-        no_boleta: "Cargando...",
-        curp: "Cargando...",
-        nombre: "Cargando...",
-        apellido_paterno: "Cargando...",
-        apellido_materno: "Cargando...",
-        aniosPreescolar: 0,
-        fecha_nacimiento: "Cargando...",
+        noBoleta: "cargando...",
+        curp: "cargando...",
+        nombres: "cargando...",
+        apellidoPaterno: "",
+        apellidoMaterno: "",
+        fechaNacimiento: "cargando...",
+        sexo: "cargando...",
+        estatus: "cargando...",
+        entidad: "cargando...",
+        paisOrigen: "cargando...",
         edad: 0,
-        pais_origen: "Cargando...",
-        sexo: "Cargando...",
-        estatus: "Cargando...",
-        entidad_nacimiento: "Cargando...",
-        grado: "Cargando...",
-        grupo: "Cargando...",
-        actualizarDatosMedicos: false,
+        aniosPreescolar: 0,
+        grado: null,
+        grupo: null,
+        actualizarDatosMedicos: null,
     });
 
     useEffect(() => {
     if (id && alumnos && alumnos.length > 0) {
       const foundAlumno = alumnos.find(
-        (alumno) => alumno.no_boleta == id
+        (alumno) => alumno.noBoleta == id
       );
       if (foundAlumno) {
         setalumnosDetails(foundAlumno);
@@ -54,7 +54,7 @@ function ConsultDataPersonalStudent() {
   return (
     <>
       <CardView title={title} description={description}>
-        <StudentDataCard alumno={alumnosDetails} baseRuta={"/directive/actionsStudent"} id = {alumnosDetails.no_boleta} isDirective = {true}>
+        <StudentDataCard alumno={alumnosDetails} baseRuta={"/directive/actionsStudent"} id = {alumnosDetails.noBoleta} isDirective = {true}>
           <PersonalData alumno={alumnosDetails} />
         </StudentDataCard>
       </CardView>

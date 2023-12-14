@@ -55,16 +55,16 @@ function ModifyGroup() {
             const element = data[i];
             const sexo = element.sexo === "M" ? "Masculino" : "Femenino";
             const newAlumno: InterfaceAlumno = {
-              no_boleta: element.noBoleta,
+              noBoleta: element.noBoleta,
               curp: element.curp,
-              nombre: element.nombres,
-              apellido_paterno: element.apellidoPaterno,
-              apellido_materno: element.apellidoMaterno,
-              fecha_nacimiento: element.fechaNacimiento,
+              nombres: element.nombres,
+              apellidoPaterno: element.apellidoPaterno,
+              apellidoMaterno: element.apellidoMaterno,
+              fechaNacimiento: element.fechaNacimiento,
               sexo: sexo,
               estatus: element.estatus,
-              entidad_nacimiento: element.entidad,
-              pais_origen: element.paisOrigen,
+              entidad: element.entidad,
+              paisOrigen: element.paisOrigen,
               edad: element.edad,
               aniosPreescolar: element.aniosPreescolar,
               grado: element.grado,
@@ -96,16 +96,16 @@ function ModifyGroup() {
           const element = data[i];
           const sexo = element.alumno.sexo === "M" ? "Masculino" : "Femenino";
           const newAlumno: InterfaceAlumno = {
-            no_boleta: element.alumno.noBoleta,
+            noBoleta: element.alumno.noBoleta,
             curp: element.alumno.curp,
-            nombre: element.alumno.nombres,
-            apellido_paterno: element.alumno.apellidoPaterno,
-            apellido_materno: element.alumno.apellidoMaterno,
-            fecha_nacimiento: element.alumno.fechaNacimiento,
+            nombres: element.alumno.nombres,
+            apellidoPaterno: element.alumno.apellidoPaterno,
+            apellidoMaterno: element.alumno.apellidoMaterno,
+            fechaNacimiento: element.alumno.fechaNacimiento,
             sexo: sexo,
             estatus: element.alumno.estatus,
-            entidad_nacimiento: element.alumno.entidad,
-            pais_origen: element.alumno.paisOrigen,
+            entidad: element.alumno.entidad,
+            paisOrigen: element.alumno.paisOrigen,
             edad: element.alumno.edad,
             aniosPreescolar: element.alumno.aniosPreescolar,
             grado: element.alumno.grado,
@@ -138,14 +138,14 @@ function ModifyGroup() {
   
 
   const handleDarDeBajaAlumnoDeGrupo = (alumno : any) =>{
-    const newAlumnosInscritos = alumnosInscritos.filter((alumnoInscrito) => alumnoInscrito.no_boleta !== alumno.no_boleta);
+    const newAlumnosInscritos = alumnosInscritos.filter((alumnoInscrito) => alumnoInscrito.noBoleta !== alumno.noBoleta);
     const nuevoAlumnoPendiente = [...alumnosPendientes, alumno];
     setAlumnosInscritos(newAlumnosInscritos);
     setAlumnosPendientes(nuevoAlumnoPendiente);
   };
 
   const handleInscribirlumnoDeGrupo = (alumno : any) =>{
-    const newAlumnosPendiente = alumnosPendientes.filter((alumnoPendiente) => alumnoPendiente.no_boleta !== alumno.no_boleta);
+    const newAlumnosPendiente = alumnosPendientes.filter((alumnoPendiente) => alumnoPendiente.noBoleta !== alumno.noBoleta);
     const nuevoAlumnoInscrito = [...alumnosInscritos, alumno];
     setAlumnosInscritos(nuevoAlumnoInscrito);
     setAlumnosPendientes(newAlumnosPendiente);

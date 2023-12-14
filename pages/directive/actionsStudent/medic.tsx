@@ -17,18 +17,18 @@ function ConsultDataPersonalStudent() {
     const { id } = router.query;
     const {alumnos} = useAlumno();
     const [alumnosDetails, setalumnosDetails] = useState<InterfaceAlumno>({
-        no_boleta: "Cargando...",
+        noBoleta: "Cargando...",
         curp: "Cargando...",
-        nombre: "Cargando...",
-        apellido_paterno: "Cargando...",
-        apellido_materno: "Cargando...",
+        nombres: "Cargando...",
+        apellidoPaterno: "Cargando...",
+        apellidoMaterno: "Cargando...",
         aniosPreescolar: 0,
-        fecha_nacimiento: "Cargando...",
+        fechaNacimiento: "Cargando...",
         edad: 0,
-        pais_origen: "Cargando...",
+        paisOrigen: "Cargando...",
         sexo: "Cargando...",
         estatus: "Cargando...",
-        entidad_nacimiento: "Cargando...",
+        entidad: "Cargando...",
         grado: "Cargando...",
         grupo: "Cargando...",
         actualizarDatosMedicos: false,
@@ -37,7 +37,7 @@ function ConsultDataPersonalStudent() {
     useEffect(() => {
     if (id && alumnos && alumnos.length > 0) {
       const foundAlumno = alumnos.find(
-        (alumno) => alumno.no_boleta == id
+        (alumno) => alumno.noBoleta == id
       );
       if (foundAlumno) {
         setalumnosDetails(foundAlumno);
