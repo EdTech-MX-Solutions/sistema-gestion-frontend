@@ -1,14 +1,13 @@
 import React from "react";
-import ButtonComponentBiColor from "../ButtonComponentBiColor";
 import InterfaceTel from "@/data/interfaces/numeroTelefonico";
+import { useRouter } from "next/router";
 
 interface TableTelefonosProps {
-  telefonos: InterfaceTel[];
+  telefonos: InterfaceTel[],
 }
 
 export const TableVistaTelefonos = ({ telefonos }: TableTelefonosProps) => {
   
-  // Verificar si telefonos es undefined o null
   if (!telefonos || telefonos.length === 0) {
     return <p className="p-5">No hay datos de teléfonos disponibles.</p>;
   }

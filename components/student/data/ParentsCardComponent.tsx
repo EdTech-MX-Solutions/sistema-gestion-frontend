@@ -14,8 +14,8 @@ function ParentsCardComponent({ parentInst }: { parentInst: InterfaceParent }) {
     }
     const parent = {
         name: `${parentInst.nombres || ""} ${
-            parentInst.apellido_paterno || ""
-        } ${parentInst.apellido_materno || ""}`,
+            parentInst.apellidoPaterno || ""
+        } ${parentInst.apellidoMaterno || ""}`,
         email: parentInst.correo || "",
         phone: number,
         relationship: parentInst.parentesco || "",

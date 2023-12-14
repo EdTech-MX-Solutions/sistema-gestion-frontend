@@ -7,7 +7,7 @@ import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 
-function modifySubject() {
+function ModifySubject() {
     const title = "Registro de Nueva Materia";
     const subtitle =
         "En esta sección puedes crear las materias que pueden ser asignadas a los alumnos";
@@ -88,4 +88,4 @@ function modifySubject() {
     );
 }
 
-export default modifySubject;
+export default ModifySubject;

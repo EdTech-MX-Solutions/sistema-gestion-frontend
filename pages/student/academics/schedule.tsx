@@ -6,16 +6,15 @@ import PrincipalTitle from "@/components/directive/Principal.Title";
 import {useState} from "react";
 
 function Schedule() {
-    const { alumnos } = useAlumno();
+    const { alumnos, alumnoActual } = useAlumno();
     const title = "Horario";
-    const [alumno,setAlumno] = useState(alumnos[0]);
 
     return (
         <>
             <CardView title={title} description={title} customtitle={true}>
                 <PrincipalTitle title={title}></PrincipalTitle>
-                <StudentAcacemicsCard alumno={alumno}>
-                    <TableSchedule horarioId={alumno.no_boleta}></TableSchedule>
+                <StudentAcacemicsCard alumno={alumnoActual}>
+                    <TableSchedule horarioId={alumnoActual.noBoleta}></TableSchedule>
                 </StudentAcacemicsCard>
             </CardView>
         </>

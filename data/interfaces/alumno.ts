@@ -1,19 +1,19 @@
 interface InterfaceAlumno {
-    no_boleta: string;
-    curp: string;
-    nombre: string;
-    apellido_paterno: string;
-    apellido_materno: string;
-    aniosPreescolar: number | null;
-    fecha_nacimiento: string;
+    noBoleta: string,
+    nombres: string,
+    apellidoPaterno: string,
+    apellidoMaterno: string,
+    aniosPreescolar: number;
+    fechaNacimiento: string,
     edad: number | null;
-    pais_origen: string;
-    sexo: string;
-    estatus: string;
-    entidad_nacimiento: string,
+    paisOrigen: string,
+    sexo: string,
+    estatus: string,
+    entidad: string,
     grado: string | null,
     grupo: string | null,
     actualizarDatosMedicos: boolean | null,
+    curp: string
 }
 
 export default InterfaceAlumno;

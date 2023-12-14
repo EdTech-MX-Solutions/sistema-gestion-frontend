@@ -5,11 +5,11 @@ interface SelectComponentProps {
         value : string;
         label : string;
     }>,
-
+    onChange?: (e: { target: { value: string; }; }) => void;
     title : string;
 }
 
-export const SelectComponent = ({options, title}: SelectComponentProps) => {
+export const SelectComponent = ({options, title,onChange}: SelectComponentProps) => {
   return (
     <>
       <form>
@@ -24,6 +24,7 @@ export const SelectComponent = ({options, title}: SelectComponentProps) => {
             name="periodo"
             id="periodo"
             className="w-full p-5 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+            onChange={onChange}
           >
             <option disabled selected> Selecciona.... </option>
             {options.map((opcion, index) => (

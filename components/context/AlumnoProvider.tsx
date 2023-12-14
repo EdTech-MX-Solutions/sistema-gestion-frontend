@@ -14,6 +14,8 @@ interface AlumnoContextType {
     updateAlumno: (newAlumno: InterfaceAlumno[]) => void;
     loading: boolean;
     hayalumnos: boolean;
+    alumnoActual: InterfaceAlumno;
+    setAlumnoActual: (newAlumno: InterfaceAlumno) => void;
 }
 
 const AlumnoContext = createContext<AlumnoContextType | undefined>(undefined);
@@ -26,23 +28,25 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
     const [hayalumnos, setHayalumnos] = useState<boolean>(false);
     const [alumnos, setAlumnos] = useState<InterfaceAlumno[]>([
         {
-            no_boleta: "",
-            curp: "",
-            nombre: "",
-            apellido_paterno: "",
-            apellido_materno: "",
-            fecha_nacimiento: "",
+            noBoleta: "",
+            nombres: "",
+            apellidoPaterno: "",
+            apellidoMaterno: "",
+            aniosPreescolar: 0,
+            fechaNacimiento: "",
+            edad: 0,
+            paisOrigen: "",
             sexo: "",
             estatus: "",
-            entidad_nacimiento: "",
-            pais_origen: "",
-            edad: 0,
-            aniosPreescolar: 0,
+            entidad: "",
             grado: null,
             grupo: null,
             actualizarDatosMedicos: null,
+            curp: "",
         },
     ]);
+
+    const [alumnoActual, setAlumnoActual] = useState<InterfaceAlumno>(alumnos[0]);
 
     const updateAlumno = (newAlumno: InterfaceAlumno[]) => {
         setAlumnos(newAlumno);
@@ -70,16 +74,16 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
                     const element = data[i];
                     const sexo = element.sexo === "M" ? "Masculino" : "Femenino";
                     const newAlumno: InterfaceAlumno = {
-                        no_boleta: element.noBoleta,
+                        noBoleta: element.noBoleta,
                         curp: element.curp,
-                        nombre: element.nombres,
-                        apellido_paterno: element.apellidoPaterno,
-                        apellido_materno: element.apellidoMaterno,
-                        fecha_nacimiento: element.fechaNacimiento,
+                        nombres: element.nombres,
+                        apellidoPaterno: element.apellidoPaterno,
+                        apellidoMaterno: element.apellidoMaterno,
+                        fechaNacimiento: element.fechaNacimiento,
                         sexo: sexo,
                         estatus: element.estatus,
-                        entidad_nacimiento: element.entidad,
-                        pais_origen: element.paisOrigen,
+                        entidad: element.entidad,
+                        paisOrigen: element.paisOrigen,
                         edad: element.edad,
                         aniosPreescolar: element.aniosPreescolar,
                         grado: element.grado,
@@ -92,6 +96,9 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
                 }
                 setAlumnos(newAlumnos);
                 setHayalumnos(true);
+                if (newAlumnos.length > 0) {
+                    setAlumnoActual(newAlumnos[0])
+                }
             } else {
                 console.error(
                     `Error en la solicitud. Código de estado: ${response.status}`
@@ -108,7 +115,7 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
     }, []);
 
     return (
-        <AlumnoContext.Provider value={{ alumnos, updateAlumno, loading, hayalumnos }}>
+        <AlumnoContext.Provider value={{ alumnos, updateAlumno, loading, hayalumnos,setAlumnoActual }}>
             {children}
         </AlumnoContext.Provider>
     );

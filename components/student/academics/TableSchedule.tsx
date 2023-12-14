@@ -35,6 +35,12 @@ const TableSchedule = ({ horarioId }: TableScheduleprops) => {
                 console.error("Error al obtener el horario " + response.status);
             }
     }
+
+    useEffect(() => {
+            fetchHorario();
+        },
+        [horarioId])
+
     useEffect(()=>{
         fetchHorario();
     },[])

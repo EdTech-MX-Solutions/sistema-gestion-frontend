@@ -1,5 +1,7 @@
 // import { Link } from 'react-router-dom';
 import Link from "next/link";
+import {useCookies} from "react-cookie";
+import {useAlumno} from "@/components/context/AlumnoProvider";
 // import DarkModeSwitcher from './DarkModeSwitcher';
 // import DropdownMessage from './DropdownMessage';
 // import DropdownNotification from './DropdownNotification';
@@ -9,6 +11,52 @@ const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
+  const [cookies,setCookies] = useCookies(["rol"]);
+  const tipoUsuario = cookies.rol;
+  const {alumnoActual, setAlumnoActual, alumnos} = useAlumno();
+  const cambioDeAlumno = (e: { target: { value: string; }; }) =>{
+    const nuevoAlumno = alumnos.find(alumno => alumno.noBoleta === e.target.value);
+    if(nuevoAlumno !== undefined){
+      setAlumnoActual(nuevoAlumno);
+    }
+  }
+
+  const SelectAlumnos = () =>{
+    return tipoUsuario === "DIRECTIVO"?
+        <>
+          <input id="search" type="search" name="q"
+                 className="cursor-pointer py-2 text-sm bg-transparent text-black dark:text-white rounded-md pl-10 focus:outline-none focus:cursor-auto dark:focus:bg-slate-600 focus:bg-secondary focus:bg-opacity-50 dark:focus:text-gray-200"
+                 placeholder="Buscar..." autoComplete="off"/>
+          <label htmlFor="search" className="absolute inset-y-0 left-0 flex items-center pl-2">
+            <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                 strokeWidth="2" viewBox="0 0 24 24" className="w-4 h-4">
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </label>
+        </> :
+        <>
+          <div className=" flex w-full text-gray-600 dark:text-gray-200 focus-within:text-gray-400">
+            <select
+                id="selectAlumnos"
+                name="selectAlumnos"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-50 w-full p-2.5"
+                value={alumnoActual.noBoleta}
+                onChange={cambioDeAlumno}
+                placeholder="Selecciona un alumno"
+            >
+              {
+                alumnos.length>0?
+                  alumnos.map((alumno) => {
+                    return <option key={alumno.noBoleta} value={alumno.noBoleta}>{alumno.nombres} {alumno.apellidoPaterno} {alumno.apellidoMaterno}</option>
+                  })
+                    :
+                    <option key={0} value={""} disabled={true}>No hay alumnos registrados</option>
+              }
+            </select>
+          </div>
+        </>
+  }
+
   return (
     <header className="print:hidden sticky top-0 z-50 flex w-full bg-white dark:bg-slate-500 drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between p-4 pl-2 shadow-2 md:pr-6 2xl:pr-11">
@@ -40,6 +88,10 @@ const Header = (props: {
                   }`}
                 ></span>
               </span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                   stroke="currentColor" className="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+              </svg>
               <span className="absolute right-0 h-full w-full rotate-45">
                 <span
                   className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white ${
@@ -98,12 +150,7 @@ const Header = (props: {
                   </div>
                 </Link>
                 <div className=" relative w-full text-gray-600 dark:text-gray-200 focus-within:text-gray-400">
-                  <input id="search" type="search" name="q" className="cursor-pointer py-2 text-sm bg-transparent text-black dark:text-white rounded-md pl-10 focus:outline-none focus:cursor-auto dark:focus:bg-slate-600 focus:bg-secondary focus:bg-opacity-50 dark:focus:text-gray-200" placeholder="Buscar..." autoComplete="off"/>
-                  <label htmlFor="search" className="absolute inset-y-0 left-0 flex items-center pl-2">
-                      <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="w-4 h-4">
-                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                      </svg>
-                  </label>
+                  <SelectAlumnos></SelectAlumnos>
                 </div>
             </div>
             </div>

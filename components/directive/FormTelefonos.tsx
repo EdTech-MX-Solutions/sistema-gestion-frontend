@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 import InterfaceTel from "@/data/interfaces/numeroTelefonico";
 import { TableTelefonos } from "./TableTelefonos";
-import router from "next/router";
+import { useRouter } from "next/router";
 
 interface FormTelefonosProps {
   telefonos: InterfaceTel[];
 }
 
+
 export const FormTelefonos = ({ telefonos }: FormTelefonosProps) => {
+  const router = useRouter();
+  const { id } = router.query;
+
+  
+
   const [telefonoInput, setTelefonoInput] = useState("");
   const [tipoInput, setTipoInput] = useState("");
   const [telefonosAgregados, setTelefonosAgregados] = useState<InterfaceTel[]>(

@@ -27,16 +27,16 @@ export const TableStudets = ({ students }: TableStudetsProps) => {
           </thead>
           <tbody>
             {students.map((student) => ( 
-              <tr key = {student.no_boleta} className="text-left">
-                <td className="p-5 text-center"> {student.no_boleta} </td>
-                <td colSpan={2}> {`${student.nombre}  ${student.apellido_paterno}  ${student.apellido_materno}`} </td>
+              <tr key = {student.noBoleta} className="text-left">
+                <td className="p-5 text-center"> {student.noBoleta} </td>
+                <td colSpan={2}> {`${student.nombres}  ${student.apellidoPaterno}  ${student.apellidoMaterno}`} </td>
                 <td> {`${student.grado} ${student.grupo}`} </td>
                 <td>
                   <ButtonComponentBiColor
                     title={"Ver Detalles"}
                     color1={"blue"}
                     color2={"green"}
-                    onClick={() => handleConsultarAlumno(student.no_boleta)}
+                    onClick={() => handleConsultarAlumno(student.noBoleta)}
                   ></ButtonComponentBiColor>
                 </td>
               </tr>
