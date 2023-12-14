@@ -281,10 +281,10 @@ export const FormMedic = ({ dataMedic, isNewUsuario}: FormMedicProps) => {
               title={"Siguiente"}
               color={"blue"}
               onClick={() => {
-                if(requiredCampos){
-                  handleDarDeAltaDatosMedicos(formData);
+                //if(requiredCampos){
+                  //handleDarDeAltaDatosMedicos(formData);
                   handleSiguientePasoRegistroPrimerTutor({ Id: id });
-                }
+                //}
                 setOpen(true);
               }}
             ></ButtonComponent>
