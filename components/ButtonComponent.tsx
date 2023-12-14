@@ -15,7 +15,7 @@ export const ButtonComponent = ({title, color, type, loading, onClick} :  Button
 
   return (
     <>
-      <div className="mx-auto justify-center p-5 m-3">
+      <div className="mx-auto justify-center p-2 m-3">
         <button 
           type={type || "button"}
           className = {btnClassName}

@@ -45,18 +45,18 @@ function ConsultStudents() {
                     const sexo =
                         element.sexo === "M" ? "Masculino" : "Femenino";
                     const newAlumno: InterfaceAlumno = {
-                        no_boleta: element.noBoleta,
+                        noBoleta: element.noBoleta,
                         curp: element.curp,
-                        nombre: element.nombres,
-                        apellido_paterno: element.apellidoPaterno,
-                        apellido_materno: element.apellidoMaterno,
+                        nombres: element.nombres,
+                        apellidoPaterno: element.apellidoPaterno,
+                        apellidoMaterno: element.apellidoMaterno,
                         aniosPreescolar: element.aniosPreescolar,
-                        fecha_nacimiento: element.fechaNacimiento,
+                        fechaNacimiento: element.fechaNacimiento,
                         edad: element.edad,
-                        pais_origen: element.paisOrigen,
+                        paisOrigen: element.paisOrigen,
                         sexo: sexo,
                         estatus: element.estatus,
-                        entidad_nacimiento: element.entidad,
+                        entidad: element.entidad,
                         grado: element.grado || "Sin asignar",
                         grupo: element.grupo || "",
                         actualizarDatosMedicos: element.actualizarDatosMedicos,
@@ -89,12 +89,12 @@ function ConsultStudents() {
                 <InputSearch
                     searchDataAutomcomplete={[
                         ...alumnos.map((alumno) => ({
-                            key: alumno.no_boleta,
-                            value: alumno.no_boleta,
+                            key: alumno.noBoleta,
+                            value: alumno.noBoleta,
                         })),
                         ...alumnos.map((alumno) => ({
-                            key: alumno.no_boleta,
-                            value: `${alumno.nombre} ${alumno.apellido_paterno} ${alumno.apellido_materno}`,
+                            key: alumno.noBoleta,
+                            value: `${alumno.nombres} ${alumno.apellidoPaterno} ${alumno.apellidoMaterno}`,
                         })),
                     ]}
                     comment={

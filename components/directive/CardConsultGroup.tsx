@@ -40,16 +40,16 @@ export const CardConsultGroup = ({ group }: CardConsultGroupProps) => {
             const element = data[i];
             const sexo = element.sexo === "M" ? "Masculino" : "Femenino";
             const newAlumno: InterfaceAlumno = {
-              no_boleta: element.noBoleta,
+              noBoleta: element.noBoleta,
               curp: element.curp,
-              nombre: element.nombres,
-              apellido_paterno: element.apellidoPaterno,
-              apellido_materno: element.apellidoMaterno,
-              fecha_nacimiento: element.fechaNacimiento,
+              nombres: element.nombres,
+              apellidoPaterno: element.apellidoPaterno,
+              apellidoMaterno: element.apellidoMaterno,
+              fechaNacimiento: element.fechaNacimiento,
               sexo: sexo,
               estatus: element.estatus,
-              entidad_nacimiento: element.entidad,
-              pais_origen: element.paisOrigen,
+              entidad: element.entidad,
+              paisOrigen: element.paisOrigen,
               edad: element.edad,
               aniosPreescolar: element.aniosPreescolar,
               grado: element.grado,

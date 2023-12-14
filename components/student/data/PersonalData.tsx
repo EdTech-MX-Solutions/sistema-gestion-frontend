@@ -12,12 +12,12 @@ function PersonalData({ alumno }: { alumno: InterfaceAlumno }) {
           </div>
           <div className="p-1">
             <p>
-              Pais de Origen: <b> {alumno.pais_origen}</b>{" "}
+              Pais de Origen: <b> {alumno.paisOrigen}</b>{" "}
             </p>
           </div>
           <div className="p-1">
             <p>
-              Entidad de Nacimiento: <b> {alumno.entidad_nacimiento}</b>{" "}
+              Entidad de Nacimiento: <b> {alumno.entidad}</b>{" "}
             </p>
           </div>
 
@@ -33,7 +33,7 @@ function PersonalData({ alumno }: { alumno: InterfaceAlumno }) {
           </div>
           <div className="p-1">
             <p>
-              Fecha de Nacimiento:<b> {alumno.fecha_nacimiento}</b> ( {alumno.edad} años) {" "}
+              Fecha de Nacimiento:<b> {alumno.fechaNacimiento}</b> ( {alumno.edad} años) {" "}
             </p>
           </div>
         </div>

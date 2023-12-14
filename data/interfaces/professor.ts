@@ -9,7 +9,7 @@ interface InterfaceProfessor {
     activo : boolean;
     diretivo : boolean;
     noCedulaProfesional : string;
-    numero : InterfaceTel[]
+    numero : InterfaceTel[];
 }
 
 export default InterfaceProfessor;

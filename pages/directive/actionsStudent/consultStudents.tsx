@@ -21,12 +21,12 @@ function ConsultStudents() {
                 <InputSearch
                     searchDataAutomcomplete={[
                         ...alumnos.map((alumno) => ({
-                            key: alumno.no_boleta,
-                            value: alumno.no_boleta,
+                            key: alumno.noBoleta,
+                            value: alumno.noBoleta,
                         })),
                         ...alumnos.map((alumno) => ({
-                            key: alumno.no_boleta,
-                            value: `${alumno.nombre} ${alumno.apellido_paterno} ${alumno.apellido_materno}`,
+                            key: alumno.noBoleta,
+                            value: `${alumno.nombres} ${alumno.apellidoPaterno} ${alumno.apellidoMaterno}`,
                         })),
                     ]}
                     comment={
