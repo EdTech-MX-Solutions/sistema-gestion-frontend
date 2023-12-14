@@ -1,23 +1,13 @@
 import CardView from "@/components/CardView";
 import PrivateRoute from "@/components/auth/PrivateRoute";
+import { useGreet } from "@/components/context/GreetProvider";
 import PanelCards from "@/components/elements/Panels/DirectivePanel";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
-function GetGreetings() {
-    var today = new Date();
-    var curHr = today.getHours();
-    if (curHr < 12) {
-        return "Buenos días";
-    } else if (curHr < 18) {
-        return "Buenas tardes";
-    } else {
-        return "Buenas noches";
-    }
-}
 
 export default function Index() {
-    let greeting = GetGreetings();
+    let greeting = useGreet().greet;
     const [cookies, setCookie, removeCookie] = useCookies(["token", "user", "childs", "boleta"]);
     const [name, setName] = useState("Cargando...");
 

@@ -14,7 +14,7 @@ function ParentsDataDetails() {
     const [dataGetted, setDataGetted] = useState(false);
     const loadingMessage = "cargando...";
     const router = useRouter();
-    const boleta = router.query.id + "";
+    const id = router.query.id + "";
     const [parentList, setParents] = useState<InterfaceParent[]>([
         {
             id : 0,
@@ -41,67 +41,70 @@ function ParentsDataDetails() {
     ]);
     var tutor = "";
 
-    try {
-        tutor = cookies.user || "";
-        console.log("tutor:", tutor);
-    } catch (error) {
-        console.log("error:", error);
-    }
+    
 
     const title = "Datos Personales del Tutor";
-    const description = `Datos registrados del tutor ${tutor}, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
+    let description = `Datos registrados del tutor.`;
 
     const fetchParents = async () => {
+        try {
+            tutor = cookies.user || "";
+            console.log("tutor:", tutor);
+        } catch (error) {
+            console.log("error:", error);
+        }
+        description = `Datos registrados del tutor ${tutor}, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
+
         const api = new SIGEAPICollection();
         const token = cookies.token;
         if (dataGetted == false) {
             api.sharedCollection
-                .executeGetParentByAlumno(token, boleta)
-                .then((response) => {
-                    return response.ok
-                        ? response.json()
-                        : Promise.reject(
-                              new Error(
-                                  `Error en la solicitud. Código de estado: ${response.status}`
-                              )
-                          );
-                })
-                .then((data) => {
-                    console.log("Datos de respuesta:", data);
-                    var list: InterfaceParent[] = [];
-                    data.forEach((dataParent: any) => {
-                        list.push({
-                            id: dataParent.idTutor,
-                            leerYescribir: dataParent.leerYescribir,
-                            curp: dataParent.curp,
-                            nombres: dataParent.nombre,
-                            apellidoPaterno: dataParent.apellidoPaterno,
-                            apellidoMaterno: dataParent.apellidoMaterno,
-                            correo: dataParent.correo,
-                            fechaNacimiento: dataParent.fechaNacimiento,
-                            sexo: dataParent.sexo,
-                            paisOrigen: dataParent.paisOrigen,
-                            estadoCivil: dataParent.estadoCivil,
-                            redesSociales: dataParent.redSocial,
-                            tipoIdentificacion: dataParent.tipoIdentificacion,
-                            noIdentificacion: dataParent.noIdentificacion,
-                            esPrincipal: dataParent.tutorPrincipal,
-                            estadoOrigen: dataParent.entidad,
-                            gradoMaximoDeEstudios:
-                            dataParent.gradoMaximoDeEstudios,
-                            ocupacion: dataParent.ocupacion,
-                            parentesco: dataParent.parentescto,
-                            numeros: dataParent.numeros,
-                        });
-                        console.log("pushing parent:", dataParent);
-                    });
-                    setParents(list);
-                    console.log("lista tutores:", parentList);
-                    console.log("lista tutores inst:", list);
-                })
-                .catch((error) => {
-                    console.error("Error de solicitud:", error);
-                });
+                // .executeGetParentByAlumno(token, boleta)
+                // .then((response) => {
+                //     return response.ok
+                //         ? response.json()
+                //         : Promise.reject(
+                //               new Error(
+                //                   `Error en la solicitud. Código de estado: ${response.status}`
+                //               )
+                //           );
+                // })
+                // .then((data) => {
+                //     console.log("Datos de respuesta:", data);
+                //     var list: InterfaceParent[] = [];
+                //     data.forEach((dataParent: any) => {
+                //         list.push({
+                //             id: dataParent.idTutor,
+                //             leerYescribir: dataParent.leerYescribir,
+                //             curp: dataParent.curp,
+                //             nombres: dataParent.nombre,
+                //             apellidoPaterno: dataParent.apellidoPaterno,
+                //             apellidoMaterno: dataParent.apellidoMaterno,
+                //             correo: dataParent.correo,
+                //             fechaNacimiento: dataParent.fechaNacimiento,
+                //             sexo: dataParent.sexo,
+                //             paisOrigen: dataParent.paisOrigen,
+                //             estadoCivil: dataParent.estadoCivil,
+                //             redesSociales: dataParent.redSocial,
+                //             tipoIdentificacion: dataParent.tipoIdentificacion,
+                //             noIdentificacion: dataParent.noIdentificacion,
+                //             esPrincipal: dataParent.tutorPrincipal,
+                //             estadoOrigen: dataParent.entidad,
+                //             gradoMaximoDeEstudios:
+                //             dataParent.gradoMaximoDeEstudios,
+                //             ocupacion: dataParent.ocupacion,
+                //             parentesco: dataParent.parentescto,
+                //             numeros: dataParent.numeros,
+                //         });
+                //         console.log("pushing parent:", dataParent);
+                //     });
+                //     setParents(list);
+                //     console.log("lista tutores:", parentList);
+                //     console.log("lista tutores inst:", list);
+                // })
+                // .catch((error) => {
+                //     console.error("Error de solicitud:", error);
+                // });
             setDataGetted(true);
         }
     };

@@ -38,17 +38,19 @@ function ParentsData() {
     ]);
     var tutor = "";
 
-    try {
-        tutor = cookies.user || "";
-        console.log("tutor:", tutor);
-    } catch (error) {
-        console.log("error:", error);
-    }
 
     const title = "Datos Personales del Tutor";
-    const description = `Datos registrados del tutor ${tutor}, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
+    let description = `Datos registrados del tutor.`;
 
     const fetchParents = async () => {
+        try {
+            tutor = cookies.user || "";
+            console.log("tutor:", tutor);
+        } catch (error) {
+            console.log("error:", error);
+        }
+        description = `Datos registrados del tutor ${tutor}, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
+
         const api = new SIGEAPICollection();
         const token = cookies.token;
         if (dataGetted == false) {
@@ -66,31 +68,30 @@ function ParentsData() {
                 .then((data) => {
                     console.log("Datos de respuesta:", data);
                     var list: InterfaceParent[] = [];
-                    data.forEach((dataParent: any) => {
+                    data.forEach((element: any) => {
                         list.push({
-                            id: dataParent.idTutor,
-                            leerYescribir: dataParent.leerYescribir,
-                            curp: dataParent.curp,
-                            nombres: dataParent.nombre,
-                            apellidoPaterno: dataParent.apellidoPaterno,
-                            apellidoMaterno: dataParent.apellidoMaterno,
-                            correo: dataParent.correo,
-                            fechaNacimiento: dataParent.fechaNacimiento,
-                            sexo: dataParent.sexo,
-                            paisOrigen: dataParent.paisOrigen,
-                            estadoCivil: dataParent.estadoCivil,
-                            redesSociales: dataParent.redSocial,
-                            tipoIdentificacion: dataParent.tipoIdentificacion,
-                            noIdentificacion: dataParent.noIdentificacion,
-                            esPrincipal: dataParent.tutorPrincipal,
-                            estadoOrigen: dataParent.entidad,
-                            gradoMaximoDeEstudios:
-                            dataParent.gradoMaximoDeEstudios,
-                            ocupacion: dataParent.ocupacion,
-                            parentesco: dataParent.parentescto,
-                            numeros: dataParent.numeros,
+                            id: element.id,
+                        curp: element.curp,
+                        leerYescribir: element.leerYescribir,
+                        gradoMaximoDeEstudios: element.gradoMaximoDeEstudios,
+                        ocupacion: element.ocupacion,
+                        nombres: element.nombre,
+                        apellidoPaterno: element.apellidoPaterno,
+                        apellidoMaterno: element.apellidoMaterno,
+                        correo: element.email,
+                        fechaNacimiento: element.fechaNacimiento,
+                        sexo: element.sexo,
+                        paisOrigen: element.paisOrigen,
+                        estadoCivil: element.estadoCivil,
+                        redesSociales: element.redesSociales,
+                        tipoIdentificacion: element.tipoIdentificacion,
+                        noIdentificacion: element.noIdentificacion,
+                        esPrincipal: element.esPrincipal,
+                        parentesco: element.parentesco,
+                        estadoOrigen: element.estadoOrigen,
+                        numeros: element.numeros,
                         });
-                        console.log("pushing parent:", dataParent);
+                        // console.log("pushing parent:", dataParent);
                     });
                     setParents(list);
                     console.log("lista tutores:", parentList);

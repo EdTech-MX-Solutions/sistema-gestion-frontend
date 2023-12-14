@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { sidebarItem } from "./SidebarItem";
 
-
 const SidebarContTutor = () => {
     const router = useRouter();
     const pathname = router.pathname;
@@ -14,9 +13,11 @@ const SidebarContTutor = () => {
         <>
             {/* <!-- Menu Group --> */}
             <div>
-                <h3 className="mb-4 ml-8 font-bold text-sm text-gray-800 dark:text-gray-200">
-                    Módulo Tutor
-                </h3>
+                <Link href="/student">
+                    <h3 className="mb-4 ml-8 font-bold text-sm text-gray-800 dark:text-gray-200">
+                        Módulo Tutor
+                    </h3>
+                </Link>
             </div>
             <div>
                 <h3 className="mb-4 ml-2 font-bold text-sm text-gray-800 dark:text-gray-200">
@@ -50,7 +51,10 @@ const SidebarContTutor = () => {
                             return <React.Fragment></React.Fragment>;
                         }}
                     </SidebarLinkGroup>
-                    {sidebarItem("Datos Personales", base_rute + "/data/personal")}
+                    {sidebarItem(
+                        "Datos Personales",
+                        base_rute + "/data/personal"
+                    )}
                     {sidebarItem("Datos Medicos", base_rute + "/data/medic")}
                     {sidebarItem("Datos Tutor", base_rute + "/data/parent")}
                 </ul>
@@ -77,8 +81,14 @@ const SidebarContTutor = () => {
                 </h3>
 
                 <ul className="mb-6 ml-4  flex flex-col gap-1.5">
-                    {sidebarItem("Calificaciones", base_rute + "/academics/notes")}
-                    {sidebarItem("Historial Academico", base_rute + "/academics/academicRecord")}
+                    {sidebarItem(
+                        "Calificaciones",
+                        base_rute + "/academics/notes"
+                    )}
+                    {sidebarItem(
+                        "Historial Academico",
+                        base_rute + "/academics/academicRecord"
+                    )}
                     {sidebarItem("Horario", base_rute + "/academics/schedule")}
                 </ul>
             </div>
