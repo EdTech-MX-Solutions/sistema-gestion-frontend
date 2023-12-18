@@ -8,7 +8,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import "intro.js/introjs.css";
-import { Steps, Hints } from "intro.js-react";
+// import { Steps, Hints } from "intro.js-react";
 
 export default function Index() {
     let greeting = useGreet().greet;
@@ -146,14 +146,14 @@ export default function Index() {
                     title={"Hola, " + greeting + " " + name}
                     description="Este es tu panel de control"
                 >
-                    <Steps
+                    {/* <Steps
                         enabled={loadingFirstTime}
                         steps={steps}
                         initialStep={1}
                         onExit={() => {
                             setLoadingFirstTime
                         }}
-                    />
+                    /> */}
                     <PanelCards />
                 </CardView>
             </PrivateRoute>

@@ -1,4 +1,4 @@
-const newSteps = [
+export const newSteps = [
   {
     id: 'intro',
     attachTo: { element: '.first-element', on: 'bottom' },
