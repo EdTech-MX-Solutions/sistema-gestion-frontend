@@ -15,7 +15,7 @@ export default function SignIn({
     console.log(router.query);
     return (
         <>
-            <div className="h-screen w-screen bg-green-100 justify-center dark:bg-slate-800">
+            <div className="h-screen w-screen bg-green-100 bg-opacity-50 justify-center dark:bg-slate-800">
                 <div className="flex h-full pt-5 sm:pt-10 md:pt-20 flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
                     <div className=" lg:m-15 sm:m-10 m-5 z-20">
                         <div className="block rounded-2xl bg-white shadow-2xl dark:bg-slate-500 bg-opacity-100">
@@ -29,7 +29,7 @@ export default function SignIn({
                                                 alt="SIGE Logo"
                                             />
                                             <img
-                                                className="mx-auto  w-1/2 max-w-3/4 lg:w-full h-1/2"
+                                                className="mx-auto hidden dark:block w-1/2 max-w-3/4 lg:w-full h-1/2"
                                                 src="/logo.dark.png"
                                                 alt="SIGE Logo"
                                             />
