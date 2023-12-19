@@ -35,10 +35,10 @@ export default function SignIn({
 
   return (
     <>
-      <div className="h-screen w-screen bg-green-100 justify-center dark:bg-black">
-        <div className="flex h-full pt-20 flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
-          <div className="w-full m-20">
-            <div className="block rounded-lg bg-white shadow-lg dark:bg-black">
+      <div className="h-screen w-screen bg-green-100 justify-center dark:bg-teal-700">
+        <div className="flex h-full pt-5 sm:pt-10 md:pt-20 flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
+          <div className="md:m-20 sm:m-10 m-5">
+            <div className="block rounded-lg bg-white shadow-lg dark:bg-teal-700">
               <div className="g-0 lg:flex lg:flex-wrap">
                 <div className="px-4 md:px-0 w-full lg:w-6/12">
                   <div className="md:mx-6 md:p-12">

@@ -12,6 +12,7 @@ function ParentsData() {
     const [cookies, setCookie] = useCookies(["token", "user"]);
     const [dataGetted, setDataGetted] = useState(false);
     const loadingMessage = "cargando...";
+    const [loading, setLoading] = useState(false);
     const [parentList, setParents] = useState<InterfaceParent[]>([
         {
             id : 0,
@@ -43,6 +44,7 @@ function ParentsData() {
     let description = `Datos registrados del tutor.`;
 
     const fetchParents = async () => {
+        setLoading(true);
         try {
             tutor = cookies.user || "";
             console.log("tutor:", tutor);
@@ -102,6 +104,7 @@ function ParentsData() {
                 });
             setDataGetted(true);
         }
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -116,11 +119,13 @@ function ParentsData() {
         <>
             <CardView title={title} description={description}>
                 <StudentDataCard alumno={alumnoActual}>
-                    {dataGetted ? (
-                        <ParentsDataComponent parents={parentList} />
-                    ) : (
-                        <p>{loadingMessage}</p>
-                    )}
+                    {
+                        loading ? (
+                            <p>{loadingMessage}</p>
+                        ) : (
+                            <ParentsDataComponent parents={parentList} />
+                        )
+                    }
                 </StudentDataCard>
             </CardView>
         </>

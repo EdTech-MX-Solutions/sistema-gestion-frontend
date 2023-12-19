@@ -23,7 +23,7 @@ function StudentDataCard({
         <>
           <div className=" p-3 selection:bg-green-100">
             <StudentCardHeader {...alumno} />
-            {baseRuta ? <DataTabs baseRuta = {baseRuta} id = {id} isDirective = {isDirective} /> : null}
+            {baseRuta ? <DataTabs baseRuta={baseRuta} id={id} isDirective={isDirective} /> : null}
             {children}
           </div>
           <div>
