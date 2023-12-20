@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ButtonComponent from "@/components/ButtonComponent";
+import ButtonComponent from "@/components/elements/Buttons/ButtonComponent";
 import InterfaceProfessor from "@/data/interfaces/professor";
 import { TableVistaTelefonos } from "./TableVistaTelefonos";
 import { useProfesores } from "../context/ProfesorProvider";

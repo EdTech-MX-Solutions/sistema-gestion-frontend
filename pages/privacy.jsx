@@ -14,7 +14,7 @@ export default function Index() {
                             al Aviso de Privacidad
                         </p>
                         <p className="mx-20 text-lg md:text-xl lg:text-2xl text-gray-500 dark:text-gray-200 my-6">
-                            El siguiente boton te permitira descargar en PDF el aviso de privacidad de acuerdo a la ley de protección de datos personales.
+                            El siguiente boton te permitirá descargar en PDF el aviso de privacidad de acuerdo a la ley de protección de datos personales.
                         </p>
                         <div className='flex gap-2'>
                             <a target='_blank' href='https://drive.google.com/file/d/14nxFBtVUqW16QmlpkT-wneZ7kIaMFEL5/view?usp=sharing' className="group flex bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded">

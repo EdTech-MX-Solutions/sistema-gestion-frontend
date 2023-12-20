@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ButtonComponent from "../ButtonComponent";
+import ButtonComponent from "../elements/Buttons/ButtonComponent";
 import { useCookies } from "react-cookie";
 import InterfacePeriodo from "@/data/interfaces/periodo";
 import SIGEAPICollection from "@/data/calls/apiHandler";

@@ -2,7 +2,7 @@ import PrincipalTitle from "@/components/directive/Principal.Title";
 import { ReactNode, useEffect, useState } from "react";
 import FormGroup from "@/components/directive/FormGroup";
 import TableStudentsGroup from "@/components/directive/TableStudentsGroup";
-import ButtonComponent from "@/components/ButtonComponent";
+import ButtonComponent from "@/components/elements/Buttons/ButtonComponent";
 import { useRouter } from "next/router";
 import InterfaceGrupo from "@/data/interfaces/grupos";
 import InterfaceAlumno from "@/data/interfaces/alumno";
@@ -10,7 +10,6 @@ import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
 import InterfaceUsuarioPendiente from "@/data/interfaces/usuarioPendiente";
 import CardView from "@/components/CardView";
-import TableStudentsPendientes from "@/components/directive/TableStudentsPendientes";
 
 interface DefaultLayoutProps {
   children: ReactNode;

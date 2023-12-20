@@ -1,8 +1,8 @@
 import React, { ReactNode, useState } from "react";
 import PrincipalTitle from "@/components/professor/Principal.Title";
 import TableGrades from "@/components/professor/TableGrades";
-import ButtonComponent from "@/components/ButtonComponent";
 import InterfacePeriodo from "@/data/interfaces/periodo";
+import ButtonComponent from "@/components/elements/Buttons/ButtonComponent";
 
 interface DefaultLayoutProps {
   children?: ReactNode;
@@ -13,7 +13,7 @@ interface DefaultLayoutProps {
 
 function PanelGrades({periodo}:DefaultLayoutProps) {
 
-  const title = "Modificacion de calificaciones [Periodo_actual]";
+  const title = "Modificacion de calificaciones";
 
   const  calificaciones  = [
     {

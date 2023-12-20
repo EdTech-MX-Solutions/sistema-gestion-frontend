@@ -25,6 +25,10 @@ function ConsultGroup() {
                             key: grupo.idGrupo,
                             value: `${grupo.grado} ${grupo.subGrado}`,
                         })),
+                        ...grupos.map((grupo) => ({
+                            key: grupo.idGrupo,
+                            value: `${grupo.grado} ${grupo.subGrado}`,
+                        })),
                     ]}
                     comment={
                         "Recuerda que solo puedes buscar a un grupo por Grado-Grupo"

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ButtonComponent from "../ButtonComponent";
+import ButtonComponent from "../elements/Buttons/ButtonComponent";
 import InterfaceProfessor from "@/data/interfaces/professor";
 import router, { useRouter } from "next/router";
 import { useState } from "react";

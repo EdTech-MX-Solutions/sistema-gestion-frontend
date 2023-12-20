@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonComponent from "../ButtonComponent";
+import ButtonComponent from "../elements/Buttons/ButtonComponent";
 import InterfaceAlumno from "@/data/interfaces/alumno";
 
 interface TableGradesProps {

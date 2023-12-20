@@ -13,7 +13,7 @@ interface DefaultLayoutProps {
 function ConsultProfessor() {
   const router = useRouter();
   const { id } = router.query;
-  const title = "Detalles profesor: [nombre_profesor]";
+  
   const { profesores } = useProfesores();
   const [professorDetails, setProfessorDetails] = useState<InterfaceProfessor>({
     idProfesor: "cargando...",
@@ -41,6 +41,8 @@ function ConsultProfessor() {
   }, [id, profesores]);
 
   console.log(professorDetails);
+
+  const title = `Detalles profesor: ${professorDetails.nombre + " " + professorDetails.apellidoPaterno + " " +professorDetails.apellidoMaterno}`;
 
   return (
     <>

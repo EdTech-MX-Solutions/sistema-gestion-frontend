@@ -9,9 +9,10 @@ interface TableScheduleprops {}
 interface TableScheduleprops {
     horarioId: string;
     esProfessor?: boolean;
+    esPorGrupo ?: boolean;
 }
 
-const TableSchedule = ({ horarioId, esProfessor }: TableScheduleprops) => {
+const TableSchedule = ({ horarioId, esProfessor, esPorGrupo }: TableScheduleprops) => {
     const [horario, setHorario] = useState<InterfaceHorario[]>([]);
     const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -26,6 +27,26 @@ const TableSchedule = ({ horarioId, esProfessor }: TableScheduleprops) => {
                     cookies.token,
                     horarioId
                 );
+            if (response.ok) {
+                const data = await response.json();
+                if (data.length == 0) {
+                    setLoading(false);
+                    setHayHorario(false);
+                    return;
+                }
+                setHorario(data);
+                setLoading(false);
+                setHayHorario(true);
+            } else {
+                setLoading(false);
+                setHayHorario(false);
+                console.error("Error al obtener el horario " + response.status);
+            }
+        } else if (esPorGrupo) {
+            const response = await api.sharedCollection.executeGetHorarioGrupo(
+                cookies.token,
+                horarioId
+            );
             if (response.ok) {
                 const data = await response.json();
                 if (data.length == 0) {
