@@ -34,7 +34,7 @@ function registrerDataFirstTutor() {
 
   return (
     <>
-      <CardView title={""} description={""}>
+      <CardView title={""} description={""} customtitle>
         <PrincipalTitle title={"Registro de Tutor Principal"}></PrincipalTitle>
         <FormTutor tutor={tutor} isNewUsuario></FormTutor>
       </CardView>
