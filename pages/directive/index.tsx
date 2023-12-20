@@ -2,8 +2,6 @@ import CardView from "@/components/CardView";
 import PrivateRoute from "@/components/auth/PrivateRoute";
 import { useGreet } from "@/components/context/GreetProvider";
 import PanelCards from "@/components/elements/Panels/DirectivePanel";
-import { Breadcrumbs } from "@material-tailwind/react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 

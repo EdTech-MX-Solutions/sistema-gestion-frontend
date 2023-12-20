@@ -48,13 +48,15 @@ const SidebarContProfesor = () => {
                             return <React.Fragment></React.Fragment>;
                         }}
                     </SidebarLinkGroup>
+                    {sidebarItem("Panel de Inicio", "/professors/")}
                     {sidebarItem("Grupo Asignado", base_route + "actionsStudent/list")}
                     {sidebarItem("Horario Grupo (próximamente)", "#")}
-                    {sidebarItem("Reportes", base_route + "actionsStudent/studentReport")}
+                    {sidebarItem("Calificaciones", base_route +"grades/grades")}
+                    {/* {sidebarItem("Reportes", base_route + "actionsStudent/studentReport")} */}
                 </ul>
             </div>
             {/* <!-- Others Group --> */}
-            <div>
+            {/* <div>
                 <h3 className="mb-4 ml-2 font-bold text-sm text-bodydark2">
                     <svg
                         className="ml-1.5 inline-block mr-1.5 mb-0.5 text-bodydark2 text-black"
@@ -78,7 +80,7 @@ const SidebarContProfesor = () => {
                     {sidebarItem("Calificaciones", base_route +"grades/grades")}
                     {sidebarItem("Historial Academico", base_route +"grades/modifyGrades")}
                 </ul>
-            </div>
+            </div> */}
             <div>
                 <h3 className="mb-4 ml-2 font-bold text-sm text-bodydark2">
                     <svg
