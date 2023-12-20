@@ -1,12 +1,17 @@
-import { ReactNode, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import PrincipalTitle from "@/components/professor/Principal.Title";
 import TableGrades from "@/components/professor/TableGrades";
+import ButtonComponent from "@/components/ButtonComponent";
+import InterfacePeriodo from "@/data/interfaces/periodo";
 
 interface DefaultLayoutProps {
-  children: ReactNode;
+  children?: ReactNode;
+  noBoleta?: string;
+  nombre?: string;
+  periodo: InterfacePeriodo;
 }
 
-function modifyGrades() {
+function PanelGrades({periodo}:DefaultLayoutProps) {
 
   const title = "Modificacion de calificaciones [Periodo_actual]";
 
@@ -35,12 +40,12 @@ function modifyGrades() {
 
   return (
     <>
-      <PrincipalTitle title={title}></PrincipalTitle>
-      
-      <TableGrades calificaciones={calificaciones}></TableGrades>
+        <div className="text-center">
+            <ButtonComponent title = {"Guardar"} color = {"green"}></ButtonComponent>
+        </div>
     </>
   );
 }
 
-export default modifyGrades;
+export default PanelGrades;
 
