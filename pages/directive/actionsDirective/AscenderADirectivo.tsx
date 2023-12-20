@@ -17,7 +17,7 @@ function AscenderADirectivo() {
 
   return (
     <>
-      <CardView title={"title"} description={""}>
+      <CardView title={"title"} description={""} customtitle>
         <PrincipalTitle title={title}></PrincipalTitle>
         <TableAscenderADirectivo
           professors={filtredProfesores}

@@ -121,7 +121,7 @@ function registrerDataMedicStudent() {
 
   return (
     <>
-      <CardView title={""} description={""}>
+      <CardView title={""} description={""} customtitle>
         <PrincipalTitle
           title={"Registro Datos Médicos Alumno"}
         ></PrincipalTitle>
