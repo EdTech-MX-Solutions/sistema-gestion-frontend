@@ -7,18 +7,15 @@ import Link from "next/link";
 import React from "react";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-
+import "intro.js/introjs.css";
+// import { Steps, Hints } from "intro.js-react";
 
 export default function Index() {
     let greeting = useGreet().greet;
-    const [cookies, setCookie, removeCookie] = useCookies([
-        "token",
-        "user",
-        "childs",
-        "boleta",
-    ]);
+    const [cookies] = useCookies(["token", "user", "childs", "boleta"]);
     const [confirmationisopen, setConfirmationOpen] = React.useState(false);
     const [name, setName] = useState("Cargando...");
+    const [loadingFirstTime, setLoadingFirstTime] = useState(false);
 
     function getUserName() {
         if (cookies.user) {
@@ -124,6 +121,24 @@ export default function Index() {
         </>
     );
 
+    const steps = [
+        {
+          element: '.selector1',
+          intro: 'test 1',
+          position: 'right',
+          tooltipClass: 'myTooltipClass',
+          highlightClass: 'myHighlightClass',
+        },
+        {
+          element: '.selector2',
+          intro: 'test 2',
+        },
+        {
+          element: '.selector3',
+          intro: 'test 3',
+        },
+      ];
+
     return (
         <>
             <PrivateRoute allowedRoles={["SUPERUSER", "TUTOR"]}>
@@ -131,6 +146,14 @@ export default function Index() {
                     title={"Hola, " + greeting + " " + name}
                     description="Este es tu panel de control"
                 >
+                    {/* <Steps
+                        enabled={loadingFirstTime}
+                        steps={steps}
+                        initialStep={1}
+                        onExit={() => {
+                            setLoadingFirstTime
+                        }}
+                    /> */}
                     <PanelCards />
                 </CardView>
             </PrivateRoute>

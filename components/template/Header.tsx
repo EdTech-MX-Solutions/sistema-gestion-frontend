@@ -2,15 +2,13 @@
 import Link from "next/link";
 import { useCookies } from "react-cookie";
 import { useAlumno } from "@/components/context/AlumnoProvider";
-// import DarkModeSwitcher from './DarkModeSwitcher';
-// import DropdownMessage from './DropdownMessage';
-// import DropdownNotification from './DropdownNotification';
-// import DropdownUser from './DropdownUser';
+import { use, useEffect, useState } from "react";
 
 const Header = (props: {
     sidebarOpen: string | boolean | undefined;
     setSidebarOpen: (arg0: boolean) => void;
 }) => {
+    const [tipoUsuario, setTipoUsuario] = useState("");
     const [cookies, setCookies] = useCookies(["rol"]);
     // const tipoUsuario = cookies.rol;
     const { alumnoActual, setAlumnoActual, alumnos } = useAlumno();
@@ -23,15 +21,21 @@ const Header = (props: {
         }
     };
 
+    useEffect(() => {
+        setTipoUsuario(cookies.rol || "")
+    } , []);
+
     const SelectAlumnos = () => {
-        const tipoUsuario = cookies.rol || "";
-        return cookies && cookies.rol === "TUTOR" ? (
+        
+        return tipoUsuario === "TUTOR" ? (
             <>
-                <div className=" flex w-full text-gray-600 dark:text-gray-200 focus-within:text-gray-400">
-                    <select
+                <div className=" flex w-full text-gray-600 dark:text-gray-200  focus-within:text-gray-400">
+                    {
+                        alumnos.length > 0 ? (
+                        <select
                         id="selectAlumnos"
                         name="selectAlumnos"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-50 w-full p-2.5"
+                        className="bg-gray-50 dark:bg-slate-600 border border-gray-300 dark:border-transparent dark:text-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-50 w-full p-2.5"
                         value={alumnoActual.noBoleta}
                         onChange={cambioDeAlumno}
                         placeholder="Selecciona un alumno"
@@ -43,6 +47,7 @@ const Header = (props: {
                                         key={alumno.noBoleta}
                                         value={alumno.noBoleta}
                                     >
+                                        Alumno: {" "}
                                         {alumno.nombres}{" "}
                                         {alumno.apellidoPaterno}{" "}
                                         {alumno.apellidoMaterno}
@@ -55,6 +60,12 @@ const Header = (props: {
                             </option>
                         )}
                     </select>
+
+                        ) :
+                        (
+                            <></>
+                        )}
+                            
                 </div>
             </>
         ) : (
@@ -98,7 +109,7 @@ const Header = (props: {
                             e.stopPropagation();
                             props.setSidebarOpen(!props.sidebarOpen);
                         }}
-                        className="z-50 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
+                        className="z-50 block rounded-sm border border-stroke bg-white dark:bg-slate-700 p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
                     >
                         <span className="relative block h-5.5 w-5.5 cursor-pointer">
                             <span className="du-block absolute right-0 h-full w-full">
@@ -151,8 +162,11 @@ const Header = (props: {
                     </button>
                     {/* <!-- Hamburger Toggle BTN --> */}
 
-                    <Link className="block flex-shrink-0 lg:hidden" href="/">
+                    <Link className="block flex-shrink-0 dark:hidden lg:hidden" href="/">
                         <img src="/logo.png" className="w-20" alt="Logo" />
+                    </Link>
+                    <Link className="block flex-shrink-0  lg:hidden" href="/">
+                        <img src="/logo.dark.png" className="w-20" alt="Logo" />
                     </Link>
                 </div>
 

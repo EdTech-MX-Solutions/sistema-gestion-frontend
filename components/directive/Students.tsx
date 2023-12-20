@@ -21,25 +21,25 @@ export default function PanelDirectiveStudents() {
                 route="/directive/actionsStudent/registrerDataPersonalStudent"
             />
            
-            <PanelCard
+            {/* <PanelCard
                 category="Panel de Control"
                 title="Reportes y Avisos"
                 bgColor="emerald-600"
                 textSize="sm"
                 route="/directive/othersOptions/suggestions"
-            />
+            /> */}
             <PanelCard
                 category="Sistema"
                 title="Regresar al Inicio"
                 bgColor="gray-600"
                 route="/"
             />
-            <PanelCard
+            {/* <PanelCard
                 category="Sistema"
                 title="Ayuda"
                 bgColor="cyan-600 bg-opacity-50"
                 route="/"
-            />
+            /> */}
 
             <PanelCard
                 category="Sistema"
