@@ -1,53 +1,34 @@
-import { ReactNode } from "react";
+import {ReactNode, useState} from "react";
 import PrincipalTitle from "@/components/professor/Principal.Title";
 import TableList from "@/components/professor/TableList";
+import {useCookies} from "react-cookie";
+import {useAlumno} from "../../../components/context/AlumnoProvider";
+import CardView from "../../../components/CardView";
+import InputSearch from "../../../components/template/InputSearch";
+import Loader from "../../../components/elements/Loader";
+import TableProfessors from "../../../components/directive/TableProfessors";
 
 
-function list() {
+function List() {
 
-  const title = "Lista de alumnos [Grupo_Asignado]";
+    const title = "Lista de Alumnos";
 
-  const listadoAlumnos = [
-     {
-        no_boleta: "2019630523",
-        curp: "RUHR920101HDFRBR00",
-        nombre: "Ricardo",
-        apellido_paterno: "Urbina",
-        apellido_materno: "Hernández",
-        aniosPreescolar: 3,
-        edad: 12,
-        fecha_nacimiento: "01/01/2002",
-        sexo: "Hombre",
-        estatus: "Activo",
-        entidad_nacimiento: "Ciudad de México",
-        pais_origen: "México",
-    },
-
-    {
-      no_boleta: "2019630523",
-      curp: "RUHR920101HDFRBR00",
-      nombre: "Ricardo2",
-      apellido_paterno: "Urbina",
-      apellido_materno: "Hernández",
-      aniosPreescolar: 3,
-      edad: 12,
-      fecha_nacimiento: "01/01/2002",
-      sexo: "Hombre",
-      estatus: "Activo",
-      entidad_nacimiento: "Ciudad de México",
-      pais_origen: "México",
-  }
-
-
-  ] 
-
-  return (
-    <>
-      <PrincipalTitle title = {title}></PrincipalTitle>
-      <TableList lista = {listadoAlumnos} ></TableList>
-    </>
-  );
+   const {alumnos,hayalumnos,loading} =useAlumno();
+    return (
+        <>
+            <CardView title={"title"} customtitle={true} description={""}>
+                <PrincipalTitle title={"Lista de Alumnos"}></PrincipalTitle>
+                {loading ? <Loader size="lg" /> : null}
+                {hayalumnos && !loading ? (
+                    <TableList
+                        lista = {alumnos}
+                        hayAlumnos={hayalumnos}>
+                    </TableList>
+                ) : null}
+            </CardView>
+        </>
+    );
 }
 
-export default list;
+export default List;
 

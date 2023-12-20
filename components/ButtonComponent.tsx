@@ -6,7 +6,8 @@ interface  ButtonComponentProps{
     color : String
     onClick ?: () => void;
     type?: ButtonHTMLAttributes<HTMLButtonElement>['type']
-    loading?: boolean
+    loading?: boolean,
+    active?:boolean
 }
 
 export const ButtonComponent = ({title, color, type, loading, onClick} :  ButtonComponentProps) => {
@@ -20,6 +21,7 @@ export const ButtonComponent = ({title, color, type, loading, onClick} :  Button
           type={type || "button"}
           className = {btnClassName}
           onClick={onClick}
+          disabled={loading}
         >
         { loading ? <Loader color="bg-blue-200" /> : <>{title}</> }
         </button>
