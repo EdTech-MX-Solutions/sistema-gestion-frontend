@@ -12,12 +12,9 @@ interface DefaultLayoutProps {
 function ConsultDirective() {
 
   const {profesores} = useProfesores()
-  console.log(profesores);
-
   const filtredDirectivos = profesores.filter((profesor) => (profesor.diretivo === true));
   console.log(filtredDirectivos);
-
-
+  
   return (
     <>
       <CardView title = {"title"} customtitle = {true} description = {""}>

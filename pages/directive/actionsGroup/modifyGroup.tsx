@@ -10,7 +10,6 @@ import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
 import InterfaceUsuarioPendiente from "@/data/interfaces/usuarioPendiente";
 import CardView from "@/components/CardView";
-import TableStudentsPendientes from "@/components/directive/TableStudentsPendientes";
 
 interface DefaultLayoutProps {
   children: ReactNode;

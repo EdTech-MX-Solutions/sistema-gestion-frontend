@@ -1,4 +1,3 @@
-import Card from "@/components/Card";
 import CardView from "@/components/CardView";
 import PrivateRoute from "@/components/auth/PrivateRoute";
 import { useGreet } from "@/components/context/GreetProvider";

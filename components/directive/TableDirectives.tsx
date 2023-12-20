@@ -2,6 +2,9 @@ import InterfaceProfessor from "@/data/interfaces/professor";
 import React from "react";
 import ButtonComponentBiColor from "../ButtonComponentBiColor";
 import router from "next/router";
+import SIGEAPICollection from "@/data/calls/apiHandler";
+import { useCookies } from "react-cookie";
+import { useProfesores } from "../context/ProfesorProvider";
 
 interface TableDirectivesProps {
   directives: InterfaceProfessor[];
@@ -13,7 +16,29 @@ export const TableDirectives = ({ directives }: TableDirectivesProps) => {
       `/directive/actionsDirective/consultDirective?id=${directiveId}`
     );
   };
+  const { updateProfesor } = useProfesores();
+  const [cookies, setCookie] = useCookies(["token", "idProfesor", "childs"]);
+  const handleDegradarADirectivo = async (id: string) => {
+    const api = new SIGEAPICollection();
+    const accion = "false"
+    const token = cookies.token;
+    const response = await api.directivosCollection.executePatchAscenderProfesorADirectivo(
+        token,
+        accion,
+        id
+    );
+    if(response.status === 200){
+        const response2 = await api.directivosCollection.executeGetProfessors(
+            token
+        )
 
+        if(response2.ok){
+          const data = await response2.json();
+          console.log("Profesor ascendido con exito!");
+          updateProfesor(data);
+        }
+    }
+  } 
   return (
     <>
       <div className="p-5 bg-white rounded-lg">
@@ -27,7 +52,7 @@ export const TableDirectives = ({ directives }: TableDirectivesProps) => {
                   Apellido Paterno Apellido Materno Nombres (s)
                 </th>
                 <th> Email </th>
-                <th> Acciones </th>
+                <th colSpan={2}> Acciones </th>
               </tr>
             </thead>
             <tbody>
@@ -48,6 +73,16 @@ export const TableDirectives = ({ directives }: TableDirectivesProps) => {
                       }
                     ></ButtonComponentBiColor>
                   </td>
+                  <td>
+                <ButtonComponentBiColor
+                  title={"Convertir a Profesor"}
+                  color1={"red"}
+                  color2={"pink"}
+                  onClick={() => {
+                    handleDegradarADirectivo(directive.idProfesor)
+                  }}
+                ></ButtonComponentBiColor>
+              </td>
                 </tr>
               ))}
             </tbody>
