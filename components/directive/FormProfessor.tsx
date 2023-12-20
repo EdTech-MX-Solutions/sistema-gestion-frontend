@@ -8,6 +8,7 @@ import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
 import { Alert, Button } from "@material-tailwind/react";
 import InterfaceTel from "@/data/interfaces/numeroTelefonico";
+import AlertComponent from "../elements/Alert";
 
 function Icon() {
   return (
@@ -55,10 +56,10 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
   const handleVerTelefonos = async () => {
     const api = new SIGEAPICollection();
     const token = cookies.token;
-    try{
+    try {
       const response = await api.sharedCollection.executeGetTelefonos(
         token,
-        id+""
+        id + ""
       );
       if (response.ok) {
         const data = await response.json();
@@ -67,15 +68,15 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
           return;
         }
         setTelefonos(data);
-      }else{
+      } else {
         console.error(
           `Error en la solicitud. Código de estado: ${response.status}`
         );
       }
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const handleInscribirProfesor = async (nuevoProfesor: InterfaceProfessor) => {
     const requiredFields = [
@@ -156,6 +157,12 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
 
   const handleModifyTelefonos = ({ profesorId }: { profesorId: any }) => {
     router.push(`/directive/registrerTelefonos/?id=${profesorId}`);
+  };
+
+  const [baja, setBaja] = useState(false);
+
+  const handleBaja = () => {
+    setBaja(true);
   };
 
   return (
@@ -298,9 +305,7 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
           </div>
 
           <div className="px-2 pb-2">
-            <TableVistaTelefonos
-              telefonos={telefonos}
-            ></TableVistaTelefonos>
+            <TableVistaTelefonos telefonos={telefonos}></TableVistaTelefonos>
             <div className="text-center">
               <ButtonComponent
                 title={"Modificar numero telefonicos"}
@@ -343,12 +348,29 @@ export const FormProfessor = ({ professor, isNewUser }: FormProfessorProps) => {
                   Cerrar
                 </Button>
               </Alert>
+
+              <ButtonComponent
+                title={"Dar de baja Profesor"}
+                color={"blue"}
+                onClick={() => {
+                  handleBaja();
+                }}
+              ></ButtonComponent>
             </div>
-            <ButtonComponent
-              title={"Dar de baja Profesor"}
-              color={"red"}
-            ></ButtonComponent>
           </div>
+          {baja && (
+            <div>
+              <div className="p-5 bg-red">
+              <AlertComponent
+                bgColor="green-100 bg-opacity-40"
+                borderColor="green-100"
+                textColor="green-100 dark:text-gray-200"
+                title="Exitoso! "
+                message={`El profesor ${formData.nombre} ${formData.apellidoPaterno} ${formData.apellidoMaterno} fue dado de baja`}
+              />
+            </div><div className="hidden bg-green-100"></div>
+            </div>
+          )}
         </div>
       </form>
     </>

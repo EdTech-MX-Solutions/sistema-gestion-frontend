@@ -8,7 +8,7 @@ interface DefaultLayoutProps {
 
 function modifyGrades() {
 
-  const title = "Modificacion de calificaciones [Periodo_actual]";
+  const title = "Modificacion de calificaciones";
 
   const  calificaciones  = [
     {
