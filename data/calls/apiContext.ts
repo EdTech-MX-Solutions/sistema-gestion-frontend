@@ -3,7 +3,7 @@ export class APIContext {
     version: string;
 
     constructor() {
-        this.baseURL = "https://sige-octavio-paz-frhfgsc9dwf5aja3.z03.azurefd.net";
+        this.baseURL = "https://sige-octavio-paz.azurewebsites.net";
         this.version = "v1";
     }
 
