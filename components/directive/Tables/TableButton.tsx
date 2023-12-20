@@ -1,6 +1,4 @@
 import React from "react";
-import InterfaceProfessor from "@/data/interfaces/professor";
-import router from "next/router";
 
 interface TableCopyButtonProps {
     text: string;
@@ -12,7 +10,7 @@ export const TableCopyButton = ({ text }: TableCopyButtonProps) => {
     return (
         <>
             <button
-                className="ml-2 border-1 bg-slate-700 rounded-full p-1"
+                className="ml-2 border-1  bg-secondary dark:bg-slate-700 rounded-full p-1"
                 title="Copiar email|"
                 onClick={() => {
                     navigator.clipboard.writeText(text);

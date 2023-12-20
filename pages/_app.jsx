@@ -64,7 +64,7 @@ export default function App(
     { Component, pageProps: { session, ...pageProps }, ...appProps }) {
     const pathname = appProps.router.pathname;
 
-    if ([`/auth/login`].includes(pathname) || [`/auth/loginEmail`].includes(pathname) || [`/privacy`].includes(pathname)||[`/tos`].includes(pathname))
+    if ([`/auth/login`].includes(pathname) || [`/auth/loginEmail`].includes(pathname) || [`/privacy`].includes(pathname)||[`/tos`].includes(pathname)||[`/forbidden`].includes(pathname))
         return <Component {...pageProps} />;
     if (pathname.startsWith("/student"))
         return (AppContext({ Layout: TutorLayout, pageProps, session, Component }))

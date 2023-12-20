@@ -155,7 +155,7 @@ function ModifyGroup() {
 
   return (
     <>
-      <CardView title={""} description={""}>
+      <CardView title={""} description={""} customtitle>
         <PrincipalTitle title={title}></PrincipalTitle>
         <div className="grid grid-rows-12 gap-6 bg-white rounded-lg">
           <FormGroup grupo={gruposDetails} isNewGroup={false}></FormGroup>

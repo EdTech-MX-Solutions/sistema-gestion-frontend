@@ -12,7 +12,8 @@ function index(){
 
     return(
         <>
-          <CardView title={title} description={description}>
+          <CardView title={title} description={description} customtitle>
+            hola
           </CardView>
         </>
     );

@@ -158,7 +158,7 @@ export const CardConsultGroup = ({ group }: CardConsultGroupProps) => {
               htmlFor=""
               className="text-xl block mb-2 text-sm font-medium text-gray-900"
             >
-              Salon:
+              Salón:
             </label>
             <label
               htmlFor=""

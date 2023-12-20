@@ -19,13 +19,13 @@ export default function PanelDirectiveCards() {
                 category="Panel de Control"
                 title="Consultar Directivos"
                 bgColor="teal-700"
-                route="/directive/othersOptions/suggestions"
+                route="/directive/actionsDirective/consultDirectives"
             />
             <PanelCard
                 category="Panel de Control"
                 title="Registrar Directivo"
                 bgColor="teal-700"
-                route="/directive/othersOptions/suggestions"
+                route="/directive/actionsDirective/registrerDirective"
             />
             <PanelCard
                 category="Sistema"

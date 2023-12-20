@@ -111,7 +111,15 @@ function ConsultStudents() {
                         "Recuerda que puedes buscar a un tutor por apellido parterno o id"
                     }
                 ></InputSearch>
-                {loading ? <Loader size="lg" /> : null}
+                {loading ? <>
+                    <h1 className="text-center text-2xl  text-green-700 dark:text-green-200">
+                        Cargando...
+                    </h1>
+                    <h2 className="text-center text-xl text-gray-500 dark:text-gray-200">
+                        Espere un momento, es posible que la consulta tarde unos segundos.
+                    </h2>
+                    <Loader size="lg" />
+                </> : null}
                 {hayTutores && !loading ? (
                     <TableParents parents={tutores}></TableParents>
                 ) : null}

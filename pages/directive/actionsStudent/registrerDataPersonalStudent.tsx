@@ -29,7 +29,7 @@ function registrerDataPersonalStudent() {
 
   return (
     <>
-      <CardView title = {""} description = {""}>
+      <CardView title = {""} description = {""} customtitle>
         <PrincipalTitle title={"Registro Alumno"}></PrincipalTitle>
         <FormStudent student={student} isNewUser = {true}></FormStudent>
       </CardView>

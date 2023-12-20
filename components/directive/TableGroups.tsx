@@ -21,7 +21,7 @@ export const TableGroups = ({ groups }: TableGroupsProps) => {
                         <th className="p-3"> Grado </th>
                         <th> Grupo </th>
                         <th> Profesor titular </th>
-                        <th> Salon </th>
+                        <th> Salón </th>
                         <th> Acciones </th>
                     </tr>
                 </thead>
