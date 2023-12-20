@@ -22,10 +22,10 @@ export default function ProfessorsPanel() {
                 route="/professors/actionsStudent/list"
             />
             <PanelCard
-                category="Tus Alumnos - (próximamente)"
+                category="Tus Alumnos"
                 title="Horario de Grupo"
                 bgColor="emerald-600"
-                route="#"
+                route="professors/actionsStudent/professorSchedule"
             />
             <PanelCard
                 category="Panel de Control"

@@ -50,7 +50,7 @@ const SidebarContProfesor = () => {
                     </SidebarLinkGroup>
                     {sidebarItem("Panel de Inicio", "/professors/")}
                     {sidebarItem("Grupo Asignado", base_route + "actionsStudent/list")}
-                    {sidebarItem("Horario Grupo (próximamente)", "#")}
+                    {sidebarItem("Horario Grupo", base_route +"actionsStudent/professorSchedule")}
                     {sidebarItem("Calificaciones", base_route +"grades/grades")}
                     {/* {sidebarItem("Reportes", base_route + "actionsStudent/studentReport")} */}
                 </ul>

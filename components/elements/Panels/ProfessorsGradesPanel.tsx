@@ -25,7 +25,7 @@ export default function ProfessorsPanel() {
                 category="Panel de Calificaciones"
                 title="Horario de Grupo"
                 bgColor="emerald-600"
-                route="#"
+                route="/professors/actionsStudent/professorSchedule"
             />
             <PanelCard
                 category="Panel de Control"
