@@ -5,6 +5,7 @@ import SIGEAPICollection from "@/data/calls/apiHandler";
 import { useCookies } from "react-cookie";
 import router from "next/router";
 import { useAlumno } from "../context/AlumnoProvider";
+import { Alert, Button } from "@material-tailwind/react";
 
 interface FormStudentProps {
   student: InterfaceAlumno;
@@ -30,6 +31,8 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
     actualizarDatosMedicos: isNewUser ? true : student.actualizarDatosMedicos,
   });
 
+  const { alumnos, updateAlumno } = useAlumno();
+  const [open, setOpen] = useState(false);
   const [cookies, setCookie] = useCookies(["token", "idProfesor", "childs"]);
   const [paises, setPaises] = useState([]);
   const [estados, setEstados] = useState([]);
@@ -56,50 +59,45 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
     if (emptyRequiredFields.length == 0) {
       console.log("NO hay campos obligatorios vacios");
       setRequiredCamposCompletos(true);
-    } else {
-      console.log("SI hay campos obligatorios vacios");
-      setRequiredCamposCompletos(false);
-    }
 
-    console.log(requiredCamposCompletos);
-      /* 
       const api = new SIGEAPICollection();
       const token = cookies.token;
-      setRequiredCampos(true);
+
       const response = await api.directivosCollection.executePostNuevoAlumno(
         token,
         nuevoAlumno
       );
-      if(response.status == 200){
-          const response2 = await api.sharedCollection.executeGetAlumnos(
-          token
-          );
+      if (response.status == 201) {
+        const response2 = await api.sharedCollection.executeGetAlumnos(token);
 
-          if(response2.ok){
-            const data = await response2.json();
-            console.log("Alumno inscrito con exito");
-            updateAlumno(data);
+        if (response2.ok) {
+          const data = await response2.json();
+          console.log("Alumno inscrito con exito!");
+          updateAlumno(data);
 
-            setFormData({
-              noBoleta: "",
-              curp: "",
-              nombres: "",
-              apellidoPaterno: "",
-              apellidoMaterno: "",
-              aniosPreescolar: 0,
-              fechaNacimiento: "",
-              edad: 0,
-              paisOrigen: "México",
-              sexo: "",
-              estatus: "",
-              entidad: "",
-              grado: null,
-              grupo: null,
-              actualizarDatosMedicos: true,
-            })
-          }
+          setFormData({
+            noBoleta: "",
+            curp: "",
+            nombres: "",
+            apellidoPaterno: "",
+            apellidoMaterno: "",
+            aniosPreescolar: 0,
+            fechaNacimiento: "",
+            edad: 0,
+            paisOrigen: "México",
+            sexo: "",
+            estatus: "",
+            entidad: "",
+            grado: null,
+            grupo: null,
+            actualizarDatosMedicos: true,
+          });
+        }
       }
-      */
+    } else {
+      console.log("SI hay campos obligatorios vacios");
+      setRequiredCamposCompletos(false);
+    }
   };
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
@@ -164,15 +162,15 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
     }
   };
 
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+  const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
   };
 
   const handleSiguientePasoMedic = ({ id }: { id: string }) => {
-    router.push(`/directive/actionsStudent/registrerDataMedicStudent/?boleta=${id}`);
+    router.push(
+      `/directive/actionsStudent/registrerDataMedicStudent/?boleta=${id}`
+    );
   };
-
-  const { alumnos, updateAlumno } = useAlumno();
 
   useEffect(() => {
     fetchPaises();
@@ -402,13 +400,30 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
               </div>
             </div>
             <div className="text-center pt-10">
+              {!open && (
                 <ButtonComponent
-                  title={"Siguiente"}
+                  title={"Guardar Datos Personales del Alumno"}
                   color={"blue"}
                   onClick={() => {
-                    handleInscribirDataNuevoAlumno(formData);
+                    if (requiredCamposCompletos == true) {
+                      handleInscribirDataNuevoAlumno(formData);
+                    } else {
+                      setOpen(true);
+                    }
                   }}
                 ></ButtonComponent>
+              )}
+              <Alert
+                open={open}
+                color="red"
+                onClose={() => setOpen(false)}
+                animate={{
+                  mount: { y: 0 },
+                  unmount: { y: 100 },
+                }}
+              >
+                Campo obligatorio Vacio
+              </Alert>
             </div>
           </form>
         </div>
