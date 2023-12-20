@@ -67,6 +67,7 @@ export const AlumnoProvider: React.FC<{ children: ReactNode }> = ({
                 let newAlumnos : InterfaceAlumno[] = [];
                 if (!data || data.length == 0) {
                     setHayalumnos(false);
+                    setAlumnos([])
                     setLoading(false);
                     return;
                 }

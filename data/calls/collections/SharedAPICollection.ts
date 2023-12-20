@@ -232,4 +232,16 @@ export class SharedAPICollection {
         }
     });
   }
+
+  executePutAsistencias(token: string, noBoleta:string, asistio:boolean, trimestre:number){
+    const route = this.apiCaller.getCall() + "/asistencias/" + noBoleta;
+    return fetch(route, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body:JSON.stringify({asistio,trimestre})
+    });
+  }
 }
