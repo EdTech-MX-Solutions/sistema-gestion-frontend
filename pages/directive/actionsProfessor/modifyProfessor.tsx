@@ -13,7 +13,7 @@ function ModifyProfessor() {
 
   const router = useRouter();
   const {id} =  router.query;
-  const title = "Modificar datos profesor: [nombre_profesor]";
+  const title = "Modificar datos profesor";
   const {profesores} = useProfesores();
   const [professorDetails, setProfessorDetails] = useState<InterfaceProfessor>({
     idProfesor : "cargando...",

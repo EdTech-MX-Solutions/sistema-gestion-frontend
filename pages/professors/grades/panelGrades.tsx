@@ -13,7 +13,7 @@ interface DefaultLayoutProps {
 
 function PanelGrades({periodo}:DefaultLayoutProps) {
 
-  const title = "Modificacion de calificaciones [Periodo_actual]";
+  const title = "Modificacion de calificaciones";
 
   const  calificaciones  = [
     {

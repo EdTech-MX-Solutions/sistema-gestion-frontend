@@ -30,76 +30,54 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
     actualizarDatosMedicos: isNewUser ? true : student.actualizarDatosMedicos,
   });
 
+  const { alumnos, updateAlumno } = useAlumno();
+  const [alerta, setAlerta] = useState(true);
   const [cookies, setCookie] = useCookies(["token", "idProfesor", "childs"]);
   const [paises, setPaises] = useState([]);
   const [estados, setEstados] = useState([]);
   const [requiredCamposCompletos, setRequiredCamposCompletos] = useState(false);
+  const [camposCompletos, setCamposCompletos] = useState(0);
 
   const handleInscribirDataNuevoAlumno = async (
     nuevoAlumno: InterfaceAlumno
   ) => {
-    const requiredFields = [
-      "nombres",
-      "apellidoPaterno",
-      "apellidoMaterno",
-      "curp",
-      "fechaNacimiento",
-      "sexo",
-      "paisOrigen",
-      "entidad",
-    ];
-
-    const emptyRequiredFields = requiredFields.filter(
-      (field) => !formData[field as keyof InterfaceAlumno]
-    );
-
-    if (emptyRequiredFields.length == 0) {
-      console.log("NO hay campos obligatorios vacios");
-      setRequiredCamposCompletos(true);
-    } else {
-      console.log("SI hay campos obligatorios vacios");
-      setRequiredCamposCompletos(false);
-    }
-
-    console.log(requiredCamposCompletos);
-      /* 
+    if (requiredCamposCompletos) {
       const api = new SIGEAPICollection();
       const token = cookies.token;
-      setRequiredCampos(true);
       const response = await api.directivosCollection.executePostNuevoAlumno(
         token,
         nuevoAlumno
       );
-      if(response.status == 200){
-          const response2 = await api.sharedCollection.executeGetAlumnos(
-          token
-          );
+      if (response.status == 201) {
+        const response2 = await api.sharedCollection.executeGetAlumnos(token);
 
-          if(response2.ok){
-            const data = await response2.json();
-            console.log("Alumno inscrito con exito");
-            updateAlumno(data);
-
-            setFormData({
-              noBoleta: "",
-              curp: "",
-              nombres: "",
-              apellidoPaterno: "",
-              apellidoMaterno: "",
-              aniosPreescolar: 0,
-              fechaNacimiento: "",
-              edad: 0,
-              paisOrigen: "México",
-              sexo: "",
-              estatus: "",
-              entidad: "",
-              grado: null,
-              grupo: null,
-              actualizarDatosMedicos: true,
-            })
-          }
+        if (response2.ok) {
+          const data = await response2.json();
+          console.log("Alumno inscrito con exito!");
+          updateAlumno(data);
+          
+          setFormData({
+            noBoleta: "",
+            curp: "",
+            nombres: "",
+            apellidoPaterno: "",
+            apellidoMaterno: "",
+            aniosPreescolar: 0,
+            fechaNacimiento: "",
+            edad: 0,
+            paisOrigen: "México",
+            sexo: "",
+            estatus: "",
+            entidad: "",
+            grado: null,
+            grupo: null,
+            actualizarDatosMedicos: true,
+          });
+        }
       }
-      */
+    } else {
+      console.log("SI hay campos obligatorios vacios");
+    }
   };
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
@@ -111,7 +89,6 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
       });
       return;
     }
-
     setFormData({
       ...formData,
       [name]: value,
@@ -164,23 +141,96 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
     }
   };
 
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+  const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
   };
 
   const handleSiguientePasoMedic = ({ id }: { id: string }) => {
-    router.push(`/directive/actionsStudent/registrerDataMedicStudent/?boleta=${id}`);
+    router.push(
+      `/directive/actionsStudent/registrerDataMedicStudent/?boleta=${id}`
+    );
   };
 
-  const { alumnos, updateAlumno } = useAlumno();
+  const handleCamposEnBlanco = () => {
+    const requiredFields = [
+      "nombres",
+      "apellidoPaterno",
+      "apellidoMaterno",
+      "curp",
+      "fechaNacimiento",
+      "sexo",
+      "paisOrigen",
+      "entidad",
+    ];
+
+    const emptyRequiredFields = requiredFields.filter(
+      (field) => !formData[field as keyof InterfaceAlumno]
+    );
+    
+    if(emptyRequiredFields.length == 0) {
+      console.log("NO hay campos obligatorios vacios");
+      setRequiredCamposCompletos(true);
+      setAlerta(false);
+    }
+    else{
+      console.log("SI hay campos obligatorios vacios");
+      setRequiredCamposCompletos(false);
+      setAlerta(true);
+    }
+  }
 
   useEffect(() => {
     fetchPaises();
     fetchEstados();
   }, []);
 
+  useEffect(() => {
+    handleCamposEnBlanco();
+  }, [formData])
+
   return (
     <>
+      {alerta && (
+        <div
+          className="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
+        >
+          <svg
+            className="flex-shrink-0 inline w-4 h-4 me-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+          </svg>
+          <span className="sr-only">Info</span>
+          <div>
+            <span className="font-medium">Campos Obligatorios Vacios!</span> Recuerda que todos los campos con
+            un asterisco (*) deben ser llenados.
+          </div>
+        </div>
+      )}
+      {requiredCamposCompletos && (
+        <div
+        className="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          className="flex-shrink-0 inline w-4 h-4 me-3"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+        <span className="sr-only">Info</span>
+        <div>
+          <span className="font-medium">Campos Obligatorios Completos!</span> Todos los campos obligatorios han sido llenados.
+        </div>
+      </div>
+      )}
       <div className="grid grid-rows-1 grid-flow-col gap-4">
         <div className="p-7 bg-white rounded-lg">
           <h4 className="font-bold pb-5"> Datos Personales Alumno </h4>
@@ -402,13 +452,17 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
               </div>
             </div>
             <div className="text-center pt-10">
-                <ButtonComponent
-                  title={"Siguiente"}
-                  color={"blue"}
-                  onClick={() => {
+              <ButtonComponent
+                title={"Guardar Datos Personales del Alumno"}
+                color={"blue"}
+                onClick={() => {
+                  if (requiredCamposCompletos == true) {
                     handleInscribirDataNuevoAlumno(formData);
-                  }}
-                ></ButtonComponent>
+                  } else {
+                    console.log("Campos obligatorios vacios");
+                  }
+                }}
+              ></ButtonComponent>
             </div>
           </form>
         </div>
@@ -416,5 +470,4 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
     </>
   );
 };
-
 export default FormStudent;

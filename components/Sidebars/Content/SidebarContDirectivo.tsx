@@ -474,7 +474,7 @@ const SidebarContDirectivo = () => {
                                                 {sidebarItem(
                                                     "Registrar Directivo",
                                                     base_rute +
-                                                        "actionsDirective/registrerDirective"
+                                                        "actionsDirective/AscenderADirectivo"
                                                 )}
                                             </li>
                                         </ul>

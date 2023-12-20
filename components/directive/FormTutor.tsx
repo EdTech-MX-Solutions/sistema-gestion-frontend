@@ -9,20 +9,20 @@ import { useRouter } from "next/router";
 import { TableVistaTelefonos } from "./TableVistaTelefonos";
 
 interface FormTutorProps {
-  tutor : InterfaceParent;
-  isNewUsuario : boolean
+  tutor: InterfaceParent;
+  isNewUsuario: boolean;
 }
 
-export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
-
+export const FormTutor = ({ tutor, isNewUsuario }: FormTutorProps) => {
   const router = useRouter();
   const { id } = router.query;
-  const [open, setOpen] = useState(false);
+  const [requiredCamposCompletos, setRequiredCamposCompletos] = useState(false);
+  const [alerta, setAlerta] = useState(true);
   const [claveElector, setclaveElector] = useState("");
   const [cookies, setCookie] = useCookies(["token", "boleta", "childs"]);
-  const [paises, setPaises] = useState([])
-  const [estados, setEstados] = useState([])
-  const [telefono, setTelefono] = useState("Cargando...")
+  const [paises, setPaises] = useState([]);
+  const [estados, setEstados] = useState([]);
+  const [telefono, setTelefono] = useState("Cargando...");
   const [formData, setFormData] = useState<InterfaceParent>({
     id: isNewUsuario ? 0 : tutor.id,
     curp: isNewUsuario ? "" : tutor.curp,
@@ -43,10 +43,10 @@ export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
     esPrincipal: isNewUsuario ? "" : tutor.esPrincipal,
     parentesco: isNewUsuario ? "" : tutor.parentesco,
     numeros: isNewUsuario ? [] : tutor.numeros,
-    estadoCivil : isNewUsuario ? "" : tutor.estadoCivil
-  })
+    estadoCivil: isNewUsuario ? "" : tutor.estadoCivil,
+  });
 
-  const handleDarDeAltaTutor = async (nuevoTutor : InterfaceParent) => {
+  const handleCamposEnBlanco = () => {
     const requiredFields = [
       "curp",
       "leerYescribir",
@@ -68,136 +68,191 @@ export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
     ];
 
     const emptyRequiredFields = requiredFields.filter(
-      (field) => !formData[field as keyof InterfaceParent] 
+      (field) => !formData[field as keyof InterfaceParent]
     );
 
-    if (emptyRequiredFields.length > 0) {
-      //alert("Por favor, completa todos los campos obligatorios.");
-      setOpen(true);
-      return;
+    if (emptyRequiredFields.length == 0) {
+      console.log("NO hay campos obligatorios vacios");
+      setRequiredCamposCompletos(true);
+      setAlerta(false);
+    } else {
+      console.log("SI hay campos obligatorios vacios");
+      setRequiredCamposCompletos(false);
+      setAlerta(true);
     }
-    else{
-      const api = new SIGEAPICollection();
-      const token = cookies.token;
-      const response = await api.directivosCollection.executePostNuevoTutor(
-        token,
-        nuevoTutor,
-        id+""
-      );
+  };
 
-      setFormData({
-        id: 0,
-        curp: "",
-        leerYescribir: "",
-        gradoMaximoDeEstudios: "",
-        ocupacion: "",
-        nombres: "",
-        apellidoPaterno: "",
-        apellidoMaterno: "",
-        correo: "",
-        fechaNacimiento: "",
-        sexo: "",
-        paisOrigen: "",
-        estadoOrigen: "",
-        redesSociales: [],
-        tipoIdentificacion: "",
-        noIdentificacion: "",
-        esPrincipal: "",
-        parentesco: "",
-        numeros: [],
-        estadoCivil : ""
-      })
-    }
-  }
+  const handleDarDeAltaTutor = async (nuevoTutor: InterfaceParent) => {
+    const api = new SIGEAPICollection();
+    const token = cookies.token;
+    const response = await api.directivosCollection.executePostNuevoTutor(
+      token,
+      nuevoTutor,
+      id + ""
+    );
+
+    setFormData({
+      id: 0,
+      curp: "",
+      leerYescribir: "",
+      gradoMaximoDeEstudios: "",
+      ocupacion: "",
+      nombres: "",
+      apellidoPaterno: "",
+      apellidoMaterno: "",
+      correo: "",
+      fechaNacimiento: "",
+      sexo: "",
+      paisOrigen: "",
+      estadoOrigen: "",
+      redesSociales: [],
+      tipoIdentificacion: "",
+      noIdentificacion: "",
+      esPrincipal: "",
+      parentesco: "",
+      numeros: [],
+      estadoCivil: "",
+    });
+  };
 
   const handleModifyTelefonos = ({ Id }: { Id: any }) => {
     router.push(`/directive/registrerTelefonos/?id=${Id}`);
   };
 
-  const handleTipoIdentificacion = (event: { target: { value: any; }; }) => {
+  const handleTipoIdentificacion = (event: { target: { value: any } }) => {
     const newValue = event.target.value;
-    setFormData(prevFormData => ({
+    setFormData((prevFormData) => ({
       ...prevFormData,
-      tipo_identificacion: newValue
+      tipo_identificacion: newValue,
     }));
   };
 
-  const handleClaveElector = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handleClaveElector = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setclaveElector(event.target.value);
   };
 
-  const handleInputChange = (event: { target: { name: any; value: any; }; }) => {
-    const {name, value} = event.target;
+  const handleInputChange = (event: { target: { name: any; value: any } }) => {
+    const { name, value } = event.target;
     setFormData({
       ...formData,
-      [name] : value
+      [name]: value,
     });
   };
 
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+  const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     console.log("Datos: ", formData);
   };
 
-  const handleSiguientePasoDireccion = (id: any) =>{
+  const handleSiguientePasoDireccion = (id: any) => {
     router.push(`/directive/actionsStudent/registrerDireccion/?id=${id}`);
-  }
+  };
 
-  const fetchPaises = async () =>{
+  const fetchPaises = async () => {
     const api = new SIGEAPICollection();
     const token = cookies.token;
-    try{
+    try {
       const response = await api.sharedCollection.executeGetSEPOMEXPaises(
         token
       );
-      if(response.ok){
+      if (response.ok) {
         console.log("Generando lista de paises");
         const data = await response.json();
         console.log(data);
-        if(!data || data.length == 0){
-          console.error("Respuesta fallida")
+        if (!data || data.length == 0) {
+          console.error("Respuesta fallida");
           return;
         }
         setPaises(data);
+      } else {
+        console.error(
+          `Error en la solicitud. Código de estado: ${response.status}`
+        );
       }
-      else{
-        console.error(`Error en la solicitud. Código de estado: ${response.status}`);
-      }
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const fetchEstados = async () => {
     const api = new SIGEAPICollection();
     const token = cookies.token;
-    
+
     try {
       const response = await api.sharedCollection.executeGetSEPOMEXEstados(
         token
       );
-      if(response.ok){
+      if (response.ok) {
         console.log("Generando lista de estados");
         const data = await response.json();
         console.log(data);
-        if(!data || data.length == 0){
-          console.error("Respuesta fallida")
+        if (!data || data.length == 0) {
+          console.error("Respuesta fallida");
           return;
         }
         setEstados(data);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchPaises();
     fetchEstados();
-  },[])
+  }, []);
+
+  useEffect(() => {
+    handleCamposEnBlanco();
+  }, [formData]);
 
   return (
     <>
+      {alerta && (
+        <div
+          className="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
+        >
+          <svg
+            className="flex-shrink-0 inline w-4 h-4 me-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+          </svg>
+          <span className="sr-only">Info</span>
+          <div>
+            <span className="font-medium">Campos Obligatorios Vacios!</span>{" "}
+            Recuerda que todos los campos con un asterisco (*) deben ser
+            llenados.
+          </div>
+        </div>
+      )}
+      {requiredCamposCompletos && (
+        <div
+          className="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
+        >
+          <svg
+            className="flex-shrink-0 inline w-4 h-4 me-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+          </svg>
+          <span className="sr-only">Info</span>
+          <div>
+            <span className="font-medium">Campos Obligatorios Completos!</span>{" "}
+            Todos los campos obligatorios han sido llenados.
+          </div>
+        </div>
+      )}
       <div className="grid grid-rows-1 grid-flow-col gap-4">
         <div className="p-7 bg-white rounded-lg">
           <h4 className="font-bold pb-5">
@@ -304,11 +359,11 @@ export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
                   id="leerYescribir"
                   name="leerYescribir"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/5 p-2.5"
-                  value = {formData.leerYescribir}
+                  value={formData.leerYescribir}
                   onChange={handleInputChange}
                   required
                 >
-                  <option value = ""> Seleccione una opción </option>
+                  <option value=""> Seleccione una opción </option>
                   <option value="s"> Sí </option>
                   <option value="n"> No </option>
                 </select>
@@ -328,7 +383,7 @@ export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
                   value={formData.gradoMaximoDeEstudios}
                   onChange={handleInputChange}
                 >
-                  <option value = ""> Seleccione una opción</option>
+                  <option value=""> Seleccione una opción</option>
                   <option value="P"> Primaria </option>
                   <option value="S"> Secundaria </option>
                   <option value="B"> Bachillerato </option>
@@ -389,7 +444,7 @@ export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
                   value={formData.sexo}
                   onChange={handleInputChange}
                 >
-                  <option value = ""> Seleccione una opción</option>
+                  <option value=""> Seleccione una opción</option>
                   <option value="M"> Masculino </option>
                   <option value="F"> Femenino </option>
                   <option value="O"> Otro </option>
@@ -410,9 +465,12 @@ export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
                   value={formData.paisOrigen}
                   onChange={handleInputChange}
                 >
-                  <option value = ""> Selecciona un país </option>
-                  {paises.map((pais: any, index) =>(
-                    <option key={index} value={pais.id}> {pais.nombre} </option>
+                  <option value=""> Selecciona un país </option>
+                  {paises.map((pais: any, index) => (
+                    <option key={index} value={pais.id}>
+                      {" "}
+                      {pais.nombre}{" "}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -433,8 +491,11 @@ export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
                   required
                 >
                   <option value=""> Selecciona un estado </option>
-                  {estados.map((estado:any, index) =>(
-                    <option key={index} value={estado.id}> {estado.nombre} </option>
+                  {estados.map((estado: any, index) => (
+                    <option key={index} value={estado.id}>
+                      {" "}
+                      {estado.nombre}{" "}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -453,7 +514,7 @@ export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
                   value={formData.estadoCivil}
                   onChange={handleInputChange}
                 >
-                  <option value = ""> Selecciona una opción</option>
+                  <option value=""> Selecciona una opción</option>
                   <option value="1"> Casado </option>
                   <option value="2"> Divorciado </option>
                   <option value="3"> Soltero </option>
@@ -482,7 +543,10 @@ export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
                   onChange={handleTipoIdentificacion}
                   value={formData.tipoIdentificacion}
                 >
-                  <option value="" selected> Selecciona una opción </option>
+                  <option value="" selected>
+                    {" "}
+                    Selecciona una opción{" "}
+                  </option>
                   <option value="1"> INE </option>
                   <option value="2"> Cartilla Militar </option>
                   <option value="3"> Pasaporte </option>
@@ -525,7 +589,10 @@ export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
                   onChange={handleInputChange}
                   required
                 >
-                  <option value = "" selected> Seleccione una opción </option>
+                  <option value="" selected>
+                    {" "}
+                    Seleccione una opción{" "}
+                  </option>
                   <option value="1"> Padre </option>
                   <option value="2"> Madre </option>
                   <option value="3"> Abuelo </option>
@@ -544,31 +611,33 @@ export const FormTutor = ({tutor, isNewUsuario}: FormTutorProps) => {
                 </select>
               </div>
             </div>
-            
+
             <div className="px-2 pb-2">
-            <TableVistaTelefonos
-              telefonos={formData.numeros}
-            ></TableVistaTelefonos>
-            <div className="text-center">
+              <TableVistaTelefonos
+                telefonos={formData.numeros}
+              ></TableVistaTelefonos>
+              <div className="text-center">
+                <ButtonComponent
+                  title={"Modificar numero telefonicos"}
+                  color={"blue"}
+                  onClick={() => {
+                    handleModifyTelefonos({ Id: formData.id });
+                  }}
+                ></ButtonComponent>
+              </div>
+            </div>
+
+            <div className="text-center pt-10">
               <ButtonComponent
-                title={"Modificar numero telefonicos"}
+                title={"Siguiente"}
                 color={"blue"}
-                onClick={() =>{
-                  handleModifyTelefonos({ Id: formData.id })
+                onClick={() => {
+                  if (requiredCamposCompletos == true) {
+                    handleDarDeAltaTutor(formData);
+                    //handleSiguientePasoDireccion(formData.id);
+                  }
                 }}
               ></ButtonComponent>
-            </div>
-          </div>
-          
-            <div className="text-center pt-10">
-             <ButtonComponent 
-              title = {"Siguiente"} 
-              color = {"blue"}
-              onClick={() => {
-                //handleDarDeAltaTutor(formData);
-                handleSiguientePasoDireccion(formData.id);
-              }}
-             ></ButtonComponent>
             </div>
           </form>
         </div>

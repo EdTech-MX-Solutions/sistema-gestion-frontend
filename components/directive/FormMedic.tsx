@@ -12,36 +12,18 @@ import { FormPreguntasMedicas } from "./FormPreguntasMedicas";
 import { FormPreguntasHereditarias } from "./FormPreguntasHereditarias";
 import CardView from "../CardView";
 import { useRouter } from "next/router";
-import { Alert, Button } from "@material-tailwind/react";
 
-function Icon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className="h-6 w-6"
-    >
-      <path
-        fillRule="evenodd"
-        d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
-}
 interface FormMedicProps {
   dataMedic: any;
-  isNewUsuario : boolean;
+  isNewUsuario: boolean;
 }
 
-export const FormMedic = ({ dataMedic, isNewUsuario}: FormMedicProps) => {
-  
+export const FormMedic = ({ dataMedic, isNewUsuario }: FormMedicProps) => {
   const router = useRouter();
   const { id } = router.query;
-  const [open, setOpen] = useState(false);
+  const [alerta, setAlerta] = useState(true);
+  const [requiredCamposCompletos, setRequiredCamposCompletos] = useState(false);
   const [cookies, setCookie] = useCookies(["token", "", "childs"]);
-  const [requiredCampos, setRequiredCampos] = useState(false);
   const [preguntasCondiciones, setPreguntasCondiciones] = useState<
     InterfacePreguntasCondiciones[]
   >([]);
@@ -53,33 +35,45 @@ export const FormMedic = ({ dataMedic, isNewUsuario}: FormMedicProps) => {
   >([]);
 
   const [formData, setFormData] = useState<InterfaceDatosMedicos>({
-    tipoSanguineo: isNewUsuario ?  "" : dataMedic.tipoSanguineo,
+    tipoSanguineo: isNewUsuario ? "" : dataMedic.tipoSanguineo,
     peso: isNewUsuario ? 0 : dataMedic.peso,
     talla: isNewUsuario ? 0 : dataMedic.talla,
     zapatoOrtopedico: isNewUsuario ? null : dataMedic.zapatoOrtopedico,
     lentes: isNewUsuario ? null : dataMedic.lentes,
     seguroMedico: isNewUsuario ? "" : dataMedic.seguroMedico,
-    recomendacionesEspeciales: isNewUsuario ? "" : dataMedic.recomendacionesEspeciales, 
+    recomendacionesEspeciales: isNewUsuario
+      ? ""
+      : dataMedic.recomendacionesEspeciales,
     nombreMedicoFamiliar: isNewUsuario ? "" : dataMedic.nombreMedicoFamiliar,
-    telefonoMedicoFamiliar: isNewUsuario ? "" : dataMedic.telefonoMedicoFamiliar,
+    telefonoMedicoFamiliar: isNewUsuario
+      ? ""
+      : dataMedic.telefonoMedicoFamiliar,
     enfermadesFrecuentes: isNewUsuario ? "" : dataMedic.enfermadesFrecuentes,
     enfermadesUltimoAnio: isNewUsuario ? "" : dataMedic.enfermadesUltimoAnio,
     alergias: isNewUsuario ? "" : dataMedic.alergias,
-    respuestasPreguntasMedicas : isNewUsuario ? [] : dataMedic.respuestasPreguntasMedicas,
-    respuestasPreguntasHereditarias : isNewUsuario ? [] : dataMedic.respuestasPreguntasHereditarias,
-    respuestasCondicionesMedicas : isNewUsuario ? [] : dataMedic.respuestasCondicionesMedicas
+    respuestasPreguntasMedicas: isNewUsuario
+      ? []
+      : dataMedic.respuestasPreguntasMedicas,
+    respuestasPreguntasHereditarias: isNewUsuario
+      ? []
+      : dataMedic.respuestasPreguntasHereditarias,
+    respuestasCondicionesMedicas: isNewUsuario
+      ? []
+      : dataMedic.respuestasCondicionesMedicas,
   });
 
   const fetchDatosMedicosAlumno = async () => {
     const api = new SIGEAPICollection();
     const token = cookies.token;
-    try{
-      const response = await api.directivosCollection.executeGetDatosMedicosAlumnos(
-        token, 
-        id+"");
-      if(response.ok){
+    try {
+      const response =
+        await api.directivosCollection.executeGetDatosMedicosAlumnos(
+          token,
+          id+""
+        );
+      if (response.ok) {
         const data = await response.json();
-        const newDatosMedicos : InterfaceDatosMedicos = {
+        const newDatosMedicos: InterfaceDatosMedicos = {
           tipoSanguineo: data.tipoSanguineo,
           peso: data.peso,
           talla: data.talla,
@@ -92,19 +86,48 @@ export const FormMedic = ({ dataMedic, isNewUsuario}: FormMedicProps) => {
           enfermadesFrecuentes: data.enfermadesFrecuentes,
           enfermadesUltimoAnio: data.enfermadesUltimoAnio,
           alergias: data.alergias,
-          respuestasPreguntasMedicas : data.respuestasPreguntasMedicas,
-          respuestasPreguntasHereditarias : data.respuestasPreguntasHereditarias,
-          respuestasCondicionesMedicas : data.respuestasCondicionesMedicas
-        }
+          respuestasPreguntasMedicas: data.respuestasPreguntasMedicas,
+          respuestasPreguntasHereditarias: data.respuestasPreguntasHereditarias,
+          respuestasCondicionesMedicas: data.respuestasCondicionesMedicas,
+        };
         setFormData(newDatosMedicos);
-        console.log(data);
       }
-    }catch(error){
+    } catch (error) {
       console.error(error);
     }
-  }
+  };
 
-  const handleDarDeAltaDatosMedicos = async (datosMedicos : InterfaceDatosMedicos) => {
+  const handleDarDeAltaDatosMedicos = async (
+    datosMedicos: InterfaceDatosMedicos
+  ) => {
+    const api = new SIGEAPICollection();
+    const token = cookies.token;
+    const response = await api.sharedCollection.executePostDatosMedicos(
+      token,
+      datosMedicos,
+      id + ""
+    );
+
+    setFormData({
+      tipoSanguineo: "",
+      peso: 0,
+      talla: 0,
+      zapatoOrtopedico: null,
+      lentes: null,
+      seguroMedico: "",
+      recomendacionesEspeciales: "",
+      nombreMedicoFamiliar: "",
+      telefonoMedicoFamiliar: "",
+      enfermadesFrecuentes: "",
+      enfermadesUltimoAnio: "",
+      alergias: "",
+      respuestasPreguntasMedicas: [],
+      respuestasPreguntasHereditarias: [],
+      respuestasCondicionesMedicas: [],
+    });
+  };
+
+  const handleCamposEnBlanco = () => {
     const requiredFields = [
       "tipoSanguineo",
       "peso",
@@ -121,43 +144,19 @@ export const FormMedic = ({ dataMedic, isNewUsuario}: FormMedicProps) => {
     ];
 
     const emptyRequiredFields = requiredFields.filter(
-      (field) => !formData[field as keyof InterfaceDatosMedicos] 
+      (field) => !formData[field as keyof InterfaceDatosMedicos]
     );
 
-    if (emptyRequiredFields.length > 0) {
-      //alert("Por favor, completa todos los campos obligatorios.");
-      setOpen(true);
-      return;
+    if (emptyRequiredFields.length == 0) {
+      console.log("NO hay campos obligatorios vacios");
+      setRequiredCamposCompletos(true);
+      setAlerta(false);
+    } else {
+      console.log("SI hay campos obligatorios vacios");
+      setRequiredCamposCompletos(false);
+      setAlerta(true);
     }
-    else{
-      const api = new SIGEAPICollection();
-      const token = cookies.token;
-      setRequiredCampos(true);
-      const response = await api.sharedCollection.executePostDatosMedicos(
-        token,
-        datosMedicos,
-        id+""
-      );
-
-      setFormData({
-        tipoSanguineo: "",
-        peso: 0,
-        talla: 0,
-        zapatoOrtopedico: null,
-        lentes: null,
-        seguroMedico: "",
-        recomendacionesEspeciales: "",
-        nombreMedicoFamiliar: "",
-        telefonoMedicoFamiliar: "",
-        enfermadesFrecuentes: "",
-        enfermadesUltimoAnio: "",
-        alergias: "",
-        respuestasPreguntasMedicas : [],
-        respuestasPreguntasHereditarias : [],
-        respuestasCondicionesMedicas : []
-      });
-    }
-  }
+  };
 
   const handleSiguientePasoRegistroPrimerTutor = ({ Id }: { Id: any }) => {
     router.push(`/directive/actionsStudent/registrerDataFirstTutor?id=${Id}`);
@@ -235,8 +234,6 @@ export const FormMedic = ({ dataMedic, isNewUsuario}: FormMedicProps) => {
     }
   };
 
-
-
   useEffect(() => {
     fetchPreguntasMedicas();
     fetchPreguntasHereditarias();
@@ -244,71 +241,102 @@ export const FormMedic = ({ dataMedic, isNewUsuario}: FormMedicProps) => {
     fetchDatosMedicosAlumno();
   }, []);
 
+  useEffect(() => {
+    handleCamposEnBlanco();
+  }, [formData]);
+
   return (
     <>
       <CardView title={""} description={""} customtitle>
+        {alerta && (
+          <div
+            className="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            role="alert"
+          >
+            <svg
+              className="flex-shrink-0 inline w-4 h-4 me-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span className="sr-only">Info</span>
+            <div>
+              <span className="font-medium">Campos Obligatorios Vacios!</span>
+              Recuerda que todos los campos con un asterisco (*) deben ser
+              llenados.
+            </div>
+          </div>
+        )}
+        {requiredCamposCompletos && (
+          <div
+            className="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-red-400"
+            role="alert"
+          >
+            <svg
+              className="flex-shrink-0 inline w-4 h-4 me-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span className="sr-only">Info</span>
+            <div>
+              <span className="font-medium">
+                Campos Obligatorios Completos!
+              </span>
+              Todos los campos obligatorios han sido llenados.
+            </div>
+          </div>
+        )}
+
         <div className="p-7 bg-white rounded-lg">
-          <FormBasicDataMedic 
-            dataMedic={dataMedic} 
-            formData={formData} 
+          <FormBasicDataMedic
+            dataMedic={dataMedic}
+            formData={formData}
             setFormData={setFormData}
           ></FormBasicDataMedic>
 
           <FormPreguntasCondiciones
             dataMedic={dataMedic}
             preguntasCondiciones={preguntasCondiciones}
-            formData={formData} 
+            formData={formData}
             setFormData={setFormData}
+            isNewUsuario={isNewUsuario}
           ></FormPreguntasCondiciones>
 
           <FormPreguntasMedicas
             preguntasMedicas={preguntasMedicas}
             dataMedic={dataMedic}
-            formData={formData} 
+            formData={formData}
             setFormData={setFormData}
           ></FormPreguntasMedicas>
 
           <FormPreguntasHereditarias
             preguntasHereditarias={preguntasHereditarias}
             dataMedic={dataMedic}
-            formData={formData} 
+            formData={formData}
             setFormData={setFormData}
           ></FormPreguntasHereditarias>
 
-          {!open && (
-            <div className="text-center pt-10">
+          <div className="text-center pt-10">
             <ButtonComponent
               title={"Siguiente"}
               color={"blue"}
               onClick={() => {
-                //if(requiredCampos){
-                  //handleDarDeAltaDatosMedicos(formData);
+                if (requiredCamposCompletos == true) {
+                  handleDarDeAltaDatosMedicos(formData);
                   handleSiguientePasoRegistroPrimerTutor({ Id: id });
-                //}
-                setOpen(true);
+                } else {
+                  console.log("Campos obligatorios vacios");
+                }
               }}
             ></ButtonComponent>
           </div>
-          )}
-           <div className="p-5 flex justify-center items-center">
-              <Alert
-                variant="gradient"
-                className="bg-black text-white text-center p-5"
-                open={open}
-                icon={<Icon />}
-              >
-                Campo obligatorio en blanco
-                <Button
-                  variant="text"
-                  color="white"
-                  size="sm"
-                  className="!absolute top-3 right-3 text-center border-solid border-2 border-white rounded-full items-center justify-center"
-                  onClick={() => setOpen(false)}
-                >
-                  Cerrar
-                </Button>
-              </Alert>
-            </div>
         </div>
       </CardView>
     </>

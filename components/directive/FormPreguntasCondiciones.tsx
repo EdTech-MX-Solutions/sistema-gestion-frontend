@@ -7,18 +7,17 @@ interface FormPreguntasCondicionesProps {
   dataMedic: InterfaceDatosMedicos;
   formData: InterfaceDatosMedicos;
   setFormData: React.Dispatch<React.SetStateAction<InterfaceDatosMedicos>>;
+  isNewUsuario: boolean;
 }
 export const FormPreguntasCondiciones = ({
   preguntasCondiciones,
   formData,
   setFormData,
-}: FormPreguntasCondicionesProps) => {
+  isNewUsuario
+}: FormPreguntasCondicionesProps,
+) => {
+
   const respuestasCondiciones = formData.respuestasCondicionesMedicas;
-  const respuestasPreguntasMedicas = formData.respuestasPreguntasMedicas;
-  const respuestasHereditarias = formData.respuestasPreguntasHereditarias;
-  console.log(respuestasCondiciones);
-  console.log(respuestasPreguntasMedicas);
-  console.log(respuestasHereditarias);
 
   const handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -47,6 +46,18 @@ export const FormPreguntasCondiciones = ({
                   (resp) =>
                     resp.pregunta.nombreCondicion === pregunta.nombreCondicion
                 );
+
+                const isCheckedYes = isNewUsuario
+                ? false
+                : respuesta
+                ? respuesta.respuestaCorta === "Sí"
+                : false;
+              const isCheckedNo = isNewUsuario
+                ? false
+                : respuesta
+                ? respuesta.respuestaCorta === "No"
+                : false;
+          
                 return (
                   <tr key={pregunta.id}>
                     <td className="p-5"> {pregunta.nombreCondicion} </td>
@@ -57,11 +68,7 @@ export const FormPreguntasCondiciones = ({
                           id={`si-${pregunta.id}`}
                           name={`radio-${pregunta.id}`}
                           value="si"
-                          checked={
-                            respuesta
-                              ? respuesta.respuestaCorta === "Sí"
-                              : false
-                          }
+                          checked={isCheckedYes}
                           onChange={(e) =>
                             handleInputChange({
                               target: {
@@ -86,11 +93,7 @@ export const FormPreguntasCondiciones = ({
                           id={`no-${pregunta.id}`}
                           name={`radio-${pregunta.id}`}
                           value="no"
-                          checked={
-                            respuesta
-                              ? respuesta.respuestaCorta === "No"
-                              : false
-                          }
+                          checked={isCheckedNo}
                           onChange={(e) =>
                             handleInputChange({
                               target: {
