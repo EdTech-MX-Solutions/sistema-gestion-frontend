@@ -20,7 +20,7 @@ export const TableProfessors = ({ professors }: TableProfessorsProps) => {
 
     return (
         <>
-            <TableContainer title={"Listado de Tutores"}>
+            <TableContainer title={"Listado de Profesores"}>
                 <thead className="text-white uppercase bg-green-700">
                     <tr className="">
                         <th className="p-3">No. Empleado</th>

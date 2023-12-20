@@ -261,7 +261,7 @@ export const FormGroup = ({ grupo, isNewGroup }: FormGroupProps) => {
               htmlFor="salon"
               className="block mb-2 text-sm font-medium text-gray-900"
             >
-              Salon<span>*</span>:
+              Salón<span>*</span>:
             </label>
             <input
               type="text"

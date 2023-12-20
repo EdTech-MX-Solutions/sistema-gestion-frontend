@@ -102,6 +102,15 @@ export default function SignIn({
                                             </svg>
                                             Continuar con Email
                                         </Link>
+                                        <div className="mt-4 text-xs md:text-sm text-cyan-500 ">
+                                            <Link className="text-green-700 hover:font-semibold" href={"/privacy"} >
+                                                Aviso de Privacidad
+                                            </Link>
+                                            {" | "}
+                                            <Link className="text-green-700 hover:font-semibold" href={"/tos"} >
+                                                Terminos y Condiciones
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

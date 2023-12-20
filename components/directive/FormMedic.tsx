@@ -246,7 +246,7 @@ export const FormMedic = ({ dataMedic, isNewUsuario}: FormMedicProps) => {
 
   return (
     <>
-      <CardView title={""} description={""}>
+      <CardView title={""} description={""} customtitle>
         <div className="p-7 bg-white rounded-lg">
           <FormBasicDataMedic 
             dataMedic={dataMedic} 

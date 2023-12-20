@@ -1,22 +1,39 @@
 import CardView from "@/components/CardView";
-import { ReactNode} from "react";
+import PrivateRoute from "@/components/auth/PrivateRoute";
+import { useGreet } from "@/components/context/GreetProvider";
+import PanelCards from "@/components/elements/Panels/DirectivePanel";
+import ProfessorsPanel from "@/components/elements/Panels/ProfessorsPanel";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
-interface DefaultLayoutProps {
-  children: ReactNode;
-}
+export default function Index() {
+    let greeting = useGreet().greet;
+    const [cookies, setCookie, removeCookie] = useCookies([
+        "token",
+        "user",
+        "childs",
+        "boleta",
+    ]);
+    const [name, setName] = useState("Cargando...");
 
-function index(){
+    function getUserName() {
+        if (cookies.user) {
+            setName(cookies.user);
+        }
+    }
 
-  const title = "Datos del profesor";
-  const description = `Datos registrados del alumno, ¿Algún dato no es correcto? contactar a la institución para cualquier modificación.`;
+    useEffect(() => {
+        getUserName();
+    }, []);
 
-    return(
+    return (
         <>
-          <CardView title={title} description={description}>
-          </CardView>
+            <CardView
+                title={"Hola, " + greeting + " " + name}
+                description="Este es tu panel de control"
+            >
+                <ProfessorsPanel   />
+            </CardView>
         </>
     );
 }
-
-export default index;
-

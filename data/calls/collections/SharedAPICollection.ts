@@ -211,6 +211,17 @@ export class SharedAPICollection {
       },
     });
   }
+
+  executeGetHorarioProfessor(token: string, id: string) {
+    const route = this.apiCaller.getCall() + "/horarios/profesor/" + id;
+    return fetch(route, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
   
   executeGetParentByAlumno(token: string, boleta: string) {
         const route = this.apiCaller.getCall() + "/tutores/alumno/" + boleta;

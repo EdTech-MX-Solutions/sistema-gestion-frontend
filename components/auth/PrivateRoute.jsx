@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie';
 import { jwtDecode } from "jwt-decode";
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import { PeriodoProvider } from "../context/PeriodoProvider";
+import { ro } from "@faker-js/faker";
 
 
 const PrivateRoute = ({ children, allowedRoles }) => {
@@ -64,12 +65,13 @@ const PrivateRoute = ({ children, allowedRoles }) => {
                     console.log("current roles:", user_roles);
                     console.log("allowed roles:", allowedRoles);
                     // router.push("/auth/login");
-                } else {
+                } else if (router.pathname != "/") {
                     console.log("No tienes permisos para acceder a esta página");
                     console.log("current roles:", user_roles);
-                    console.log("allowed roles:", allowedRoles);
+                    console.log("allowed roles:", allowedRoles);                    
+                    router.push("/forbidden");
                 }
-
+                
                 if (cookies.user == null) {
                     console.log("No existe un usuario, generando nuevo usuario");
                     const user = decodedToken;
@@ -78,6 +80,7 @@ const PrivateRoute = ({ children, allowedRoles }) => {
                 } else {
                     console.log("ya existe un usuario:", cookies.user);
                 }
+
 
                 return;
             }

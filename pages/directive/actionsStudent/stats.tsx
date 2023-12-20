@@ -97,8 +97,8 @@ const StatsPanel = () => {
             <div className="relative flex flex-col bg-clip-border rounded-xl bg-white dark:bg-slate-300 text-gray-700 border border-blue-gray-100 shadow-sm">
                 <div className="relative bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-white dark:bg-slate-300 text-gray-700">
                     <div className="p-3">
-                        <h1 className="text-2xl">Stats de Alumnos</h1>
-                        <p>Descripción de la estadistica</p>
+                        <h1 className="text-2xl">Estadísticas de Alumnos</h1>
+                        <p>Distribución de Alumnos por grupo</p>
                         <div className="flex ">
                             <div className="w-1/2">
                                 <PieChart />
@@ -137,7 +137,7 @@ const StatsPanel = () => {
             <div className="relative flex flex-col bg-clip-border rounded-xl bg-white dark:bg-slate-300 text-gray-700 border border-blue-gray-100 shadow-sm">
                 <div className="relative bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-white dark:bg-slate-300 text-gray-700">
                     <div className="p-3">
-                        <h1 className="text-2xl">Stats de Alumnos</h1>
+                        <h1 className="text-2xl">Estadísticas de Alumnos</h1>
                         <p>Descripción de la estadistica</p>
                         <div className="w-full">
                             <Lines />

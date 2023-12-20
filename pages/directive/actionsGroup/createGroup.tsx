@@ -27,7 +27,7 @@ function createGroup() {
 
   return (
     <>
-      <CardView title={""} description={""}>
+      <CardView title={""} description={""} customtitle>
         <PrincipalTitle title={title}></PrincipalTitle>
         <div className="justify-center bg-white p-5 rounded-lg">
           <h4 className="font-bold">Elementos del grupo: </h4>

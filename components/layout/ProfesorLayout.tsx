@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PrivateRoute from "../auth/PrivateRoute";
 import SidebarProfesor from "@/components/Sidebars/SidebarProfesor";
 import Header from "@/components/template/Header";
-import { ProfesorProvider } from "@/components/context/ProfesorProvider";
 import { AlumnoProvider } from "@/components/context/AlumnoProvider";
 
 interface LayoutProps {
@@ -14,7 +13,6 @@ const TutorLayout = ({ children }: LayoutProps) => {
   return (
     <>
       <PrivateRoute allowedRoles={["SUPERUSER", "PROFESOR"]}>
-        <ProfesorProvider>
           <AlumnoProvider>
             <div className="dark:bg-boxdark-2 dark:text-bodydark">
               <div className="flex h-screen overflow-hidden">
@@ -36,7 +34,6 @@ const TutorLayout = ({ children }: LayoutProps) => {
               </div>
             </div>
           </AlumnoProvider>
-        </ProfesorProvider>
       </PrivateRoute>
     </>
   );

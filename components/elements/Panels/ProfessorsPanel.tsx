@@ -3,7 +3,7 @@ import PanelCard from "./CardPanel";
 import React from "react";
 import { ConfirmLogoutElement } from "../Confirms/ConfirmLogout";
 
-export default function PanelDirectiveCards() {
+export default function ProfessorsPanel() {
     const [confirmationisopen, setConfirmationOpen] = React.useState(false);
     const [cookies, setCookie, removeCookie] = useCookies([
         "token",
@@ -16,17 +16,35 @@ export default function PanelDirectiveCards() {
         <>
             <div className="bg-teal-700" />
             <PanelCard
-                category="Panel de Control"
-                title="Consultar Directivos"
-                bgColor="teal-700"
-                route="/directive/actionsDirective/consultDirectives"
+                category="Tus Alumnos"
+                title="Grupo Asignado"
+                bgColor="emerald-600"
+                route="/professors/actionsStudent/list"
+            />
+            <PanelCard
+                category="Tus Alumnos"
+                title="Horario de Grupo"
+                bgColor="emerald-600"
+                route="professors/actionsStudent/professorSchedule"
             />
             <PanelCard
                 category="Panel de Control"
-                title="Registrar Directivo"
-                bgColor="teal-700"
-                route="/directive/actionsDirective/registrerDirective"
+                title="Calificaciones"
+                bgColor="emerald-600"
+                route="/professors/grades/grades"
             />
+            <PanelCard
+                category="Panel de Control - (próximamente)"
+                title="Otras Opciones"
+                bgColor="cyan-600"
+                route="#"
+            />
+            {/* <PanelCard
+                category="Panel de Control"
+                title="Reportes y Avisos"
+                bgColor="teal-700"
+                route="/directive/othersOptions/suggestions"
+            /> */}
             <PanelCard
                 category="Sistema"
                 title="Cerrar Sesión"

@@ -75,10 +75,20 @@ const Sidebar = ({
         >
             {/* <!-- SIDEBAR HEADER --> */}
             <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-                {/* <NavLink to="/">
-          <img src={Logo} alt="Logo" />
-        </NavLink> */}
-
+            <div className="pt-32 sm:pt-10 p-1">
+                        <Image
+                            src={Logo}
+                            className="hidden dark:hidden lg:block dark:lg:hidden pointer-events-none"
+                            alt="Logo"
+                            width={200}
+                        />
+                        <Image
+                            src={LogoDark}
+                            className="hidden dark:lg:block pointer-events-none"
+                            alt="Logo"
+                            width={200}
+                        />
+                    </div>
                 <button
                     ref={trigger}
                     onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -105,20 +115,7 @@ const Sidebar = ({
 
             <div className="no-scrollbar flex flex-col overflow-visible duration-300 ease-linear h-screen">
                 <nav className="pb-4 lg:pl-2 lg:pr-4 min-h-screen">
-                    <div className="pt-32 sm:pt-10 p-1">
-                        <Image
-                            src={Logo}
-                            className="hidden dark:hidden lg:block dark:lg:hidden pointer-events-none"
-                            alt="Logo"
-                            width={200}
-                        />
-                        <Image
-                            src={LogoDark}
-                            className="hidden dark:lg:block pointer-events-none"
-                            alt="Logo"
-                            width={200}
-                        />
-                    </div>
+                    
                     <div>
                         {/* <!-- Menu Groups --> */}
                         {children}

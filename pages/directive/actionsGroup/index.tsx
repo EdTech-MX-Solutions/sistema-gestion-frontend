@@ -22,7 +22,7 @@ export default function Index() {
 
     return (
         <>
-            <PrivateRoute allowedRoles={["SUPERUSER", "DIRECTIVE"]}>
+            <PrivateRoute allowedRoles={["SUPERUSER", "DIRECTIVO"]}>
                 <CardView
                     title={"Hola, " + greeting + " " + name}
                     description="Este es tu panel de control"

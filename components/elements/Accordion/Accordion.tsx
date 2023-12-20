@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import React, { useState, ReactNode, use, useEffect } from "react";
 import {
     Accordion,
     AccordionHeader,
@@ -46,20 +46,33 @@ export function AccordionCustomIcon({ items }: AccordionCustomIconProps) {
 
     const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
 
+    useEffect(() => {
+        // open the first accordion
+        setOpen(1);
+    }, []);
+
     return (
         <>
             {items.map((item, index) => (
-                <Card
-                key={index}
-                >
+                <Card key={index}>
                     <Accordion
                         open={open === index + 1}
                         icon={<Icon id={index + 1} open={open} />}
                     >
-                        <AccordionHeader className="pb-3 text-gray-100" onClick={() => handleOpen(index + 1)}>
-                            {item.AccordionHeaderTitle}
+                        <AccordionHeader
+                            className="pb-3 dark:text-gray-100 text-gray-700"
+                            onClick={() => handleOpen(index + 1)}
+                        >
+                            <div>
+                                {item.AccordionHeaderTitle}
+                                <span className="text-xs mx-4">
+                                    Haz click para ver las materias del nivel
+                                </span>
+                            </div>
                         </AccordionHeader>
-                        <AccordionBody className="text-gray-200">{item.AccordionChild}</AccordionBody>
+                        <AccordionBody className="dark:text-gray-200 text-gray-600">
+                            {item.AccordionChild}
+                        </AccordionBody>
                     </Accordion>
                 </Card>
             ))}
