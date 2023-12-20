@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonComponentBiColor from "../ButtonComponentBiColor";
+import ButtonComponentBiColor from "../elements/Buttons/ButtonComponentBiColor";
 import InterfaceProfessor from "@/data/interfaces/professor";
 import router from "next/router";
 import TableContainer from "./Tables/TableContainter";

@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonComponent from "../ButtonComponent";
+import ButtonComponent from "../elements/Buttons/ButtonComponent";
 
 interface TableGradesProps {
   calificaciones : Array<{

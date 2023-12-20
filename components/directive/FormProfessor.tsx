@@ -1,6 +1,6 @@
 import InterfaceProfessor from "@/data/interfaces/professor";
 import React, { useEffect, useState } from "react";
-import ButtonComponent from "../ButtonComponent";
+import ButtonComponent from "../elements/Buttons/ButtonComponent";
 import { useRouter } from "next/router";
 import { useProfesores } from "../context/ProfesorProvider";
 import { TableVistaTelefonos } from "./TableVistaTelefonos";

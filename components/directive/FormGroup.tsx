@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ButtonComponent from "../ButtonComponent";
+import ButtonComponent from "../elements/Buttons/ButtonComponent";
 import InterfaceGrupo from "@/data/interfaces/grupos";
 import { useGrupos } from "../context/GruposProvides";
 import { useRouter } from "next/router";

@@ -1,12 +1,10 @@
-import {ReactNode, useState} from "react";
+
 import PrincipalTitle from "@/components/professor/Principal.Title";
 import TableList from "@/components/professor/TableList";
-import {useCookies} from "react-cookie";
 import {useAlumno} from "../../../components/context/AlumnoProvider";
 import CardView from "../../../components/CardView";
-import InputSearch from "../../../components/template/InputSearch";
 import Loader from "../../../components/elements/Loader";
-import TableProfessors from "../../../components/directive/TableProfessors";
+import Card from "@/components/Card";
 
 
 function List() {
@@ -24,7 +22,16 @@ function List() {
                         lista = {alumnos}
                         hayAlumnos={hayalumnos}>
                     </TableList>
-                ) : null}
+                ) : (
+                    <Card>
+                        <div className="flex flex-col items-center justify-center my-20 ">
+                        <h1 className="text-2xl font-semibold text-gray-700">
+                            No hay alumnos registrados
+                        </h1>
+
+                        </div>
+                    </Card>
+                )}
             </CardView>
         </>
     );

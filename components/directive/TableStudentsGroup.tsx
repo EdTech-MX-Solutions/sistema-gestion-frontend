@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonComponentBiColor from "../ButtonComponentBiColor";
+import ButtonComponentBiColor from "../elements/Buttons/ButtonComponentBiColor";
 import InterfaceAlumno from "@/data/interfaces/alumno";
 import router from "next/router";
 

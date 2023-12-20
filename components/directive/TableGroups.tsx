@@ -1,7 +1,7 @@
 import InterfaceGrupo from "@/data/interfaces/grupos";
 import React from "react";
 import router from "next/router";
-import ButtonComponentBiColor from "../ButtonComponentBiColor";
+import ButtonComponentBiColor from "../elements/Buttons/ButtonComponentBiColor";
 import TableContainer from "./Tables/TableContainter";
 
 interface TableGroupsProps {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ButtonComponent from "../ButtonComponent";
+import ButtonComponent from "../elements/Buttons/ButtonComponent";
 import InterfaceDatosMedicos from "@/data/interfaces/datosMedicos";
 import InterfacePreguntasHereditarias from "@/data/interfaces/preguntasHereditarias";
 import InterfacePreguntasCondiciones from "@/data/interfaces/preguntasCondiciones";
