@@ -1,5 +1,5 @@
 import React from 'react'
-import ButtonComponentBiColor from '../ButtonComponentBiColor'
+import ButtonComponentBiColor from '../elements/Buttons/ButtonComponentBiColor'
 import InterfaceTel from '@/data/interfaces/numeroTelefonico'
 
 interface TableTelefonosProps{

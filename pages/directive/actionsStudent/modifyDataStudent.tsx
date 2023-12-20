@@ -28,7 +28,7 @@ function modifyDataPersonalStudent() {
   };
   return (
     <>
-      <CardView title={""} description={""}>
+      <CardView title={""} description={""} customtitle>
         <PrincipalTitle title={"Registro Alumno"}></PrincipalTitle>
         <FormStudent isNewUser student={student}></FormStudent>
       </CardView>

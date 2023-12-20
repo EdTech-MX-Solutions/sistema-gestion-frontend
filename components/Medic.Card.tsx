@@ -2,7 +2,7 @@ import DataMedicCard from "./Data.Medic.Card";
 import InstituteDataMedicCard from "./Institute.Data.Medic.Card";
 import {useEffect, useState} from "react";
 import Loader from "./elements/Loader";
-import Button from "./elements/Button";
+import Button from "./elements/Buttons/Button";
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import {InterfaceCalificaciones} from "@/data/interfaces/calificaciones";
 import {useCookies} from "react-cookie";

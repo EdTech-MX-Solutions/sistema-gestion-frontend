@@ -1,7 +1,7 @@
 import InterfaceGrupo from "@/data/interfaces/grupos";
 import React from "react";
 import router from "next/router";
-import ButtonComponentBiColor from "../ButtonComponentBiColor";
+import ButtonComponentBiColor from "../elements/Buttons/ButtonComponentBiColor";
 import TableContainer from "./Tables/TableContainter";
 
 interface TableGroupsProps {
@@ -21,7 +21,7 @@ export const TableGroups = ({ groups }: TableGroupsProps) => {
                         <th className="p-3"> Grado </th>
                         <th> Grupo </th>
                         <th> Profesor titular </th>
-                        <th> Salon </th>
+                        <th> Salón </th>
                         <th> Acciones </th>
                     </tr>
                 </thead>

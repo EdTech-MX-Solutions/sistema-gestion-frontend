@@ -31,7 +31,7 @@ export default function PanelCards() {
                 category="Panel de Control"
                 title="Grupos"
                 bgColor="emerald-600"
-                route="/directive/othersOptions/suggestions"
+                route="/directive/actionsGroup/consultGroups"
             />
             <PanelCard
                 category="Panel de Control"

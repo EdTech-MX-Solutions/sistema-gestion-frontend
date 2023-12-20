@@ -22,7 +22,7 @@ function modifyDireccion() {
   };
   return (
     <>
-      <CardView title={""} description={""}>
+      <CardView title={""} description={""} customtitle>
         <PrincipalTitle title={"Modificar dirección"}></PrincipalTitle>
         <FormDirecciones direccion={initialDireccion} isNewUser = {false}></FormDirecciones>
       </CardView>

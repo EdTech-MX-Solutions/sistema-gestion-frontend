@@ -8,9 +8,9 @@ import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 
 function ModifySubject() {
-    const title = "Registro de Nueva Materia";
+    const title = "Modificar Materia";
     const subtitle =
-        "En esta sección puedes crear las materias que pueden ser asignadas a los alumnos";
+        "En esta sección puedes modificar la materia seleccionada que pueden ser asignadas a los alumnos";
     const [loading, setLoading] = useState<boolean>(true);
     const [hayMaterias, setHayMaterias] = useState<boolean>(false);
     const [clave_a_buscar, setClaveABuscar] = useState<string>("");

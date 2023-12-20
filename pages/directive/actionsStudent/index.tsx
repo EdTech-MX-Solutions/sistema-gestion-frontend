@@ -25,7 +25,7 @@ export default function Index() {
 
     return (
         <>
-            <PrivateRoute allowedRoles={["SUPERUSER", "DIRECTIVE"]}>
+            <PrivateRoute allowedRoles={["SUPERUSER", "DIRECTIVO"]}>
                 <BreadcrumbsWithIcon />
                 <CardView
                     title={"Hola, " + greetingProvider.greet + " " + name}

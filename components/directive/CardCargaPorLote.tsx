@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ButtonComponent from "../ButtonComponent";
+import ButtonComponent from "../elements/Buttons/ButtonComponent";
 import SIGEAPICollection from "@/data/calls/apiHandler";
 import { Typography } from "@material-tailwind/react";
 import AlertComponent from "../elements/Alert";

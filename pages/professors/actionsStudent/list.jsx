@@ -1,53 +1,41 @@
-import { ReactNode } from "react";
+
 import PrincipalTitle from "@/components/professor/Principal.Title";
 import TableList from "@/components/professor/TableList";
+import {useAlumno} from "../../../components/context/AlumnoProvider";
+import CardView from "../../../components/CardView";
+import Loader from "../../../components/elements/Loader";
+import Card from "@/components/Card";
 
 
-function list() {
+function List() {
 
-  const title = "Lista de alumnos [Grupo_Asignado]";
+    const title = "Lista de Alumnos";
 
-  const listadoAlumnos = [
-     {
-        no_boleta: "2019630523",
-        curp: "RUHR920101HDFRBR00",
-        nombre: "Ricardo",
-        apellido_paterno: "Urbina",
-        apellido_materno: "Hernández",
-        aniosPreescolar: 3,
-        edad: 12,
-        fecha_nacimiento: "01/01/2002",
-        sexo: "Hombre",
-        estatus: "Activo",
-        entidad_nacimiento: "Ciudad de México",
-        pais_origen: "México",
-    },
+   const {alumnos,hayalumnos,loading} =useAlumno();
+    return (
+        <>
+            <CardView title={"title"} customtitle={true} description={""}>
+                <PrincipalTitle title={"Lista de Alumnos"}></PrincipalTitle>
+                {loading ? <Loader size="lg" /> : null}
+                {hayalumnos && !loading ? (
+                    <TableList
+                        lista = {alumnos}
+                        hayAlumnos={hayalumnos}>
+                    </TableList>
+                ) : (
+                    <Card>
+                        <div className="flex flex-col items-center justify-center my-20 ">
+                        <h1 className="text-2xl font-semibold text-gray-700">
+                            No hay alumnos registrados
+                        </h1>
 
-    {
-      no_boleta: "2019630523",
-      curp: "RUHR920101HDFRBR00",
-      nombre: "Ricardo2",
-      apellido_paterno: "Urbina",
-      apellido_materno: "Hernández",
-      aniosPreescolar: 3,
-      edad: 12,
-      fecha_nacimiento: "01/01/2002",
-      sexo: "Hombre",
-      estatus: "Activo",
-      entidad_nacimiento: "Ciudad de México",
-      pais_origen: "México",
-  }
-
-
-  ] 
-
-  return (
-    <>
-      <PrincipalTitle title = {title}></PrincipalTitle>
-      <TableList lista = {listadoAlumnos} ></TableList>
-    </>
-  );
+                        </div>
+                    </Card>
+                )}
+            </CardView>
+        </>
+    );
 }
 
-export default list;
+export default List;
 

@@ -165,7 +165,7 @@ const Header = (props: {
                     <Link className="block flex-shrink-0 dark:hidden lg:hidden" href="/">
                         <img src="/logo.png" className="w-20" alt="Logo" />
                     </Link>
-                    <Link className="block flex-shrink-0  lg:hidden" href="/">
+                    <Link className="hidden dark:block flex-shrink-0  lg:hidden" href="/">
                         <img src="/logo.dark.png" className="w-20" alt="Logo" />
                     </Link>
                 </div>

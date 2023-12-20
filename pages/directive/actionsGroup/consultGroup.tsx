@@ -2,7 +2,7 @@ import PrincipalTitle from "@/components/directive/Principal.Title";
 import { ReactNode, useEffect, useState } from "react";
 import CardConsultGroup from "@/components/directive/CardConsultGroup";
 import TableStudentsGroup from "@/components/directive/TableStudentsGroup";
-import ButtonComponent from "@/components/ButtonComponent";
+import ButtonComponent from "@/components/elements/Buttons/ButtonComponent";
 import CardView from "@/components/CardView";
 import { useRouter } from "next/router";
 import { useGrupos } from "@/components/context/GruposProvides";
@@ -40,7 +40,7 @@ function ConsultGroup() {
     }
   }, [id, grupos]);
 
-  const title = "Detalles grupo: [grado+grupo]";
+  const title = "Detalles grupo: " + groupDetails.grado +"-" + groupDetails.subGrado + " (" + groupDetails.idGrupo + ")";
 
   return (
     <>

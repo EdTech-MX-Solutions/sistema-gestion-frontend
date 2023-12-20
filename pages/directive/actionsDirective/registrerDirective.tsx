@@ -24,7 +24,7 @@ function registrerDirective(){
 
     return(
         <>
-        <CardView title = {""} description = {""}>
+        <CardView title = {""} description = {""} customtitle>
           <PrincipalTitle title = {"Registrar Directivo"}></PrincipalTitle>
           <FormProfessor professor = {initialDirective} isNewUser = {true}></FormProfessor>
         </CardView>

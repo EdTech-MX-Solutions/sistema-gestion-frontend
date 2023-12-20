@@ -136,6 +136,37 @@ export class DirectivosAPICollection {
             },
         });
     }
+  
+    executePutGrupo(token: string, grupo: InterfaceGrupo){
+        const route = this.apiCaller.getCall() + `/grupos`;
+        return fetch(route, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idGrupo: grupo.idGrupo,
+                grado: grupo.grado,
+                subGrado: grupo.subGrado,
+                turno: grupo.turno,
+                responsable: grupo.responsable,
+                idResponsable: grupo.idResponsable,
+                salon: grupo.salon,
+                inscritos: grupo.inscritos,
+            }),
+        });
+    }
+
+    executePatchAscenderProfesorADirectivo(token : string, accion : string ,id : string){
+      const route = this.apiCaller.getCall() + `/directivos/convertir/${id}?ascender=${accion}`
+      return fetch(route, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    }
 
     executePostPeriodo(token: string, periodo: InterfacePeriodo) {
         const route = this.apiCaller.getCall() + `/ciclos`;

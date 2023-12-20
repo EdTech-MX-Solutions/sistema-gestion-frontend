@@ -1,17 +1,10 @@
 import React, { useState, ReactNode } from "react";
 import { AccordionCustomIcon } from "./Accordion";
-import SIGEAPICollection from "@/data/calls/apiHandler";
-import { useCookies } from "react-cookie";
 import InterfaceMateria from "@/data/interfaces/materia";
 import {
-    Button,
-    IconButton,
     List,
     ListItem,
-    ListItemSuffix,
 } from "@material-tailwind/react";
-import { TrashIcon } from "../icons/Trash";
-import ButtonComponent from "@/components/ButtonComponent";
 import { useRouter } from "next/router";
 
 export function SubjectAccordion({
@@ -39,11 +32,11 @@ export function SubjectAccordion({
                     {
                         AccordionHeaderTitle: "NIVEL 1",
                         AccordionChild: (
-                            <p>
+                            <p >
                                 <List>
                                     {nivelel1.map((subject, index) => (
                                         <ListItem onClick={viewSubject(subject.clave)} key={index} className="rounded-none mr-10 border-b border-b-blue-gray-100">
-                                            <p>
+                                            <p className="hover:text-green-700">
                                                 <span className="font-semibold">
                                                     {subject.clave} - Nombre:
                                                 </span>{" "}
@@ -58,10 +51,10 @@ export function SubjectAccordion({
                     {
                         AccordionHeaderTitle: "NIVEL 2",
                         AccordionChild: (
-                            <p>
+                            <p >
                                 {nivelel2.map((subject, index) => (
                                     <ListItem onClick={viewSubject(subject.clave)} key={index} className="rounded-none mr-10 border-b border-b-blue-gray-100">
-                                        <p>
+                                        <p className="hover:text-green-700">
                                             <span className="font-semibold">
                                                 {subject.clave} - Nombre:
                                             </span>{" "}
@@ -75,10 +68,10 @@ export function SubjectAccordion({
                     {
                         AccordionHeaderTitle: "NIVEL 3",
                         AccordionChild: (
-                            <p>
+                            <p >
                                 {nivelel3.map((subject, index) => (
                                     <ListItem onClick={viewSubject(subject.clave)} key={index} className="rounded-none mr-10 border-b border-b-blue-gray-100">
-                                        <p>
+                                        <p className="hover:text-green-700">
                                             <span className="font-semibold">
                                                 {subject.clave} - Nombre:
                                             </span>{" "}
@@ -92,10 +85,10 @@ export function SubjectAccordion({
                     {
                         AccordionHeaderTitle: "NIVEL 4",
                         AccordionChild: (
-                            <p>
+                            <p >
                                 {nivelel4.map((subject, index) => (
                                     <ListItem onClick={viewSubject(subject.clave)} key={index} className="rounded-none mr-10 border-b border-b-blue-gray-100">
-                                        <p>
+                                        <p className="hover:text-green-700">
                                             <span className="font-semibold">
                                                 {subject.clave} - Nombre:
                                             </span>{" "}
@@ -109,10 +102,10 @@ export function SubjectAccordion({
                     {
                         AccordionHeaderTitle: "NIVEL 5",
                         AccordionChild: (
-                            <p>
+                            <p >
                                 {nivelel5.map((subject, index) => (
                                     <ListItem onClick={viewSubject(subject.clave)} key={index} className="rounded-none mr-10 border-b border-b-blue-gray-100">
-                                        <p>
+                                        <p className="hover:text-green-700">
                                             <span className="font-semibold">
                                                 {subject.clave} - Nombre:
                                             </span>{" "}
@@ -126,10 +119,10 @@ export function SubjectAccordion({
                     {
                         AccordionHeaderTitle: "NIVEL 6",
                         AccordionChild: (
-                            <p>
+                            <p >
                                 {nivelel6.map((subject, index) => (
                                     <ListItem onClick={viewSubject(subject.clave)} key={index} className="rounded-none mr-10 border-b border-b-blue-gray-100">
-                                        <p>
+                                        <p className="hover:text-green-700">
                                             <span className="font-semibold">
                                                 {subject.clave} - Nombre:
                                             </span>{" "}
