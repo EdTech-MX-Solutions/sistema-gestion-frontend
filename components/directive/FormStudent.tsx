@@ -36,7 +36,7 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
   const [paises, setPaises] = useState([]);
   const [estados, setEstados] = useState([]);
   const [requiredCamposCompletos, setRequiredCamposCompletos] = useState(false);
-  const [camposCompletos, setCamposCompletos] = useState(0);
+  const [alumnoCreado, setAlumnoCreado] = useState(false);
 
   const handleInscribirDataNuevoAlumno = async (
     nuevoAlumno: InterfaceAlumno
@@ -55,7 +55,7 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
           const data = await response2.json();
           console.log("Alumno inscrito con exito!");
           updateAlumno(data);
-          
+
           setFormData({
             noBoleta: "",
             curp: "",
@@ -73,6 +73,7 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
             grupo: null,
             actualizarDatosMedicos: true,
           });
+          setAlumnoCreado(false);
         }
       }
     } else {
@@ -166,18 +167,17 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
     const emptyRequiredFields = requiredFields.filter(
       (field) => !formData[field as keyof InterfaceAlumno]
     );
-    
-    if(emptyRequiredFields.length == 0) {
+
+    if (emptyRequiredFields.length == 0) {
       console.log("NO hay campos obligatorios vacios");
       setRequiredCamposCompletos(true);
       setAlerta(false);
-    }
-    else{
+    } else {
       console.log("SI hay campos obligatorios vacios");
       setRequiredCamposCompletos(false);
       setAlerta(true);
     }
-  }
+  };
 
   useEffect(() => {
     fetchPaises();
@@ -186,7 +186,7 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
 
   useEffect(() => {
     handleCamposEnBlanco();
-  }, [formData])
+  }, [formData]);
 
   return (
     <>
@@ -206,30 +206,32 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
           </svg>
           <span className="sr-only">Info</span>
           <div>
-            <span className="font-medium">Campos Obligatorios Vacios!</span> Recuerda que todos los campos con
-            un asterisco (*) deben ser llenados.
+            <span className="font-medium">Campos Obligatorios Vacios!</span>{" "}
+            Recuerda que todos los campos con un asterisco (*) deben ser
+            llenados.
           </div>
         </div>
       )}
       {requiredCamposCompletos && (
         <div
-        className="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-red-400"
-        role="alert"
-      >
-        <svg
-          className="flex-shrink-0 inline w-4 h-4 me-3"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 20"
+          className="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
         >
-          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-        </svg>
-        <span className="sr-only">Info</span>
-        <div>
-          <span className="font-medium">Campos Obligatorios Completos!</span> Todos los campos obligatorios han sido llenados.
+          <svg
+            className="flex-shrink-0 inline w-4 h-4 me-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+          </svg>
+          <span className="sr-only">Info</span>
+          <div>
+            <span className="font-medium">Campos Obligatorios Completos!</span>{" "}
+            Todos los campos obligatorios han sido llenados.
+          </div>
         </div>
-      </div>
       )}
       <div className="grid grid-rows-1 grid-flow-col gap-4">
         <div className="p-7 bg-white rounded-lg">
@@ -458,11 +460,35 @@ export const FormStudent = ({ student, isNewUser }: FormStudentProps) => {
                 onClick={() => {
                   if (requiredCamposCompletos == true) {
                     handleInscribirDataNuevoAlumno(formData);
+                    setAlumnoCreado(true);
                   } else {
                     console.log("Campos obligatorios vacios");
                   }
                 }}
               ></ButtonComponent>
+              {alumnoCreado && (
+                <div
+                  className="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-100 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    className="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                  </svg>
+                  <span className="sr-only">Info</span>
+                  <div>
+                    <span className="font-medium">
+                      Alumno Registrado con éxito
+                    </span>
+                    Espere porfavor
+                  </div>
+                </div>
+              )}
             </div>
           </form>
         </div>
